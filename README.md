@@ -63,3 +63,6 @@ PRIOR TO MAKING ANY PUSH REQUESTS: make sure to enter the command 'git pull' int
 
 ## Additional Markdown Documents
 None at the moment.
+
+## Additional Information
+[Restaurant Item Rating Project - Additional Information](https://docs.google.com/document/d/1ittY0FjQa-B9_O_HnBvqj8tEV4wqiQdanH6V__-Thg4/edit?usp=sharing)
