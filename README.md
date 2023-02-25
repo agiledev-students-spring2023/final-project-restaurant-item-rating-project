@@ -25,15 +25,15 @@ In 2 months we want this project to be fully functional
 
 **Team Members:**
 
-Akhil Kotamraju:  [Akhil's Github](https://github.com/ASK212)
+Akhil Kotamraju:  [Akhil's Github](https://github.com/ASK212), [Akhil's LinkedIn](https://www.linkedin.com/in/akhil-kotamraju/)
 
-Christina Borao: [Christina's Github](https://github.com/crb623)
+Christina Borao: [Christina's Github](https://github.com/crb623), [Christina's LinkedIn](https://www.linkedin.com/in/christina-borao/)
 
-James Galbraith: [James's Github]()
+James Galbraith: [James's Github](), [James's LinkedIn](https://www.linkedin.com/in/james-galbraith/)
 
-Janak Balar: [Janak's Github](https://github.com/janakbalar)
+Janak Balar: [Janak's Github](https://github.com/janakbalar), [Janak's LinkedIn](https://www.linkedin.com/in/janak-balar-4a20731a1/)
 
-Wei Luo: [Yiwei's Github](https://github.com/yl7408)
+Wei Luo: [Yiwei's Github](https://github.com/yl7408), [Wei's LinkedIn](hhttps://www.linkedin.com/in/yiwei-luo-b68b131b3/)
 
 
 
