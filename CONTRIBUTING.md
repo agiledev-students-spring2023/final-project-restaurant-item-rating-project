@@ -5,6 +5,8 @@
 **Team Values:**
 - Keep an open line of communication. It's okay to ask for help and not know it all!
 
+- Be respectful of each other's work. Criticism is welcomed. However, it must be done constructively.
+
 - Be buddies. Each member will be assigned a buddy at the beginning of each sprint. Buddy pairs will ensure work is complete through checks and balances. If a teammate has issues with their code, they will first contact their buddy. If they cannot solve the problem with their buddy, the buddy pair will reach out to the rest of the team
 
 - If a team conflict arises, an anonymous group vote will occur. The majority wins the group vote
