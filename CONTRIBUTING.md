@@ -1,6 +1,7 @@
 # Guide to Contributing
 
-**Team Norms:**
+## Team Norms:
+
 **Team Values:**
 
 **Sprint Cadence:**
