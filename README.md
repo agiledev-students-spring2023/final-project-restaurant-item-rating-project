@@ -21,7 +21,7 @@ Several sets of instructions are included in this repository. They should each b
 ## Project Description:
 This application will allow users to rate individual items at restaurants. There are two current problem with review systems like Google Reviews (which is excellent) and Yelp: (1) you can rate restaurants but not individual food items, and (2) people don't know what's "the best" thing to order at a restaurant unless by word of mouth. On the first point, critically, things such as service and ambience will lower the overall rating of the restaurant even if the food is fire (delicious). Our application solves this problem by focusing our ratings exclusively on the dishes themselves. On the second point, our application enables users, before going to or at a restaurant, to quickly lookup the best-rated items. Our target market is foodies and those with allergies. 
 
-In 2 months we want this project to be fully functional
+In 2 months we want this project to be fully functional.
 
 ## Team Members:
 
