@@ -18,12 +18,12 @@ Several sets of instructions are included in this repository. They should each b
 
 1. See the [Deployment instructions](./instructions-4-deployment.md) for the requirements of deploying an app.
 
-**Project Description:**
+## Project Description:
 This application will allow users to rate individual items at restaurants. There are two current problem with review systems like Google Reviews (which is excellent) and Yelp: (1) you can rate restaurants but not individual food items, and (2) people don't know what's "the best" thing to order at a restaurant unless by word of mouth. On the first point, critically, things such as service and ambience will lower the overall rating of the restaurant even if the food is fire (delicious). Our application solves this problem by focusing our ratings exclusively on the dishes themselves. On the second point, our application enables users, before going to or at a restaurant, to quickly lookup the best-rated items. Our target market is foodies and those with allergies. 
 
 In 2 months we want this project to be fully functional
 
-**Team Members:**
+## Team Members:
 
 Akhil Kotamraju:  [Github](https://github.com/ASK212) & [LinkedIn](https://www.linkedin.com/in/akhil-kotamraju/)
 
@@ -35,12 +35,12 @@ Janak Balar: [Github](https://github.com/janakbalar) & [LinkedIn](https://www.li
 
 Wei Luo: [Github](https://github.com/yl7408) & [LinkedIn](https://www.linkedin.com/in/yiwei-luo-b68b131b3/)
 
-**Project History:**
+## Project History:
 This application idea was the creation of five excited foodies. We bonded on the shared experience of craving a dish but not knowing which restaurant serves the best version of that dish. We are solving this issue through our application! 
 
 Project contributions should be made with the following [guidelines](./CONTRIBUTING.md) in mind.
 
-**Instructions for Building and Testing:**
+## Instructions for Building and Testing:
 
 PRIOR TO MAKING ANY PUSH REQUESTS: make sure to enter the command 'git pull' into your terminal, then stage your changes and push your code with a detailed message regarding the changes made.
 
@@ -61,4 +61,5 @@ PRIOR TO MAKING ANY PUSH REQUESTS: make sure to enter the command 'git pull' int
 15. Run security testing.
 16. Run certification testing.
 
-**Additional Markdown Documents**
+## Additional Markdown Documents
+None at the moment.
