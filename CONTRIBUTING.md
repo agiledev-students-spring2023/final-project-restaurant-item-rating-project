@@ -1,8 +1,6 @@
 # Guide to Contributing
 
-## Team Norms:
-
-**Team Values:**
+## Team Values:
 - Keep an open line of communication. It's okay to ask for help and not know it all!
 
 - Be respectful of each other's work. Criticism is welcomed. However, it must be done constructively.
@@ -11,10 +9,10 @@
 
 - If a team conflict arises, an anonymous group vote will occur. The majority wins the group vote.
 
-**Sprint Cadence:**
+## Sprint Cadence:
 Sprints will be 2 weeks in duration.
 
-**Daily Standups:**
+## Daily Standups:
 - Daily standups will occur on Saturdays at 11 am and Wednesdays at 12 pm. 
 
 - Saturday meetings will be held via zoom, and Wednesday meetings will occur at Bobst. Attendance from all team members is required. Absences are allowed as long as they can communicate 24 hours prior to the meeting.
@@ -23,7 +21,7 @@ Sprints will be 2 weeks in duration.
 
 - A member who makes no progress on a task for two or more standups will be reported to management.
 
-**Coding Standards:**
+## Coding Standards:
 - Write minimum code to get things working end to end, only then iterate to improve.
 - Always push working code, if you break the pipeline/build then fix it.
 - Make granular and small commits, per feature or per bug fix.
@@ -33,19 +31,19 @@ Sprints will be 2 weeks in duration.
 - Don't leave dead/commented out code behind. If you see such code, delete it.
 - Write automated tests to cover critical integration points and functionality.
 
-**Rules of Contributing:**
+## Rules of Contributing:
 Teammates will complete the tasks they are given at the beginning of each sprint.
 
 - Contributions: prior to writing code on a section, make a '@-mentioned' comment to indicate that the code is your code.
 - Suggestions: when making user suggestions tag a teammate using the '@' key.
 
 
-**Instructions for Setting up the Local Development Environment:**
+## Instructions for Setting up the Local Development Environment:
 1. Clone the repository
 2. Prior to writing code on a section make a '@-mentioned' comment to indicate that the code is your code
 3. 
 
-**Instructions for Building and Testing the Project:**
+## Instructions for Building and Testing the Project:
 
 PRIOR TO MAKING ANY PUSH REQUESTS: make sure to enter the command 'git pull' into your terminal, then stage your changes and push your code with a detailed message regarding the changes made.
 
