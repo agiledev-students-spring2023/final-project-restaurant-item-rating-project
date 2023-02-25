@@ -26,9 +26,16 @@ Sprints will be 2 weeks in duration.
 **Coding Standards:**
 
 **Rules of Contributing:**
+Teammates will complete the tasks they are given at the beginning of each sprint.
+
+- Contributions: prior to writing code on a section, make a '@-mentioned' comment to indicate that the code is your code
+- Suggestions: when making user suggestions tag a teammate using the '@' key
 
 
 **Instructions for Setting up the Local Development Environment:**
+1. Clone the repository
+2. Prior to writing code on a section make a '@-mentioned' comment to indicate that the code is your code
+3. 
 
 **Instructions for Building and Testing the Project:**
 
