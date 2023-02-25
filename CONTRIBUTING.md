@@ -1,6 +1,6 @@
 # Guide to Contributing
 
-**Team Norms:**
+***Team Norms:***
 
 **Rules of Contributing:**
 
