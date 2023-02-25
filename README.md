@@ -33,7 +33,7 @@ James Galbraith: [James's Github](), [James's LinkedIn](https://www.linkedin.com
 
 Janak Balar: [Janak's Github](https://github.com/janakbalar), [Janak's LinkedIn](https://www.linkedin.com/in/janak-balar-4a20731a1/)
 
-Wei Luo: [Yiwei's Github](https://github.com/yl7408), [Wei's LinkedIn](hhttps://www.linkedin.com/in/yiwei-luo-b68b131b3/)
+Wei Luo: [Yiwei's Github](https://github.com/yl7408), [Wei's LinkedIn](https://www.linkedin.com/in/yiwei-luo-b68b131b3/)
 
 
 
