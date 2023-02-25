@@ -39,9 +39,12 @@ Teammates will complete the tasks they are given at the beginning of each sprint
 
 
 ## Instructions for Setting up the Local Development Environment:
-1. Clone the repository
-2. Prior to writing code on a section make a '@-mentioned' comment to indicate that the code is your code
-3. 
+1. Clone the repository.
+2. Create clone in VS Code.
+3. Write code.
+4. Enter the command 'git pull' into terminal.
+5. Stage Changes.
+6. Commit code with a descriptive message.
 
 ## Instructions for Building and Testing the Project:
 
