@@ -24,6 +24,7 @@ This application will allow users to rate individual items at restaurants. There
 In 2 months we want this project to be fully functional
 
 **Team Members:**
+
 Akhil Kotamraju:  [Github](https://github.com/ASK212) & [LinkedIn](https://www.linkedin.com/in/akhil-kotamraju/)
 
 Christina Borao: [Github](https://github.com/crb623) & [LinkedIn](https://www.linkedin.com/in/christina-borao/)
@@ -35,4 +36,10 @@ Janak Balar: [Github](https://github.com/janakbalar) & [LinkedIn](https://www.li
 Wei Luo: [Github](https://github.com/yl7408) & [LinkedIn](https://www.linkedin.com/in/yiwei-luo-b68b131b3/)
 
 **Project History:**
+This application idea was the creation of five excited foodies. We bonded on the shared experience of craving a dish but not knowing which restaurant serves the best version of that dish. We are solving this issue through our application! 
+
 Project contributions should be made with the following [guidelines](./CONTRIBUTING.md) in mind.
+
+**Instructions for building and testing**
+
+**Additional Markdown Documents**
