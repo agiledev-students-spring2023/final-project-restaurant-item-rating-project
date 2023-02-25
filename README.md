@@ -57,7 +57,7 @@ PRIOR TO MAKING ANY PUSH REQUESTS: make sure to enter the command 'git pull' int
 11. Run usability testing (satisfaction, efficiency, effectiveness)
 12. Run User interface testing
 13. Run compatibility testing (OS Configuration, Browser Configuration, Database Configuration, Device Configuration, Network Configuration)
-14. RUn performance testing (Load Testing, Stress Testing, Stability Testing, Volume Testing, Concurrency testing)
+14. Run performance testing (Load Testing, Stress Testing, Stability Testing, Volume Testing, Concurrency testing)
 15. Run security testing
 16. Run certification testing
 
