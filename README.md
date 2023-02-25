@@ -40,17 +40,17 @@ This application idea was the creation of five excited foodies. We bonded on the
 
 Project contributions should be made with the following [guidelines](./CONTRIBUTING.md) in mind.
 
-**Instructions for building and testing**
+**Instructions for Building and Testing:**
 1. Create a well-defined strategy to tackle the feature being built
 2. Analyze and anticipate potential issues in the code
-3. Code the back-end/server technology (run a code reveiw process periodically)
+3. Code the back-end/server technology (run a code review process periodically)
 4. Have a teammate check your code!
-5. Create the the application programming interface
+5. Create the application programming interface
 6. Have a teammate check your code!
-7. Develope the mobile app front-end or "client-side" interface (run a code reveiw process periodically)
-8. Develope requests a rview of code
+7. Develop the mobile app front-end or "client-side" interface (run a code review process periodically)
+8. Developer requests a review of the code
 9. Run documentation testing
-10. Run functinal testing (business functionality, target audience, and distribution channels)
+10. Run functional testing (business functionality, target audience, and distribution channels)
 11. Run usability testing (satisfaction, efficiency, effectiveness)
 12. Run User interface testing
 13. Run compatibility testing (OS Configuration, Browser Configuration, Database Configuration, Device Configuration, Network Configuration)
