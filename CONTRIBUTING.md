@@ -52,11 +52,11 @@ PRIOR TO MAKING ANY PUSH REQUESTS: make sure to enter the command 'git pull' int
 
 1. Create a well-defined strategy to tackle the feature being built (sprint planning).
 2. Analyze and anticipate potential issues in the code.
-3. Code the back-end/server technology (run a code review process periodically).
+3. Run 'git pull'. Code the back-end/server technology (run a code review and push process periodically).
 4. Have a teammate check your code!
-5. Create the application programming interface.
+5. Run 'git pull'. Create the application programming interface.
 6. Have a teammate check your code!
-7. Develop the mobile app front-end or "client-side" interface (run a code review process periodically).
+7. Run 'git pull'. Develop the mobile app front-end or "client-side" interface (run a code review and push process periodically).
 8. Developer requests a review of the code.
 9. Run documentation testing.
 10. Run functional testing (business functionality, target audience, and distribution channels).
