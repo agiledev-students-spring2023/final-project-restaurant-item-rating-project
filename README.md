@@ -25,15 +25,15 @@ In 2 months we want this project to be fully functional
 
 **Team Members:**
 
-Akhil Kotamraju:  [Akhil's Github](https://github.com/ASK212), [Akhil's LinkedIn](https://www.linkedin.com/in/akhil-kotamraju/)
+Akhil Kotamraju:  [Github](https://github.com/ASK212) & [LinkedIn](https://www.linkedin.com/in/akhil-kotamraju/)
 
-Christina Borao: [Christina's Github](https://github.com/crb623), [Christina's LinkedIn](https://www.linkedin.com/in/christina-borao/)
+Christina Borao: [Github](https://github.com/crb623) & [LinkedIn](https://www.linkedin.com/in/christina-borao/)
 
-James Galbraith: [James's Github](), [James's LinkedIn](https://www.linkedin.com/in/james-galbraith/)
+James Galbraith: [Github]() & [LinkedIn](https://www.linkedin.com/in/james-galbraith/)
 
-Janak Balar: [Janak's Github](https://github.com/janakbalar), [Janak's LinkedIn](https://www.linkedin.com/in/janak-balar-4a20731a1/)
+Janak Balar: [Github](https://github.com/janakbalar) & [LinkedIn](https://www.linkedin.com/in/janak-balar-4a20731a1/)
 
-Wei Luo: [Wei's Github](https://github.com/yl7408), [Wei's LinkedIn](https://www.linkedin.com/in/yiwei-luo-b68b131b3/)
+Wei Luo: [Github](https://github.com/yl7408) & [LinkedIn](https://www.linkedin.com/in/yiwei-luo-b68b131b3/)
 
 
 
