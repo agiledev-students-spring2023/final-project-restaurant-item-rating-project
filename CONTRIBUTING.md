@@ -4,9 +4,23 @@
 
 **Team Values:**
 
+- Keep an open line of communication. It's okay to ask for help and not know it all!
+
+- Be buddies. Each member will be assigned a buddy at the beginning of each sprint. Buddy pairs will ensure work is complete through checks and balances. If a teammate has issues with their code, they will first contact their buddy. If they cannot solve the problem with their buddy, the buddy pair will reach out to the rest of the team
+
+- If a team conflict arises, an anonymous group vote will occur. The majority wins the group vote
+
 **Sprint Cadence:**
+Sprints will be 2 weeks in duration.
 
 **Daily Standups:**
+Daily standups will occur on Saturdays at 11 am and Wednesdays at 12 pm. 
+
+Saturday meetings will be held via zoom, and Wednesday meetings will occur at Bobst. Attendance from all team members is required. Absences are allowed as long as they can communicate 24 hours prior to the meeting.
+
+Each teammate will present their progress. They will present only their progress, not the progress of any other teammate. 
+
+A member who makes no progress on a task for two or more standups will be reported to management.
 
 **Coding Standards:**
 
