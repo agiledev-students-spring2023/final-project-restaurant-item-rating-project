@@ -41,6 +41,9 @@ This application idea was the creation of five excited foodies. We bonded on the
 Project contributions should be made with the following [guidelines](./CONTRIBUTING.md) in mind.
 
 **Instructions for Building and Testing:**
+
+PRIOR TO MAKING ANY PUSH REQUESTS: make sure to enter the command 'git pull' into your terminal, then stage your changes and push your code with a detailed message regarding the changes made
+
 1. Create a well-defined strategy to tackle the feature being built
 2. Analyze and anticipate potential issues in the code
 3. Code the back-end/server technology (run a code review process periodically)

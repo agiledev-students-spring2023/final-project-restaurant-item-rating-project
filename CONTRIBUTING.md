@@ -1,12 +1,23 @@
 # Guide to Contributing
 
-***Team Norms:***
+**Team Norms:**
+**Team Values:**
+
+**Sprint Cadence:**
+
+**Daily Standups:**
+
+**Coding Standards:**
 
 **Rules of Contributing:**
+
 
 **Instructions for Setting up the Local Development Environment:**
 
 **Instructions for Building and Testing the Project:**
+
+PRIOR TO MAKING ANY PUSH REQUESTS: make sure to enter the command 'git pull' into your terminal, then stage your changes and push your code with a detailed message regarding the changes made
+
 1. Create a well-defined strategy to tackle the feature being built (sprint planning)
 2. Analyze and anticipate potential issues in the code
 3. Code the back-end/server technology (run a code review process periodically)
