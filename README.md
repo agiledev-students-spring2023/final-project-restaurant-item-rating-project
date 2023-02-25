@@ -29,7 +29,7 @@ Akhil Kotamraju:  [Github](https://github.com/ASK212) & [LinkedIn](https://www.l
 
 Christina Borao: [Github](https://github.com/crb623) & [LinkedIn](https://www.linkedin.com/in/christina-borao/)
 
-James Galbraith: [Github]() & [LinkedIn](https://www.linkedin.com/in/james-galbraith/)
+James Galbraith: [Github](https://github.com/ajgalbraith) & [LinkedIn](https://www.linkedin.com/in/james-galbraith/)
 
 Janak Balar: [Github](https://github.com/janakbalar) & [LinkedIn](https://www.linkedin.com/in/janak-balar-4a20731a1/)
 
