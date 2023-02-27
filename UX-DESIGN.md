@@ -11,7 +11,13 @@ Replace the contents of this file with the completed assignments, as described i
 
 ### General Note
 
-We still need to define scope of geolocation feature and integrate into this wireframe.
+(James) I just want to call out that we still need to define the scope of geolocation feature and integrate said feature into this design document.
+
+## Prototype
+
+I built the prototype using Figma, not Invision. But I uploaded the prototype to Invision. It can be accessed [here](https://restaurant-app.invisionapp.com/freehand/restaurant-prototype-3a8nc6OjZ?dsid_h=07e10b76786b992fb6a3368152d60a5630797c825c6c943900b8f05c14a15d28&uid_h=25bc6b9c64f6b7fc825d72e8e5d3035747dc583356c522e7066f53b61daaeebb).
+
+I also added the ```.fig``` file to the ```/ux-design/prototype``` folder. 
 
 ## App Map
 
