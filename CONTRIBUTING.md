@@ -34,8 +34,39 @@ Sprints will be 2 weeks in duration.
 ## Rules of Contributing:
 Teammates will complete the tasks they are given at the beginning of each sprint.
 
-- Contributions: prior to writing code on a section, make a '@-mentioned' comment to indicate that the code is your code.
-- Suggestions: when making user suggestions tag a teammate using the '@' key.
+1. Pull recent changes
+	git pull origin master
+
+2. create branch. choose a branch name for what feature you’re doing
+	git checkout -b <branch-name>
+
+example:
+	git checkout -b user-story/13/task/9/implement-user-login
+
+3. Update task board TASK to “In Process” 
+
+4. add and commit 
+	git add .
+	git commit -m “<message>”
+
+5. merge remote changes
+	git fetch origin
+	git merge origin/master
+
+6. push branch changes to YOUR BRANCH
+	git push origin <branch-name>
+
+7. go on github, go to your branch and go to PULL REQUESTS. Create a pull request to push your branch into the main branch
+
+8. Update task board TASK to awaiting review 
+
+9. AFTER someone else reviews, approves and merges your code,
+delete your branch
+	git push origin -d <branch-name>
+THEN switch back to master
+	git checkout master
+THEN delete branch locally
+	git branch -D <branch-name>
 
 
 ## Instructions for Setting up the Local Development Environment:
