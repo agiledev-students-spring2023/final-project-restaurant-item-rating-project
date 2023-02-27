@@ -34,9 +34,30 @@ Sprints will be 2 weeks in duration.
 ## Rules of Contributing:
 Teammates will complete the tasks they are given at the beginning of each sprint.
 
-- Contributions: prior to writing code on a section, make a '@-mentioned' comment to indicate that the code is your code.
-- Suggestions: when making user suggestions tag a teammate using the '@' key.
+1. create branch. choose a branch name for what feature you’re doing
+git checkout -b <branch-name>
 
+2. add and commit 
+git add .
+git commit -m “<message>”
+
+3. push changes to YOUR BRANCH
+git push origin <branch-name>
+
+3. go on github, go to your branch and go to PULL REQUESTS
+create a pull request to push your branch into the main branch
+
+4. AFTER someone else reviews, approves and merges your code, you can delete your branch:
+git push origin -d <branch-name>
+
+THEN switch back to master:
+git checkout master
+
+THEN delete branch locally:
+git branch -D <branch-name>
+
+to check the branch you’re currently on:
+git rev-parse --abbrev-ref HEAD
 
 ## Instructions for Setting up the Local Development Environment:
 1. Clone the repository.
