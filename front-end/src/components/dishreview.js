@@ -11,7 +11,7 @@ function Title(props) {
 }
 
 
-export function DishReview() {
+export function Dishreview() {
 
   // const bodyText = "This is some body text!";
 
