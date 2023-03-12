@@ -13,16 +13,21 @@ function Title(props) {
 
 export function Dishreview() {
 
-  // const bodyText = "This is some body text!";
-
-  return (
-    <Box>
+  const bodyText = "Restaurant: ";
+  const bodyText2 = "Dish: ";
+  const bodyText3 = "Rating: ";
+  
+return (
+    <Box display="flex" flexDirection="column">
       <Title title="Leave a review" />
-      <Typography
-        variant="body1"
-      >
-        {/* {bodyText} */}
-        
+      <Typography variant="body1">
+        {bodyText}
+      </Typography>
+      <Typography variant="body1">
+        {bodyText2}
+      </Typography>
+      <Typography variant="body1">
+        {bodyText3}
       </Typography>
     </Box>
   );

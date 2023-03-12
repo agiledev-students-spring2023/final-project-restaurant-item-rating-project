@@ -4,7 +4,7 @@ import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import { Layout } from './components/Layout';
 import { Home } from './components/Home';
 import { Template } from './components/Template';
-import { DishReview } from './components/DishReview';
+import { Dishreview } from './components/Dishreview';
 function MyRoutes() {
   return (
     <BrowserRouter>
@@ -17,7 +17,7 @@ function MyRoutes() {
           /> 
           <Route 
             path="/dishreview"
-            element={<DishReview />} 
+            element={<Dishreview />} 
           /> 
 
         </Route>
