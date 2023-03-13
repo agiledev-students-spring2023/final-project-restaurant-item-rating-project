@@ -1,30 +1,35 @@
-import React, { useState } from 'react';
 
-function Rating(props){
-    const [rating, setRating] = useState(0);
+import React, {startTransition, useState} from "react";
+import { FaStar } from "react-icons/fa";
 
-    const handleClick = (value) => {
-        setRating(value);
-    };
+const Rating = () => {
+    const [rating, setRating] = useState(null);
+    const [hover, setHover] = useState(null);
 
-    const stars = [];
-
-    for (let i =1; i<=5; i++){
-        stars.push(
-            <span
-            key = {i}
-            className = {`fa fa-star${rating >= i ? ' checked': ''}`}
-            onClick={()=> handleClick(i)}
-            />
-        );
-    }
-    return (
+        return(
         <div>
-            {stars}
-            <p>{rating} out of 5 stars </p>
-            </div>
-    );
+            {[ ...Array(5)].map((star,i) => {
+                const ratingValue = i+1
 
+                return(
+                    <label>
+                       <label>
+                        <input type="radio" name="rating" value={ratingValue} onClick={() => setRating(ratingValue)} />
+                        <FaStar 
+                             className="star" 
+                             color={ratingValue <= (hover || rating) ? "#ffc107" : "#e4e5e9"} 
+                                size={100}
+                                onMouseEnter={() => setHover(ratingValue)}
+                                onMouseLeave={() => setHover(null)}
+                                />
+                            </label>
 
+                    </label>
+                );
+            })}
+            <p>Thank you! You rated this item: {rating} stars</p>
+        </div>
+
+        );
 }
-export default Rating;
+export default Rating
