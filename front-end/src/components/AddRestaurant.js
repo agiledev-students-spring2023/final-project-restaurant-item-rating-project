@@ -55,7 +55,7 @@ function App() {
         <input name ="Enter city"/>
       </label>
       </div>
-      <button type="submit">Submit</button>
+      <button type="submit" style ={{width: "20px", height: "10px"}}>Submit</button>
     </form>
   </div>
  )
