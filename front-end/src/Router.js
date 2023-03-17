@@ -6,6 +6,7 @@ import { Home } from './components/Home';
 import { Template } from './components/Template';
 import { Dishreview } from './components/Dishreview';
 import { DishDetail } from './components/DishDetail';
+import { Search } from './components/Search';
 function MyRoutes() {
   return (
     <BrowserRouter>
@@ -25,7 +26,10 @@ function MyRoutes() {
             path="/dishdetail"
             element={<DishDetail/>} 
           />
-
+          <Route 
+            path="/search"
+            element={<Search />} 
+          />
         </Route>
       </Routes>
     </BrowserRouter>
