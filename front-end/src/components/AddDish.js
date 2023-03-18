@@ -24,35 +24,49 @@ function App() {
     const handleSubmit = event => {
         event.preventDefault();
         setSubmitting(true);
-        alert('Restaurant Information submitted')
+        alert('Dish Details submitted')
         
         setTimeout(() => {
             setSubmitting(false);
           }, 3000)
     
   }
+}
   
  return(
   <div className = "Wrapper">
-    <h1 style = {{fontSize: 20}}>Add a Restaurant</h1>
-    {submitting &&
-        <div>You are submitting the folowing Restaurant information：
-          <ul> {Object.entries(formData).map(([name, value]) => (
-             <li key={name}><strong>{name}</strong>:{value.toString()}</li>
-           ))}</ul>
-        </div>
-      }
+    <h1 style = {{fontSize: 20}}>Add a Dish</h1>
+    <h1>Restaurant: </h1>
     <form onSubmit ={handleSubmit}>
       <div>
       <label>
-        <p>Restaurant Name</p>
-        <input name ="Enter restaurant name" onChange = {handleChange}/>
+        <p>Dish Name</p>
+        <input name ="Enter dish name" onChange = {handleChange}/>
       </label>
       </div>
+      <View style ={{flexDirection: "row"}}>
+      <p>Vegan? </p>
+      <view className = "buttonStyle">
+      <Button style ={{width: "15px", height: "10px"}}>Yes</Button>
+      </view>
+      <view className = "buttonStyle">
+      <Button style ={{width: "15px", height: "10px"}}>No</Button>
+      </view>
+      </View>
+      <View style ={{flexDirection: "row"}}>
+      <p>Gluten Free? </p>
+      <view className = "buttonStyle">
+      <Button style ={{width: "15px", height: "10px"}}>Yes</Button>
+      </view>
+      <view className = "buttonStyle">
+        <Button style ={{width: "15px", height: "10px"}}>No</Button>
+      </view>
+      </View>
       <div>
       <label>
-        <p>City</p>
-        <input name ="Enter city"/>
+        <p>Add Pictures?</p>
+        <Button style ={{width: "15px", height: "10px"}}>Add Image</Button>
+        <span style={{ fontWeight: 'bold' }}>Uploaded images: </span>
       </label>
       </div>
       <button type="submit" style ={{width: "30px", height: "10px"}}>Submit</button>
@@ -63,5 +77,6 @@ function App() {
   
 
 
-}
+
+
 export default App; 
