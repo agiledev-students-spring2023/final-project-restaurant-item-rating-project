@@ -34,7 +34,7 @@ function App() {
   
  return(
   <div className = "Wrapper">
-    <h1 style = {{fontSize: 20}}>Add a Restaurant</h1>
+    <h1 className = "pagetitle">Add a Restaurant</h1>
     {submitting &&
         <div>You are submitting the folowing Restaurant information：
           <ul> {Object.entries(formData).map(([name, value]) => (
@@ -55,7 +55,7 @@ function App() {
         <input name ="Enter city"/>
       </label>
       </div>
-      <button type="submit" style ={{width: "30px", height: "10px"}}>Submit</button>
+      <button type="submit">Submit</button>
     </form>
   </div>
  )

@@ -32,11 +32,16 @@
   padding-right: 20px;
 
   padding-top: 5px;
-
+  width: 15px;
+  height: 10px;
   
    
 
 
+}
+
+.pagetitle{
+  font-size: 20px;
 }
 
 
@@ -44,6 +49,10 @@
   color: #61dafb;
 }
 
+.sideWay{
+  flex: auto;
+  flex-direction: row;
+}
 @keyframes App-logo-spin {
   from {
     transform: rotate(0deg);
