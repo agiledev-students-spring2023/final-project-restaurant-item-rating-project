@@ -1,15 +1,17 @@
 import React, { useState } from "react";
 import { FaStar } from "react-icons/fa";
 
-const Rating = ({ onRatingChange }) => {
+const Rating = ({ onRatingChange}) => {
   const [rating, setRating] = useState(null);
   const [values, setValues] = useState([]);
 
   const handleClick = (ratingValue) => {
+    
     setRating(ratingValue);
     setValues([...values, ratingValue]);
     onRatingChange([...values, ratingValue]);
   };
+
 
   return (
     <div>
@@ -28,7 +30,7 @@ const Rating = ({ onRatingChange }) => {
               color={ratingValue <= rating ? "#ffc107" : "#e4e5e9"}
               size={50}
               onMouseEnter={() => setRating(ratingValue)}
-              onMouseLeave={() => setRating(null)}
+              onMouseLeave={() => setRating(ratingValue)}
             />
           </label>
         );
