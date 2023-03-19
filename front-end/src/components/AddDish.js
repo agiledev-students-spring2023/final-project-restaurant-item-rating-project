@@ -35,7 +35,7 @@ function App() {
   
  return(
   <div className = "Wrapper">
-    <h1 style = {{fontSize: 20}}>Add a Dish</h1>
+    <h1 className = "pagetitle">Add a Dish</h1>
     <h1>Restaurant: </h1>
     <form onSubmit ={handleSubmit}>
       <div>
@@ -44,32 +44,32 @@ function App() {
         <input name ="Enter dish name" onChange = {handleChange}/>
       </label>
       </div>
-      <View style ={{flexDirection: "row"}}>
+      <View className ="sideWay">
       <p>Vegan? </p>
       <view className = "buttonStyle">
-      <Button style ={{width: "15px", height: "10px"}}>Yes</Button>
+      <Button>Yes</Button>
       </view>
       <view className = "buttonStyle">
-      <Button style ={{width: "15px", height: "10px"}}>No</Button>
+      <Button>No</Button>
       </view>
       </View>
-      <View style ={{flexDirection: "row"}}>
+      <View  className ="sideWay">
       <p>Gluten Free? </p>
       <view className = "buttonStyle">
-      <Button style ={{width: "15px", height: "10px"}}>Yes</Button>
+      <Button>Yes</Button>
       </view>
       <view className = "buttonStyle">
-        <Button style ={{width: "15px", height: "10px"}}>No</Button>
+        <Button>No</Button>
       </view>
       </View>
       <div>
       <label>
         <p>Add Pictures?</p>
-        <Button style ={{width: "15px", height: "10px"}}>Add Image</Button>
-        <span style={{ fontWeight: 'bold' }}>Uploaded images: </span>
+        <Button>Add Image</Button>
+        <span >Uploaded images: </span>
       </label>
       </div>
-      <button type="submit" style ={{width: "30px", height: "10px"}}>Submit</button>
+      <button type="submit">Submit</button>
     </form>
   </div>
  )
