@@ -3,6 +3,7 @@ import React, {useReducer, useState} from 'react';
 import Rating from './Rating';
 import "./stars.css"
 import './front-end/src/App.css'
+//.....................................//
 
 const formReducer = (state, event) =>{
   return {
