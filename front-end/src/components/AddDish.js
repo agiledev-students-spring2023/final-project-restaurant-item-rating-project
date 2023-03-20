@@ -2,7 +2,7 @@ import { Box, Typography } from "@mui/material";
 import React, {useReducer, useState} from 'react';
 import Rating from './Rating';
 import "./stars.css"
-import './App.css'
+import './front-end/src/App.css'
 
 const formReducer = (state, event) =>{
   return {
