@@ -5,7 +5,7 @@ import { Layout } from './components/Layout';
 import { Home } from './components/Home';
 import { Template } from './components/Template';
 import { Dishreview } from './components/Dishreview';
-import { DishDetail } from './components/DishDetail';
+//import { DishDetail } from './components/DishDetail';
 import { Search } from './components/Search';
 function MyRoutes() {
   return (
