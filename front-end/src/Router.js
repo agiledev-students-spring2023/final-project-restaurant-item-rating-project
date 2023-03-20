@@ -7,7 +7,7 @@ import { Template } from './components/Template';
 import { DishReview } from './components/DishReview';
 import { AddDish } from './components/AddDish';
 import { AddRestaurant } from './components/AddRestaurant';
-//import { DishDetail } from './components/DishDetail';
+import { DishDetail } from './components/DishDetail';
 import { Search } from './components/Search';
 function MyRoutes() {
   return (
@@ -30,6 +30,10 @@ function MyRoutes() {
           <Route 
             path="/dishreview"
             element={<DishReview />} 
+          />
+          <Route 
+            path="/dish"
+            element={<DishDetail />} 
           />
 
           {/* <Route 
