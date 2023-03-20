@@ -1,17 +1,15 @@
 import React, { useState } from "react";
 import { FaStar } from "react-icons/fa";
 
-const Rating = ({ onRatingChange}) => {
+export function Rating({ onRatingChange}) {
   const [rating, setRating] = useState(null);
   const [values, setValues] = useState([]);
 
   const handleClick = (ratingValue) => {
-    
     setRating(ratingValue);
     setValues([...values, ratingValue]);
     onRatingChange([...values, ratingValue]);
   };
-
 
   return (
     <div>
@@ -36,9 +34,7 @@ const Rating = ({ onRatingChange}) => {
         );
       })}
       <p>Thank you! You rated this item: {rating} stars</p>
-      {/* <p>All ratings: {values.join(",")}</p> */}
+
     </div>
   );
 };
-
-export default Rating;

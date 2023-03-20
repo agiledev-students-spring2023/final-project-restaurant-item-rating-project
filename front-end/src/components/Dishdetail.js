@@ -5,11 +5,11 @@ import CardMedia from '@mui/material/CardMedia';
 import CardContent from '@mui/material/CardContent';
 
 //this is a change in the file
-function displaydishes(resturant) {
-  console.log(resturant.id, resturant);
+function displaydishes(restaurant) {
+  console.log(restaurant.id, restaurant);
   return (
     <Card 
-      key={resturant.id}
+      key={restaurant.id}
     >
     <Box
       sx={{
@@ -25,7 +25,7 @@ function displaydishes(resturant) {
           display:'flex', 
         }}
         src={restaurant.img}
-        title={resturant.title}
+        title={restaurant.title}
         />
     </Box>
       <CardContent
@@ -50,7 +50,7 @@ export function dishdetail() {
   const [dishresults, setDishresults] = useState([]);
 
   // mocked api with mockaroo
-  const apiUrl =  "https://my.api.mockaroo.com/resturant?key=07b3ef90";
+  const apiUrl =  "https://my.api.mockaroo.com/restaurant?key=07b3ef90";
   useEffect(() => {
     fetch(apiUrl)
     .then((response) => response.json())
