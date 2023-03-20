@@ -1,82 +1,95 @@
-import { Box, Typography } from "@mui/material";
-import React, {useReducer, useState} from 'react';
-import Rating from './Rating';
-import "./stars.css"
-import './front-end/src/App.css'
+import { Button, Box, TextField, FormGroup, FormControlLabel, Typography, Container } from "@mui/material";
+import React, { useEffect, useState } from 'react';
+import { Checkbox } from '@mui/material';
+import '../App.css';
 
-const formReducer = (state, event) =>{
-  return {
-    ...state,
-    [event.name]: event.value
+export function AddDish() {
+
+  // fetched data
+  const [restaurantName, setRestaurantName] = useState('Los Tacos'); // TODO: mock this with mockeroo
+
+  // form data
+  const [dishName, setDishName] = useState('');
+  const [isVegan, setIsVegan] = useState(false);
+  const [isGlutenFree, setIsGlutenFree] = useState(false);
+  const [uploadedImages, setUploadedImages] = useState([]);
+
+  const handleIsVegan = (event) => {
+    setIsVegan(event.target.checked);
+  };
+  const handleGlutenFree = (event) => {
+    setIsGlutenFree(event.target.checked);
+  };
+
+  const handleSubmit = event => {
+    event.preventDefault();
+    alert('Dish Details submitted')
   }
-}
 
-const handleChange = event =>{
-  setFormData({
-    name: event.target.name,
-    value: event.target.value,
-  });
-}
-
-function App() {
-  const [formData, setFormData] = useReducer(formReducer, {});
-  const [submitting, setSubmitting] = useState(false);
-    const handleSubmit = event => {
-        event.preventDefault();
-        setSubmitting(true);
-        alert('Dish Details submitted')
-        
-        setTimeout(() => {
-            setSubmitting(false);
-          }, 3000)
-    
-  }
-}
+  useEffect( () => {
+    // TODO: mock fetch data: setRestaurantName 
+  }, [])
   
- return(
-  <div className = "Wrapper">
-    <h1 className = "pagetitle">Add a Dish</h1>
-    <h1>Restaurant: </h1>
-    <form onSubmit ={handleSubmit}>
-      <div>
-      <label>
-        <p>Dish Name</p>
-        <input name ="Enter dish name" onChange = {handleChange}/>
-      </label>
-      </div>
-      <View className ="sideWay">
-      <p>Vegan? </p>
-      <view className = "buttonStyle">
-      <Button>Yes</Button>
-      </view>
-      <view className = "buttonStyle">
-      <Button>No</Button>
-      </view>
-      </View>
-      <View  className ="sideWay">
-      <p>Gluten Free? </p>
-      <view className = "buttonStyle">
-      <Button>Yes</Button>
-      </view>
-      <view className = "buttonStyle">
-        <Button>No</Button>
-      </view>
-      </View>
-      <div>
-      <label>
-        <p>Add Pictures?</p>
-        <Button>Add Image</Button>
-        <span >Uploaded images: </span>
-      </label>
-      </div>
-      <button type="submit">Submit</button>
-    </form>
-  </div>
- )
+  return(
+    <Container>
+      <Typography variant="h3">Add a Dish</Typography>
+      <Typography variant="h6">Restaurant: {restaurantName}</Typography>
+      <form onSubmit ={handleSubmit}>
+        <Box sx={{m:2}} /> 
+        <TextField label = "Dish Name" value = {dishName} onChange = {setDishName}/>
 
-  
+        <FormGroup>
+          <FormControlLabel 
+            control={
+              <Checkbox 
+                checked={isVegan}
+                onChange={handleIsVegan}
+                inputProps={{ 'aria-label': 'controlled' }}
+              />
+            } 
+            label="Vegan" 
+          />
+          <FormControlLabel 
+            control={
+              <Checkbox 
+                checked={isGlutenFree}
+                onChange={handleGlutenFree}
+                inputProps={{ 'aria-label': 'controlled' }}
+              />
+            } 
+            label="Gluten Free" 
+          />
+        </FormGroup>
 
+        <Box sx={{m:2}} /> 
 
+        {/* image input */}
+        <Box>
+          <Typography variant="h6">Add Pictures?</Typography>
 
-
-export default App; 
+          <Box sx={{m:1}} /> 
+          <Button
+            variant="contained"
+            component="label"
+          >
+            Upload File
+            <input
+              type="file"
+              hidden
+            />
+          </Button>
+          
+          <Box sx={{m:2}}> 
+            Uploaded images: {uploadedImages.map( 
+              (imageObject)=>{
+                return ( `${imageObject.name} ` )
+              }
+            )}
+          </Box>
+        </Box>
+        <Box sx={{m:2}} /> 
+        <Button variant="contained" onClick={handleSubmit}>Submit</Button>
+      </form>
+    </Container>
+  )  
+}

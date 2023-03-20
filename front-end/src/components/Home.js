@@ -5,7 +5,6 @@ import CardMedia from '@mui/material/CardMedia';
 import CardContent from '@mui/material/CardContent';
 
 function suggestionsMapping (favorite) {
-  console.log(favorite.id, favorite);
   return (
     <Card 
       key={favorite.id}
@@ -25,7 +24,7 @@ function suggestionsMapping (favorite) {
         }}
         src={"https://picsum.photos/200"}
         title={favorite.title}
-        />
+      />
     </Box>
       <CardContent
         sx={{

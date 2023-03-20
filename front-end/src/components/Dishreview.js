@@ -1,82 +1,107 @@
+import { Box, Button, TextField, Typography } from "@mui/material";
+import React, { useEffect, useState } from 'react';
+import { FaStar, FaStarHalf } from "react-icons/fa";
+import { useNavigate } from "react-router-dom";
+import { Rating } from './Rating';
+import "./stars.css";
 
-import { Box, ratingClasses, Typography, TextField } from "@mui/material";
-import React, {useState} from 'react';
-import Rating from './Rating';
-import "./stars.css"
-import { FaStarHalf,FaStar, FaSatelliteDish } from "react-icons/fa";
+export function DishReview() {
+  // to change pages
+  const navigate = useNavigate();
 
-export function Dishreview() {
-  const [restaurantName, setRestaurant] = useState('')
-  const[dishName, setDish] = useState('')
-  const [averageRating, setAverageRating] = useState(0)
-  const [review, setReview] = useState('')
-  const[isSubmitted, setIsSubmitted] = useState(false)
-  const [ratings,setRatings] = useState([])
+  const centeringStyles = {
+    justifyContent: "center",
+    alignItems: "center",
+    flexDirection: "column",
+    display: "inline-block"
+  }
 
+  const [restaurantName, setRestaurantName] = useState('');
+  const [dishName, setDish] = useState('');
+
+  const [averageRating, setAverageRating] = useState(0);
+  const [review, setReview] = useState('');
+  const [isSubmitted, setIsSubmitted] = useState(false);
+  const [ratings,setRatings] = useState([]);
   
   const handleRatingChange = (values) => {
-    // const sum = values.reduce((accumulator, currentValue)=>accumulator + currentValue,0)
-    // const newAverage = sum / values.length
-    // setAverageRating(parseFloat(newAverage.toFixed(2)))
     setRatings(values)
   };
 
-  const renderStars = (rating) => {
-    const starIcons = [];
-    const fullStars = Math.floor(rating);
-    const halfStar = (rating-fullStars)>=0.5
-    for(let i = 0; i<fullStars; i++){
-      starIcons.push(<FaStar key = {i} className = "star" color = "#ffc107" size = {100}/>)
-    }
-    if(halfStar){
-      starIcons.push(<FaStarHalf key = {starIcons.length} className = "star" color = "#ffc107" size = {100}/>)
-    }
-    for(let i = starIcons.length; i<5; i++){
-      starIcons.push(<FaStar key = {i} className = "star" color = "e4e5e9" size = {100}/>)
-    }
-    return starIcons;
-  };
-
-  const handleRestaurant=(event) => {
-    setRestaurant(event.target.value)
-  };
-  const handleDish = (event) => {
-    setDish(event.target.value)
-  };
   const handleReview=(event)=>{
     setReview(event.target.value)
   };
 
   const handleSubmit = (event) => {
-  event.preventDefault()
-  setIsSubmitted(true)
-  const sum = ratings.reduce((accumulator, currentValue)=>accumulator + currentValue,0)
-  const newAverage = sum / ratings.length
-  setAverageRating(parseFloat(newAverage.toFixed(2)))
-
-  setRestaurant('')
-  setDish('')
-  setReview('')
+    event.preventDefault()
+    setIsSubmitted(true)
+    const sum = ratings.reduce((accumulator, currentValue)=>accumulator + currentValue,0)
+    const newAverage = sum / ratings.length
+    setAverageRating(parseFloat(newAverage.toFixed(2)))
+    // go back to previous page
+    navigate(-1);
   };
-  return (
-    <div>
-    <div style={{display: "flex",flexDirection: "column", justifyContent: "center", alignItems: "center", height: "40vh"}}>
-      <h1> Leave a Review</h1>
-      <p>Average Rating: {averageRating}</p>
-      <div>{renderStars(averageRating)}</div>
-    </div>
-    <form onSubmit={handleSubmit}>
-    <div style={{display: "flex", flexDirection: "column"}}>
-      <TextField label = "Restaurant Name" value = {restaurantName} onChange = {handleRestaurant}/>
-      <TextField label = "Dish Name" value = {dishName} onChange = {handleDish}/>
-      <TextField label = "Review" value = {review} onChange = {handleReview}/>
-      </div>
-      <Rating onRatingChange = {handleRatingChange} />
-      <button type="submit">Submit</button> 
-     </form>
-    {isSubmitted && <p>Thank you for your review!</p>}
 
-    </div>
+  useEffect( () => {
+    // TODO: (mock) fetch dishName, restaurantName and averageReview
+    setRestaurantName("Los Tacos");
+    setDish("3 Tacos");
+  }, [])
+
+  const renderStars = (rating) => {
+    const starIcons = [];
+    const fullStars = Math.floor(rating);
+    const halfStar = (rating-fullStars)>=0.5
+    // added below to easily control star display because mobile was spilling over display
+    const starWidth = "70";
+    for(let i = 0; i<fullStars; i++){
+      starIcons.push(<FaStar key = {i} className = "star" color = "#ffc107" size = {starWidth}/>)
+    }
+    if(halfStar){
+      starIcons.push(<FaStarHalf key = {starIcons.length} className = "star" color = "#ffc107" size = {starWidth}/>)
+    }
+    for(let i = starIcons.length; i<5; i++){
+      starIcons.push(<FaStar key = {i} className = "star" color = "e4e5e9" size = {starWidth}/>)
+    }
+    return starIcons;
+  };
+
+  return (
+    <Box
+      // display="flex"
+      justifyContent="center"
+      alignItems="center"
+      minHeight="100vh"
+    >
+        <Box sx={{m:4}} /> 
+        <Box sx={{display: "flex",flexDirection: "column", justifyContent: "center", alignItems: "center"}}>
+          <Typography variant="h4"> Leave a Review</Typography>
+          <Box sx={{m:2}} /> 
+          <Typography variant="h6">Restaurant: {restaurantName}</Typography> 
+          <Typography variant="h6">Dish: {dishName}</Typography> 
+          <Typography variant="h6">Average Rating: {averageRating}</Typography>
+          <Box sx={{m:1}} /> 
+          <Box>
+            {renderStars(averageRating)}
+          </Box>
+        </Box>
+
+        <Box sx={{m:2}} />
+        <Box sx={{...centeringStyles, display: "flex"}}>
+          <form onSubmit={handleSubmit} style={{...centeringStyles, }}>
+            <Box sx={centeringStyles}>
+              <Box sx={{m:2}} />
+              <Typography variant="h5"> Your Review</Typography>
+              <Box sx={{m:1}} />
+              <TextField label = "Review" value = {review} onChange = {handleReview} multiline/>
+              <Box sx={{m:2}} />
+              <Rating onRatingChange = {handleRatingChange} />
+              <Button variant="contained" onClick={handleSubmit}>Submit</Button>
+            </Box>
+          </form>
+          {isSubmitted && <p>Thank you for your review!</p>}
+        </Box>
+    </Box>
   );
 }
 

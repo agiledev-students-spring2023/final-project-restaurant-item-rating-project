@@ -1,78 +1,121 @@
-import { Box, Typography } from "@mui/material";
+import { Box, Typography, ImageList, ImageListItem, Button } from "@mui/material";
 import { useEffect, useState } from "react";
 import Card from '@mui/material/Card';
 import CardMedia from '@mui/material/CardMedia';
 import CardContent from '@mui/material/CardContent';
+import Rating from '@mui/material/Rating';
+import { useNavigate } from "react-router-dom";
 
-//this is a change in the file
-function displaydishes(resturant) {
-  console.log(resturant.id, resturant);
+export function DishDetail() {
+
+  // to change pages
+  const navigate = useNavigate();
+
+  const millisecondsInADay = 86400000;
+
+  // fetched state
+  const [restaurantName, setRestaurantName] = useState('Los Tacos'); // TODO: mock this with mockeroo
+
+  const [dish, setDish] = useState({
+    id:1,
+    name:"Spicy Tacos",
+    images: [
+      {
+        id: 1,
+        img:"https://picsum.photos/200"
+      },
+      {
+        id: 2,
+        img:"https://picsum.photos/200"
+      },
+
+    ],
+    reviews: [
+      {
+        id: 1,
+        value:4,
+        date: Date.now() - (millisecondsInADay*3)
+      },
+      {
+        id: 2,
+        value:5,
+        date: Date.now() - (millisecondsInADay*4)
+      },
+      {
+        id: 3,
+        value:2,
+        date: Date.now() - (millisecondsInADay*5)
+      },
+
+    ]
+  });
+
+  // TODO: mock
+  //     fetching dish
+  //     fetching images for a dish?
+  //     fetching reviews
+
   return (
-    <Card 
-      key={resturant.id}
-    >
     <Box
       sx={{
-        display:'flex', 
-        justifyContent:"center"
+        width: "90%", 
+        height: "auto",
+        justifyContent:"center",
+        margin: "0 auto"
       }}
     >
-      <CardMedia
-        component="img"
-        height="200"
+      <Typography variant="h3">{dish.name}</Typography>
+      <Box sx={{m:2}} /> 
+      <Typography variant="h6">Restaurant: {restaurantName}</Typography>
+
+      <Box sx={{m:1.5}} /> 
+
+      {/* images */}
+      <Typography variant="h4">How it Looks</Typography>
+      <Box sx={{m:0.5}} /> 
+      <ImageList 
         sx={{ 
-          maxWidth:"200px",
-          display:'flex', 
-        }}
-        src={restaurant.img}
-        title={resturant.title}
-        />
-    </Box>
-      <CardContent
-        sx={{
-          maxWidth:200
-        }}
+          width: "100%", 
+          height: "auto",
+          justifyContent:"center",
+          margin: "0 auto"
+        }} 
+        cols={2} 
+        rowHeight={"auto"}
       >
-        <Typography 
-          gutterBottom 
-          max
-          variant="h6" 
-        >
-          {favorite.title.split(" ").slice(0,4).join(" ")}
-        </Typography>
-      </CardContent>
-    </Card>
-  );
-};
+        {dish.images.map((item) => (
+          <ImageListItem key={item.id}>
+            <img
+              src={`${item.img}?w=164&h=164&fit=crop&auto=format`}
+              srcSet={`${item.img}?w=164&h=164&fit=crop&auto=format&dpr=2 2x`}
+              alt={item.title}
+              height="auto"
+              loading="lazy"
+            />
+          </ImageListItem>
+        ))}
+      </ImageList>
 
-export function dishdetail() {
-
-  const [dishresults, setDishresults] = useState([]);
-
-  // mocked api with mockaroo
-  const apiUrl =  "https://my.api.mockaroo.com/resturant?key=07b3ef90";
-  useEffect(() => {
-    fetch(apiUrl)
-    .then((response) => response.json())
-    .then((data) => {
-      setDishresults(data.slice(0,3));
-    });
-
-  }, []
-  )
-
-  // this is what gets rendered in the React DOM. Must be one element at the top level
-  return (
-    <Box>      
-      <Box
-        sx={{ 
-          margin: "auto 4% auto 4%",
-          display: 'flex',
-          justifyContent: 'space-between'
-        }}
+      <Box sx={{m:3}} /> 
+      <Typography variant="h4">Reviews</Typography>
+      <Button
+        variant="contained"
+        size="small"
+        onClick={() => {navigate("/review");}}
       >
-        {dishresults.map(displaydishes)}
-      </Box>
+        Add a review
+      </Button>
+      
+      {dish.reviews.map( (review) => {
+        return (
+          <Box
+          >
+            <Box sx={{m:1.5}} /> 
+            <Rating name="read-only" value={review.value} readOnly />
+            <Typography> {Math.round((Date.now() - review.date) / millisecondsInADay)} days ago </Typography>
+          </Box>
+        );
+      })}
 
     </Box>
   );
