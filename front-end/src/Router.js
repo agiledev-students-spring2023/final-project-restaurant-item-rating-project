@@ -28,7 +28,7 @@ function MyRoutes() {
             element={<AddRestaurant />} 
           />
           <Route 
-            path="/dishreview"
+            path="/review"
             element={<DishReview />} 
           />
           <Route 
@@ -43,6 +43,11 @@ function MyRoutes() {
           <Route 
             path="/search"
             element={<Search />} 
+          />
+          {/* catch all */}
+          <Route 
+            path="/*"
+            element={<Home />} 
           />
         </Route>
       </Routes>

@@ -1,11 +1,15 @@
-import { Box, Typography, ImageList, ImageListItem } from "@mui/material";
+import { Box, Typography, ImageList, ImageListItem, Button } from "@mui/material";
 import { useEffect, useState } from "react";
 import Card from '@mui/material/Card';
 import CardMedia from '@mui/material/CardMedia';
 import CardContent from '@mui/material/CardContent';
 import Rating from '@mui/material/Rating';
+import { useNavigate } from "react-router-dom";
 
 export function DishDetail() {
+
+  // to change pages
+  const navigate = useNavigate();
 
   const millisecondsInADay = 86400000;
 
@@ -94,6 +98,13 @@ export function DishDetail() {
 
       <Box sx={{m:3}} /> 
       <Typography variant="h4">Reviews</Typography>
+      <Button
+        variant="contained"
+        size="small"
+        onClick={() => {navigate("/review");}}
+      >
+        Add a review
+      </Button>
       
       {dish.reviews.map( (review) => {
         return (

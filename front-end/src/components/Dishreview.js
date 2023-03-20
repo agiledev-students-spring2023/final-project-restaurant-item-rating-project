@@ -1,10 +1,14 @@
 import { Box, Button, TextField, Typography } from "@mui/material";
 import React, { useEffect, useState } from 'react';
 import { FaStar, FaStarHalf } from "react-icons/fa";
+import { useNavigate } from "react-router-dom";
 import { Rating } from './Rating';
 import "./stars.css";
 
 export function DishReview() {
+  // to change pages
+  const navigate = useNavigate();
+
   const centeringStyles = {
     justifyContent: "center",
     alignItems: "center",
@@ -34,6 +38,8 @@ export function DishReview() {
     const sum = ratings.reduce((accumulator, currentValue)=>accumulator + currentValue,0)
     const newAverage = sum / ratings.length
     setAverageRating(parseFloat(newAverage.toFixed(2)))
+    // go back to previous page
+    navigate(-1);
   };
 
   useEffect( () => {
