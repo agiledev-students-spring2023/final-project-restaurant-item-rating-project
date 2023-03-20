@@ -1,35 +1,44 @@
-
-import React, {startTransition, useState} from "react";
+import React, { useState } from "react";
 import { FaStar } from "react-icons/fa";
 
-const Rating = () => {
-    const [rating, setRating] = useState(null);
-    const [hover, setHover] = useState(null);
+const Rating = ({ onRatingChange}) => {
+  const [rating, setRating] = useState(null);
+  const [values, setValues] = useState([]);
 
-        return(
-        <div>
-            {[ ...Array(5)].map((star,i) => {
-                const ratingValue = i+1
+  const handleClick = (ratingValue) => {
+    
+    setRating(ratingValue);
+    setValues([...values, ratingValue]);
+    onRatingChange([...values, ratingValue]);
+  };
 
-                return(
-                    <label>
-                       <label>
-                        <input type="radio" name="rating" value={ratingValue} onClick={() => setRating(ratingValue)} />
-                        <FaStar 
-                             className="star" 
-                             color={ratingValue <= (hover || rating) ? "#ffc107" : "#e4e5e9"} 
-                                size={100}
-                                onMouseEnter={() => setHover(ratingValue)}
-                                onMouseLeave={() => setHover(null)}
-                                />
-                            </label>
 
-                    </label>
-                );
-            })}
-            <p>Thank you! You rated this item: {rating} stars</p>
-        </div>
-
+  return (
+    <div>
+      {[...Array(5)].map((star, i) => {
+        const ratingValue = i + 1;
+        return (
+          <label key={i}>
+            <input
+              type="radio"
+              name="rating"
+              value={ratingValue}
+              onClick={() => handleClick(ratingValue)}
+            />
+            <FaStar
+              className="star"
+              color={ratingValue <= rating ? "#ffc107" : "#e4e5e9"}
+              size={50}
+              onMouseEnter={() => setRating(ratingValue)}
+              onMouseLeave={() => setRating(ratingValue)}
+            />
+          </label>
         );
-}
-export default Rating
+      })}
+      <p>Thank you! You rated this item: {rating} stars</p>
+      {/* <p>All ratings: {values.join(",")}</p> */}
+    </div>
+  );
+};
+
+export default Rating;

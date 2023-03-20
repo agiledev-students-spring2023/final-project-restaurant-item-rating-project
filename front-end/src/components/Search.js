@@ -4,11 +4,11 @@ import Card from '@mui/material/Card';
 import CardMedia from '@mui/material/CardMedia';
 import CardContent from '@mui/material/CardContent';
 
-function displaydishes(resturant) {
-  console.log(resturant.id, resturant);
+function searchResults (restaurants) {
+  console.log(restaurants.id, restaurants);
   return (
     <Card 
-      key={resturant.id}
+      key={restaurants.id}
     >
     <Box
       sx={{
@@ -23,40 +23,54 @@ function displaydishes(resturant) {
           maxWidth:"200px",
           display:'flex', 
         }}
-        src={restaurant.img}
-        title={resturant.title}
+        src={restaurants.img}
+        title={restaurants.name}
         />
     </Box>
       <CardContent
         sx={{
           maxWidth:200
         }}
-      >
+      > 
+        <Typography 
+          gutterBottom 
+          max
+          variant="h4" 
+        >
+          {restaurants.name}
+        </Typography>
+        <Typography
+        max
+        variant="h6" 
+        >
+        Most Popular Dish:
+        </Typography>
         <Typography 
           gutterBottom 
           max
           variant="h6" 
         >
-          {favorite.title.split(" ").slice(0,4).join(" ")}
+          
+          {restaurants.popular_dish}
         </Typography>
       </CardContent>
     </Card>
   );
 };
 
-export function dishdetail() {
+export function Search() {
 
-  const [dishresults, setDishresults] = useState([]);
+  const [restaurantList, setRestaurantList] = useState([]);
 
   // mocked api with mockaroo
-  const apiUrl =  "https://my.api.mockaroo.com/resturant?key=07b3ef90";
-  useEffect(() => {
+  const apiUrl =  "https://my.api.mockaroo.com/restaurants/123.json?key=fc5ecd60";
+  useEffect( () => {
     fetch(apiUrl)
     .then((response) => response.json())
     .then((data) => {
-      setDishresults(data.slice(0,3));
+      setRestaurantList(data.slice(0,5));
     });
-
+    
   }, []
   )
 
@@ -70,9 +84,8 @@ export function dishdetail() {
           justifyContent: 'space-between'
         }}
       >
-        {dishresults.map(displaydishes)}
+        {restaurantList.map(searchResults)}
       </Box>
-
     </Box>
   );
 }
