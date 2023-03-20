@@ -4,7 +4,8 @@ import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import { Layout } from './components/Layout';
 import { Home } from './components/Home';
 import { Template } from './components/Template';
-import { Dishreview } from './components/Dishreview';
+import { DishReview } from './components/DishReview';
+import { AddDish } from './components/AddDish';
 //import { DishDetail } from './components/DishDetail';
 import { Search } from './components/Search';
 function MyRoutes() {
@@ -18,8 +19,12 @@ function MyRoutes() {
             element={<Template />} 
           /> 
           <Route 
+            path="/add"
+            element={<AddDish />} 
+          />
+          <Route 
             path="/dishreview"
-            element={<Dishreview />} 
+            element={<DishReview />} 
           />
 
           {/* <Route 

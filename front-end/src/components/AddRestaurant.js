@@ -19,7 +19,7 @@ const handleChange = event =>{
   });
 }
 
-function App() {
+export function App() {
   const [formData, setFormData] = useReducer(formReducer, {});
   const [submitting, setSubmitting] = useState(false);
     const handleSubmit = event => {
