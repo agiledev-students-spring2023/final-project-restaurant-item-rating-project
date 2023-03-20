@@ -1,4 +1,4 @@
-import { Box, Typography } from "@mui/material";
+/* import { Box, Typography } from "@mui/material";
 import { useEffect, useState } from "react";
 import Card from '@mui/material/Card';
 import CardMedia from '@mui/material/CardMedia';
@@ -76,5 +76,5 @@ export function dishdetail() {
 
     </Box>
   );
-}
+} */
 
