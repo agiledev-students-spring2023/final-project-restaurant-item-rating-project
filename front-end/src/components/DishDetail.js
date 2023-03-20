@@ -45,7 +45,7 @@ function displaydishes(resturant) {
   );
 };
 
-export function dishdetail() {
+export function DishDetail() {
 
   const [dishresults, setDishresults] = useState([]);
 
