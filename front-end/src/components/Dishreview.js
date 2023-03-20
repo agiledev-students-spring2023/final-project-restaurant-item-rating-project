@@ -1,15 +1,13 @@
-
-import { TextField, Box, Typography, Button, Grid } from "@mui/material";
+import { Box, Button, TextField, Typography } from "@mui/material";
 import React, { useEffect, useState } from 'react';
 import { FaStar, FaStarHalf } from "react-icons/fa";
-import {Rating} from './Rating';
+import { Rating } from './Rating';
 import "./stars.css";
 
 export function DishReview() {
   const centeringStyles = {
     justifyContent: "center",
     alignItems: "center",
-    display: "flex",
     flexDirection: "column",
     display: "inline-block"
   }
