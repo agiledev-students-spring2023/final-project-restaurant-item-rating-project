@@ -22,10 +22,10 @@ function MyRoutes() {
             element={<Dishreview />} 
           />
 
-          <Route 
+          {/* <Route 
             path="/dishdetail"
             element={<DishDetail/>} 
-          />
+          /> */}
           <Route 
             path="/search"
             element={<Search />} 
