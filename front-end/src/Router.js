@@ -1,6 +1,5 @@
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 
-// import { Template } from './components/Template';
 import { Layout } from './components/Layout';
 import { Home } from './components/Home';
 import { Template } from './components/Template';
@@ -9,6 +8,7 @@ import { AddDish } from './components/AddDish';
 import { AddRestaurant } from './components/AddRestaurant';
 import { DishDetail } from './components/DishDetail';
 import { Search } from './components/Search';
+
 function MyRoutes() {
   return (
     <BrowserRouter>
