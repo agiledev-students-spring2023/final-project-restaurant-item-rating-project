@@ -36,10 +36,11 @@ function MyRoutes() {
             element={<DishDetail />} 
           />
 
-          {/* <Route 
+          <Route 
             path="/dishdetail"
             element={<DishDetail/>} 
-          /> */}
+          />
+          
           <Route 
             path="/search"
             element={<Search />} 
