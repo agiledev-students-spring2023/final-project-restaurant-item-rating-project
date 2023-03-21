@@ -42,11 +42,21 @@ export function DishReview() {
     navigate(-1);
   };
 
+  const apiUrl =  "https://my.api.mockaroo.com/restaurants/123.json?key=fc5ecd60";
   useEffect( () => {
-    // TODO: (mock) fetch dishName, restaurantName and averageReview
-    setRestaurantName("Los Tacos");
-    setDish("3 Tacos");
-  }, [])
+    fetch(apiUrl)
+    
+    .then((response) => response.json())
+    .then((data) => {
+      const randomInt = Math.floor(Math.random() * 10) + 1;
+      const randomNumber = Math.floor(Math.random() * 5) + 1;
+      setRestaurantName(data[randomInt].name);
+      setDish(data[randomInt].popular_dish);
+      setAverageRating(data[randomNumber].id);
+    });
+    
+  }, []
+  )
 
   const renderStars = (rating) => {
     const starIcons = [];
