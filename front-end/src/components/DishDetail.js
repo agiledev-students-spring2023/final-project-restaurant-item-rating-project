@@ -1,9 +1,6 @@
-import { Box, Typography, ImageList, ImageListItem, Button } from "@mui/material";
-import { useEffect, useState } from "react";
-import Card from '@mui/material/Card';
-import CardMedia from '@mui/material/CardMedia';
-import CardContent from '@mui/material/CardContent';
+import { Box, Button, ImageList, ImageListItem, Typography } from "@mui/material";
 import Rating from '@mui/material/Rating';
+import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
 export function DishDetail() {
