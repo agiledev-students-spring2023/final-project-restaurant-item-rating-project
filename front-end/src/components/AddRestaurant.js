@@ -3,66 +3,28 @@ import React, { useEffect, useState } from 'react';
 import { Checkbox } from '@mui/material';
 import '../App.css';
 
-export function AddDish() {
-
-  // fetched data
-  const [restaurantName, setRestaurantName] = useState('Los Tacos'); // TODO: mock this with mockeroo
+export function AddRestaurant() {
 
   // form data
-  const [dishName, setDishName] = useState('');
-  const [isVegan, setIsVegan] = useState(false);
-  const [isGlutenFree, setIsGlutenFree] = useState(false);
+  const [restaurantName, setRestaurantName] = useState('');
+  const [cityName, setCityName] = useState('');
   const [uploadedImages, setUploadedImages] = useState([]);
-
-  const handleIsVegan = (event) => {
-    setIsVegan(event.target.checked);
-  };
-  const handleGlutenFree = (event) => {
-    setIsGlutenFree(event.target.checked);
-  };
 
   const handleSubmit = event => {
     event.preventDefault();
-    alert('Dish Details submitted')
+    alert('Restaurant Details submitted')
   }
-
-  useEffect( () => {
-    // TODO: mock fetch data: setRestaurantName 
-  }, [])
   
   return(
     <Container>
-      <Typography variant="h3">Add a Dish</Typography>
-      <Typography variant="h6">Restaurant: {restaurantName}</Typography>
+      <Typography variant="h3">Add Restaurant</Typography>
+
       <form onSubmit ={handleSubmit}>
         <Box sx={{m:2}} /> 
-        <TextField label = "Dish Name" value = {dishName} onChange = {setDishName}/>
-
-        <FormGroup>
-          <FormControlLabel 
-            control={
-              <Checkbox 
-                checked={isVegan}
-                onChange={handleIsVegan}
-                inputProps={{ 'aria-label': 'controlled' }}
-              />
-            } 
-            label="Vegan" 
-          />
-          <FormControlLabel 
-            control={
-              <Checkbox 
-                checked={isGlutenFree}
-                onChange={handleGlutenFree}
-                inputProps={{ 'aria-label': 'controlled' }}
-              />
-            } 
-            label="Gluten Free" 
-          />
-        </FormGroup>
-
+        <TextField label = "Restaurant Name" value = {restaurantName} onChange = {setRestaurantName}/>
         <Box sx={{m:2}} /> 
-
+        <TextField label = "City" value = {cityName} onChange = {setCityName}/>
+        <Box sx={{m:1}} />
         {/* image input */}
         <Box>
           <Typography variant="h6">Add Pictures?</Typography>
