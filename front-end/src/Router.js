@@ -35,7 +35,6 @@ function MyRoutes() {
             path="/dish"
             element={<DishDetail />} 
           />
-          
           <Route 
             path="/search"
             element={<Search />} 
