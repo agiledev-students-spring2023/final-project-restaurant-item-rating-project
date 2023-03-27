@@ -9,7 +9,7 @@ app.post('/', (req, res) => {
     res.send('POST request to the homepage')
 })
 
-
+// GET route 
 // GET route for getting all suggestions for a dish
 router.get('/dishes/:cityId/suggestions', (req,res)=>{
     const cityId = req.params.cityId;
