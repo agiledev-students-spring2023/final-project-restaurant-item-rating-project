@@ -6,20 +6,16 @@ const port = 3000; // set the port number
 // Middleware to parse JSON requests
 app.use(express.json());
 
-// Define the GET endpoint to get dishes by restaurant ID
+// Define the GET endpoint to get dish by restaurant ID
 app.get('/restaurant/:id', (req, res) => {
   const restaurantId = req.params.id; // extract the restaurant ID from the URL parameter
 
-  // Here you can fetch the dishes from the database based on the restaurant ID
+  // Here you can fetch the dish from the database based on the restaurant ID
   // For example:
-  const dishes = [
-    { id: 1, name: 'Pizza' },
-    { id: 2, name: 'Burger' },
-    { id: 3, name: 'Salad' },
-  ];
+  const Dish = mongoose.model('Dish');];
 
-  // Return the dishes as a response
-  res.json(dishes);
+  // Return the dish as a response
+  res.json(Dish);
 });
 
 // Define the POST endpoint to update a restaurant by ID
