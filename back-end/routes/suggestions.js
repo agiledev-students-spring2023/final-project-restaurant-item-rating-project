@@ -33,7 +33,7 @@ router.get('/restaurants/:cityId', (req,res)=>{
 
 // PUT route
 // PUT route for updating an existing suggestion for dishes
-router.put('/dishes/:cityId/suggestions', (req,res)=>{
+router.put('/dishes/:cityId', (req,res)=>{
     const cityId = req.params.cityId;
     const dish_suggests = req.body;
     if (!dish_suggests) {
@@ -43,7 +43,7 @@ router.put('/dishes/:cityId/suggestions', (req,res)=>{
     res.json(dish_suggests);
 })
 // PUT route for updating an existing suggestion for restaurants
-router.put('/restaurants/:cityId/suggestions', (req,res)=>{
+router.put('/restaurants/:cityId', (req,res)=>{
     const cityId = req.params.cityId;
     const restaurant_suggests = req.body;
     if (!restaurant_suggests) {
