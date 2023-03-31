@@ -2,6 +2,25 @@ const express = require('express');
 // this router is used for the paths that match "/dish"
 const dishRouter = express.Router();
 
+
+// handler functions for routes
+function findDishById(id) {
+  return ({
+    id: 24,
+    name: "Los Tacos",
+    restaurant: {},
+  });
+}
+function createDish(dish) {
+  return true;
+}
+function updateDish(id, dish) {
+  return true;
+}
+function deleteDishById(id) {
+  return true;
+}
+
 // GET route for getting a specific dish
 dishRouter.get('/:id', (req, res) => {
     const id = req.params.id;
