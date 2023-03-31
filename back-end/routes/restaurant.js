@@ -21,15 +21,13 @@ function deleteRestaurant(id) {
   return true;
 }
 
-
-
 // Define the GET endpoint to get dish by restaurant ID
 restaurantRouter.get('/:id', (req, res) => {
 
   // res id, given from URL
   const restaurantId = req.params.id; // extract the restaurant ID from the URL parameter
 
-  const restaurant = findRestaurantById();
+  const restaurant = findRestaurantById(restaurantId);
 
   // Return the dish as a response
   res.json(restaurant);
