@@ -9,6 +9,14 @@ const axios = require("axios") // middleware for making requests to APIs
 require("dotenv").config({ silent: true }) // load environmental variables from a hidden file named .env
 const morgan = require("morgan") // middleware for nice logging of incoming HTTP requests
 
+
+
+// import routers
+const dishRouter = require('./routes/dish')
+const ratingRouter = require('./routes/rating')
+const restaurantRouter = require('./routes/restaurant')
+const suggestionRouter = require('./routes/suggestion')
+
 /**
  * Typically, all middlewares would be included before routes
  * In this file, however, most middlewares are after most routes
@@ -189,6 +197,12 @@ app.put('/', (req, res) => {
 app.delete('/', (req, res) => {
   res.send('Got a DELETE request at /user')
 })
+
+// implement routers
+app.use('/restaurant/dish/:dishId/review', ratingRouter) // review routes
+app.use('/restaurant/dish', dishRouter) // dish routes
+app.use('/restaurant', restaurantRouter) // restaurant routes
+app.use('/suggestion', suggestionRouter) // suggestion routes
 
 
 module.exports = app

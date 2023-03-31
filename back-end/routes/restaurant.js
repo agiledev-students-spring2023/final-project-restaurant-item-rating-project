@@ -1,62 +1,71 @@
-
 const express = require('express');
-const app = express();
-const port = 3000; // set the port number
 
-// Middleware to parse JSON requests
-app.use(express.json());
+// this router is used for paths matching "/restaurant"
+const restaurantRouter = express.Router();
+
+// handler functions for routes
+function findRestaurantById(id) {
+  return ({
+    id: id,
+    name: "Los Tacos",
+    dishes: []
+  });
+}
+function createRestaurant(restaurant) {
+  return true;
+}
+function updateRestaurant(id, restaurant) {
+  return true;
+}
+function deleteRestaurant(id) {
+  return true;
+}
 
 // Define the GET endpoint to get dish by restaurant ID
-app.get('/restaurant/:id', (req, res) => {
+restaurantRouter.get('/:id', (req, res) => {
 
-  //res id, given from URL
+  // res id, given from URL
   const restaurantId = req.params.id; // extract the restaurant ID from the URL parameter
 
-  // Here you can fetch the dish from the database based on the restaurant ID
-  // For example:
-  const Dish = mongoose.model('Dish');
+  const restaurant = findRestaurantById(restaurantId);
 
   // Return the dish as a response
-  res.json(Dish);
+  res.json(restaurant);
 });
 
 // Define the POST endpoint to update a restaurant by ID
-app.post('/restaurant/:id', (req, res) => {
+restaurantRouter.post('/:id', (req, res) => {
   const restaurantId = req.params.id; // extract the restaurant ID from the URL parameter
 
-  // Here you can update the restaurant in the database based on the restaurant ID and the data in the request body
-  // For example:
-  // const updatedRestaurant = updateRestaurant(restaurantId, req.body);
+  const updatedRestaurant = updateRestaurant(restaurantId, req.body);
+
+  // TODO: check if error
 
   // Return a success response
-  res.json({ responseStatus: 200 });
+  res.json({responseStatus: 200});
 });
 
 // Define the POST endpoint to create a restaurant
-app.post('/restaurant', (req, res) => {
+restaurantRouter.post('', (req, res) => {
   // Here you can create the restaurant in the database based on the data in the request body
   // For example:
-  // const createdRestaurant = createRestaurant(req.body);
+  const createdRestaurant = createRestaurant(req.body);
 
   // Return a success response
-  res.json({ responseStatus: 200 });
+  res.json({...createdRestaurant, responseStatus: 200 });
 });
 
 // Define the DELETE endpoint to delete a restaurant by ID
-app.delete('/restaurant/:id', (req, res) => {
+restaurantRouter.delete('/:id', (req, res) => {
   const restaurantId = req.params.id; // extract the restaurant ID from the URL parameter
 
   // Here you can delete the restaurant from the database based on the restaurant ID
   // For example:
-  // deleteRestaurant(restaurantId);
+  deleteRestaurant(restaurantId);
 
   // Return a success response
   res.json({ responseStatus: 200 });
 });
 
 
-//I don't think we need to start the server because this is not the homepage
-/* // Start the server
-app.listen(port, () => {
-  console.log(`App listening at http://localhost:${port}`);
-}); */
+module.exports = restaurantRouter;
