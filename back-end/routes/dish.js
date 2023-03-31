@@ -2,13 +2,11 @@ const express = require('express');
 // this router is used for the paths that match "/dish"
 const dishRouter = express.Router();
 
-
 // handler functions for routes
 function findDishById(id) {
   return ({
-    id: 24,
-    name: "Los Tacos",
-    restaurant: {},
+    id: id,
+    name: "3 Taco Combo",
   });
 }
 function createDish(dish) {
@@ -17,13 +15,13 @@ function createDish(dish) {
 function updateDish(id, dish) {
   return true;
 }
-function deleteDishById(id) {
+function deleteDish(id) {
   return true;
 }
 
 // GET route for getting a specific dish
-dishRouter.get('/:id', (req, res) => {
-    const id = req.params.id;
+dishRouter.get('/:dishId', (req, res) => {
+    const id = req.params.dishId;
     // You can use the `id` parameter to look up the dish in your database or in-memory store
     const dish = findDishById(id);
     if (!dish) {
@@ -41,8 +39,8 @@ dishRouter.post('', (req, res) => {
 });
 
 // PUT route for updating an existing dish
-dishRouter.put('/:id', (req, res) => {
-  const id = req.params.id;
+dishRouter.put('/:dishId', (req, res) => {
+  const id = req.params.dishId;
   const dish = req.body;
   // You can use the `id` parameter and `dish` object to update an existing dish in your database or in-memory store
   updateDish(id, dish);
@@ -50,10 +48,10 @@ dishRouter.put('/:id', (req, res) => {
 });
 
 // DELETE route for deleting a specific dish
-dishRouter.delete('/:id', (req, res) => {
-  const id = req.params.id;
+dishRouter.delete('/:dishId', (req, res) => {
+  const id = req.params.dishId;
   // You can use the `id` parameter to delete the dish from your database or in-memory store
-  deleteDishById(id);
+  deleteDish(id);
   res.sendStatus(204);
 });
 

@@ -11,6 +11,8 @@ const morgan = require("morgan") // middleware for nice logging of incoming HTTP
 
 // import routers
 const dishRouter = require('./routes/dish')
+const ratingRouter = require('./routes/rating')
+const restaurantRouter = require('./routes/restaurant')
 
 /**
  * Typically, all middlewares would be included before routes
@@ -193,12 +195,10 @@ app.delete('/', (req, res) => {
   res.send('Got a DELETE request at /user')
 })
 
-// implement sub-folder routes
-
-// "/dish" routes
-app.use('/dish', dishRouter)
-
-
+// implement routers
+app.use('/restaurant/dish/:dishId/review', ratingRouter) // review routes
+app.use('/restaurant/dish', dishRouter) // dish routes
+app.use('/restaurant', restaurantRouter) // restaurant routes
 
 
 module.exports = app
