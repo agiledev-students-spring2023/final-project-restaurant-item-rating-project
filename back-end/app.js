@@ -13,6 +13,7 @@ const morgan = require("morgan") // middleware for nice logging of incoming HTTP
 const dishRouter = require('./routes/dish')
 const ratingRouter = require('./routes/rating')
 const restaurantRouter = require('./routes/restaurant')
+const suggestionRouter = require('./routes/suggestion')
 
 /**
  * Typically, all middlewares would be included before routes
@@ -199,6 +200,7 @@ app.delete('/', (req, res) => {
 app.use('/restaurant/dish/:dishId/review', ratingRouter) // review routes
 app.use('/restaurant/dish', dishRouter) // dish routes
 app.use('/restaurant', restaurantRouter) // restaurant routes
+app.use('/suggestion', suggestionRouter) // suggestion routes
 
 
 module.exports = app
