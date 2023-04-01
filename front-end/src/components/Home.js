@@ -5,6 +5,7 @@ import CardMedia from '@mui/material/CardMedia';
 import CardContent from '@mui/material/CardContent';
 import { useNavigate } from 'react-router-dom';
 
+/* import{SearchBar} from "./components/SearchBar"; */
 
 function suggestionsMapping (favorite) {
   return (
@@ -41,6 +42,7 @@ function suggestionsMapping (favorite) {
         >
           {favorite.title.split(" ").slice(0,4).join(" ")}
         </Typography>
+
       </CardContent>
 
     </Card>
@@ -73,9 +75,18 @@ export function Home() {
 
     <Container>
 
-      <TextField  type="search" id="search" label="Search" sx={{ width: 380 }} />
+      <Button onClick={() => navigate('/search')}>Search</Button>
+      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 
-      <Button onClick={() => navigate('/favorites')}>Your Favorites</Button>
+      {/* <TextField  type="search" id="search" label="Search" sx={{ width: 350}} /> */}
+      {/* <div className = "search-bar-container">
+        <SearchBar />
+        <div>SearchResults</div>
+      </div> */}
+
+      <Button onClick={() => navigate('/favorites')}>Your Favorites - not built out</Button>
       &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
       <Button onClick={() => navigate('/add/restaurant')}>Add Restaurant</Button>
 
@@ -99,6 +110,22 @@ export function Home() {
 
       </Box>
 
+
+      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+
+
+      <Box>      
+        <Box
+          sx={{ 
+            margin: "auto 4% auto 4%",
+            display: 'flex',
+            justifyContent: 'space-between'
+          }}
+        >
+          {suggestions.map(suggestionsMapping)}
+        </Box>
+
+      </Box>
 
       &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 
