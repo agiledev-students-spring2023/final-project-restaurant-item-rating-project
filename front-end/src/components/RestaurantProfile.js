@@ -1,10 +1,10 @@
 
 import { Box, Typography } from "@mui/material";
 import { useEffect, useState } from "react";
-import Card from '@mui/material/Card';
-import CardMedia from '@mui/material/CardMedia';
-import CardContent from '@mui/material/CardContent';
-
+import Button from '@mui/material/Button';
+import List from '@mui/material/List';
+import ListItemButton from '@mui/material/ListItemButton';
+import ListItemText from '@mui/material/ListItemText';
 
 export function RestaurantProfile(){
 
@@ -33,7 +33,37 @@ export function RestaurantProfile(){
     
   }, []
   )
-    
+  const generateGoldStars = (rating) => {
+    const fullStars = Math.floor(rating);
+    const halfStar = Math.round(rating - fullStars);
+    const emptyStars = 5 - fullStars - halfStar;
+  
+    const stars = [];
+  
+    for (let i = 0; i < fullStars; i++) {
+      stars.push(<span key={i}>&#9733;</span>);
+    }
+  
+    if (halfStar === 1) {
+      stars.push(<span key={fullStars}>&#9733;&#189;</span>);
+    }
+  
+    for (let i = 0; i < emptyStars; i++) {
+      stars.push(<span key={fullStars + halfStar + i}>&#9734;</span>);
+    }
+  
+    return stars;
+  };
+
+  
+    const[showAllergies, setShowAllergies] = useState(false);
+
+    const allergies = [ 'Gluten','Dairy','Eggs','Soy','Peanuts','Tree  nuts',
+      'Shellfish','fish'];
+  const handleButtonClick =() =>{
+    setShowAllergies(!showAllergies);
+  }
+      
     
     return (
       <Box sx={{display: 'flex', flexDirection: 'column', alignItems: 'center',paddingBottom: '60px'}}>
@@ -49,7 +79,7 @@ export function RestaurantProfile(){
         <Box sx={{display: 'flex', justifyContent: 'center', marginTop: 2}}>
           <Box sx={{width: '50%', border: 1, borderColor: 'grey.400', padding: 2, marginRight: 4}}>
             <Typography variant="h6" component="h2" gutterBottom>
-              Order Via DoorDash
+            <a href="https://www.doordash.com/"> Order Via DoorDash </a>
             </Typography>
           </Box>
           <Box sx={{width: '50%', border: 1, borderColor: 'grey.400', padding: 2, marginLeft: 4}}>
@@ -71,54 +101,69 @@ export function RestaurantProfile(){
           <img src="https://images.ctfassets.net/o19mhvm9a2cm/3TqdEA20hEleGPCZj2JZJl/297b157fdd3ca108c74f17b1bd5fdfce/Website_RB_HP.png" alt="Delicious food" style={{maxWidth: '100%', height: 'auto'}} />
         </div>
         <p style={{textAlign: 'center'}}>Dish: {foodName2}</p>
-        <p style={{textAlign: 'center'}}>Dish: {avgRating} stars</p>
+        <p style={{textAlign: 'center'}}>Dish: {generateGoldStars(avgRating)}</p>
         </div>
         <div style={{position: 'relative', maxWidth: '30%', height: '40', left :'-150px'}}>
         <div>
           <img src="https://images.ctfassets.net/o19mhvm9a2cm/40Rv5BpzPIXl94xajEmLWf/92ed9f6fbbfa0d252c60c124c92befdb/Website_2023_February_LTO.png" alt="Delicious food" style={{maxWidth: '100%', height: 'auto'}} />
         </div>
         <p style={{textAlign: 'center'}}>Dish: {foodName}</p>
-        <p style={{textAlign: 'center'}}>Dish: {avgRating} stars</p>
+        <p style={{textAlign: 'center'}}>Dish: {generateGoldStars(avgRating)}</p>
         </div>
         </div>
     </Box>
+    <div style={{ position: 'relative' }}>
+      <Button variant = "contained" onClick = {handleButtonClick} 
+       style={{ position: 'absolute', right: -250 , top : 50}}>
+        Allergy Filter
+      </Button>
+      {showAllergies && (
+        <List>
+          {allergies.map((allergy)=>(
+            <ListItemButton key = {allergy}>
+              <ListItemText primary = {allergy}/>
+            </ListItemButton>
+          ))}
+        </List>
+      )}
+    </div>
     <Typography variant="h4" component="h2" gutterBottom sx={{ marginLeft: -70, marginRight: 0 }}>
         Full Menu:
       </Typography>
-      <div style={{display: 'flex', flexDirection: 'row', maxWidth: '20%', marginLeft : -550}}>
+      <div style={{display: 'flex', flexDirection: 'row', maxWidth: '25%', marginLeft : -550}}>
   <div style={{position: 'relative', maxWidth: '100%', height: 'auto'}}>
     <img src="https://a.cdn-hotels.com/gdcs/production0/d1513/35c1c89e-408c-4449-9abe-f109068f40c0.jpg?impolicy=fcrop&w=800&h=533&q=medium" alt="Delicious food" style={{maxWidth: '100%', height: 'auto'}} />
   </div>
   <div style={{marginLeft: '10px'}}>
     <p style={{textAlign: 'center'}}>{foodName}</p>
-    <p style={{textAlign: 'center'}}>{avgRating} stars</p>
+    <p style={{textAlign: 'center'}}> {generateGoldStars(avgRating)}</p>
   </div>
 </div>
-<div style={{display: 'flex', flexDirection: 'row', maxWidth: '20%', marginLeft : -550}}>
+<div style={{display: 'flex', flexDirection: 'row', maxWidth: '25%', marginLeft : -550}}>
   <div style={{position: 'relative', maxWidth: '100%', height: 'auto'}}>
     <img src="https://images.ctfassets.net/o19mhvm9a2cm/3TqdEA20hEleGPCZj2JZJl/297b157fdd3ca108c74f17b1bd5fdfce/Website_RB_HP.png" alt="Delicious food" style={{maxWidth: '100%', height: 'auto'}} />
   </div>
   <div style={{marginLeft: '10px'}}>
     <p style={{textAlign: 'center'}}>{foodName2}</p>
-    <p style={{textAlign: 'center'}}>{avgRating} stars</p>
+    <p style={{textAlign: 'center'}}> {generateGoldStars(avgRating)}</p>
   </div>
 </div>
-<div style={{display: 'flex', flexDirection: 'row', maxWidth: '20%', marginLeft : -550}}>
+<div style={{display: 'flex', flexDirection: 'row', maxWidth: '25%', marginLeft : -550}}>
   <div style={{position: 'relative', maxWidth: '100%', height: 'auto'}}>
     <img src="https://images.ctfassets.net/o19mhvm9a2cm/40Rv5BpzPIXl94xajEmLWf/92ed9f6fbbfa0d252c60c124c92befdb/Website_2023_February_LTO.png" alt="Delicious food" style={{maxWidth: '100%', height: 'auto'}} />
   </div>
   <div style={{marginLeft: '10px'}}>
     <p style={{textAlign: 'center'}}>{foodName3}</p>
-    <p style={{textAlign: 'center'}}>{avgRating} stars</p>
+    <p style={{textAlign: 'center'}}> {generateGoldStars(avgRating)}</p>
   </div>
 </div>
-<div style={{display: 'flex', flexDirection: 'row', maxWidth: '20%', marginLeft : -550}}>
+<div style={{display: 'flex', flexDirection: 'row', maxWidth: '25%', marginLeft : -550}}>
   <div style={{position: 'relative', maxWidth: '100%', height: 'auto'}}>
     <img src="https://a.cdn-hotels.com/gdcs/production0/d1513/35c1c89e-408c-4449-9abe-f109068f40c0.jpg?impolicy=fcrop&w=800&h=533&q=medium" alt="Delicious food" style={{maxWidth: '100%', height: 'auto'}} />
   </div>
   <div style={{marginLeft: '10px'}}>
     <p style={{textAlign: 'center'}}>{foodName2}</p>
-    <p style={{textAlign: 'center'}}>{avgRating} stars</p>
+    <p style={{textAlign: 'center'}}>{generateGoldStars(avgRating)}</p>
   </div>
 </div>
   </Box>
