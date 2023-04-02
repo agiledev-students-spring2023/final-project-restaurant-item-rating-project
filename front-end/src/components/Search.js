@@ -1,5 +1,6 @@
 import { Box, Typography, TextField, Container } from "@mui/material";
 import { useEffect, useState } from "react";
+import Button from '@mui/material/Button';
 import Card from '@mui/material/Card';
 import CardMedia from '@mui/material/CardMedia';
 import CardContent from '@mui/material/CardContent';
@@ -80,21 +81,40 @@ export function Search() {
   )
 
   // this is what gets rendered in the React DOM. Must be one element at the top level
-  return (
-    <Box>   
+  // return (
+  //   <Box>   
 
-      <TextField  type="search" id="search" label="Search" sx={{ width: 350 }} />  <SearchIcon />  
+  //     <TextField  type="search" id="search" label="Search" sx={{ width: 350 }} />  <SearchIcon />  
   
 
-      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+  //     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 
-      <Box
-        sx={{ 
-          margin: "auto 4% auto 4%",
-          display: 'flex',
-          justifyContent: 'space-between'
-        }}
-      >
+  //     <Box
+  //       sx={{ 
+  //         margin: "auto 4% auto 4%",
+  //         display: 'flex',
+  //         justifyContent: 'space-between'
+  //       }}
+  //     >
+  //       {restaurantList.map(searchResults)}
+  //     </Box>
+  //   </Box>
+  // );
+  return (
+    <Box>
+      <Box sx={{ display: 'flex', justifyContent: 'center', mb: 4 }}>
+        <TextField
+          label="Search restaurants"
+          sx={{ width: { xs: '100%', md: '50%' }, mr: 2 }}
+          variant="outlined"
+        />
+        <Button variant="contained" endIcon={<SearchIcon />} color="primary">
+          Search
+        </Button>
+      </Box>
+      <Box sx={{ margin: 'auto 4%', 
+      display: 'flex', 
+      justifyContent: 'space-between' }}>
         {restaurantList.map(searchResults)}
       </Box>
     </Box>
