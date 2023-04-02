@@ -1,16 +1,17 @@
-import { Box, Typography, TextField, Container } from "@mui/material";
-import { useEffect, useState } from "react";
+import SearchIcon from '@mui/icons-material/Search';
+import { Box, Container, TextField, Typography } from "@mui/material";
 import Button from '@mui/material/Button';
 import Card from '@mui/material/Card';
-import CardMedia from '@mui/material/CardMedia';
 import CardContent from '@mui/material/CardContent';
-import SearchIcon from '@mui/icons-material/Search';
-import Grid from "@mui/material/Grid";
+import CardMedia from '@mui/material/CardMedia';
+import { useEffect, useState } from "react";
+import { useNavigate } from 'react-router-dom';
+import IconButton from '@mui/material/IconButton';
+
 
 function searchResults (restaurants) {
   console.log(restaurants.id, restaurants);
   return (
-
     <Container> 
       <Card 
         key={restaurants.id}
@@ -66,6 +67,8 @@ function searchResults (restaurants) {
 
 export function Search() {
 
+  const navigate = useNavigate();
+
   const [restaurantList, setRestaurantList] = useState([]);
 
   // mocked api with mockaroo
@@ -74,44 +77,34 @@ export function Search() {
     fetch(apiUrl)
     .then((response) => response.json())
     .then((data) => {
+      console.log(data)
       setRestaurantList(data.slice(0,1));
     });
-    
-  }, []
-  )
+  }, [])
 
-  // this is what gets rendered in the React DOM. Must be one element at the top level
-  // return (
-  //   <Box>   
-
-  //     <TextField  type="search" id="search" label="Search" sx={{ width: 350 }} />  <SearchIcon />  
-  
-
-  //     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-
-  //     <Box
-  //       sx={{ 
-  //         margin: "auto 4% auto 4%",
-  //         display: 'flex',
-  //         justifyContent: 'space-between'
-  //       }}
-  //     >
-  //       {restaurantList.map(searchResults)}
-  //     </Box>
-  //   </Box>
-  // );
   return (
     <Box>
-      <Box sx={{ display: 'flex', justifyContent: 'center', mb: 4 }}>
+      <Box sx={{ 
+        display: 'flex', 
+        justifyContent: 'center', 
+      }}>
         <TextField
-          label="Search restaurants"
-          sx={{ width: { xs: '100%', md: '50%' }, mr: 2 }}
+          placeholder='Restaurant Name'
+          sx={{
+            width:"100%",
+            padding:"0.5em",
+          }}
           variant="outlined"
         />
-        <Button variant="contained" endIcon={<SearchIcon />} color="primary">
-          Search
-        </Button>
+        <IconButton 
+          variant="contained" 
+          onClick={()=>{navigate("/restaurant")}}
+          color="primary"
+        >
+          <SearchIcon />
+        </IconButton>
       </Box>
+
       <Box sx={{ margin: 'auto 4%', 
       display: 'flex', 
       justifyContent: 'space-between' }}>

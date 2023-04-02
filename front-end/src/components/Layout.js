@@ -4,10 +4,7 @@ import FavoriteIcon from '@mui/icons-material/Favorite';
 import Home from '@mui/icons-material/Home';
 import SearchIcon from '@mui/icons-material/Search';
 import { BottomNavigation, BottomNavigationAction, Box, Paper, Typography } from '@mui/material';
-import Button from '@mui/material/Button';
 import IconButton from '@mui/material/IconButton';
-import Menu from '@mui/material/Menu';
-import MenuItem from '@mui/material/MenuItem';
 import React, { useEffect, useState } from 'react';
 import { Outlet, useNavigate } from 'react-router-dom';
 
@@ -35,16 +32,6 @@ export function Layout() {
   const home = () => navigate('/');
   const about = () => navigate('/about');
   const search = () => navigate('/search');
-
-  
-  const [anchorEl, setAnchorEl] = useState(null);
-  const open = Boolean(anchorEl);
-  const handleClick = (event) => {
-    setAnchorEl(event.currentTarget);
-  };
-  const handleClose = () => {
-    setAnchorEl(null);
-  };
 
   return (
     <Box>

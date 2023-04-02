@@ -1,12 +1,8 @@
 
 import { Box, Typography } from "@mui/material";
-import { useEffect, useState } from "react";
-import Button from '@mui/material/Button';
-import List from '@mui/material/List';
-import ListItemButton from '@mui/material/ListItemButton';
-import ListItemText from '@mui/material/ListItemText';
-import { Outlet, useNavigate } from 'react-router-dom';
 import Rating from '@mui/material/Rating';
+import { useEffect, useState } from "react";
+import { useNavigate } from 'react-router-dom';
 
 export function RestaurantDetail(){
 
@@ -18,9 +14,7 @@ export function RestaurantDetail(){
   const [foodName2, setFood2] = useState('');
   const [foodName3, setFood3] = useState('');
   const [avgRating, setRating] = useState(0);
-  
   const apiUrl =  "https://my.api.mockaroo.com/restaurants/123.json?key=fc5ecd60";
-
   useEffect( () => {
     fetch(apiUrl)
     .then((response) => response.json())
@@ -35,40 +29,10 @@ export function RestaurantDetail(){
       
     });
   }, [])
-  
-  const generateGoldStars = (rating) => {
-    const fullStars = Math.floor(rating);
-    const halfStar = Math.round(rating - fullStars);
-    const emptyStars = 5 - fullStars - halfStar;
-  
-    const stars = [];
-  
-    for (let i = 0; i < fullStars; i++) {
-      stars.push(<span key={i}>&#9733;</span>);
-    }
-  
-    if (halfStar === 1) {
-      stars.push(<span key={fullStars}>&#9733;&#189;</span>);
-    }
-  
-    for (let i = 0; i < emptyStars; i++) {
-      stars.push(<span key={fullStars + halfStar + i}>&#9734;</span>);
-    }
-  
-    return stars;
-  };
-
-  
-  const[showAllergies, setShowAllergies] = useState(false);
-
-  const allergies = [ 'Gluten','Dairy','Eggs','Soy','Peanuts','Tree  nuts', 'Shellfish','fish'];
-  const handleButtonClick =() =>{
-    setShowAllergies(!showAllergies);
-  }
 
   return (
     <Box sx={{display: 'flex', flexDirection: 'column', alignItems: 'center',paddingBottom: '60px'}}>
-      
+
       <Typography variant="h3" gutterBottom>
         Prime Burgers
       </Typography>
@@ -76,7 +40,6 @@ export function RestaurantDetail(){
         City: New York
       </Typography>
       <Box height="2rem" />
-      
 
       <Typography variant="h5" gutterBottom>
         Signature Item
