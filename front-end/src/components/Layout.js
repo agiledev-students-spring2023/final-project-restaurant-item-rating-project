@@ -54,9 +54,7 @@ export function Layout() {
         >
         Dish Dealer
       </Typography>
-      <Box height="1rem" />
       {/* back button */}
-
       <IconButton 
         variant="outlined" 
         onClick={() => {
@@ -67,7 +65,7 @@ export function Layout() {
       </IconButton>
 
       {/* quick links */}
-      <Box>
+      {/* <Box>
         <Button
           id="basic-button"
           aria-controls={open ? 'basic-menu' : undefined}
@@ -91,8 +89,11 @@ export function Layout() {
           <MenuItem onClick={() => navigate('/add/dish')}>Add Dish</MenuItem>
           <MenuItem onClick={() => navigate('/add/restaurant')}>Add Restaurant</MenuItem>
           <MenuItem onClick={() => navigate('/dish')}>Dish Profile</MenuItem>
+          <MenuItem onClick={() => navigate('/dish')}>Dish Profile</MenuItem>
+
         </Menu>
-      </Box>
+      </Box> 
+      <Box height="1rem" /> */}
 
       <Box height="1rem" />
 

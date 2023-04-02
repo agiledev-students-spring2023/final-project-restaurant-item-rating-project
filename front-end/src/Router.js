@@ -1,5 +1,4 @@
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
-
 import { Layout } from './components/Layout';
 import { Home } from './components/Home';
 import { DishReview } from './components/DishReview';
@@ -7,7 +6,7 @@ import { AddDish } from './components/AddDish';
 import { AddRestaurant } from './components/AddRestaurant';
 import { DishDetail } from './components/DishDetail';
 import { Search } from './components/Search';
-import { RestaurantProfile } from './components/RestaurantProfile';
+import { RestaurantDetail } from './components/RestaurantDetail';
 
 function MyRoutes() {
   return (
@@ -36,8 +35,8 @@ function MyRoutes() {
             element={<Search />} 
           />
            <Route 
-            path="/profile"
-            element={<RestaurantProfile />} 
+            path="/restaurant"
+            element={<RestaurantDetail />} 
           />
           {/* catch all */}
           <Route 
