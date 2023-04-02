@@ -8,7 +8,7 @@ import { AddDish } from './components/AddDish';
 import { AddRestaurant } from './components/AddRestaurant';
 import { DishDetail } from './components/DishDetail';
 import { Search } from './components/Search';
-import { About } from './components/About';
+import { RestaurantProfile } from './components/RestaurantProfile';
 
 function MyRoutes() {
   return (
@@ -40,9 +40,9 @@ function MyRoutes() {
             path="/search"
             element={<Search />} 
           />
-          <Route 
-            path="/about"
-            element={<About />} 
+           <Route 
+            path="/profile"
+            element={<RestaurantProfile />} 
           />
           {/* catch all */}
           <Route 
