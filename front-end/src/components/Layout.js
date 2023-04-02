@@ -81,11 +81,20 @@ export function Layout() {
           <MenuItem onClick={() => navigate('/dish')}>Dish Profile</MenuItem>
         </Menu>
       </Box>
+      <Box height="1rem" />
       <Box
-        height="1rem"
-      />
-      <Outlet />
-      <Paper sx={{ position: 'fixed', bottom: 0, left: 0, right: 0 }} elevation={3}>
+        paddingBottom={"5em"}
+      >
+        <Outlet />
+      </Box>
+      <Paper 
+        sx={{
+          position: 'fixed', 
+          bottom: 0, 
+          left: 0, 
+          right: 0,
+        }}
+        elevation={3}>
         <BottomNavigation
           showLabels
           value={home}
