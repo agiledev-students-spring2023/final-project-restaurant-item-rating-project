@@ -37,7 +37,6 @@ function suggestionsMapping (favorite) {
       >
         <Typography 
           gutterBottom 
-          max
           variant="h6" 
         >
           {favorite.title.split(" ").slice(0,4).join(" ")}

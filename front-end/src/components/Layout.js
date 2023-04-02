@@ -27,11 +27,14 @@ export function Layout() {
         window.removeEventListener('resize', handleWindowSizeChange);
     }
   }, []);
+
   const isMobile = width <= 768;
 
   const home = () => navigate('/');
   const about = () => navigate('/about');
   const search = () => navigate('/search');
+
+  const [value, setValue] = useState(home);
 
   return (
     <Box>
@@ -51,37 +54,6 @@ export function Layout() {
         <ArrowBackIosIcon />
       </IconButton>
 
-      {/* quick links */}
-      {/* <Box>
-        <Button
-          id="basic-button"
-          aria-controls={open ? 'basic-menu' : undefined}
-          aria-haspopup="true"
-          aria-expanded={open ? 'true' : undefined}
-          onClick={handleClick}
-        >
-          Quick Links
-        </Button>
-        <Menu
-          id="basic-menu"
-          anchorEl={anchorEl}
-          open={open}
-          onClose={handleClose}
-          MenuListProps={{
-            'aria-labelledby': 'basic-button',
-          }}
-        >
-          <MenuItem onClick={() => navigate('/home')}>Home</MenuItem>
-          <MenuItem onClick={() => navigate('/review')}>Review Dish</MenuItem>
-          <MenuItem onClick={() => navigate('/add/dish')}>Add Dish</MenuItem>
-          <MenuItem onClick={() => navigate('/add/restaurant')}>Add Restaurant</MenuItem>
-          <MenuItem onClick={() => navigate('/dish')}>Dish Profile</MenuItem>
-          <MenuItem onClick={() => navigate('/dish')}>Dish Profile</MenuItem>
-
-        </Menu>
-      </Box> 
-      <Box height="1rem" /> */}
-
       <Box height="1rem" />
 
       <Box
@@ -96,28 +68,30 @@ export function Layout() {
           left: 0, 
           right: 0,
         }}
-        elevation={3}>
+        elevation={3}
+      >
         <BottomNavigation
           showLabels
-          value={home}
+          value={value}
           onChange={(event, newValue) => {
-            newValue();
+            console.log(newValue);
+            setValue(newValue);
           }}
         >
           <BottomNavigationAction 
             label="Home" 
             icon={<Home />}
-            value={home}
+            onClick={home}
           />
           <BottomNavigationAction 
             label="About" 
             icon={<FavoriteIcon />}
-            value={about}
+            onClick={about}
           />
           <BottomNavigationAction 
             label="Search" 
             icon={<SearchIcon />}
-            value={search}
+            onClick={search}
           />
         </BottomNavigation>
       </Paper>

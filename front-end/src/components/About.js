@@ -1,33 +1,10 @@
 import { Box, Typography } from "@mui/material";
 
-function Title(props) {
-    return (
-      <Typography
-      variant="h1"
-    >
-      {props.title}
-    </Typography>
-    )
-  }
-  
-  /**
-   * this is a template component for the team
-   * @returns JSX Element
-   */
   export function About() {
-  
-    // do javascript stuff here like call APIs or state initialization
-  
-    // for now, we should store our text/values as variables here 
-    // since we will have to fetch them from an api later 
-  
-    // this is what gets rendered in the React DOM. Must be one element at the top level
     return (
 
         <Box>
-
-            <Typography
-            variant="h5" component="div" sx={{ flexGrow: 1, fontWeight: 'bold'}} padding={0} margin={1}>
+            <Typography variant="h5" component="div" sx={{ flexGrow: 1, fontWeight: 'bold'}} padding={0} margin={1}>
                 Our Purpose:
             </Typography>
 
