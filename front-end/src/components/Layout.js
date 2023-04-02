@@ -4,10 +4,12 @@ import React, { useEffect, useState } from 'react';
 import { Outlet, useNavigate } from 'react-router-dom';
 import Home from '@mui/icons-material/Home';
 import FavoriteIcon from '@mui/icons-material/Favorite';
+import SearchIcon from '@mui/icons-material/Search';
 import Add from '@mui/icons-material/Add';
 import Button from '@mui/material/Button';
 import Menu from '@mui/material/Menu';
 import MenuItem from '@mui/material/MenuItem';
+import { Search } from './Search';
 
 /**
  * 
@@ -32,7 +34,7 @@ export function Layout() {
 
   const home = () => navigate('/');
   const about = () => navigate('/about');
-  const template = () => navigate('/template');
+  const search = () => navigate('/search');
 
   
   const [anchorEl, setAnchorEl] = useState(null);
@@ -50,7 +52,7 @@ export function Layout() {
         variant={isMobile ? "h6" : "h2" } 
         textAlign="center"
         >
-        Dish Tish
+        Dish Dealer
       </Typography>
       {/* quick links */}
       <Box>
@@ -72,11 +74,11 @@ export function Layout() {
             'aria-labelledby': 'basic-button',
           }}
         >
-          <MenuItem onClick={() => navigate('/template')}>Profile</MenuItem>
+          <MenuItem onClick={() => navigate('/home')}>Home</MenuItem>
           <MenuItem onClick={() => navigate('/review')}>Review Dish</MenuItem>
           <MenuItem onClick={() => navigate('/add/dish')}>Add Dish</MenuItem>
           <MenuItem onClick={() => navigate('/add/restaurant')}>Add Restaurant</MenuItem>
-          <MenuItem onClick={() => navigate('/Search')}>Search</MenuItem>
+          <MenuItem onClick={() => navigate('/dish')}>Dish Profile</MenuItem>
         </Menu>
       </Box>
       <Box
@@ -102,9 +104,9 @@ export function Layout() {
             value={about}
           />
           <BottomNavigationAction 
-            label="Template" 
-            icon={<Add />}
-            value={template}
+            label="Search" 
+            icon={<SearchIcon />}
+            value={search}
           />
         </BottomNavigation>
       </Paper>
