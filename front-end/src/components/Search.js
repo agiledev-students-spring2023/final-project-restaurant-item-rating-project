@@ -70,6 +70,7 @@ export function Search() {
   const navigate = useNavigate();
 
   const [restaurantList, setRestaurantList] = useState([]);
+  const [searchQuery, setSearchQuery] = useState("");
 
   // mocked api with mockaroo
   const apiUrl =  "https://my.api.mockaroo.com/restaurants/123.json?key=fc5ecd60";
@@ -80,8 +81,40 @@ export function Search() {
       console.log(data)
       setRestaurantList(data.slice(0,1));
     });
-  }, [])
+    
+  }, []);
 
+  const handleSearch = () => {
+    fetch(apiUrl)
+    .then((response) => response.json())
+    .then((data) => {
+    const filteredData = data.filter(restaurant =>
+    restaurant.name.toLowerCase().includes(searchQuery.toLowerCase())
+    );
+    setRestaurantList(filteredData);
+    });
+  };  
+
+  // this is what gets rendered in the React DOM. Must be one element at the top level
+  // return (
+  //   <Box>   
+
+  //     <TextField  type="search" id="search" label="Search" sx={{ width: 350 }} />  <SearchIcon />  
+  
+
+  //     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+
+  //     <Box
+  //       sx={{ 
+  //         margin: "auto 4% auto 4%",
+  //         display: 'flex',
+  //         justifyContent: 'space-between'
+  //       }}
+  //     >
+  //       {restaurantList.map(searchResults)}
+  //     </Box>
+  //   </Box>
+  // );
   return (
     <Box>
       <Box sx={{ 
