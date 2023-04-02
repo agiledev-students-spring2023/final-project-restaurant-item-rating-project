@@ -1,9 +1,11 @@
-import { Button, Box, TextField, FormGroup, FormControlLabel, Typography, Container } from "@mui/material";
-import React, { useEffect, useState } from 'react';
-import { Checkbox } from '@mui/material';
+import { Box, Button, Container, TextField, Typography } from "@mui/material";
+import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import '../App.css';
 
 export function AddRestaurant() {
+
+  const navigate = useNavigate();
 
   // form data
   const [restaurantName, setRestaurantName] = useState('');
@@ -13,6 +15,7 @@ export function AddRestaurant() {
   const handleSubmit = event => {
     event.preventDefault();
     alert('Restaurant Details submitted')
+    navigate('/restaurant');
   }
   
   return(

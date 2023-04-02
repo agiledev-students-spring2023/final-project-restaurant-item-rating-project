@@ -1,14 +1,13 @@
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
-
 import { Layout } from './components/Layout';
 import { Home } from './components/Home';
-import { Template } from './components/Template';
 import { DishReview } from './components/DishReview';
 import { AddDish } from './components/AddDish';
 import { AddRestaurant } from './components/AddRestaurant';
 import { DishDetail } from './components/DishDetail';
 import { Search } from './components/Search';
-import { RestaurantProfile } from './components/RestaurantProfile';
+import { About } from './components/About';
+import { RestaurantDetail } from './components/RestaurantDetail';
 
 function MyRoutes() {
   return (
@@ -16,10 +15,6 @@ function MyRoutes() {
       <Routes>
         <Route path="/" element={<Layout />}>
           <Route index element={<Home />} /> 
-          <Route 
-            path="/template"
-            element={<Template />} 
-          /> 
           <Route 
             path="/add/dish"
             element={<AddDish />} 
@@ -40,9 +35,13 @@ function MyRoutes() {
             path="/search"
             element={<Search />} 
           />
+          <Route 
+            path="/about"
+            element={<About />} 
+          />
            <Route 
-            path="/profile"
-            element={<RestaurantProfile />} 
+            path="/restaurant"
+            element={<RestaurantDetail />} 
           />
           {/* catch all */}
           <Route 

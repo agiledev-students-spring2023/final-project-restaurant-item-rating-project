@@ -1,15 +1,12 @@
 // components/Layout.js
-import { Typography, Box, Container, Paper, BottomNavigation, BottomNavigationAction } from '@mui/material';
+import ArrowBackIosIcon from '@mui/icons-material/ArrowBackIos';
+import FavoriteIcon from '@mui/icons-material/Favorite';
+import Home from '@mui/icons-material/Home';
+import SearchIcon from '@mui/icons-material/Search';
+import { BottomNavigation, BottomNavigationAction, Box, Paper, Typography } from '@mui/material';
+import IconButton from '@mui/material/IconButton';
 import React, { useEffect, useState } from 'react';
 import { Outlet, useNavigate } from 'react-router-dom';
-import Home from '@mui/icons-material/Home';
-import FavoriteIcon from '@mui/icons-material/Favorite';
-import SearchIcon from '@mui/icons-material/Search';
-import Add from '@mui/icons-material/Add';
-import Button from '@mui/material/Button';
-import Menu from '@mui/material/Menu';
-import MenuItem from '@mui/material/MenuItem';
-import { Search } from './Search';
 
 /**
  * 
@@ -30,21 +27,14 @@ export function Layout() {
         window.removeEventListener('resize', handleWindowSizeChange);
     }
   }, []);
+
   const isMobile = width <= 768;
 
   const home = () => navigate('/');
   const about = () => navigate('/about');
   const search = () => navigate('/search');
 
-  
-  const [anchorEl, setAnchorEl] = useState(null);
-  const open = Boolean(anchorEl);
-  const handleClick = (event) => {
-    setAnchorEl(event.currentTarget);
-  };
-  const handleClose = () => {
-    setAnchorEl(null);
-  };
+  const [value, setValue] = useState(home);
 
   return (
     <Box>
@@ -54,59 +44,54 @@ export function Layout() {
         >
         Dish Dealer
       </Typography>
-      {/* quick links */}
-      <Box>
-        <Button
-          id="basic-button"
-          aria-controls={open ? 'basic-menu' : undefined}
-          aria-haspopup="true"
-          aria-expanded={open ? 'true' : undefined}
-          onClick={handleClick}
-        >
-          Quick Links
-        </Button>
-        <Menu
-          id="basic-menu"
-          anchorEl={anchorEl}
-          open={open}
-          onClose={handleClose}
-          MenuListProps={{
-            'aria-labelledby': 'basic-button',
-          }}
-        >
-          <MenuItem onClick={() => navigate('/home')}>Home</MenuItem>
-          <MenuItem onClick={() => navigate('/review')}>Review Dish</MenuItem>
-          <MenuItem onClick={() => navigate('/add/dish')}>Add Dish</MenuItem>
-          <MenuItem onClick={() => navigate('/add/restaurant')}>Add Restaurant</MenuItem>
-          <MenuItem onClick={() => navigate('/dish')}>Dish Profile</MenuItem>
-        </Menu>
-      </Box>
+      {/* back button */}
+      <IconButton 
+        variant="outlined" 
+        onClick={() => {
+          navigate(-1);
+        }}
+      >
+        <ArrowBackIosIcon />
+      </IconButton>
+
+      <Box height="1rem" />
+
       <Box
-        height="1rem"
-      />
-      <Outlet />
-      <Paper sx={{ position: 'fixed', bottom: 0, left: 0, right: 0 }} elevation={3}>
+        paddingBottom={"5em"}
+      >
+        <Outlet />
+      </Box>
+      <Paper 
+        sx={{
+          position: 'fixed', 
+          bottom: 0, 
+          left: 0, 
+          right: 0,
+        }}
+        elevation={3}
+      >
         <BottomNavigation
           showLabels
-          value={home}
+          value={value}
           onChange={(event, newValue) => {
-            newValue();
+            console.log(newValue);
+            setValue(newValue);
           }}
         >
           <BottomNavigationAction 
             label="Home" 
             icon={<Home />}
-            value={home}
+            onClick={home}
           />
           <BottomNavigationAction 
             label="About" 
             icon={<FavoriteIcon />}
-            value={about}
+            onClick={about}
           />
           <BottomNavigationAction 
             label="Search" 
             icon={<SearchIcon />}
-            value={search}
+            onClick={search}
           />
         </BottomNavigation>
       </Paper>
