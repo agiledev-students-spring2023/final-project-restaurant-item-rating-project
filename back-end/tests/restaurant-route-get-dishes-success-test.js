@@ -2,7 +2,7 @@ const request = require('supertest');
 const app = require('./app');
 
 describe('GET /restaurant/:id', () => {
-  it('responds with JSON containing the dish', async () => {
+  it('responds with JSON containing the dish and price', async () => {
     const response = await request(app)
       .get('/restaurant/123');
 
