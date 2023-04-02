@@ -67,6 +67,7 @@ function searchResults (restaurants) {
 export function Search() {
 
   const [restaurantList, setRestaurantList] = useState([]);
+  const [searchQuery, setSearchQuery] = useState("");
 
   // mocked api with mockaroo
   const apiUrl =  "https://my.api.mockaroo.com/restaurants/123.json?key=fc5ecd60";
@@ -77,8 +78,18 @@ export function Search() {
       setRestaurantList(data.slice(0,1));
     });
     
-  }, []
-  )
+  }, []);
+
+  const handleSearch = () => {
+    fetch(apiUrl)
+    .then((response) => response.json())
+    .then((data) => {
+    const filteredData = data.filter(restaurant =>
+    restaurant.name.toLowerCase().includes(searchQuery.toLowerCase())
+    );
+    setRestaurantList(filteredData);
+    });
+  };  
 
   // this is what gets rendered in the React DOM. Must be one element at the top level
   // return (
