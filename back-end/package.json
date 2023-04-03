@@ -4,16 +4,7 @@
   "description": "Our project! in Agile Development",
   "main": "server.js",
   "scripts": {
-    "name": "chai",
-    "version": "1.0.0",
-    "description": "",
-    "main": "index.js",
-    "scripts": {
       "test": "mocha"
-    },
-    "keywords": [],
-    "author": "",
-    "license": "ISC"
   },
   "keywords": [],
   "author": "",

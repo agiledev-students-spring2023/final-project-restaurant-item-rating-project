@@ -1,5 +1,6 @@
-const request = require('supertest');
-const app = require('./app');
+var chai = require('chai');
+var expect = chai.expect;
+const app = require('../app');
 
 describe('GET /restaurant/:id', () => {
   it('responds with JSON containing the dish and price', async () => {
