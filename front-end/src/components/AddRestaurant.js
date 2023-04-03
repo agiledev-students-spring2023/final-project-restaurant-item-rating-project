@@ -23,11 +23,31 @@ export function AddRestaurant() {
       <Typography variant="h3">Add Restaurant</Typography>
 
       <form onSubmit ={handleSubmit}>
-        <Box sx={{m:2}} /> 
+       {/*  <Box sx={{m:2}} /> 
         <TextField label = "Restaurant Name" value = {restaurantName} onChange = {setRestaurantName}/>
         <Box sx={{m:2}} /> 
         <TextField label = "City" value = {cityName} onChange = {setCityName}/>
-        <Box sx={{m:1}} />
+        <Box sx={{m:1}} /> */}
+         <Typography variant="body1">Add Restaurant?</Typography>
+        <TextField
+          placeholder='Restaurant Name'
+          sx={{
+            width:"100%",
+            padding:"0.5em",
+          }}
+          variant="outlined"
+        />
+
+        <Typography variant="body1">Add City</Typography>
+        <TextField
+          placeholder='City'
+          sx={{
+            width:"100%",
+            padding:"0.5em",
+          }}
+          variant="outlined"
+        />
+
         {/* image input */}
         <Box>
           <Typography variant="h6">Add Pictures?</Typography>
