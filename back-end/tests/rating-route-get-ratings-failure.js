@@ -1,5 +1,6 @@
-const request = require('supertest');
-const app = require('./app');
+var chai = require('chai');
+var expect = chai.expect;
+const app = require('../app');
 
 describe('ratingRouter', () => {
     describe('GET /dish/:dishId/reviews', () => {
