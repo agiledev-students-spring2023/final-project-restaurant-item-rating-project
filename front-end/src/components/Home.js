@@ -22,24 +22,119 @@ function suggestionsMapping (favorite) {
         component="img"
         height="200"
         sx={{ 
-          maxWidth:"100px",
+          maxWidth:"1000px",
           display:'flex', 
         }}
-        src={"https://picsum.photos/200"}
+          src={"https://images.unsplash.com/photo-1555939594-58d7cb561ad1?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=687&q=80"}
+/*         src={"https://picsum.photos/200"} */
         title={favorite.title}
       />
     </Box>
 
       <CardContent
         sx={{
-          maxWidth:100
+          maxWidth:1000
         }}
       >
         <Typography 
           gutterBottom 
-          variant="h6" 
-        >
-          {favorite.title.split(" ").slice(0,4).join(" ")}
+          variant="h6">Lava Shawarma NYC - 226 Thompson St, New York, NY 10012
+          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+          Rating:☆☆☆☆☆
+        {/* >
+          {favorite.title.split(" ").slice(0,4).join(" ")} */}
+        </Typography>
+
+      </CardContent>
+
+    </Card>
+
+    
+  );
+};
+
+function suggestionsMapping1 (favorite) {
+  return (
+    <Card 
+      key={favorite.id}
+    >
+    <Box
+      sx={{
+        display:'flex', 
+        justifyContent:"center"
+      }}
+    >
+      <CardMedia
+        component="img"
+        height="200"
+        sx={{ 
+          maxWidth:"1000px",
+          display:'flex', 
+        }}
+          src={"https://images.unsplash.com/photo-1567620905732-2d1ec7ab7445?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=780&q=80"}
+/*         src={"https://picsum.photos/200"} */
+        title={favorite.title}
+      />
+    </Box>
+
+      <CardContent
+        sx={{
+          maxWidth:1000
+        }}
+      >
+        <Typography 
+          gutterBottom 
+          variant="h6">SThe Grey Dog - 90 University Pl, New York, NY 10003
+          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+          Rating: ☆☆☆☆☆
+        {/* >
+          {favorite.title.split(" ").slice(0,4).join(" ")} */}
+        </Typography>
+
+      </CardContent>
+
+    </Card>
+
+    
+  );
+};
+
+function suggestionsMapping2 (favorite) {
+  return (
+    <Card 
+      key={favorite.id}
+    >
+    <Box
+      sx={{
+        display:'flex', 
+        justifyContent:"center"
+      }}
+    >
+      <CardMedia
+        component="img"
+        height="200"
+        sx={{ 
+          maxWidth:"1000px",
+          display:'flex', 
+        }}
+          src={"https://images.unsplash.com/photo-1482049016688-2d3e1b311543?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=710&q=80"}
+/*         src={"https://picsum.photos/200"} */
+        title={favorite.title}
+      />
+    </Box>
+
+      <CardContent
+        sx={{
+          maxWidth:1000
+        }}
+      >
+        <Typography 
+          gutterBottom 
+          variant="h6">Tavern 29 - 47 E 29th St, New York, NY 10016
+          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+          Rating: ☆☆☆☆☆
+        {/* >
+          {favorite.title.split(" ").slice(0,4).join(" ")} */}
         </Typography>
 
       </CardContent>
@@ -63,7 +158,7 @@ export function Home() {
     fetch(apiUrl)
     .then((response) => response.json())
     .then((data) => {
-      setSuggestions(data.slice(0,2));
+      setSuggestions(data.slice(0,1));
     });
 
   }, []
@@ -121,7 +216,7 @@ export function Home() {
             justifyContent: 'space-between'
           }}
         >
-          {suggestions.map(suggestionsMapping)}
+          {suggestions.map(suggestionsMapping1)}
         </Box>
 
       </Box>
@@ -137,7 +232,7 @@ export function Home() {
             justifyContent: 'space-between'
           }}
         >
-          {suggestions.map(suggestionsMapping)}
+          {suggestions.map(suggestionsMapping2)}
         </Box>
 
       </Box>

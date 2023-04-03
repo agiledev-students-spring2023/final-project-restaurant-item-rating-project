@@ -28,7 +28,7 @@ export function AddRestaurant() {
         <Box sx={{m:2}} /> 
         <TextField label = "City" value = {cityName} onChange = {setCityName}/>
         <Box sx={{m:1}} /> */}
-         <Typography variant="body1">Add Restaurant?</Typography>
+         <Typography variant="body1">Add Restaurant</Typography>
         <TextField
           placeholder='Restaurant Name'
           sx={{
