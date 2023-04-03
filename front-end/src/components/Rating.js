@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { FaStar } from "react-icons/fa";
 
-export function Rating({ onRatingChange}) {
+export function Rating({ onRatingChange, isSubmitted}) {
   const [rating, setRating] = useState(null);
   const [values, setValues] = useState([]);
 
@@ -13,7 +13,8 @@ export function Rating({ onRatingChange}) {
   
   useEffect(() => {
     setRating(null);
-  }, []);
+    setValues([]);
+  }, [isSubmitted]);
 
   return (
     <div>
