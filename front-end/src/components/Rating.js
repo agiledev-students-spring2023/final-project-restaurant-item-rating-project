@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { FaStar } from "react-icons/fa";
 
 export function Rating({ onRatingChange}) {
@@ -10,6 +10,10 @@ export function Rating({ onRatingChange}) {
     setValues([...values, ratingValue]);
     onRatingChange([...values, ratingValue]);
   };
+  
+  useEffect(() => {
+    setRating(null);
+  }, []);
 
   return (
     <div>
@@ -33,7 +37,7 @@ export function Rating({ onRatingChange}) {
           </label>
         );
       })}
-      <p>Thank you! You rated this item: {rating} stars</p>
+      {/* <p>Thank you! You rated this item: {rating} stars</p> */}
 
     </div>
   );

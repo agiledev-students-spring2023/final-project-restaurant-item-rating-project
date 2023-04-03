@@ -38,8 +38,10 @@ export function DishReview() {
     const sum = ratings.reduce((accumulator, currentValue)=>accumulator + currentValue,0)
     const newAverage = sum / ratings.length
     setAverageRating(parseFloat(newAverage.toFixed(2)))
+    setReview('')
+
     // go back to previous page
-    navigate(-1);
+    // navigate(-1);
   };
 
   const apiUrl =  "https://my.api.mockaroo.com/restaurants/123.json?key=fc5ecd60";
