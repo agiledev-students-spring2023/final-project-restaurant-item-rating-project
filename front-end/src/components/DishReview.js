@@ -4,11 +4,15 @@ import { FaStar, FaStarHalf } from "react-icons/fa";
 import { useNavigate } from "react-router-dom";
 import { Rating } from './Rating';
 import "./stars.css";
-
+import { useLocation } from "react-router-dom";
 export function DishReview() {
   // to change pages
-  const navigate = useNavigate();
 
+  const navigate = useNavigate();
+  const location = useLocation();
+  
+  const { dish } = location.state;
+  
   const centeringStyles = {
     justifyContent: "center",
     alignItems: "center",
@@ -39,10 +43,33 @@ export function DishReview() {
     const newAverage = sum / ratings.length
     setAverageRating(parseFloat(newAverage.toFixed(2)))
     setReview('')
-
-    // go back to previous page
-    // navigate(-1);
+    const data = {
+      restaurantName: restaurantName,
+      dishName: dishName,
+      review: review,
+      ratings: ratings,
+      averageRating: newAverage
+    };
+  
+    fetch('http://localhost:3000/restaurant/dish/:dishId/review', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(data)
+    })
+    .then(response => response.json())
+    .then(data => {
+      console.log('Success:', data);
+    })
+    .catch((error) => {
+      console.error('Error:', error);
+    });
+  
   };
+  
+  
+
 
   const apiUrl =  "https://my.api.mockaroo.com/restaurants/123.json?key=fc5ecd60";
   useEffect( () => {
@@ -54,7 +81,8 @@ export function DishReview() {
       const randomNumber = Math.floor(Math.random() * 5) + 1;
       setRestaurantName(data[randomInt].name);
       setDish(data[randomInt].popular_dish);
-      setAverageRating(data[randomNumber].id);
+      setAverageRating(0)
+      // setAverageRating(data[randomNumber].id);
     });
     
   }, []

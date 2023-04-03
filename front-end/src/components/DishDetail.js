@@ -98,7 +98,9 @@ export function DishDetail() {
       <Button
         variant="contained"
         size="small"
-        onClick={() => {navigate("/review");}}
+        onClick={() => {
+          navigate("/review", { state: { dish } });
+        }}
       >
         Add a review
       </Button>
