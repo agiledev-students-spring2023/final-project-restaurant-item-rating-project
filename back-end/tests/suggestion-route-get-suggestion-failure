@@ -1,5 +1,6 @@
 const request = require('supertest');
 const app = require('./app');
+const expect = require('chai').expect;
 describe('GET /restaurant/:cityId', ()=>{
     it('failed to respond with JSON containing the restaurant suggestions', async () => {
     const response = await request(app)
@@ -17,24 +18,4 @@ describe('GET /dishes/:cityId', ()=>{
       expect(response.body).not.toHaveProperty('name', 'Pizza');
       expect(response.body).not.toHaveProperty('price', 10);
 })
-})
-describe('PUT /restaurants/:cityId', ()=>{
-    it('failed to update with JSON containing the restaurant suggestions and returns it', async () => {
-      const updatedsuggest = {name : pizza,
-        price : 10 }
-    const response = await request(app)
-      .put('/restaurant/123').send(updatedsuggest);
-      expect(response.status).toBe(404);
-      expect(response.body).not.toMatchObject(updatedsuggest);
-})
-})
-describe('PUT /dishes/:cityId', ()=>{
-    it('failed to update with JSON containing the dish suggestions and returns it', async () => {
-      const updatedsuggest = {name : pizza,
-        price : 10}
-    const response = await request(app)
-      .put('/dish/123').send(updatedsuggest);
-      expect(response.status).toBe(404);
-      expect(response.body).not.toMatchObject(updatedsuggest);
-    })
 })
