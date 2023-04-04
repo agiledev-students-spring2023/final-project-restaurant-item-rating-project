@@ -2,7 +2,7 @@ var chai = require('chai');
 var expect = chai.expect;
 const app = require('../app');
 
-describe('GET /restaurant/:id', () => {
+describe('GET /restaurant/{id}', () => {
   it('failed to respond with JSON containing the dish name and price', async () => {
     const response = await request(app)
       .get('/restaurant/123');
@@ -13,7 +13,7 @@ describe('GET /restaurant/:id', () => {
   });
 });
 
-describe('POST /restaurant/:id', () => {
+describe('POST /restaurant/{id}', () => {
   it('responds with JSON containing a failure message', async () => {
     const response = await request(app)
       .post('/restaurant/123')
@@ -35,7 +35,7 @@ describe('POST /restaurant', () => {
   });
 });
 
-describe('DELETE /restaurant/:id', () => {
+describe('DELETE /restaurant/{id}', () => {
   it('responds with JSON containing a failure message', async () => {
     const response = await request(app)
       .delete('/restaurant/123');

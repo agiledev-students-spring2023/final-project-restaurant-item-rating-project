@@ -1,7 +1,7 @@
 var chai = require('chai');
 var expect = chai.expect;
 const app = require('../app');
-describe('GET /restaurant/:cityId', ()=>{
+describe('GET /restaurant/{cityId}', ()=>{
     it('failed to respond with JSON containing the restaurant suggestions', async () => {
     const response = await request(app)
     .get('/restaurant/123');
@@ -10,7 +10,7 @@ describe('GET /restaurant/:cityId', ()=>{
       
     })
 })
-describe('GET /dishes/:cityId', ()=>{
+describe('GET /dishes/{cityId}', ()=>{
     it('failed to respond with JSON containing the dish suggestions', async () => {
     const response = await request(app)
     .get('/dish/123');
