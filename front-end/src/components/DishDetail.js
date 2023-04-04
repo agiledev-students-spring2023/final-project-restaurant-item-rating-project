@@ -15,6 +15,12 @@ export function DishDetail() {
   const [review, setReview] = useState('')
   const[rating,setRating] = useState(null)
 
+  const [review2, setReview2] = useState('')
+  const[rating2,setRating2] = useState(null)
+
+  const [review3, setReview3] = useState('')
+  const[rating3,setRating3] = useState(null)
+
   const [dish, setDish] = useState({
     id:1,
     name:"Spicy Tacos",
@@ -56,39 +62,51 @@ export function DishDetail() {
       .then(response => response.json())
       .then(data => {
         console.log('Success:', data);
-        // setRating(data.lastestRating);
-        setReview(data.review);
+        setRating(data[0].rating);
+        setReview(data[0].review);
+        setRating2(data[1].rating);
+        setReview2(data[1].review);
+        setRating3(data[2].rating);
+        setReview3(data[2].review);
+        console.log(data[1].review);
+        console.log(data[0].rating)
       })
       .catch((error) => {
         console.error('Error:', error);
       });
   }, []);
 
-  const addReview = (dishId, review, rating) => {
-    const data = { 
-      review: review,
-      ratings: [rating]
-    };
-    fetch('http://localhost:3000/restaurant/dish/{dishId}/review', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify(data)
-    })
-    .then(response => response.json())
-    .then(data => {
-      console.log('Success:', data);
-      const latestRating = data.latestRating;
-      setRating(latestRating);
-      setReview(data.review.review);
-      console.log(data.latestRating)
-      console.log(data.review.review)
-    })
-    .catch((error) => {
-      console.error('Error:', error);
-    });
-  };
+  // const addReview = (dishId, review, rating) => {
+  //   const data = { 
+  //     review: review,
+  //     ratings: [rating]
+  //   };
+  //   fetch('http://localhost:3000/restaurant/dish/{dishId}/review', {
+  //     method: 'POST',
+  //     headers: {
+  //       'Content-Type': 'application/json'
+  //     },
+  //     body: JSON.stringify(data)
+  //   })
+  //   .then(response => response.json())
+  //   .then(data => {
+  //     console.log('Success:', data);
+  //     const latestRating = data.latestRating;
+  //     setRating(latestRating);
+  //     setReview(data.review.review);
+  //     console.log(data.latestRating)
+  //     console.log(data.review.review)
+  //   })
+  //   .catch((error) => {
+  //     console.error('Error:', error);
+  //   });
+  // };
+
+  function getRatingStars(rating) {
+    const filledStars = '★'.repeat(Math.floor(rating));
+    const emptyStars = '☆'.repeat(Math.floor(5 - rating));
+    return filledStars + emptyStars;
+  }
 
   // TODO: mock
   //     fetching dish
@@ -148,8 +166,13 @@ export function DishDetail() {
         Add a review
       </Button>
 
-      <p>Rating: {rating}</p>
+      <p>Rating: {getRatingStars(rating)}</p>
       <p>Review: {review}</p>
+
+      <p>Rating: {getRatingStars(rating2)}</p>
+      <p>Review: {review2}</p>
+      <p>Rating: {getRatingStars(rating3)}</p>
+      <p>Review: {review3}</p>
       
       {/* {dish.reviews.map( (review) => {
         return (

@@ -65,28 +65,34 @@ export function DishReview() {
       console.log('Success:', data);
       const latestRating = data.latestRating;
       const dishName = data.dishName;
-      setAverageRating(data.review.averageRating);
+      // setAverageRating(data.review.averageRating);
       // setReview(data.review.review);
       // console.log(data.dishName)
     })
     .catch((error) => {
       console.error('Error:', error);
     });
-
-    // window.location.reload()
   
   };
+
+  useEffect(() => {
+    // Make a GET request to fetch the initial data
+    fetch('http://localhost:3000/restaurant/dish/{dishId}/review')
+    .then(response => response.json())
+    .then(data => {
+      const ratings = data.map(review => review.rating); // Extract ratings array
+      const totalRating = ratings.reduce((acc, curr) => acc + curr, 0); // Calculate total rating
+      const averageRating = totalRating / ratings.length; // Calculate average rating
+      const roundedRating = averageRating.toFixed(2); // Round to two decimal points
+      setAverageRating(roundedRating);
+      console.log('Average Rating:', roundedRating);
+    })
+    .catch((error) => {
+      console.error('Error:', error);
+      });
+  }, []);
   
-  axios.get('http://localhost:3000/restaurant/dish/123/review')
-  .then(response => {
-    // Handle the response data
-    const dishReviews = response.data;
-    console.log(dishReviews);
-  })
-  .catch(error => {
-    // Handle errors
-    console.error(error);
-  });
+ 
   
 
 

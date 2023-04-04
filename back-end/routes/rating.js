@@ -8,18 +8,29 @@ ratingRouter.use(cors());
 ratingRouter.use(express.json());
 
 const reviews =[]
+
 function findReviewsByDishId(dishId) {
   // Filter the reviews array to only include reviews for the specified dish
   const filteredReviews = reviews.filter(review => review.dishId === dishId);
-  
+
   // Return an array of objects containing the review and rating values
   return filteredReviews.map(review => {
+    const ratings = review.ratings;
+    const averageRating = ratings.reduce((acc,cur)=>acc+cur /ratings.length);
+    
+    const roundedAverageRating = Number(averageRating.toFixed(2));
+    if (roundedAverageRating > 5) {
+      review.averageRating = 5;
+    } else {
+      review.averageRating = roundedAverageRating;
+    }
     return {
       id: review.id,
-      rating: review.rating,
+      rating: review.ratings[0],
       review: review.review,
       dishName: review.dishName,
-      rating: review.latestRating
+      averageRating : review.averageRating
+  
     };
   });
 }
