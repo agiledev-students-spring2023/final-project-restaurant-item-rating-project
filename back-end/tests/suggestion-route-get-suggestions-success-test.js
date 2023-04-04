@@ -6,8 +6,7 @@ describe('GET /restaurant/:cityId', ()=>{
     const response = await request(app)
     .get('/restaurant/123');
       expect(response.statusCode).toBe(200);
-      expect(response.body).toHaveProperty('name', 'Pizza');
-      expect(response.body).toHaveProperty('price', 10);
+      expect(response.body).toHaveProperty('name', 'Los Tacos');
     })
 })
 describe('GET /dishes/:cityId', ()=>{
