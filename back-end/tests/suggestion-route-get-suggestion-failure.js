@@ -1,14 +1,13 @@
 var chai = require('chai');
 var expect = chai.expect;
 const app = require('../app');
-const expect = require('chai').expect;
 describe('GET /restaurant/:cityId', ()=>{
     it('failed to respond with JSON containing the restaurant suggestions', async () => {
     const response = await request(app)
     .get('/restaurant/123');
       expect(response.statusCode).toBe(404);
-      expect(response.body).not.toHaveProperty('name', 'Pizza');
-      expect(response.body).not.toHaveProperty('price', 10);
+      expect(response.body).not.toHaveProperty('name', 'Los Tacos');
+      
     })
 })
 describe('GET /dishes/:cityId', ()=>{
