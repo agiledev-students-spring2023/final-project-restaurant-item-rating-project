@@ -5,6 +5,7 @@ import { useNavigate } from "react-router-dom";
 import { Rating } from './Rating';
 import "./stars.css";
 import { useLocation } from "react-router-dom";
+import axios from 'axios';
 export function DishReview() {
   // to change pages
 
@@ -48,6 +49,7 @@ export function DishReview() {
       dishName: dish.name,
       review: review,
       ratings: ratings,
+      dishId : dish.id
       // averageRating: newAverage
     };
   
@@ -61,10 +63,10 @@ export function DishReview() {
     .then(response => response.json())
     .then(data => {
       console.log('Success:', data);
-      setDish(data.dishName)
-      setAverageRating(data.roundedAverageRating);
-      setReview(data.review.review);
-      console.log(data.dishName)
+      // setDish(data.dishName)
+      // setAverageRating(data.roundedAverageRating);
+      // setReview(data.review.review);
+      // console.log(data.dishName)
     })
     .catch((error) => {
       console.error('Error:', error);
@@ -74,6 +76,16 @@ export function DishReview() {
   
   };
   
+  axios.get('http://localhost:3000/dish/{dishId}/reviews')
+  .then(response => {
+    // Handle the response data
+    const dishReviews = response.data;
+    console.log(dishReviews);
+  })
+  .catch(error => {
+    // Handle errors
+    console.error(error);
+  });
   
 
 

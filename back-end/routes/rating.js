@@ -5,31 +5,118 @@ const ratingRouter = express.Router();
 const cors = require('cors');
 
 ratingRouter.use(cors());
+ratingRouter.use(express.json());
 
+const reviews =[]
 function findReviewsByDishId(dishId) {
-  return ([
-    {
+  // Filter the reviews array to only include reviews for the specified dish
+  const filteredReviews = reviews.filter(review => review.dishId === dishId);
+
+  // Return an array of objects containing the review and rating values
+  return filteredReviews.map(review => {
+    return {
+      id: review.id,
+      rating: review.rating,
+      review: review.review
+    };
+  });
+}
+const dishes = [
+  {
     id: 1,
-    value: 3,
-    },
-    {
+    name: 'Pasta',
+    restaurant: 'Italiano',
+    reviews: [], // add a reviews property to the dish object
+  },
+  {
     id: 2,
-    value: 4,
-    },
-
-  ]);
-}
+    name: 'Sushi',
+    restaurant: 'Japanese Garden',
+    reviews: [],
+  },
+  // more dishes
+];
 function createReview(dishId, review) {
-  return true;
-}
-function updateReview(dishId, reviewId, review) {
-  return true;
-}
-function deleteReview(dishId, reviewId) {
-  return true;
+  review.id = reviews.length + 1;
+  review.dishId = dishId;
+  reviews.push(review);
+  return review;
 }
 
-// GET route for getting all reviews for a dish
+function updateReview(dishId, reviewId, review) {
+  const index = reviews.findIndex((r) => r.id === reviewId && r.dishId === dishId);
+  if (index !== -1) {
+    reviews[index] = review;
+    review.id = reviewId;
+    review.dishId = dishId;
+    return review;
+  }
+  return null;
+}
+
+function deleteReview(dishId, reviewId) {
+  const index = reviews.findIndex((r) => r.id === reviewId && r.dishId === dishId);
+  if (index !== -1) {
+    return reviews.splice(index, 1)[0];
+  }
+  return null;
+}
+
+
+
+
+ratingRouter.post('/', (req, res) => {
+  // const dishId = req.params.dishId;
+  const review = req.body;
+
+  const dishId = 1;
+
+  const newReview = createReview(dishId, review);
+
+  const ratings = review.ratings;
+
+  const averageRating = ratings.reduce((acc,cur)=>acc+cur /ratings.length);
+  
+  const roundedAverageRating = Number(averageRating.toFixed(2));
+  if (roundedAverageRating > 5) {
+    review.averageRating = 5;
+  } else {
+    review.averageRating = roundedAverageRating;
+  }
+
+  // Send the review object and average rating to the client
+  res.status(201).json({ review: newReview, roundedAverageRating });
+  // res.status(201).json(review);
+}); 
+
+
+ratingRouter.get('/', (req, res) => {
+  const dishReviews = findReviewsByDishId(1);
+  res.json(dishReviews);
+});
+
+// ratingRouter.get('/restaurant/dish/:dishId/reviews', (req, res) => {
+//   const dishId = 1;
+  
+//   const reviews = getReviewsByDishId(dishId);
+
+//   const reviewsWithRatings = reviews.map(review => {
+//     const ratings = review.ratings;
+//     const averageRating = ratings.reduce((acc, cur) => acc + cur, 0) / ratings.length;
+//     const roundedAverageRating = Number(averageRating.toFixed(2));
+//     return {
+//       review: review.review,
+//       ratings: review.ratings,
+//       averageRating: roundedAverageRating
+//     };
+//   });
+
+//   res.status(200).json(reviewsWithRatings);
+// });
+
+
+
+
 // ratingRouter.get('/', (req, res) => {
 //   const dishId = req.params.dishId;
 //   // You can use the `dishId` parameter to look up the reviews for a specific dish in your database or in-memory store
@@ -44,25 +131,9 @@ function deleteReview(dishId, reviewId) {
 //   res.json(reviews);
 // });
 
-ratingRouter.post('/', (req, res) => {
-  const dishId = req.params.dishId;
-  const review = req.body;
-  // You can use the `dishId` parameter and `review` object to create a new review for the dish in your database or in-memory store
-  createReview(dishId, review);
-  
-  const ratings = review.ratings;
 
-  const averageRating = ratings.reduce((acc,cur)=>acc+cur /ratings.length);
-  
-  const roundedAverageRating = Number(averageRating.toFixed(2));
-  review.averageRating = roundedAverageRating;
 
-  // Send the review object and average rating to the client
-  res.status(201).json({ review, roundedAverageRating });
-  // res.status(201).json(review);
-}); 
 
-// POST route for creating a new review for a dish
 // ratingRouter.post('/:dishId/reviews', (req, res) => {
 //   const dishId = req.params.dishId;
 //   const review = req.body;
