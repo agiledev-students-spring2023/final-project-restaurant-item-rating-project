@@ -39,19 +39,19 @@ export function DishReview() {
   const handleSubmit = (event) => {
     event.preventDefault()
     setIsSubmitted(true)
-    const sum = ratings.reduce((accumulator, currentValue)=>accumulator + currentValue,0)
-    const newAverage = sum / ratings.length
-    setAverageRating(parseFloat(newAverage.toFixed(2)))
+    // const sum = ratings.reduce((accumulator, currentValue)=>accumulator + currentValue,0)
+    // const newAverage = sum / ratings.length
+    // setAverageRating(parseFloat(newAverage.toFixed(2)))
     setReview('')
     const data = {
       restaurantName: restaurantName,
-      dishName: dishName,
+      dishName: dish.name,
       review: review,
       ratings: ratings,
-      averageRating: newAverage
+      // averageRating: newAverage
     };
   
-    fetch('http://localhost:3000/restaurant/dish/:dishId/review', {
+    fetch('http://localhost:3000/restaurant/dish/{dishId}/review', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json'
@@ -61,32 +61,37 @@ export function DishReview() {
     .then(response => response.json())
     .then(data => {
       console.log('Success:', data);
+      setDish(data.dishName)
+      setAverageRating(data.roundedAverageRating);
+      setReview(data.review.review);
+      console.log(data.dishName)
     })
     .catch((error) => {
       console.error('Error:', error);
     });
+
+    // window.location.reload()
   
   };
   
   
 
 
-  const apiUrl =  "https://my.api.mockaroo.com/restaurants/123.json?key=fc5ecd60";
-  useEffect( () => {
-    fetch(apiUrl)
-    
-    .then((response) => response.json())
-    .then((data) => {
-      const randomInt = Math.floor(Math.random() * 10) + 1;
-      const randomNumber = Math.floor(Math.random() * 5) + 1;
-      setRestaurantName(data[randomInt].name);
-      setDish(data[randomInt].popular_dish);
-      setAverageRating(0)
-      // setAverageRating(data[randomNumber].id);
-    });
-    
-  }, []
-  )
+  // const apiUrl = 'http://localhost:3000/restaurant/dish/{dish.id}/review';
+
+  // useEffect(() => {
+  //   fetch(apiUrl)
+  //     .then((response) => response.json())
+  //     .then((data) => {
+  //       // setReviews(data.reviews);
+  //       setAverageRating(data.averageRating);
+  //       console.log(data.reviews)
+  //     });
+  // }, []);
+
+ 
+
+
 
   const renderStars = (rating) => {
     const starIcons = [];
@@ -118,7 +123,7 @@ export function DishReview() {
           <Typography variant="h4"> Leave a Review</Typography>
           <Box sx={{m:2}} /> 
           <Typography variant="h6">Restaurant: {restaurantName}</Typography> 
-          <Typography variant="h6">Dish: {dishName}</Typography> 
+          <Typography variant="h6">Dish: {dish.name}</Typography> 
           <Typography variant="h6">Average Rating: {averageRating}</Typography>
           <Box sx={{m:1}} /> 
           <Box>
