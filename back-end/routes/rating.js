@@ -11,13 +11,15 @@ const reviews =[]
 function findReviewsByDishId(dishId) {
   // Filter the reviews array to only include reviews for the specified dish
   const filteredReviews = reviews.filter(review => review.dishId === dishId);
-
+  
   // Return an array of objects containing the review and rating values
   return filteredReviews.map(review => {
     return {
       id: review.id,
       rating: review.rating,
-      review: review.review
+      review: review.review,
+      dishName: review.dishName,
+      rating: review.latestRating
     };
   });
 }
@@ -71,9 +73,13 @@ ratingRouter.post('/', (req, res) => {
 
   const dishId = 1;
 
+  const dish = dishes.find((d) => d.id === dishId);
+
   const newReview = createReview(dishId, review);
 
   const ratings = review.ratings;
+  
+  const latestRating = ratings[ratings.length-1];
 
   const averageRating = ratings.reduce((acc,cur)=>acc+cur /ratings.length);
   
@@ -83,9 +89,9 @@ ratingRouter.post('/', (req, res) => {
   } else {
     review.averageRating = roundedAverageRating;
   }
-
+  review.rating = latestRating;
   // Send the review object and average rating to the client
-  res.status(201).json({ review: newReview, roundedAverageRating });
+  res.status(201).json({dishName:dish.name, review: newReview, roundedAverageRating });
   // res.status(201).json(review);
 }); 
 

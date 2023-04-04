@@ -63,8 +63,9 @@ export function DishReview() {
     .then(response => response.json())
     .then(data => {
       console.log('Success:', data);
-      // setDish(data.dishName)
-      // setAverageRating(data.roundedAverageRating);
+      const latestRating = data.latestRating;
+      const dishName = data.dishName;
+      setAverageRating(data.review.averageRating);
       // setReview(data.review.review);
       // console.log(data.dishName)
     })
@@ -76,7 +77,7 @@ export function DishReview() {
   
   };
   
-  axios.get('http://localhost:3000/dish/{dishId}/reviews')
+  axios.get('http://localhost:3000/restaurant/dish/123/review')
   .then(response => {
     // Handle the response data
     const dishReviews = response.data;
