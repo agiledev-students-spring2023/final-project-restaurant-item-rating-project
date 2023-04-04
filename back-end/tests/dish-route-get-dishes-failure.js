@@ -2,43 +2,42 @@ var chai = require('chai');
 var expect = chai.expect;
 const app = require('../app');
 
-describe('GET /restaurant/{id}', () => {
-  it('failed to respond with JSON containing the dish name and price', async () => {
+describe('GET /dish/{id}', () => {
+  it('failed to respond with JSON containing the dish name', async () => {
     const response = await request(app)
-      .get('/restaurant/123');
+      .get('/dish/123');
 
     expect(response.status).toEqual(404);
-    expect(response.body).not.toHaveProperty('name', 'Pizza');
-    expect(response.body).not.toHaveProperty('price', 10);
+    expect(response.body).not.toHaveProperty('name', '3 Taco Combo');
   });
 });
 
-describe('POST /restaurant/{id}', () => {
+describe('POST /dish/{id}', () => {
   it('responds with JSON containing a failure message', async () => {
     const response = await request(app)
-      .post('/restaurant/123')
-      .send({ name: 'Pizza', price: 10 });
+      .post('/dish/123')
+      .send({ name: '3 Taco Combo' });
 
     expect(response.status).toEqual(400);
     expect(response.body).toHaveProperty('responseStatus', 400);
   });
 });
 
-describe('POST /restaurant', () => {
+describe('POST /dish', () => {
   it('responds with JSON containing a failure message', async () => {
     const response = await request(app)
-      .post('/restaurant')
-      .send({ name: 'Pizza', price: 10 });
+      .post('/dish')
+      .send({ name: '3 Taco Combo' });
 
     expect(response.status).toEqual(400);
     expect(response.body).toHaveProperty('responseStatus', 400);
   });
 });
 
-describe('DELETE /restaurant/{id}', () => {
+describe('DELETE /dish/{id}', () => {
   it('responds with JSON containing a failure message', async () => {
     const response = await request(app)
-      .delete('/restaurant/123');
+      .delete('/dish/123');
 
     expect(response.status).toEqual(400);
     expect(response.body).toHaveProperty('responseStatus', 400);
