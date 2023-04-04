@@ -1,6 +1,6 @@
 import { Box, Button, ImageList, ImageListItem, Typography } from "@mui/material";
 import Rating from '@mui/material/Rating';
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 
 export function DishDetail() {
@@ -12,6 +12,8 @@ export function DishDetail() {
 
   // fetched state
   const [restaurantName, setRestaurantName] = useState('Los Tacos'); // TODO: mock this with mockeroo
+  const [review, setReview] = useState('')
+  const[rating,setRating] = useState(null)
 
   const [dish, setDish] = useState({
     id:1,
@@ -46,6 +48,47 @@ export function DishDetail() {
 
     ]
   });
+
+
+  useEffect(() => {
+    // Make a GET request to fetch the initial data
+    fetch('http://localhost:3000/restaurant/dish/{dishId}/review')
+      .then(response => response.json())
+      .then(data => {
+        console.log('Success:', data);
+        // setRating(data.lastestRating);
+        setReview(data.review);
+      })
+      .catch((error) => {
+        console.error('Error:', error);
+      });
+  }, []);
+
+  const addReview = (dishId, review, rating) => {
+    const data = { 
+      review: review,
+      ratings: [rating]
+    };
+    fetch('http://localhost:3000/restaurant/dish/{dishId}/review', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(data)
+    })
+    .then(response => response.json())
+    .then(data => {
+      console.log('Success:', data);
+      const latestRating = data.latestRating;
+      setRating(latestRating);
+      setReview(data.review.review);
+      console.log(data.latestRating)
+      console.log(data.review.review)
+    })
+    .catch((error) => {
+      console.error('Error:', error);
+    });
+  };
 
   // TODO: mock
   //     fetching dish
@@ -104,8 +147,11 @@ export function DishDetail() {
       >
         Add a review
       </Button>
+
+      <p>Rating: {rating}</p>
+      <p>Review: {review}</p>
       
-      {dish.reviews.map( (review) => {
+      {/* {dish.reviews.map( (review) => {
         return (
           <Box
           >
@@ -114,7 +160,7 @@ export function DishDetail() {
             <Typography> {Math.round((Date.now() - review.date) / millisecondsInADay)} days ago </Typography>
           </Box>
         );
-      })}
+      })} */}
 
     </Box>
   );
