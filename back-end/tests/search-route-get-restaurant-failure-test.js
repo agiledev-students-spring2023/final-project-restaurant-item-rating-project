@@ -1,5 +1,6 @@
 var chai = require('chai');
 var expect = chai.expect;
+var request = require('request');
 const app = require('../app');
 describe('GET /search/{locationId}/{restaurantId}/{Id}', ()=>{
     it('failed to respond with search result', async () => {
