@@ -1,7 +1,12 @@
 const express = require('express');
+const mongoose = require('mongoose');
+// get restaurant model
+// const Restaurant = require("./../schema");
 
 // this router is used for paths matching "/restaurant"
 const restaurantRouter = express.Router();
+
+// const Restaurant = mongoose.model("")
 
 // handler functions for routes
 function findRestaurantById(id) {
@@ -20,6 +25,25 @@ function updateRestaurant(id, restaurant) {
 function deleteRestaurant(id) {
   return true;
 }
+
+// test route
+restaurantRouter.get('/hello', async (req, res) => {
+  // const user = new Restaurant(
+  //   {name:"james"}
+  // );
+  
+  // const something = await Restaurant.find({});
+  // console.log(something);
+  // .toArray(function(error, documents) {
+  //   if (err) throw error;
+
+  //   res.send(documents);
+  // });
+  // res.json(
+  //   Restaurant.find()
+  // );
+  res.json({hello:"Hello"})
+});
 
 // Define the GET endpoint to get dish by restaurant ID
 restaurantRouter.get('/:id', (req, res) => {
