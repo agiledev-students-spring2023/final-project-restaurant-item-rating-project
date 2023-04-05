@@ -1,5 +1,6 @@
 var chai = require('chai');
 var expect = chai.expect;
+var request = require('request');
 const app = require('../app');
 
 describe('ratingRouter', () => {
