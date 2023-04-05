@@ -5,5 +5,8 @@
     "cors": "^2.8.5",
     "mocha": "^10.2.0",
     "save-dev": "^0.0.1-security"
+  },
+  "devDependencies": {
+    "nyc": "^15.1.0"
   }
 }

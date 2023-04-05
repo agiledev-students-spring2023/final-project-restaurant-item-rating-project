@@ -4,7 +4,7 @@
   "description": "Our project! in Agile Development",
   "main": "server.js",
   "scripts": {
-    "test": "mocha"
+    "test": "nyc mocha --timeout=3000"
   },
   "keywords": [],
   "author": "",
