@@ -1,13 +1,31 @@
 const express = require('express');
+//Mongoose required
+const mongoose = require('mongoose');
+const {Schema} = mongoose;
+mongoose.Promise = global.Promise;
 // this router is used for paths matching "/suggestion"
 const suggestionRouter = express.Router();
+//MongoDB imported
+const suggestionSchema = new mongoose.Schema({
+  Restaurant:{
+    name: String,
+    location: String,
+    dishes: Array},
+    Dish:{
+      name: String
+    }
+   });
 
+const DishModel = mongoose.model('Dish', suggestionSchema);
+const RestaurantModel = mongoose.model('Restaurant', suggestionSchema);
 // handlers
-function makeRestaurantSuggestions() {
-  return [];
+async function makeRestaurantSuggestions() {
+  const RestaurantFromDb = await RestaurantModel.findById(id).exec();
+  return RestaurantFromDb;
 }
-function makeDishSuggestions() {
-  return [];
+async function makeDishSuggestions() {
+  const DishFromDb = await DishModel.findById(id).exec();
+  return DishFromDb];
 }
 
 // GET route for dishes
@@ -28,4 +46,5 @@ suggestionRouter.get('/restaurants', (req,res)=>{
     res.json(restaurantSuggestions);
 })
 
-module.exports = suggestionRouter;
+module.exports = RestaurantModel;
+module.exports = DishModel;
