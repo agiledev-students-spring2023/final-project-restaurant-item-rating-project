@@ -25,7 +25,7 @@ async function makeRestaurantSuggestions() {
 }
 async function makeDishSuggestions() {
   const DishFromDb = await DishModel.findById(id).exec();
-  return DishFromDb];
+  return DishFromDb;
 }
 
 // GET route for dishes
