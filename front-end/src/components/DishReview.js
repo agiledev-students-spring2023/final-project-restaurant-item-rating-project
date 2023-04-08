@@ -1,11 +1,9 @@
 import { Box, Button, TextField, Typography } from "@mui/material";
 import React, { useEffect, useState } from 'react';
 import { FaStar, FaStarHalf } from "react-icons/fa";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import { Rating } from './Rating';
 import "./stars.css";
-import { useLocation } from "react-router-dom";
-import axios from 'axios';
 export function DishReview() {
   // to change pages
 

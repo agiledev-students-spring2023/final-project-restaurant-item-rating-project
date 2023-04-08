@@ -15,16 +15,11 @@ async function main() {
       useUnifiedTopology: true, 
     }
   );
-
-  // const restaurantSchema = new mongoose.Schema({
-  //   name: String
-  // });
-  
-  // const Restaurant = mongoose.model('Restaurant', restaurantSchema);
 }
 
 const Restaurant = mongoose.model('Restaurant', RestaurantSchema);
 const Dish = mongoose.model('Dish', DishSchema);
 
-module.exports = Restaurant;
-module.exports = Dish;
+module.exports = mongoose.model('Restaurant', new mongoose.Schema({
+  name: String
+}));
