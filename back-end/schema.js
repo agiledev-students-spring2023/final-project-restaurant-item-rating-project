@@ -1,4 +1,6 @@
 // // this file defines the Models/Schema for objects in our application
+const mongoose = require('mongoose');
+const { Schema } = mongoose;
 
 // // do not use this code. this is for reference so everyone 
 
@@ -29,10 +31,33 @@
 // // DB STUFF
 // const mongoose = require('mongoose');
 
-// const restaurantSchema = new mongoose.Schema({
-//   name: String
-// });
+// Define the dish schema
+const DishSchema = new Schema({
+  name: {
+    type: String,
+    required: true
+  },
+  description: {
+    type: String,
+    required: true
+  }
+});
+  
+// Define the Restaurant schema
+const RestaurantSchema = new Schema({
+  name: {
+    type: String,
+    required: true
+  },
+  location: {
+    type: String,
+    required: true
+  },
+  dishes: [{
+    type: Schema.Types.ObjectId,
+    ref: 'Dish'
+  }]
+});
 
-// const Restaurant = mongoose.model('Restaurant', restaurantSchema);
-
-// module.exports = Restaurant;
+module.exports = RestaurantSchema;
+module.exports = DishSchema;
