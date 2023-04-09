@@ -9,16 +9,28 @@ const Restaurant = require("./../db");
 // this router is used for paths matching "/restaurant"
 const restaurantRouter = express.Router();
 
-// // test route
-// restaurantRouter.get('/test', async (req, res) => {
-//   // const deleted = await Restaurant.deleteMany({});
-//   // console.log("hi");
-//   // const newRest = new Restaurant({name:"James"});
-//   // await newRest.validate();
-//   // await newRest.save();
-//   const allRestaurants = await Restaurant.find({});
-//   res.json({restaurants:allRestaurants})
-// });
+// test route
+restaurantRouter.get('/test', async (req, res) => {
+
+
+
+  // const deleted = await Restaurant.deleteMany({});
+  // console.log("hi");
+  const newRest = await Restaurant.create({
+    name:"akhil",
+    location: "nyc",
+    dishes: [
+      {"name":"akhil"}
+    ]
+  });
+  await newRest.save();
+
+  // await newRest.validate();
+  // await newRest.save();
+  // await Restaurant.deleteMany({});
+  const allRestaurants = await Restaurant.find({});
+  res.json({restaurants:allRestaurants})
+});
 
 // Define the GET endpoint to get restaurant
 restaurantRouter.get('/:id', async (req, res) => {
@@ -68,8 +80,9 @@ restaurantRouter.post('/', async (req, res) => {
   // For example:
   let newRest;
   try {
+    console.log("req.body", req.body);
     newRest = await Restaurant.create(req.body);
-    console.log("this is the result! ", newRest);
+
     await newRest.validate();
     await newRest.save();
   } catch (err) {

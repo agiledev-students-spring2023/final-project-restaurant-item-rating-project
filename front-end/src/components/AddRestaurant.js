@@ -4,7 +4,7 @@ import { useNavigate } from 'react-router-dom';
 import axios from 'axios'
 import '../App.css';
 
-const serverAddress = "http://localhost:3000"
+const serverAddress = "http://localhost:3002"
 
 export function AddRestaurant() {
 

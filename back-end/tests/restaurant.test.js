@@ -51,16 +51,16 @@ describe("Restaurant routes", function() {
     });
   });
   
-  // describe("get", function() {
-  //   it("return 404 if restaurant not found", async () => {
-  //     const url = "/restaurant/123";
-  //     const response = await chai.request(app).post(url);
+  describe("get", function() {
+    it("return 404 if restaurant not found", async () => {
+      const url = "/restaurant/123";
+      const response = await chai.request(app).post(url);
 
-  //     expect(response.statusCode).to.equal(404);
-  //   });
-  // });
+      expect(response.statusCode).to.equal(404);
+    });
+  });
 
-
+  // Restaurant.create
   
 });
 
