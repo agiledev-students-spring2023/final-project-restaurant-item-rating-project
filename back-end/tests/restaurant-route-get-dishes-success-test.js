@@ -1,4 +1,37 @@
-var chai = require('chai');
+
+// Import the necessary modules
+const chai = require('chai');
+const chaiHttp = require('chai-http');
+const app = require('../app');
+
+// Configure Chai
+chai.use(chaiHttp);
+chai.should();
+
+// Define the test
+describe('Restaurant', () => {
+  describe('POST /restaurant', () => {
+    it('should create a new restaurant', (done) => {
+      const restaurant = {
+        name: 'Test Restaurant',
+        location: 'Test Location'
+      };
+      chai.request(app)
+        .post('/restaurant')
+        .send(restaurant)
+        .end((error, res) => {
+          res.should.have.status(201);
+          res.body.should.be.a('object');
+          res.body.should.have.property('_id');
+          res.body.should.have.property('name').eq('Test Restaurant');
+          res.body.should.have.property('location').eq('Test Location');
+          done();
+        });
+    });
+  });
+});
+
+/* var chai = require('chai');
 var expect = chai.expect;
 var request = require('request');
 const app = require('../app');
@@ -45,3 +78,4 @@ describe('DELETE /restaurant/{id}', () => {
     expect(response.body).toHaveProperty('responseStatus', 200);
   });
 });
+ */
