@@ -2,7 +2,6 @@
 // Import necessary modules
 const express = require('express');
 
-
 // get restaurant model
 const Restaurant = require("./../db");
 

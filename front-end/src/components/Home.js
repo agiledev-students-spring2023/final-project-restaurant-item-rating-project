@@ -4,13 +4,15 @@ import Card from '@mui/material/Card';
 import CardMedia from '@mui/material/CardMedia';
 import CardContent from '@mui/material/CardContent';
 import { useNavigate } from 'react-router-dom';
+import axios from 'axios'
 
-/* import{SearchBar} from "./components/SearchBar"; */
+const serverAddress = "http://localhost:3002"
 
-function suggestionsMapping (favorite) {
+function restaurantSuggestionMapping (favorite, navigate) {
   return (
     <Card 
-      key={favorite.id}
+      key={favorite._id}
+      onClick={() => navigate(`restaurant/${favorite._id}`)}
     >
     <Box
       sx={{
@@ -26,7 +28,7 @@ function suggestionsMapping (favorite) {
           display:'flex', 
         }}
           src={"https://picsum.photos/200"}
-        title={favorite.title}
+        title={favorite.name}
       />
     </Box>
 
@@ -38,7 +40,7 @@ function suggestionsMapping (favorite) {
         <Typography 
           gutterBottom 
           variant="h6">
-          {favorite.title.split(" ").slice(0,4).join(" ")}
+          {favorite.name.split(" ").slice(0,4).join(" ")}
         </Typography>
 
       </CardContent>
@@ -53,19 +55,25 @@ function suggestionsMapping (favorite) {
 export function Home() {
 
 
-  const [suggestions, setSuggestions] = useState([]);
+  const [suggestionsRestaurant, setSuggestionsRestaurant] = useState([]);
+  const [suggestionsDish, setSuggestionsDish] = useState([]);
 
   const navigate = useNavigate();
 
   // mocked api with mockaroo
-  const apiUrl =  "https://my.api.mockaroo.com/suggestions?key=07b3ef90";
+  const restaurantSuggestionsUrl = `${serverAddress}/suggestion/restaurant`
+  // const dishSuggestionsUrl = `${serverAddress}/suggestion/dish`
   useEffect( () => {
-    fetch(apiUrl)
-    .then((response) => response.json())
-    .then((data) => {
-      setSuggestions(data.slice(0,1));
-    });
-
+    axios.get(restaurantSuggestionsUrl)
+    .then((response) => {
+      // console.log("response: ", response);
+      setSuggestionsRestaurant(response.data.slice(0,3));
+    })
+    // axios.get(dishSuggestionsUrl)
+    // .then((response) => response.json())
+    // .then((data) => {
+    //   setSuggestionsDish(data);
+    // });
   }, []
   )
 
@@ -74,28 +82,16 @@ export function Home() {
 
     <Container>
 
-      <Button onClick={() => navigate('/search')}>Search</Button>
-      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      {/* <Button onClick={() => navigate('/search')}>Search</Button> */}
 
-      {/* <TextField  type="search" id="search" label="Search" sx={{ width: 350}} /> */}
-      {/* <div className = "search-bar-container">
-        <SearchBar />
-        <div>SearchResults</div>
-      </div> */}
-
-      <Button onClick={() => navigate('/favorites')}>Your Favorites - not built out</Button>
-      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-      <Button onClick={() => navigate('/add/restaurant')}>Add Restaurant</Button>
+      {/* <Button onClick={() => navigate('/favorites')}>Your Favorites - not built out</Button> */}
+      <Button onClick={() => navigate('/restaurant')}>Add Restaurant</Button>
 
 
       <Typography variant="h6" 
         component="div" sx={{ flexGrow: 1}}>
-        Recommended for you:
+        Suggested Restaurants
       </Typography>
-
-
       <Box>      
         <Box
           sx={{ 
@@ -104,15 +100,16 @@ export function Home() {
             justifyContent: 'space-between'
           }}
         >
-          {suggestions.map(suggestionsMapping)}
+          {suggestionsRestaurant.map((fav) => {
+            return restaurantSuggestionMapping(fav, navigate);
+          })}
         </Box>
-
       </Box>
 
-
-      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-
-
+      {/* <Typography variant="h6" 
+        component="div" sx={{ flexGrow: 1}}>
+        Suggested Dishes
+      </Typography>
       <Box>      
         <Box
           sx={{ 
@@ -121,28 +118,9 @@ export function Home() {
             justifyContent: 'space-between'
           }}
         >
-          {suggestions.map(suggestionsMapping)}
+          {suggestionsDish.map(restaurantSuggestionMapping)}
         </Box>
-
-      </Box>
-
-      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-
-
-      <Box>      
-        <Box
-          sx={{ 
-            margin: "auto 4% auto 4%",
-            display: 'flex',
-            justifyContent: 'space-between'
-          }}
-        >
-          {suggestions.map(suggestionsMapping)}
-        </Box>
-
-      </Box>
-
-      
+      </Box> */}
     </Container>
   );
 }
