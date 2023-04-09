@@ -1,5 +1,5 @@
 const express = require('express');
-// this router is used for paths matching "/dish/:dishId/reviews"
+// this router is used for paths matching "/restaurant/:restaurantId/dish/:dishId/review"
 const ratingRouter = express.Router();
 
 const cors = require('cors');
