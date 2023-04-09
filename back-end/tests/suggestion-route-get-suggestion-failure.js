@@ -7,10 +7,8 @@ describe('GET suggestion/{cityid}/restaurant', ()=>{
       axios.get('http://localhost:3000/suggestion/123/restaurant')
       .then((res) => {
         expect(res.status).to.equal(404);
-        expect(res.data).not.to.have.property('name');
-        expect(res.data).not.to.have.property('location');
-        expect(res.data).not.to.have.property('dishes');
-        expect(res.data).not.to.have.property('id');
+        expect(res.body).should.have.property('object');
+        expect(res.body).should.have.property('message').eq("Can not retrieve information regarding restaurant suggestion under the given path.");
         done();
       })
       .catch(done);
@@ -21,8 +19,8 @@ describe('GET suggestion/{cityid}/{restaurantid}/dish', ()=>{
     axios.get('http://localhost:3000/suggestion/123/456/dish')
     .then((res) => {
       expect(res.status).to.equal(404);
-      expect(res.data).not.to.have.property('name');
-      expect(res.data).not.to.have.property('description');
+      expect(res.body).should.have.property('object');
+      expect(res.body).should.have.property('message').eq("Can not retrieve information regarding dish suggestion under the given path.");
       done();
 })
   .catch(done);

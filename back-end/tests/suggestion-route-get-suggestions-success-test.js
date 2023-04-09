@@ -7,10 +7,11 @@ describe('GET suggestion/{cityid}/restaurant', ()=>{
       axios.get('http://localhost:3000/suggestion/123/restaurant')
       .then((res) => {
         expect(res.status).to.equal(200);
-        expect(res.data).to.have.property('name');
-        expect(res.data).to.have.property('location');
-        expect(res.data).to.have.property('dishes');
-        expect(res.data).to.have.property('id');
+        expect(res.body).should.be.a('object');
+        expect(res.data).should.have.property('name');
+        expect(res.data).should.have.property('location');
+        expect(res.data).should.have.property('dishes');
+        expect(res.data).should.have.property('id');
         done();
       })
       .catch(done);
@@ -21,8 +22,9 @@ describe('GET suggestion/{cityid}/{restaurantid}/dish', ()=>{
     axios.get('http://localhost:3000/suggestion/123/456/dish')
     .then((res) => {
       expect(res.status).to.equal(200);
-      expect(res.data).to.have.property('name');
-      expect(res.data).to.have.property('description');
+      expect(res.body).should.be.a('object');
+      expect(res.data).should.have.property('name');
+      expect(res.data).should.have.property('description');
       done();
 })
   .catch(done);
