@@ -1,6 +1,8 @@
 // import and instantiate express
 const express = require('express')
+
 const app = express()
+
 const port = 3000
 
 // import some useful middleware
@@ -8,6 +10,8 @@ const multer = require("multer") // middleware to handle HTTP POST requests with
 const axios = require("axios") // middleware for making requests to APIs
 require("dotenv").config({ silent: true }) // load environmental variables from a hidden file named .env
 const morgan = require("morgan") // middleware for nice logging of incoming HTTP requests
+var cors = require('cors')
+
 
 // import routers
 const dishRouter = require('./routes/dish')
@@ -16,11 +20,16 @@ const restaurantRouter = require('./routes/restaurant')
 const suggestionRouter = require('./routes/suggestion')
 const searchRouter = require('./routes/search')
 
+
 /**
  * Typically, all middlewares would be included before routes
  * In this file, however, most middlewares are after most routes
  * This is to match the order of the accompanying slides
  */
+
+
+// cors for front-end
+app.use(cors());
 
 // use the morgan middleware to log all incoming http requests
 app.use(morgan("dev")) // morgan has a few logging default styles - dev is a nice concise color-coded style
@@ -198,10 +207,10 @@ app.delete('/', (req, res) => {
 })
 
 // implement routers
-app.use('/restaurant/dish/:dishId/review', ratingRouter) // review routes
-app.use('/restaurant/dish', dishRouter) // dish routes
-app.use('/restaurant', restaurantRouter) // restaurant routes
-app.use('/suggestion', suggestionRouter) // suggestion routes
-app.use('/search', searchRouter) // search routes
+app.use('/restaurant/:restaurantId/dish/:dishId/review', ratingRouter); // review routes
+app.use('/restaurant/:restaurantId/dish', dishRouter); // dish routes
+app.use('/restaurant', restaurantRouter); // restaurant routes
+app.use('/suggestion', suggestionRouter); // suggestion routes
+app.use('/search', searchRouter); // search routes
 
 module.exports = app

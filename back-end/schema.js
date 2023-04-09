@@ -31,33 +31,25 @@ const { Schema } = mongoose;
 // // DB STUFF
 // const mongoose = require('mongoose');
 
+// Define the review schema
+const ReviewSchema = new Schema({
+  value: Number,
+  date: {type: Date, default: Date.now},
+  userID: Number,
+});
+
 // Define the dish schema
 const DishSchema = new Schema({
-  name: {
-    type: String,
-    required: true
-  },
-  description: {
-    type: String,
-    required: true
-  }
+  name: String,
+  reviews: [ReviewSchema],
 });
   
 // Define the Restaurant schema
 const RestaurantSchema = new Schema({
-  name: {
-    type: String,
-    required: true
-  },
-  location: {
-    type: String,
-    required: true
-  },
-  dishes: [{
-    type: Schema.Types.ObjectId,
-    ref: 'Dish'
-  }]
+  name: String,
+  location: String,
+  dishes: [DishSchema],
 });
 
 module.exports = RestaurantSchema;
-module.exports = DishSchema;
+// module.exports = DishSchema;

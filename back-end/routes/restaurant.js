@@ -1,67 +1,115 @@
 
 // Import necessary modules
 const express = require('express');
-const Restaurantrouter = express.Router();
-const Restaurant = require('../models/restaurant');
 
-// Get all restaurants
-Restaurantrouter.get('/restaurant', async (req, res) => {
-  try {
-    const restaurants = await Restaurant.find().populate('dishes');
-    res.status(200).json(restaurants);
-  } catch (error) {
-    res.status(500).json({ error: error.message });
-  }
+
+// get restaurant model
+const Restaurant = require("./../db");
+
+// this router is used for paths matching "/restaurant"
+const restaurantRouter = express.Router();
+
+// test route
+restaurantRouter.get('/test', async (req, res) => {
+
+
+
+  // const deleted = await Restaurant.deleteMany({});
+  // console.log("hi");
+  const newRest = await Restaurant.create({
+    name:"akhil",
+    location: "nyc",
+    dishes: [
+      {"name":"akhil"}
+    ]
+  });
+  await newRest.save();
+
+  // await newRest.validate();
+  // await newRest.save();
+  // await Restaurant.deleteMany({});
+  const allRestaurants = await Restaurant.find({});
+  res.json({restaurants:allRestaurants})
 });
 
-// Get a restaurant by ID
-Restaurantrouter.get('/restaurant/:id', async (req, res) => {
+// Define the GET endpoint to get restaurant
+restaurantRouter.get('/:id', async (req, res) => {
+  // res id, given from URL
+  const restaurantId = req.params.id; // extract the restaurant ID from the URL parameter
+
+  console.log("restaurantId: ", restaurantId);
+
+  let restaurant;
   try {
-    const restaurant = await Restaurant.findById(req.params.id).populate('dishes');
-    if (!restaurant) {
-      return res.status(404).json({ error: 'Restaurant not found' });
-    }
-    res.status(200).json(restaurant);
-  } catch (error) {
-    res.status(500).json({ error: error.message });
+    restaurant = await Restaurant.findById(restaurantId).exec(); 
+  } catch (err) {
+    console.log(err);
   }
+  // const restaurant = await Restaurant.findById(restaurantId); 
+  if (!restaurant) {
+    // error 
+    res.statusCode = 404;
+    res.json({
+      error: "Restaurant not found",
+    });
+  }
+
+  // Return the restaurant
+  res.json(restaurant);
 });
 
-// Create a new restaurant
-Restaurantrouter.post('/restaurant', async (req, res) => {
+// // Define the POST endpoint to update a restaurant by ID
+// restaurantRouter.post('/:id', async (req, res) => {
+//   const restaurantId = req.params.id; // extract the restaurant ID from the URL parameter
+
+
+  
+
+//   const updatedRestaurant = {};
+//   // const updatedRestaurant = {updateRestaurant(restaurantId, req.body);}
+
+//   // TODO: check if error
+
+//   // Return a success response
+//   res.json({responseStatus: 200});
+// });
+
+// Define the POST endpoint to create a restaurant
+restaurantRouter.post('/', async (req, res) => {
+  // Here you can create the restaurant in the database based on the data in the request body
+  // For example:
+  let newRest;
   try {
-    const restaurant = new Restaurant(req.body);
-    await restaurant.save();
-    res.status(201).json(restaurant);
-  } catch (error) {
-    res.status(500).json({ error: error.message });
+    console.log("req.body", req.body);
+    newRest = await Restaurant.create(req.body);
+
+    await newRest.validate();
+    await newRest.save();
+  } catch (err) {
+    console.log(err);
+    res.statusCode = 500;
+    res.json({
+      error: "there was an error creating a new restaurant"
+    })
   }
+  // Return a success response
+  res.statusCode = 200;
+  res.json({
+    restaurant: newRest,
+    message: "success"
+  });
 });
 
-// Update a restaurant by ID
-Restaurantrouter.put('/restaurant/:id', async (req, res) => {
-  try {
-    const restaurant = await Restaurant.findByIdAndUpdate(req.params.id, req.body, { new: true });
-    if (!restaurant) {
-      return res.status(404).json({ error: 'Restaurant not found' });
-    }
-    res.status(200).json({ responseStatus: 200 });
-  } catch (error) {
-    res.status(500).json({ error: error.message });
-  }
-});
+// // Define the DELETE endpoint to delete a restaurant by ID
+// restaurantRouter.delete('/:id', async (req, res) => {
+//   const restaurantId = req.params.id; // extract the restaurant ID from the URL parameter
 
-// Delete a restaurant by ID
-Restaurantrouter.delete('/restaurant/:id', async (req, res) => {
-  try {
-    const restaurant = await Restaurant.findByIdAndDelete(req.params.id);
-    if (!restaurant) {
-      return res.status(404).json({ error: 'Restaurant not found' });
-    }
-    res.status(200).json({ responseStatus: 200 });
-  } catch (error) {
-    res.status(500).json({ error: error.message });
-  }
-});
+//   // Here you can delete the restaurant from the database based on the restaurant ID
+//   // For example:
+//   // deleteRestaurant(restaurantId);
 
-module.exports = Restaurantrouter;
+//   // Return a success response
+//   res.json({ responseStatus: 200 });
+// });
+
+module.exports = restaurantRouter;

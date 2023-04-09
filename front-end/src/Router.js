@@ -24,11 +24,11 @@ function MyRoutes() {
             element={<AddRestaurant />} 
           />
           <Route 
-            path="/review"
+            path="restaurant/:restaurantID/dish/:dishID/rating"
             element={<DishReview />} 
           />
           <Route 
-            path="/dish"
+            path="dish"
             element={<DishDetail />} 
           />
           <Route 

@@ -1,17 +1,21 @@
 import { Box, Button, TextField, Typography } from "@mui/material";
 import React, { useEffect, useState } from 'react';
 import { FaStar, FaStarHalf } from "react-icons/fa";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate, useParams } from "react-router-dom";
 import { Rating } from './Rating';
 import "./stars.css";
-import { useLocation } from "react-router-dom";
 export function DishReview() {
+
+  const params = useParams();
+  // console.log(params);
+
+  // restaurantID
+
   // to change pages
 
   const navigate = useNavigate();
   const location = useLocation();
-  
-  const { dish } = location.state;
+
   
   const centeringStyles = {
     justifyContent: "center",
@@ -44,15 +48,13 @@ export function DishReview() {
     // setAverageRating(parseFloat(newAverage.toFixed(2)))
     setReview('')
     const data = {
-      restaurantName: restaurantName,
-      dishName: dish.name,
       review: review,
-      ratings: ratings,
-      dishId : dish.id
-      // averageRating: newAverage
+      ratings: ratings[0],
     };
+    // console.log("data ", data)
   
-    fetch('http://localhost:3000/restaurant/dish/{dishId}/review', {
+    fetch(`http://localhost:3002/restaurant/${params.restaurantID}/dish/${params.dishID}/review`, {
+    // fetch('http://localhost:3000/restaurant/dish/{dishId}/review', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json'
@@ -97,6 +99,8 @@ export function DishReview() {
 
   // const apiUrl = 'http://localhost:3000/restaurant/dish/{dish.id}/review';
 
+  // TODO: find dish -> get name
+  let [dishName2, setDishName]= useState("toDo");
   // useEffect(() => {
   //   fetch(apiUrl)
   //     .then((response) => response.json())
@@ -141,7 +145,7 @@ export function DishReview() {
           <Typography variant="h4"> Leave a Review</Typography>
           <Box sx={{m:2}} /> 
           <Typography variant="h6">Restaurant: {restaurantName}</Typography> 
-          <Typography variant="h6">Dish: {dish.name}</Typography> 
+          <Typography variant="h6">Dish: {dishName2.name}</Typography> 
           <Typography variant="h6">Average Rating: {averageRating}</Typography>
           <Box sx={{m:1}} /> 
           <Box>

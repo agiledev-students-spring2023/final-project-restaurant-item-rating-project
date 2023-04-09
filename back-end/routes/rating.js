@@ -1,8 +1,10 @@
 const express = require('express');
-// this router is used for paths matching "/dish/:dishId/reviews"
+// this router is used for paths matching "/restaurant/:restaurantId/dish/:dishId/review"
 const ratingRouter = express.Router();
 
 const cors = require('cors');
+
+const Restaurant = require("./../db");
 
 ratingRouter.use(cors());
 ratingRouter.use(express.json());
@@ -34,21 +36,7 @@ function findReviewsByDishId(dishId) {
     };
   });
 }
-const dishes = [
-  {
-    id: 1,
-    name: 'Pasta',
-    restaurant: 'Italiano',
-    reviews: [], // add a reviews property to the dish object
-  },
-  {
-    id: 2,
-    name: 'Sushi',
-    restaurant: 'Japanese Garden',
-    reviews: [],
-  },
-  // more dishes
-];
+
 function createReview(dishId, review) {
   review.id = reviews.length + 1;
   review.dishId = dishId;
@@ -78,11 +66,28 @@ function deleteReview(dishId, reviewId) {
 
 
 
-ratingRouter.post('/', (req, res) => {
-  // const dishId = req.params.dishId;
+ratingRouter.post('/', async (req, res) => {
+  const dishId = req.params.dishId;
+  const restaurantID = req.params.restaurantID;
+  
   const review = req.body;
 
-  const dishId = 1;
+
+  const thisRestaurant = await Restaurant.findById(restaurantID).exec();
+  console.log("thisRestaurant: ", thisRestaurant);
+  const thisDish = thisRestaurant.dishes.id(dishId);
+
+  try {
+    thisDish.reviews.create(req.body);
+    thisRestaurant.save();
+  } catch (err) {
+    console.error(err);
+    res.statusCode=500;
+    res.json({
+      "message":"Error creating new review object"
+    })
+  }
+
 
   const dish = dishes.find((d) => d.id === dishId);
 

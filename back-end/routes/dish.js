@@ -1,5 +1,5 @@
 const express = require('express');
-// this router is used for the paths that match "/dish"
+// this router is used for the paths that match "/restaurant/:restaurantId/dish"
 const dishRouter = express.Router();
 
 // handler functions for routes

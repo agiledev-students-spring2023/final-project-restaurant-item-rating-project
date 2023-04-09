@@ -1,7 +1,10 @@
 import { Box, Button, Container, TextField, Typography } from "@mui/material";
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import axios from 'axios'
 import '../App.css';
+
+const serverAddress = "http://localhost:3002"
 
 export function AddRestaurant() {
 
@@ -10,26 +13,35 @@ export function AddRestaurant() {
   // form data
   const [restaurantName, setRestaurantName] = useState('');
   const [cityName, setCityName] = useState('');
-  const [uploadedImages, setUploadedImages] = useState([]);
+  // const [uploadedImages, setUploadedImages] = useState([]);
 
   const handleSubmit = event => {
     event.preventDefault();
-    alert('Restaurant Details submitted')
-    navigate('/restaurant');
-  }
+
+    axios.post(`${serverAddress}/restaurant`, {
+      name: restaurantName,
+      location: cityName
+    }).then(function (response) {
+      console.log(response);
+      alert('Restaurant Details submitted')
+    })
+    .catch(function (error) {
+      console.log(error);
+      alert(error);
+    });
+    
+    // navigate('/restaurant');
+  };
   
   return(
     <Container>
       <Typography variant="h3">Add Restaurant</Typography>
 
-      <form onSubmit ={handleSubmit}>
-       {/*  <Box sx={{m:2}} /> 
-        <TextField label = "Restaurant Name" value = {restaurantName} onChange = {setRestaurantName}/>
-        <Box sx={{m:2}} /> 
-        <TextField label = "City" value = {cityName} onChange = {setCityName}/>
-        <Box sx={{m:1}} /> */}
-         <Typography variant="body1">Add Restaurant</Typography>
+      <form>
+        <Typography variant="body1">Add Restaurant</Typography>
         <TextField
+          value = {restaurantName} 
+          onChange = {(e) => {setRestaurantName(e.target.value);}}
           placeholder='Restaurant Name'
           sx={{
             width:"100%",
@@ -40,6 +52,8 @@ export function AddRestaurant() {
 
         <Typography variant="body1">Add City</Typography>
         <TextField
+          value = {cityName} 
+          onChange = {(e) => {setCityName(e.target.value);}}
           placeholder='City'
           sx={{
             width:"100%",
@@ -49,7 +63,7 @@ export function AddRestaurant() {
         />
 
         {/* image input */}
-        <Box>
+        {/* <Box>
           <Typography variant="h6">Add Pictures?</Typography>
 
           <Box sx={{m:1}} /> 
@@ -72,6 +86,7 @@ export function AddRestaurant() {
             )}
           </Box>
         </Box>
+         */}
         <Box sx={{m:2}} /> 
         <Button variant="contained" onClick={handleSubmit}>Submit</Button>
       </form>
