@@ -1,4 +1,35 @@
-var chai = require('chai');
+
+
+// Import the necessary modules
+const chai = require('chai');
+const chaiHttp = require('chai-http');
+const app = require('../app');
+
+// Configure Chai
+chai.use(chaiHttp);
+chai.should();
+
+// Define the test
+describe('Restaurant', () => {
+  describe('POST /restaurant', () => {
+    it('should return an error when required fields are missing', (done) => {
+      const restaurant = {
+        name: 'Test Restaurant'
+      };
+      chai.request(app)
+        .post('/restaurant')
+        .send(restaurant)
+        .end((error, res) => {
+          res.should.have.status(400);
+          res.body.should.be.a('object');
+          res.body.should.have.property('message').eq('Validation failed: location: Path `location` is required.');
+          done();
+        });
+    });
+  });
+});
+
+/* var chai = require('chai');
 var expect = chai.expect;
 var request = require('request');
 const app = require('../app');
@@ -45,3 +76,4 @@ describe('DELETE /restaurant/{id}', () => {
     expect(response.body).toHaveProperty('responseStatus', 400);
   });
 });
+ */
