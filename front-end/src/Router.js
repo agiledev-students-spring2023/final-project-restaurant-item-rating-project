@@ -16,20 +16,24 @@ function MyRoutes() {
         <Route path="/" element={<Layout />}>
           <Route index element={<Home />} /> 
           <Route 
-            path="/add/dish"
+            path="restaurant/:restaurantID/dish"
             element={<AddDish />} 
           />
-          <Route 
-            path="/add/restaurant"
-            element={<AddRestaurant />} 
-          />
-          <Route 
+          <Route
             path="restaurant/:restaurantID/dish/:dishID/rating"
             element={<DishReview />} 
           />
           <Route 
-            path="dish"
+            path="/restaurant/:restaurantID/dish/:dishID"
             element={<DishDetail />} 
+          />
+           <Route 
+            path="/restaurant/:restaurantID"
+            element={<RestaurantDetail />} 
+          />
+          <Route 
+            path="/restaurant"
+            element={<AddRestaurant />} 
           />
           <Route 
             path="/search"
@@ -38,10 +42,6 @@ function MyRoutes() {
           <Route 
             path="/about"
             element={<About />} 
-          />
-           <Route 
-            path="/restaurant"
-            element={<RestaurantDetail />} 
           />
           {/* catch all */}
           <Route 

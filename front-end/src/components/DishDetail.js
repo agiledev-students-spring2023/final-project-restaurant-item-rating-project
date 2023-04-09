@@ -3,6 +3,8 @@ import Rating from '@mui/material/Rating';
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 
+const serverAddress = "http://localhost:3002"
+
 export function DishDetail() {
 
   // to change pages
@@ -58,7 +60,7 @@ export function DishDetail() {
 
   useEffect(() => {
     // Make a GET request to fetch the initial data
-    fetch('http://localhost:3000/restaurant/dish/{dishId}/review')
+    fetch(`${serverAddress}/restaurant/dish/{dishId}/review`)
       .then(response => response.json())
       .then(data => {
         console.log('Success:', data);
