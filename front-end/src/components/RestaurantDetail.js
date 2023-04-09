@@ -2,45 +2,53 @@
 import { Box, Typography } from "@mui/material";
 import Rating from '@mui/material/Rating';
 import { useEffect, useState } from "react";
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
+
+const serverAddress = "http://localhost:3002"
 
 export function RestaurantDetail(){
 
+  const params = useParams();
+
   const navigate = useNavigate();
 
+  const [restaurantName, setRestaurantName] = useState('');
+  const [location, setLocation] = useState('');
+  const [dishes, setDishes] = useState([]);
 
-  const [restaurant, setRestaurant] = useState('');
-  const [foodName, setFood] = useState('');
-  const [foodName2, setFood2] = useState('');
-  const [foodName3, setFood3] = useState('');
-  const [avgRating, setRating] = useState(0);
-  const apiUrl =  "https://my.api.mockaroo.com/restaurants/123.json?key=fc5ecd60";
+  // const [foodName, setFood] = useState('');
+  // const [foodName2, setFood2] = useState('');
+  // const [foodName3, setFood3] = useState('');
+  // const [avgRating, setRating] = useState(0);
+
   useEffect( () => {
-    fetch(apiUrl)
+    fetch(`${serverAddress}/restaurant/${params.restaurantID}`)
     .then((response) => response.json())
     .then((data) => {
-      const randomInt = Math.floor(Math.random() * 10) + 1;
-      const randomNumber = Math.floor(Math.random() * 5) + 1;
-      setRestaurant(data[randomInt].name);
-      setFood(data[randomInt].popular_dish);
-      setFood2(data[randomInt+1].popular_dish);
-      setFood3(data[randomInt+2].popular_dish);
-      setRating(randomNumber);
-      
-    });
+
+      setRestaurantName(data.name);
+      setLocation(data.location);
+      setDishes(data.dishes);
+    })
+    .catch( (err) => {
+      console.error(err);
+      alert("An error has occurred when finding that restaurant");
+    })
   }, [])
 
+  // get restaurant
   return (
     <Box sx={{display: 'flex', flexDirection: 'column', alignItems: 'center',paddingBottom: '60px'}}>
 
       <Typography variant="h3" gutterBottom>
-        Prime Burgers
+        {restaurantName}
       </Typography>
       <Typography variant="h6" gutterBottom>
-        City: New York
+        City: {location}
       </Typography>
-      <Box height="2rem" />
 
+      <Box height="2rem" />
+{/* 
       <Typography variant="h5" gutterBottom>
         Signature Item
       </Typography>
@@ -70,8 +78,8 @@ export function RestaurantDetail(){
     </Typography>
     <Typography variant="body" gutterBottom>
       Here are some of our most popular dishes!
-    </Typography>
-
+    </Typography> */}
+{/* 
     <Box
       onClick={() => navigate("/dish")}
       sx={{
@@ -108,7 +116,7 @@ export function RestaurantDetail(){
       </Typography>
       <Rating name="read-only" value={3} readOnly />
     </Box>
-    
+     */}
 
 
   {/* leaving this out for now. we can implement later */}
@@ -132,79 +140,37 @@ export function RestaurantDetail(){
     <Typography variant="h4" gutterBottom>
         Full Menu
     </Typography>
-    <Box
-      onClick={() => navigate("/dish")}
-      sx={{
-        width:"60%",
-        margin:"auto",
-        textAlign: 'center'
-      }}
-    >
-      <img 
-        src="https://images.ctfassets.net/o19mhvm9a2cm/3TqdEA20hEleGPCZj2JZJl/297b157fdd3ca108c74f17b1bd5fdfce/Website_RB_HP.png" 
-        alt="Delicious food" 
-        style={{maxWidth: '100%', height: 'auto'}} 
-      />
-      <Typography variant="h7" gutterBottom >
-        The Devil's Burger
-      </Typography>
-      <Rating name="read-only" value={3} readOnly />
-    </Box>
-    <Box
-      onClick={() => navigate("/dish")}
-      sx={{
-        width:"60%",
-        margin:"auto",
-        textAlign: 'center'
-      }}
-    >
-      <img 
-        src="https://images.ctfassets.net/o19mhvm9a2cm/40Rv5BpzPIXl94xajEmLWf/92ed9f6fbbfa0d252c60c124c92befdb/Website_2023_February_LTO.png" 
-        alt="Delicious food" 
-        style={{maxWidth: '100%', height: 'auto'}} 
-      />
-      <Typography variant="h7" gutterBottom >
-        The Devil's Burger
-      </Typography>
-      <Rating name="read-only" value={3} readOnly />
-    </Box>
-    <Box
-      onClick={() => navigate("/dish")}
-      sx={{
-        width:"60%",
-        margin:"auto",
-        textAlign: 'center'
-      }}
-    >
-      <img 
-        src="https://images.ctfassets.net/o19mhvm9a2cm/3TqdEA20hEleGPCZj2JZJl/297b157fdd3ca108c74f17b1bd5fdfce/Website_RB_HP.png" 
-        alt="Delicious food" 
-        style={{maxWidth: '100%', height: 'auto'}} 
-      />
-      <Typography variant="h7" gutterBottom >
-        The Devil's Burger
-      </Typography>
-      <Rating name="read-only" value={3} readOnly />
-    </Box>
-    <Box
-      onClick={() => navigate("/dish")}
-      sx={{
-        width:"60%",
-        margin:"auto",
-        textAlign: 'center'
-      }}
-    >
-      <img 
-        src="https://images.ctfassets.net/o19mhvm9a2cm/40Rv5BpzPIXl94xajEmLWf/92ed9f6fbbfa0d252c60c124c92befdb/Website_2023_February_LTO.png" 
-        alt="Delicious food" 
-        style={{maxWidth: '100%', height: 'auto'}} 
-      />
-      <Typography variant="h7" gutterBottom >
-        The Devil's Burger
-      </Typography>
-      <Rating name="read-only" value={3} readOnly />
-    </Box>
-
+    {dishes.map( (dish) => {
+      return (
+        
+        <Box
+        onClick={() => navigate(`/restaurant/${params.restaurantID}/dish/${dish._id}`)}
+        sx={{
+          width:"60%",
+          margin:"auto",
+          textAlign: 'center'
+        }}
+      >
+        <Box height="2rem" />
+        <img 
+          src="https://images.ctfassets.net/o19mhvm9a2cm/3TqdEA20hEleGPCZj2JZJl/297b157fdd3ca108c74f17b1bd5fdfce/Website_RB_HP.png" 
+          alt="Delicious food" 
+          style={{maxWidth: '100%', height: 'auto'}} 
+        />
+        <Typography variant="h7" gutterBottom >
+          {dish.name}
+        </Typography>
+        {
+          ("averageRating" in dish) ? 
+          <Rating name="read-only" value={dish.averageRating} readOnly /> :
+          ""
+        }
+        
+        
+      </Box>
+  
+      );
+    })}
   </Box>
     );
   }

@@ -28,7 +28,7 @@ function MyRoutes() {
             element={<DishReview />} 
           />
           <Route 
-            path="dish"
+            path="/restaurant/:restaurantID/dish/:dishID"
             element={<DishDetail />} 
           />
           <Route 
@@ -40,7 +40,7 @@ function MyRoutes() {
             element={<About />} 
           />
            <Route 
-            path="/restaurant"
+            path="/restaurant/:restaurantID"
             element={<RestaurantDetail />} 
           />
           {/* catch all */}

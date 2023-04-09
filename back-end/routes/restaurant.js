@@ -11,25 +11,36 @@ const restaurantRouter = express.Router();
 
 // test route
 restaurantRouter.get('/test', async (req, res) => {
-
-
-
   // const deleted = await Restaurant.deleteMany({});
   // console.log("hi");
   const newRest = await Restaurant.create({
     name:"akhil",
     location: "nyc",
     dishes: [
-      {"name":"akhil"}
+      {"name":"akhil's pasta"}
     ]
   });
   await newRest.save();
-
-  // await newRest.validate();
-  // await newRest.save();
-  // await Restaurant.deleteMany({});
   const allRestaurants = await Restaurant.find({});
   res.json({restaurants:allRestaurants})
+});
+// test2 route
+restaurantRouter.get('/test2', async (req, res) => {
+
+  try {
+    const myRest = await Restaurant.findById("64333687508b2bfe3d8b5bbe");
+    createResponse = myRest.dishes.create({
+      name:"pasta"
+    });
+    await myRest.save();
+  }
+  catch (err) {
+    console.error(err);
+  }
+  res.json({
+    thing:myRest,
+    saveResp:saveResp,
+  })
 });
 
 // Define the GET endpoint to get restaurant

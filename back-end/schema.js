@@ -41,6 +41,16 @@ const ReviewSchema = new Schema({
 // Define the dish schema
 const DishSchema = new Schema({
   name: String,
+  // TODO: implement this stuff..uploads and method on model to calculate,
+  //  then every time the reviews are touched (ex, by "add review"), this method
+  //  should be called 
+  // mainImage: {
+  //   type: String,
+  //   required: false,
+  //   // TODO: change this...just for testing
+  //   default: "https://images.ctfassets.net/o19mhvm9a2cm/3TqdEA20hEleGPCZj2JZJl/297b157fdd3ca108c74f17b1bd5fdfce/Website_RB_HP.png"
+  // },
+  // averageRating: Number,
   reviews: [ReviewSchema],
 });
   
