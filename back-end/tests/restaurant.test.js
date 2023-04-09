@@ -9,7 +9,6 @@ const { faker } = require("@faker-js/faker");
 const app = require("../app");
 const Restaurant = require("./../db");
 
-
 // to mock
 const mongoose = require('mongoose');
 
@@ -38,9 +37,6 @@ describe("Restaurant routes", function() {
     sinon.stub(Restaurant, "create").resolves(mockRestaurantObject);
     sinon.stub(Restaurant, "findById").resolves(mockRestaurantObject);
   });
-
-
-
 
   describe("create", function() {
     it("add a restaurant", async () => {
