@@ -79,7 +79,8 @@ After starting up the application...
 1. Open a new terminal
 2. In terminal, cd back-end
 3. In terminal, enter 'npm test'
-4. Allow time to run and view results
+4. Allow time to run and view resultsgit fetch origin
+
 
 
 ## Additional Information
