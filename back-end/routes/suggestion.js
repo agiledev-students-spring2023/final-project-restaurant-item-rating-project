@@ -9,7 +9,7 @@ const suggestionRouter = express.Router();
 // GET route for restaurants
 suggestionRouter.get('/restaurant', async (req, res)=>{
   
-  const restaurantSuggestions = await Restaurant.find({});
+  const restaurantSuggestions = await Restaurant.find({cityId});
   if (!restaurantSuggestions) {
       res.statusCode = 404;
       return res.json({ error: `Restaurant suggestions within city ID ${req.cityId} not found` });
