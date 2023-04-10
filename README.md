@@ -62,7 +62,25 @@ PRIOR TO MAKING ANY PUSH REQUESTS: make sure to enter the command 'git pull' int
 16. Run certification testing.
 
 ## Additional Markdown Documents
-None at the moment.
+### Instructions on how to set up and run the project, this process will require two terminals:
+1. Open a new terminal
+2. In terminal (1), cd front-end
+3. In terminal (1), enter 'npm run start'
+4. Open a new terminal
+5. In terminal (2), cd back-end
+6. In terminal (2), enter 'nodemon'
+
+### The front-end will run on port 3000, while the server will run on port 3002.
+After starting up the application...
+    - If you would like to access the application... [press here](http://localhost:3000/) 
+    - If you would like to access the back-end data collected from forms within the application... [press here](http://localhost:3002/restaurant/test)
+
+### To view tests status and code coverage:
+1. Open a new terminal
+2. In terminal, cd back-end
+3. In terminal, enter 'npm test'
+4. Allow time to run and view results
+
 
 ## Additional Information
 [Restaurant Item Rating Project - Additional Information](https://docs.google.com/document/d/1ittY0FjQa-B9_O_HnBvqj8tEV4wqiQdanH6V__-Thg4/edit?usp=sharing)
