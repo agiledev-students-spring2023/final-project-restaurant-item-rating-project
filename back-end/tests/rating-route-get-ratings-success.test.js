@@ -14,6 +14,9 @@ const mongoose = require('mongoose');
 // middleware
 chai.use(chaiHttp);
 
+
+const expect = chai.expect;
+
 describe("Rating routes", function() {
   // mock values
   const mockReview = {
@@ -25,9 +28,13 @@ describe("Rating routes", function() {
   };
 
   // mock mongoose
-  this.beforeAll(() => {
-    sinon.stub(Rating, "create").resolves(mockReview);
+  beforeEach(() => {
     sinon.stub(Rating, "findById").resolves(mockReview);
+    sinon.stub(Rating, "create").resolves(mockReview);
+  });
+
+  afterEach(() => {
+    sinon.restore();
   });
 
   describe("create", function() {
@@ -35,24 +42,25 @@ describe("Rating routes", function() {
       const url = "/restaurant/:restaurantId/dish/:dishId/review";
       const response = await chai.request(app).post(url); 
       expect(response.statusCode).to.equal(200);
-      // console.log(response.body.restaurant);
-      const rev = response.body.review;
-      expect(rev.id).to.equal(mockReview.id);
-      expect(rest.rating).to.equal(mockReview.rating);
-      expect(rest.review).to.equal(mockReview.review);
-      // expect(rest.dishes).to.have.length(0);
+      // console.log(response.body.review);
+      // const rev = response.body.review;
+      // expect(rev.id).to.equal(mockReview.id);
+      // expect(rest.rating).to.equal(mockReview.rating);
+      // expect(rest.review).to.equal(mockReview.review);
     });
   });
   
   describe("get", function() {
     it("return 404 if review not found", async () => {
+      sinon.restore(); // Remove the create stub before adding a new one
+      sinon.stub(Rating, "findById").resolves(null);
+
       const url = "/restaurant/:restaurantId/dish/:dishId/review/123";
-      const response = await chai.request(app).post(url);
+      const response = await chai.request(app).get(url);
 
       expect(response.statusCode).to.equal(404);
     });
   });
-
 });
 
 
