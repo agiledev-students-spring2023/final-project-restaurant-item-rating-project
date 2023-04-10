@@ -42,11 +42,11 @@ describe("Rating routes", function() {
       const url = "/restaurant/:restaurantId/dish/:dishId/review";
       const response = await chai.request(app).post(url); 
       expect(response.statusCode).to.equal(200);
-      // console.log(response.body.review);
-      // const rev = response.body.review;
-      // expect(rev.id).to.equal(mockReview.id);
-      // expect(rest.rating).to.equal(mockReview.rating);
-      // expect(rest.review).to.equal(mockReview.review);
+      console.log(response.body.review);
+      const rev = response.body.review;
+      expect(rev.id).to.equal(mockReview.id);
+      expect(rev.rating).to.equal(mockReview.rating);
+      expect(rev.review).to.equal(mockReview.review);
     });
   });
   
