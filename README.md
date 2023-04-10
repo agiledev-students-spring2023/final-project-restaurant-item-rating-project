@@ -73,7 +73,6 @@ PRIOR TO MAKING ANY PUSH REQUESTS: make sure to enter the command 'git pull' int
 ### The front-end will run on port 3000, while the server will run on port 3002.
 After starting up the application...
 - If you would like to access the application... [press here](http://localhost:3000/) 
-- If you would like to access the back-end data collected from forms within the application... [press here](http://localhost:3002/restaurant/test)
 
 ### To view tests status and code coverage:
 1. Open a new terminal
