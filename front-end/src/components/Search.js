@@ -7,122 +7,46 @@ import CardMedia from '@mui/material/CardMedia';
 import { useEffect, useState } from "react";
 import { useNavigate } from 'react-router-dom';
 import IconButton from '@mui/material/IconButton';
+import axios from 'axios';
+// reuse this function
+import { RestaurantMapping } from "./Home"
 
-
-function searchResults (restaurants) {
-  console.log(restaurants.id, restaurants);
-  return (
-    <Container> 
-      <Card 
-        key={restaurants.id}
-      >
-      <Box
-        sx={{
-          display:'flex', 
-          justifyContent:"center"
-        }}
-      >
-        <CardMedia
-          component="img"
-          height="200"
-          sx={{ 
-            maxWidth:"200px",
-            display:'flex', 
-          }}
-          src={restaurants.img}
-          title={restaurants.name}
-          />
-      </Box>
-        <CardContent
-          sx={{
-            maxWidth:200
-          }}
-        > 
-          <Typography 
-            gutterBottom 
-            max
-            variant="h4" 
-          >
-            {restaurants.name}
-          </Typography>
-          <Typography
-          max
-          variant="h6" 
-          >
-          Most Popular Dish:
-          </Typography>
-          <Typography 
-            gutterBottom 
-            max
-            variant="h6" 
-          >
-            
-            {restaurants.popular_dish}
-          </Typography>
-        </CardContent>
-      </Card>
-    </Container>
-  );
-};
+const serverAddress = "http://localhost:3002"
 
 export function Search() {
 
   const navigate = useNavigate();
 
-  const [restaurantList, setRestaurantList] = useState([]);
   const [searchQuery, setSearchQuery] = useState("");
-
-  // mocked api with mockaroo
-  const apiUrl =  "https://my.api.mockaroo.com/restaurants/123.json?key=fc5ecd60";
-  useEffect( () => {
-    fetch(apiUrl)
-    .then((response) => response.json())
-    .then((data) => {
-      console.log(data)
-      setRestaurantList(data.slice(0,1));
-    });
-    
-  }, []);
+  const [searchResults, setSearchResults] = useState([]);
+  const [hasSearched, setHasSearched] = useState(false);
 
   const handleSearch = () => {
-    fetch(apiUrl)
-    .then((response) => response.json())
-    .then((data) => {
-    const filteredData = data.filter(restaurant =>
-    restaurant.name.toLowerCase().includes(searchQuery.toLowerCase())
-    );
-    setRestaurantList(filteredData);
+    axios.post(
+      `${serverAddress}/search`, 
+      {
+        searchText: searchQuery,
+      }
+    )
+    .then((response) => {
+      console.log(response.data);
+      setSearchResults(response.data);
+      setHasSearched(true);
     });
   };  
 
-  // this is what gets rendered in the React DOM. Must be one element at the top level
-  // return (
-  //   <Box>   
-
-  //     <TextField  type="search" id="search" label="Search" sx={{ width: 350 }} />  <SearchIcon />  
-  
-
-  //     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-
-  //     <Box
-  //       sx={{ 
-  //         margin: "auto 4% auto 4%",
-  //         display: 'flex',
-  //         justifyContent: 'space-between'
-  //       }}
-  //     >
-  //       {restaurantList.map(searchResults)}
-  //     </Box>
-  //   </Box>
-  // );
   return (
     <Box>
-      <Box sx={{ 
-        display: 'flex', 
-        justifyContent: 'center', 
-      }}>
+      <Box 
+        sx={{ 
+          display: 'flex', 
+          justifyContent: 'center', 
+        }}
+      >
         <TextField
           placeholder='Restaurant Name'
+          value = {searchQuery} 
+          onChange = {(e) => {setSearchQuery(e.target.value);}}
           sx={{
             width:"100%",
             padding:"0.5em",
@@ -131,17 +55,38 @@ export function Search() {
         />
         <IconButton 
           variant="contained" 
-          onClick={()=>{navigate("/restaurant")}}
+          onClick={() => handleSearch()}
           color="primary"
         >
           <SearchIcon />
         </IconButton>
       </Box>
+      <Button onClick={() => navigate('/restaurant')}>Add Restaurant</Button>
 
-      <Box sx={{ margin: 'auto 4%', 
-      display: 'flex', 
-      justifyContent: 'space-between' }}>
-        {restaurantList.map(searchResults)}
+      <Box 
+        sx={{ 
+          margin: 'auto 4%', 
+          display: 'flex', 
+          flexDirection: 'column',
+          justifyContent: 'space-between' 
+        }}
+      >
+        { !hasSearched ? (
+          <Typography
+            variant='body'
+          >
+            Please enter a search to see results!
+          </Typography>
+        ) : (
+            (searchResults.length===0) ? 
+            (<Typography
+              variant='body'
+            >
+              Please enter a search to see results!
+            </Typography>) : 
+              searchResults.map(RestaurantMapping)
+          )
+        }
       </Box>
     </Box>
   );

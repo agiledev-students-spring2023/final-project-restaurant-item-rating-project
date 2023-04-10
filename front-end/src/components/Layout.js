@@ -8,6 +8,9 @@ import IconButton from '@mui/material/IconButton';
 import React, { useEffect, useState } from 'react';
 import { Outlet, useNavigate } from 'react-router-dom';
 
+import { useLocation } from 'react-router-dom';
+
+
 /**
  * 
  * @returns parent component for all pages. provides header and footer 
@@ -36,6 +39,10 @@ export function Layout() {
 
   const [value, setValue] = useState(home);
 
+  // get path
+  const location = useLocation();
+  // console.log(location.pathname)
+
   return (
     <Box>
       <Typography
@@ -45,6 +52,10 @@ export function Layout() {
         Dish Dealer
       </Typography>
       {/* back button */}
+      {/* check if "home" */}
+      {
+        (location.pathname === '/') ? 
+        "" : 
       <IconButton 
         variant="outlined" 
         onClick={() => {
@@ -53,6 +64,7 @@ export function Layout() {
       >
         <ArrowBackIosIcon />
       </IconButton>
+      }
 
       <Box height="1rem" />
 

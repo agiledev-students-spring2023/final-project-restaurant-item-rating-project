@@ -61,5 +61,8 @@ const RestaurantSchema = new Schema({
   dishes: [DishSchema],
 });
 
+RestaurantSchema.index({'$**': 'text'});
+
+
 module.exports = RestaurantSchema;
 // module.exports = DishSchema;

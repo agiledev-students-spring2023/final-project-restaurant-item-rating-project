@@ -12,33 +12,42 @@ const restaurantRouter = express.Router();
 restaurantRouter.get('/test', async (req, res) => {
   // const deleted = await Restaurant.deleteMany({});
   // console.log("hi");
-  const newRest = await Restaurant.create({
-    name:"akhil",
-    location: "nyc",
-    dishes: [
-      {"name":"akhil's pasta"}
-    ]
-  });
-  await newRest.save();
+  // const newRest = await Restaurant.create({
+  //   name:"akhil",
+  //   location: "nyc",
+  //   dishes: [
+  //     {"name":"akhil's pasta"}
+  //   ]
+  // });
+  // await newRest.save();
+  // const allRestaurants = await Restaurant.find({$text: {$search: "akhil"}}).exec();
   const allRestaurants = await Restaurant.find({});
-  res.json({restaurants:allRestaurants})
+  res.json({
+    numberOfResults: allRestaurants.length,
+    restaurants:allRestaurants
+  })
 });
 // test2 route
 restaurantRouter.get('/test2', async (req, res) => {
 
-  try {
-    const myRest = await Restaurant.findById("64333687508b2bfe3d8b5bbe");
-    createResponse = myRest.dishes.create({
-      name:"pasta"
-    });
-    await myRest.save();
-  }
-  catch (err) {
-    console.error(err);
-  }
+  // try {
+  //   const myRest = await Restaurant.findById("64333687508b2bfe3d8b5bbe");
+  //   createResponse = myRest.dishes.create({
+  //     name:"pasta"
+  //   });
+  //   await myRest.save();
+  // }
+  // catch (err) {
+  //   console.error(err);
+  // }
+  // res.json({
+  //   thing:myRest,
+  //   saveResp:saveResp,
+  // })
+  const searchResults = await Restaurant.find({$text: {$search: "pasta"}}).exec();
   res.json({
-    thing:myRest,
-    saveResp:saveResp,
+    numberOfResults: searchResults.length,
+    searchResults: searchResults
   })
 });
 
