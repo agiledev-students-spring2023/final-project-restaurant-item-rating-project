@@ -30,7 +30,7 @@ import { Box, Typography } from "@mui/material";
 
             <Typography
             variant="body1" component="div" sx={{ flexGrow: 1}} padding={0} margin={1}>
-                Akhil Kotamraju, CHristina Borao, James Galbraith, Janak Balar & Weu Luo.
+                Akhil Kotamraju, Christina Borao, James Galbraith, Janak Balar & Wei Luo.
             </Typography>
 
             <Typography
