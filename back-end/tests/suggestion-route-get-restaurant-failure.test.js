@@ -43,6 +43,7 @@ describe("Restaurant routes", function() {
     it("failed to get a restaurant from suggestion and returns a 400 error", async () => {
       sinon.restore();
       sinon.stub(Restaurant, "findById").resolves(null);
+      const url = "/restaurant/:cityId";
       const response = await chai.request(app).get(url); 
       expect(response.statusCode).to.equal(400);
       expect(response.body).to.have.property("error");
