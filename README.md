@@ -72,15 +72,14 @@ PRIOR TO MAKING ANY PUSH REQUESTS: make sure to enter the command 'git pull' int
 
 ### The front-end will run on port 3000, while the server will run on port 3002.
 After starting up the application...
-    - If you would like to access the application... [press here](http://localhost:3000/) 
-    - If you would like to access the back-end data collected from forms within the application... [press here](http://localhost:3002/restaurant/test)
+- If you would like to access the application... [press here](http://localhost:3000/) 
+- If you would like to access the back-end data collected from forms within the application... [press here](http://localhost:3002/restaurant/test)
 
 ### To view tests status and code coverage:
 1. Open a new terminal
 2. In terminal, cd back-end
 3. In terminal, enter 'npm test'
-4. Allow time to run and view resultsgit fetch origin
-
+4. Allow time to run and view results
 
 
 ## Additional Information
