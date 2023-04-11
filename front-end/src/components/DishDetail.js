@@ -126,12 +126,12 @@ export function DishDetail() {
     >
       <Typography variant="h3">{dish.name}</Typography>
       <Box sx={{m:2}} /> 
-      <Typography variant="h6">Restaurant: {restaurantName}</Typography>
+      <Typography style={{ fontFamily: 'Roboto'}} variant="h6">Restaurant: {restaurantName}</Typography>
 
       <Box sx={{m:1.5}} /> 
 
       {/* images */}
-      <Typography variant="h4">How it Looks</Typography>
+      <Typography style={{ fontFamily: 'Roboto'}} color={'#31525B'} variant="h4">How it Looks</Typography>
       <Box sx={{m:0.5}} /> 
       <ImageList 
         sx={{ 
@@ -157,7 +157,7 @@ export function DishDetail() {
       </ImageList>
 
       <Box sx={{m:3}} /> 
-      <Typography variant="h4">Reviews</Typography>
+      <Typography style={{ fontFamily: 'Roboto'}} color={'#31525B'} variant="h4">Reviews</Typography>
       <Button
         variant="contained"
         size="small"
@@ -168,13 +168,13 @@ export function DishDetail() {
         Add a review
       </Button>
 
-      <p>Rating: {getRatingStars(rating)}</p>
-      <p>Review: {review}</p>
+      <p style={{ fontFamily: 'Roboto'}}>Rating: {getRatingStars(rating)}</p>
+      <p style={{ fontFamily: 'Roboto'}}>Review: {review}</p>
 
-      <p>Rating: {getRatingStars(rating2)}</p>
-      <p>Review: {review2}</p>
-      <p>Rating: {getRatingStars(rating3)}</p>
-      <p>Review: {review3}</p>
+      <p style={{ fontFamily: 'Roboto'}}>Rating: {getRatingStars(rating2)}</p>
+      <p style={{ fontFamily: 'Roboto'}}>Review: {review2}</p>
+      <p style={{ fontFamily: 'Roboto'}}>Rating: {getRatingStars(rating3)}</p>
+      <p style={{ fontFamily: 'Roboto'}}>Review: {review3}</p>
       
       {/* {dish.reviews.map( (review) => {
         return (
