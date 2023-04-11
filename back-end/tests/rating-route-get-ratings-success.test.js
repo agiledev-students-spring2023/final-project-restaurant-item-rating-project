@@ -39,13 +39,14 @@ describe("Rating routes", function() {
         .post(url)
         .send(mockReview);
       expect(response.statusCode).to.equal(200);
-      const rev = response.body.review;
-      expect(rev._id).to.exist;
-      expect(rev.rating).to.equal(mockReview.rating);
-      expect(rev.review).to.equal(mockReview.review);
-      // expect(response.body.averageRating).to.exist;
+      const responseObj = response.body;
+      expect(responseObj.review).to.exist;
+      expect(responseObj.averageRating).to.exist;
+      expect(responseObj.review.rating).to.equal(mockReview.rating);
+      expect(responseObj.review.review).to.equal(mockReview.review);
     });
   });
+  
   
   
   describe("get", function() {
