@@ -91,7 +91,21 @@ export function DishReview() {
  //   });
   // };
 
+  useEffect( () => {
+    fetch(`${serverAddress}/restaurant/${params.restaurantID}/dish/${params.dishID}`)
+    .then((response) => response.json())
+    .then((data) => {
 
+      setRestaurantName(data.name);
+      console.log(data);
+      // setLocation(data.location);
+      // setDish(data.dishes);
+    })
+    .catch( (err) => {
+      console.error(err);
+      alert("An error has occurred when finding that restaurant");
+    })
+  }, [])
 
 
  const handleSubmit = event => {
