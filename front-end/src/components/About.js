@@ -1,14 +1,15 @@
 import { Box, Typography } from "@mui/material";
 
+
   export function About() {
     return (
 
-        <Box>
-            <Typography variant="h5" component="div" sx={{ flexGrow: 1, fontWeight: 'bold'}} padding={0} margin={1}>
+        <Box bgcolor={'#FFFFFF'}> 
+            <Typography style={{ fontFamily: 'Roboto'}} color={'#31525B'} variant="h5" component="div" sx={{ flexGrow: 1, fontWeight: 'bold'}} padding={0} margin={1}>
                 Our Purpose:
             </Typography>
 
-            <Typography
+            <Typography style={{ fontFamily: 'Roboto'}}
             variant="body1" component="div" sx={{ flexGrow: 1}} padding={0} margin={1}>
                 Dish Dealer allows users to rate individual items at restaurants.
                 There are two current problem with review systems like Google Reviews 
@@ -23,22 +24,22 @@ import { Box, Typography } from "@mui/material";
                 Our target market is foodies and those with allergies.
             </Typography>
 
-            <Typography
+            <Typography style={{ fontFamily: 'Roboto'}} color={'#31525B'}
             variant="h5" component="div" sx={{ flexGrow: 1, fontWeight: 'bold'}} padding={0} margin={1}>
                 Who we are:
             </Typography>
 
-            <Typography
+            <Typography style={{ fontFamily: 'Roboto'}}
             variant="body1" component="div" sx={{ flexGrow: 1}} padding={0} margin={1}>
                 Akhil Kotamraju, Christina Borao, James Galbraith, Janak Balar & Wei Luo.
             </Typography>
 
-            <Typography
+            <Typography style={{ fontFamily: 'Roboto'}} color={'#31525B'}
             variant="h5" component="div" sx={{ flexGrow: 1, fontWeight: 'bold'}} padding={0} margin={1}>
                 Terms of Service:
             </Typography>
 
-            <Typography
+            <Typography style={{ fontFamily: 'Roboto'}} 
             variant="body1" component="div" sx={{ flexGrow: 1}} padding={0} margin={1}>
                 Contrary to popular belief, Lorem Ipsum is not simply random text. 
                 It has roots in a piece of classical Latin literature from 45 BC, 

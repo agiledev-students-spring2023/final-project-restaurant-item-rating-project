@@ -74,6 +74,7 @@ export function Search() {
         { !hasSearched ? (
           <Typography
             variant='body'
+            style={{ fontFamily: 'Roboto'}}
           >
             Please enter a search to see results!
           </Typography>

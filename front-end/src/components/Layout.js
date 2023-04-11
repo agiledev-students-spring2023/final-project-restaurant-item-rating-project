@@ -7,6 +7,7 @@ import { BottomNavigation, BottomNavigationAction, Box, Paper, Typography } from
 import IconButton from '@mui/material/IconButton';
 import React, { useEffect, useState } from 'react';
 import { Outlet, useNavigate } from 'react-router-dom';
+import Logo from './Dish_Dealer_Logo.png';
 
 import { useLocation } from 'react-router-dom';
 
@@ -45,12 +46,14 @@ export function Layout() {
 
   return (
     <Box>
-      <Typography
+      <Typography bgcolor={'#FAA101'}
         variant={isMobile ? "h6" : "h2" } 
         textAlign="center"
         >
-        Dish Dealer
+
+        <img src = {require('./Dish_Dealer_Logo.png')} width={350} height={200} alt = "Dish Dealer Logo" />
       </Typography>
+
       {/* back button */}
       {/* check if "home" */}
       {
@@ -82,20 +85,21 @@ export function Layout() {
         }}
         elevation={3}
       >
-        <BottomNavigation
+        <BottomNavigation style={{ backgroundColor: '#B3DEE5' }}
           showLabels
           value={value}
           onChange={(event, newValue) => {
             console.log(newValue);
             setValue(newValue);
           }}
+          fill={'#B3DEE5'}
         >
           <BottomNavigationAction 
             label="Home" 
             icon={<Home />}
             onClick={home}
           />
-          <BottomNavigationAction 
+          <BottomNavigationAction
             label="About" 
             icon={<FavoriteIcon />}
             onClick={about}
