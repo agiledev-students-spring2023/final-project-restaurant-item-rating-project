@@ -1,7 +1,77 @@
 const express = require('express');
 // this router is used for the paths that match "/restaurant/:restaurantId/dish"
-const dishRouter = express.Router();
 
+// get restaurant model
+const Restaurant = require("../db");
+
+const dishRouter = express.Router({ mergeParams: true });
+
+//NEW STUFF!!:
+// Define the GET endpoint to get restaurant
+dishRouter.get('/:id', async (req, res) => { 
+  const restaurantId = req.params.restaurantId; // passed down from parent
+  const dishId = req.params.id;
+
+  let thisRestaurant;
+  let dish;
+  try {
+    thisRestaurant = await Restaurant.findById(restaurantId).exec();
+    
+    if (!thisRestaurant) {
+      // error 
+      res.statusCode = 404;
+      res.json({
+        error: "Restaurant not found",
+      });
+    }
+    dish = thisRestaurant.dishes.id(dishId);
+
+    if (!dish) {
+      res.statusCode = 404;
+      res.json({
+        error: 'Dish not found'
+      });
+      return;
+    }
+
+  }
+  catch (err) {
+    console.log(err);
+  }
+
+  // Return the restaurant
+  res.json(dish);
+});
+
+// Define the POST endpoint to create a a dish for a restaurant
+dishRouter.post('/', async (req, res) => {  //Is :dishId right here?
+  // Here you can create the restaurant in the database based on the data in the request body
+  // For example:
+  //slet newRest;
+  try {
+    // console.log("req.body", req.body);
+    //newRest = await Restaurant.create(req.body);
+    const restaurant = await Restaurant.findById(restaurantId);
+
+    await newRest.validate();
+    await newRest.save();
+  } catch (err) {
+    console.log(err);
+    res.statusCode = 500;
+    res.json({
+      error: "there was an error creating a new restaurant"
+    })
+  }
+  // Return a success response
+  res.statusCode = 200;
+  res.json({
+    restaurant: newRest,
+    message: "success"
+  });
+});
+//END OF NEW STUFF
+
+/*
 // handler functions for routes
 function findDishById(id) {
   return ({
@@ -54,5 +124,6 @@ dishRouter.delete('/:dishId', (req, res) => {
   deleteDish(id);
   res.sendStatus(204);
 });
+*/
 
 module.exports = dishRouter;
