@@ -116,7 +116,7 @@ export function DishDetail() {
   //     fetching reviews
 
   return (
-    <Box
+    <Box 
       sx={{
         width: "90%", 
         height: "auto",

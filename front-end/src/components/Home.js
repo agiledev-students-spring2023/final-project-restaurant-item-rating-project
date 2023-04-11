@@ -100,19 +100,23 @@ export function Home() {
 
 
       <Typography 
-        variant="h4" 
+        variant="h5" 
         component="div" 
+        color={'#31525B'}
+        align="center"
+        style={{ fontFamily: 'Roboto'}}
         // sx={{ flexGrow: 1}}
         >
-        Home
+        Welcome to Dish Dealer!
       </Typography>    
       <Box height={"2em"} />     
       <Typography 
+        style={{ fontFamily: 'Roboto'}}
         variant="h6" 
         component="div" 
         // sx={{ flexGrow: 1}}
         >
-        Suggested Restaurants
+        Suggested Restaurants:
       </Typography>   
       <Box
         sx={{ 

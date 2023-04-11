@@ -40,10 +40,10 @@ export function RestaurantDetail(){
   return (
     <Box sx={{display: 'flex', flexDirection: 'column', alignItems: 'center',paddingBottom: '60px'}}>
 
-      <Typography variant="h3" gutterBottom>
+      <Typography style={{ fontFamily: 'Roboto'}} color={'#31525B'} variant="h3" gutterBottom>
         {restaurantName}
       </Typography>
-      <Typography variant="h6" gutterBottom>
+      <Typography style={{ fontFamily: 'Roboto'}} variant="h6" gutterBottom>
         City: {location}
       </Typography>
 
@@ -137,7 +137,7 @@ export function RestaurantDetail(){
   </div> */}
 
   <Box height="2rem" />
-    <Typography variant="h4" gutterBottom>
+    <Typography style={{ fontFamily: 'Roboto'}} color={'#31525B'} variant="h4" gutterBottom>
         Full Menu
     </Typography>
     {dishes.map( (dish) => {
@@ -157,7 +157,7 @@ export function RestaurantDetail(){
           alt="Delicious food" 
           style={{maxWidth: '100%', height: 'auto'}} 
         />
-        <Typography variant="h7" gutterBottom >
+        <Typography style={{ fontFamily: 'Roboto'}} variant="h7" gutterBottom >
           {dish.name}
         </Typography>
         {

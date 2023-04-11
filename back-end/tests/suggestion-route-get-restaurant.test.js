@@ -5,7 +5,7 @@ const sinon = require("sinon");
 const chaiHttp = require('chai-http');
 const { faker } = require("@faker-js/faker");
 const app = require("../app");
-const Restaurant = require("../db");
+const Restaurant = require("./../db");
 
 // to mock
 const mongoose = require('mongoose');
@@ -16,15 +16,19 @@ chai.use(chaiHttp);
 // idk what this is
 const expect = chai.expect;
 
-describe("Restaurant routes", function() {
+describe("Restaurant Suggestion routes", function() {
   // mock values
-  const mockRestaurantObject = {
+function MakeMockRestaurant()  {
+  return{
     id: faker.random.alphaNumeric(10),
     name:faker.lorem.sentence(10),
     dishes: [],
     validate: sinon.stub().resolves(1),
     save: sinon.stub().resolves(1),
   };
+};
+
+const MockRestaurant = Array.from({length:10}, MakeMockRestaurant);
 
   // mock mongoose
   this.beforeAll( () => {
@@ -32,32 +36,31 @@ describe("Restaurant routes", function() {
     // sinon.stub(mongoose, "model").returns({
     //   create: sinon.stub().resolves(mockRestaurantObject),
     // });
-    sinon.stub(Restaurant, "findById").resolves(mockRestaurantObject);
+    sinon.stub(Restaurant, "find").resolves(MockRestaurant);
   });
 
   this.afterAll(() =>{
-    sinon.restore;
+    sinon.restore();
   })
 
   describe("GET", function() {
-    it("get a restaurant from suggestion", async () => {
-      const url = "/restaurant/:cityId";
+    it("get restaurants from suggestion", async () => {
+      const url = "/suggestion/restaurant";
       const response = await chai.request(app).get(url); 
+      const suggestion = response.body;
+      expect(suggestion.length).to.equal(MockRestaurant.length);
       expect(response.statusCode).to.equal(200);
-      const res = response.body.suggestion;
-      console.log(response.body.name);
-      console.log(response.body.dishes);
-      expect(res.id).to.equal(mockRestaurantObject.id);
-      expect(res.name).to.equal(mockRestaurantObject.name);
-      expect(res.dishes).to.have.length(0);
+      expect(suggestion.id).to.equal(MockRestaurant.id);
+      expect(suggestion.name).to.equal(MockRestaurant.name);
+      expect(suggestion.dishes).to.equal(MockRestaurant.dishes);
     });
   });
   
   describe("GET", function() {
     it("return 404 if suggestion restaurant not found", async () => {
       sinon.restore();
-      sinon.stub(Restaurant, "findById").resolves(null);
-      const url = "/restaurant/123";
+      sinon.stub(Restaurant, "find").resolves(null);
+      const url = "/suggestion/restaurant/123";
       const response = await chai.request(app).get(url);
 
       expect(response.statusCode).to.equal(404);
