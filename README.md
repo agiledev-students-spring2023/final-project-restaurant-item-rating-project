@@ -69,6 +69,10 @@ PRIOR TO MAKING ANY PUSH REQUESTS: make sure to enter the command 'git pull' int
 4. Open a new terminal
 5. In terminal (2), cd back-end
 6. In terminal (2), enter 'nodemon'
+    1. If an error is displayed after entering 'nodemon' in terminal (2)...
+    2. In terminal (2), enter 'sudo npm install -g nodemon'
+    3. If prompted in terminal (2), enter computer password
+    4. In terminal (2), enter 'nodemon'
 
 ### The front-end will run on port 3000, while the server will run on port 3002.
 After starting up the application...
