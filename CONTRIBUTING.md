@@ -35,7 +35,7 @@ Sprints will be 2 weeks in duration.
 Teammates will complete the tasks they are given at the beginning of each sprint.
 
 1. Pull recent changes
-	git pull origin master
+	git pull 
 
 2. create branch. choose a branch name for what feature you’re doing
 	git checkout -b <branch-name>
