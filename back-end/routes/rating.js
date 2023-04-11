@@ -3,7 +3,7 @@ const express = require('express');
 
 const Rating = require("./../db");
 
-const ratingRouter = express.Router();
+const ratingRouter = express.Router({ mergeParams: true });
 
 const cors = require('cors');
 
@@ -72,7 +72,7 @@ ratingRouter.post('/', async (req, res) => {
   // For example:
   let newRev;
   try {
-    console.log("req.body", req.body);
+    // console.log("req.body", req.body);
     newRev = await Rating.create(req.body);
 
     await newRev.validate();
