@@ -66,32 +66,172 @@ function deleteReview(dishId, reviewId) {
   return null;
 }
 
+// ratingRouter.post('/', async (req, res) => {
+//   let newRev;
+//   try {
+//     // create a new rating in the database based on the data in the request body
+//     newRev = await Rating.create(req.body);
+ 
+ 
+//     // calculate the average of the ratings array
+//     const ratingSum = req.body.rating.reduce((acc, curr) => acc + curr, 0);
+//     const ratingAvg = ratingSum / req.body.rating.length;
+//     const ratingAvgRounded = ratingAvg.toFixed(2);
+ 
+ 
+//     // add the average rating to the response object
+//     const responseObj = {
+//       review: newRev,
+//       message: "success",
+//       averageRating: ratingAvgRounded
+//     };
+   
+ 
+ 
+//     // return a success response
+//     res.status(200).json(responseObj);
+//   } catch (err) {
+//     console.log(err);
+//     res.status(500).json({
+//       error: "there was an error creating a new review"
+//     });
+//     return;
+//   }
+//  });
+
+// ratingRouter.post('/', async (req, res) => {
+//   let newRev;
+//   try {
+//     // create a new rating in the database based on the data in the request body
+//     newRev = await Rating.create(req.body);
+
+//     // calculate the average of the ratings array, or set to 0 if the array is empty
+//     const ratingSum = req.body.rating ? req.body.rating.reduce((acc, curr) => acc + curr, 0) : 0;
+//     const ratingAvg = req.body.rating && req.body.rating.length ? ratingSum / req.body.rating.length : 0;
+//     const ratingAvgRounded = ratingAvg.toFixed(2);
+
+//     // add the average rating to the response object
+//     const responseObj = {
+//       review: newRev,
+//       averageRating: ratingAvgRounded
+//     };
+
+//     // return a success response
+//     res.status(200).json(responseObj);
+//   } catch (err) {
+//     console.log(err);
+//     res.status(500).json({
+//       error: "there was an error creating a new review"
+//     });
+//     return;
+//   }
+// });
+
 
 ratingRouter.post('/', async (req, res) => {
-  // Here you can create the restaurant in the database based on the data in the request body
-  // For example:
   let newRev;
   try {
-    // console.log("req.body", req.body);
+    // create a new rating in the database based on the data in the request body
+
+    const { restaurantId, dishId } = req.params;
+    const ratingData = { ...req.body, dishId }; 
     newRev = await Rating.create(req.body);
 
-    await newRev.validate();
-    await newRev.save();
+    
+
+    // calculate the average of the ratings array, or set to 0 if the array is empty
+    const ratingSum = req.body.rating ? req.body.rating.reduce((acc, curr) => acc + curr, 0) : 0;
+    const ratingAvg = req.body.rating && req.body.rating.length ? ratingSum / req.body.rating.length : 0;
+    const ratingAvgRounded = ratingAvg.toFixed(2);
+
+
+    // add the average rating to the response object
+    const responseObj = {
+      review: newRev,
+      averageRating: ratingAvgRounded
+    };
+
+    console.log(responseObj.review);
+    // return a success response
+    res.status(200).json(responseObj);
   } catch (err) {
     console.log(err);
-    res.statusCode = 500;
-    res.json({
+    res.status(500).json({
       error: "there was an error creating a new review"
     });
     return;
   }
-  // Return a success response
-  res.statusCode = 200;
-  res.json({
-    review: newRev,
-    message: "success"
-  });
 });
+
+
+
+
+
+// ratingRouter.post('/', async (req, res) => {
+//  let newRev;
+//  try {
+//    // create a new rating in the database based on the data in the request body
+//    newRev = await Rating.create(req.body);
+
+
+//    // calculate the average of the ratings array
+//    const ratingSum = req.body.rating.reduce((acc, curr) => acc + curr, 0);
+//    const ratingAvg = ratingSum / req.body.rating.length;
+//    const ratingAvgRounded = ratingAvg.toFixed(2);
+
+
+//    // add the average rating to the response object
+//    const responseObj = {
+//      review: newRev,
+//      message: "success",
+//      averageRating: ratingAvgRounded
+//    };
+  
+
+
+//    // return a success response
+//    res.status(200).json(responseObj);
+//  } catch (err) {
+//    console.log(err);
+//    res.status(500).json({
+//      error: "there was an error creating a new review"
+//    });
+//    return;
+//  }
+//  res.statusCode = 200;
+//  res.json({
+//       review: newRev,
+//       message: "success"
+//     });
+// });
+
+
+// ratingRouter.post('/', async (req, res) => {
+//   // Here you can create the restaurant in the database based on the data in the request body
+//   // For example:
+//   let newRev;
+//   try {
+//     // console.log("req.body", req.body);
+//     newRev = await Rating.create(req.body);
+
+//     await newRev.validate();
+//     await newRev.save();
+//   } catch (err) {
+//     console.log(err);
+//     res.statusCode = 500;
+//     res.json({
+//       error: "there was an error creating a new review"
+//     });
+//     return;
+//   }
+//   // Return a success response
+//   res.statusCode = 200;
+//   res.json({
+//     review: newRev,
+//     message: "success"
+//   });
+// });
+
 
 
 
