@@ -1,12 +1,12 @@
 import { Box, Button, ImageList, ImageListItem, Typography } from "@mui/material";
 import Rating from '@mui/material/Rating';
 import { useState, useEffect } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate,useParams } from "react-router-dom";
 
 const serverAddress = "http://localhost:3002"
 
 export function DishDetail() {
-
+  const params = useParams();
   // to change pages
   const navigate = useNavigate();
 
@@ -60,7 +60,7 @@ export function DishDetail() {
 
   useEffect(() => {
     // Make a GET request to fetch the initial data
-    fetch(`${serverAddress}/restaurant/dish/{dishId}/review`)
+    fetch(`${serverAddress}/restaurant/${params.restaurantID}/dish/${params.dishID}/review`)
       .then(response => response.json())
       .then(data => {
         console.log('Success:', data);
@@ -162,7 +162,7 @@ export function DishDetail() {
         variant="contained"
         size="small"
         onClick={() => {
-          navigate("/review", { state: { dish } });
+          navigate(`/restaurant/${params.restaurantID}/dish/${params.dishID}/rating`, { state: { dish } });
         }}
       >
         Add a review
