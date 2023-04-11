@@ -2,33 +2,29 @@ const express = require('express');
 // this router is used for the paths that match "/restaurant/:restaurantId/dish"
 
 // get restaurant model
-const Restaurant = require("./../db");
+const Restaurant = require("../db");
 
-const dishRouter = express.Router(); //const dishRouter = express.Router({ mergeParams: true });
+const dishRouter = express.Router({ mergeParams: true });
 
 //NEW STUFF!!:
 // Define the GET endpoint to get restaurant
-dishRouter.get('/:id', async (req, res) => {  //Change :id to :dishId?
-  // res id, given from URL
-  const restaurantId = req.params.restaurantId; // extract the restaurant ID from the URL parameter
+dishRouter.get('/:id', async (req, res) => { 
+  const restaurantId = req.params.restaurantId; // passed down from parent
   const dishId = req.params.id;
 
-  console.log("restaurantId: ", restaurantId);
-  console.log("dishId: ", dishId)
-
-  let restaurant;
+  let thisRestaurant;
+  let dish;
   try {
-    restaurant = await Restaurant.findById(restaurantId).exec();
-
-    if (!restaurant) {
+    thisRestaurant = await Restaurant.findById(restaurantId).exec();
+    
+    if (!thisRestaurant) {
       // error 
       res.statusCode = 404;
       res.json({
         error: "Restaurant not found",
       });
     }
-
-    dish = await restaurant.dishes.id(dishId);
+    dish = thisRestaurant.dishes.id(dishId);
 
     if (!dish) {
       res.statusCode = 404;
@@ -43,7 +39,6 @@ dishRouter.get('/:id', async (req, res) => {  //Change :id to :dishId?
     console.log(err);
   }
 
-
   // Return the restaurant
   res.json(dish);
 });
@@ -54,7 +49,7 @@ dishRouter.post('/', async (req, res) => {  //Is :dishId right here?
   // For example:
   //slet newRest;
   try {
-    console.log("req.body", req.body);
+    // console.log("req.body", req.body);
     //newRest = await Restaurant.create(req.body);
     const restaurant = await Restaurant.findById(restaurantId);
 
