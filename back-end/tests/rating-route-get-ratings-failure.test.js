@@ -6,6 +6,7 @@ const chaiHttp = require('chai-http');
 const { faker } = require("@faker-js/faker");
 const app = require("../app");
 const Rating = require("./../db");
+const Helpers = require("./mock-helpers");
 
 // middleware
 chai.use(chaiHttp);
@@ -14,13 +15,7 @@ const expect = chai.expect;
 
 describe("Rating failure routes", function() {
   // mock values
-  const mockReview = {
-    id: faker.random.alphaNumeric(10),
-    rating: faker.datatype.number({min: 1, max: 5}),
-    review: faker.lorem.sentence(),
-    validate: sinon.stub().resolves(1),
-    save: sinon.stub().resolves(1),
-  };
+    const mockReview = Helpers.makeReview();
 
   // mock mongoose
   beforeEach(() => {

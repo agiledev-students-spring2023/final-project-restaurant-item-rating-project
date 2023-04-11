@@ -7,6 +7,7 @@ const chaiHttp = require('chai-http');
 const { faker } = require("@faker-js/faker");
 const app = require("../app");
 const Rating = require("./../db");
+const Helpers = require("./mock-helpers");
 
 // to mock
 const mongoose = require('mongoose');
@@ -19,13 +20,7 @@ const expect = chai.expect;
 
 describe("Rating routes", function() {
   // mock values
-  const mockReview = {
-    id: faker.random.alphaNumeric(10),
-    rating: faker.datatype.number({min: 1, max: 5}),
-    review: faker.lorem.sentence(),
-    validate: sinon.stub().resolves(1),
-    save: sinon.stub().resolves(1),
-  };
+  const mockReview = Helpers.makeReview();
 
   // mock mongoose
   beforeEach(() => {
@@ -40,15 +35,18 @@ describe("Rating routes", function() {
   describe("create", function() {
     it("add a review", async () => {
       const url = "/restaurant/:restaurantId/dish/:dishId/review";
-      const response = await chai.request(app).post(url); 
+      const response = await chai.request(app)
+        .post(url)
+        .send(mockReview);
       expect(response.statusCode).to.equal(200);
-      console.log(response.body.review);
       const rev = response.body.review;
-      expect(rev.id).to.equal(mockReview.id);
+      expect(rev._id).to.exist;
       expect(rev.rating).to.equal(mockReview.rating);
       expect(rev.review).to.equal(mockReview.review);
+      // expect(response.body.averageRating).to.exist;
     });
   });
+  
   
   describe("get", function() {
     it("return 404 if review not found", async () => {
