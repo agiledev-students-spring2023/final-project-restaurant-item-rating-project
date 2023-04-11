@@ -187,11 +187,11 @@ export function DishReview() {
    >
        <Box sx={{m:4}} />
        <Box sx={{display: "flex",flexDirection: "column", justifyContent: "center", alignItems: "center"}}>
-         <Typography variant="h4"> Leave a Review</Typography>
+         <Typography style={{ fontFamily: 'Roboto'}} color={'#31525B'} variant="h4"> Leave a Review</Typography>
          <Box sx={{m:2}} />
-         <Typography variant="h6">Restaurant: {restaurantName}</Typography>
-         <Typography variant="h6">Dish: {dishName2.name}</Typography>
-         <Typography variant="h6">Average Rating: {averageRating}</Typography>
+         <Typography style={{ fontFamily: 'Roboto'}} variant="h6">Restaurant: {restaurantName}</Typography>
+         <Typography style={{ fontFamily: 'Roboto'}} variant="h6">Dish: {dishName2.name}</Typography>
+         <Typography style={{ fontFamily: 'Roboto'}} variant="h6">Average Rating: {averageRating}</Typography>
          <Box sx={{m:1}} />
          <Box>
            {renderStars(averageRating)}
@@ -204,7 +204,7 @@ export function DishReview() {
          <form onSubmit={handleSubmit} style={{...centeringStyles, }}>
            <Box sx={centeringStyles}>
              <Box sx={{m:2}} />
-             <Typography variant="h5"> Your Review</Typography>
+             <Typography style={{ fontFamily: 'Roboto'}} color={'#31525B'} variant="h5"> Your Review</Typography>
              <Box sx={{m:1}} />
              <TextField label = "Review" value = {review} onChange = {handleReview} multiline/>
              <Box sx={{m:2}} />
