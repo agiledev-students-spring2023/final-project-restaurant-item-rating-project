@@ -15,7 +15,7 @@ Sprints will be 2 weeks in duration.
 ## Daily Standups:
 - Daily standups will occur on Sundays (virtual) at 11 am, Wednesdays (in-person) at 5:30 pm, and Friday (in-person) at 1 pm.
 
-- Saturday meetings will be held via zoom, and Wednesday meetings will occur at Bobst. Attendance from all team members is required. Absences are allowed as long as they can communicate 24 hours prior to the meeting.
+- Sunday meetings will be held via zoom, and Wednesday/Friday meetings will occur at Bobst. Attendance from all team members is required. Absences are allowed as long as they can communicate 24 hours prior to the meeting.
 
 - Each teammate will present their progress. They will present only their progress, not the progress of any other teammate. 
 
