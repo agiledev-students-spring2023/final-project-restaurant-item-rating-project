@@ -74,7 +74,7 @@ export function DishReview() {
  };
 
  function calcAvgReview() {
-  if (!("reviews" in dish)) {return undefined};
+  if (!("reviews" in dish) || dish.reviews.length === 0) {return undefined};
   const average = array => array.reduce((a, b) => a + b) / array.length;
   return average(dish.reviews.map(review => review.value));
  }
