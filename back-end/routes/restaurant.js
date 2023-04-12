@@ -9,57 +9,55 @@ const MockHelpers = require("../tests/mock-helpers")
 // this router is used for paths matching "/restaurant"
 const restaurantRouter = express.Router();
 
-// test route
-restaurantRouter.get('/test', async (req, res) => {
+// // test route
+// restaurantRouter.get('/test', async (req, res) => {
 
 
 
-  // console.log("hi");
-  // const newRest = await Restaurant.create({
-  //   name:"akhil",
-  //   location: "nyc",
-  //   dishes: [
-  //     {"name":"akhil's pasta"}
-  //   ]
-  // });
-  // await newRest.save();
-  // const allRestaurants = await Restaurant.find({$text: {$search: "akhil"}}).exec();
-  const allRestaurants = await Restaurant.find({});
-  res.json({
-    numberOfResults: allRestaurants.length,
-    restaurants:allRestaurants
-  })
-});
-// test2 route
-restaurantRouter.get('/test2', async (req, res) => {
+//   // console.log("hi");
+//   // const newRest = await Restaurant.create({
+//   //   name:"akhil",
+//   //   location: "nyc",
+//   //   dishes: [
+//   //     {"name":"akhil's pasta"}
+//   //   ]
+//   // });
+//   // await newRest.save();
+//   // const allRestaurants = await Restaurant.find({$text: {$search: "akhil"}}).exec();
+//   const allRestaurants = await Restaurant.find({});
+//   res.json({
+//     numberOfResults: allRestaurants.length,
+//     restaurants:allRestaurants
+//   })
+// });
+// // test2 route
+// restaurantRouter.get('/test2', async (req, res) => {
 
-  // try {
-  //   const myRest = await Restaurant.findById("64333687508b2bfe3d8b5bbe");
-  //   createResponse = myRest.dishes.create({
-  //     name:"pasta"
-  //   });
-  //   await myRest.save();
-  // }
-  // catch (err) {
-  //   console.error(err);
-  // }
-  // res.json({
-  //   thing:myRest,
-  //   saveResp:saveResp,
-  // })
-  const searchResults = await Restaurant.find({$text: {$search: "pasta"}}).exec();
-  res.json({
-    numberOfResults: searchResults.length,
-    searchResults: searchResults
-  })
-});
+//   // try {
+//   //   const myRest = await Restaurant.findById("64333687508b2bfe3d8b5bbe");
+//   //   createResponse = myRest.dishes.create({
+//   //     name:"pasta"
+//   //   });
+//   //   await myRest.save();
+//   // }
+//   // catch (err) {
+//   //   console.error(err);
+//   // }
+//   // res.json({
+//   //   thing:myRest,
+//   //   saveResp:saveResp,
+//   // })
+//   const searchResults = await Restaurant.find({$text: {$search: "pasta"}}).exec();
+//   res.json({
+//     numberOfResults: searchResults.length,
+//     searchResults: searchResults
+//   })
+// });
 
 // Define the GET endpoint to get restaurant
 restaurantRouter.get('/:id', async (req, res) => {
   // res id, given from URL
   const restaurantId = req.params.id; // extract the restaurant ID from the URL parameter
-
-  console.log("restaurantId: ", restaurantId);
 
   let restaurant;
   try {

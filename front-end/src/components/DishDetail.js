@@ -4,6 +4,7 @@ import { useState, useEffect } from "react";
 import { useNavigate,useParams } from "react-router-dom";
 import axios from 'axios'
 import TimeAgo from "react-timeago"
+import { CardMedia } from '@mui/material';
 
 const serverAddress = "http://localhost:3002"
 
@@ -63,17 +64,26 @@ export function DishDetail() {
         cols={2} 
         rowHeight={"auto"}
       >
-        {(!("images" in dish)) ? "" : dish.images.map((item) => (
-          <ImageListItem key={item.id}>
+        {(!("images" in dish)) ? 
+          <ImageListItem>
             <img
-              src={`${item.img}?w=164&h=164&fit=crop&auto=format`}
-              srcSet={`${item.img}?w=164&h=164&fit=crop&auto=format&dpr=2 2x`}
-              alt={item.title}
+              src={"https://picsum.photos/200"}
+              alt="random"
               height="auto"
-              loading="lazy"
             />
           </ImageListItem>
-        ))}
+        : dish.images.map((item) => (
+            <ImageListItem key={item.id}>
+              <img
+                src={`${item.img}?w=164&h=164&fit=crop&auto=format`}
+                srcSet={`${item.img}?w=164&h=164&fit=crop&auto=format&dpr=2 2x`}
+                alt={item.title}
+                height="auto"
+                loading="lazy"
+              />
+            </ImageListItem>
+          ))
+        }
       </ImageList>
 
       <Box sx={{m:3}} /> 

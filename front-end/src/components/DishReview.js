@@ -63,7 +63,7 @@ export function DishReview() {
   axios.post(`${serverAddress}/restaurant/${params.restaurantID}/dish/${params.dishID}/review`, {
     value: rating
   }).then(function (response) {
-  console.log(response)
+  // console.log(response)
   })
   .catch(function (error) {
     console.log(error);

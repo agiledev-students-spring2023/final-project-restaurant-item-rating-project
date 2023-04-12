@@ -1,5 +1,5 @@
 
-import { Box, Button, Typography } from "@mui/material";
+import { Box, Button, Typography, capitalize } from "@mui/material";
 import Rating from '@mui/material/Rating';
 import { useEffect, useState } from "react";
 import { useNavigate, useParams } from 'react-router-dom';
@@ -55,20 +55,24 @@ export function RestaurantDetail(){
       return (
         
         <Box
+        key={dish._id}
         onClick={() => navigate(`/restaurant/${params.restaurantID}/dish/${dish._id}`)}
         sx={{
           width:"60%",
           margin:"auto",
-          textAlign: 'center'
+          textAlign: 'center',
+          display:"flex",
+          flexDirection:"column"
         }}
       >
         <Box height="2rem" />
         <img 
-          src="https://images.ctfassets.net/o19mhvm9a2cm/3TqdEA20hEleGPCZj2JZJl/297b157fdd3ca108c74f17b1bd5fdfce/Website_RB_HP.png" 
+          src={"https://picsum.photos/200"}          
+          // src="https://images.ctfassets.net/o19mhvm9a2cm/3TqdEA20hEleGPCZj2JZJl/297b157fdd3ca108c74f17b1bd5fdfce/Website_RB_HP.png" 
           alt="Delicious food" 
           style={{maxWidth: '100%', height: 'auto'}} 
         />
-        <Typography style={{ fontFamily: 'Roboto'}} variant="h7" gutterBottom >
+        <Typography style={{ fontFamily: 'Roboto'}} variant="h5" gutterBottom textTransform={"capitalize"}>
           {dish.name}
         </Typography>
         {
