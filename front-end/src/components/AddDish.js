@@ -1,33 +1,56 @@
-import { Button, Box, TextField, FormGroup, FormControlLabel, Typography, Container } from "@mui/material";
+import { Box, Button, Container, TextField, Typography } from "@mui/material";
+import axios from 'axios';
 import React, { useEffect, useState } from 'react';
-import { Checkbox } from '@mui/material';
+import { useNavigate, useParams } from "react-router-dom";
 import '../App.css';
 
+
 export function AddDish() {
+  const serverAddress = "http://localhost:3002"
+
+  const navigate = useNavigate();
+  const params = useParams();
 
   // fetched data
-  const [restaurantName, setRestaurantName] = useState('Los Tacos'); // TODO: mock this with mockeroo
+  const [restaurantName, setRestaurantName] = useState(""); 
 
   // form data
   const [dishName, setDishName] = useState('');
-  const [isVegan, setIsVegan] = useState(false);
-  const [isGlutenFree, setIsGlutenFree] = useState(false);
-  const [uploadedImages, setUploadedImages] = useState([]);
+  // const [isVegan, setIsVegan] = useState(false);
+  // const [isGlutenFree, setIsGlutenFree] = useState(false);
 
-  const handleIsVegan = (event) => {
-    setIsVegan(event.target.checked);
-  };
-  const handleGlutenFree = (event) => {
-    setIsGlutenFree(event.target.checked);
-  };
+  // const handleIsVegan = (event) => {
+  //   setIsVegan(event.target.checked);
+  // };
+  // const handleGlutenFree = (event) => {
+  //   setIsGlutenFree(event.target.checked);
+  // };
 
-  const handleSubmit = event => {
-    event.preventDefault();
-    alert('Dish Details submitted')
-  }
+ const handleSubmit = event => {
+  axios.post(`${serverAddress}/restaurant/${params.restaurantID}/dish`, {
+    name: dishName
+  }).then(function (response) {
+  console.log(response)
+  })
+  .catch(function (error) {
+    console.log(error);
+    alert(error);
+  });
+  // redirect to dish 
+  navigate(`/restaurant/${params.restaurantID}`);
+ };
+
 
   useEffect( () => {
-    // TODO: mock fetch data: setRestaurantName 
+    // get restaurant name
+    axios.get(`${serverAddress}/restaurant/${params.restaurantID}`)
+    .then(response => {
+      setRestaurantName(response.data.name);
+    })
+    .catch((error) => {
+      console.error('Error getting restaurant name: ', error);
+      // alert("An error has occurred when finding that restaurant");
+    });
   }, [])
   
   return(
@@ -36,9 +59,9 @@ export function AddDish() {
       <Typography variant="h6">Restaurant: {restaurantName}</Typography>
       <form onSubmit ={handleSubmit}>
         <Box sx={{m:2}} /> 
-        <TextField label = "Dish Name" value = {dishName} onChange = {setDishName}/>
+        <TextField label = "Dish Name" value = {dishName} onChange = {(e) => {setDishName(e.target.value);}}/>
 
-        <FormGroup>
+        {/* <FormGroup>
           <FormControlLabel 
             control={
               <Checkbox 
@@ -59,12 +82,12 @@ export function AddDish() {
             } 
             label="Gluten Free" 
           />
-        </FormGroup>
+        </FormGroup> */}
 
-        <Box sx={{m:2}} /> 
+        {/* <Box sx={{m:2}} />  */}
 
         {/* image input */}
-        <Box>
+        {/* <Box>
           <Typography variant="h6">Add Pictures?</Typography>
 
           <Box sx={{m:1}} /> 
@@ -86,7 +109,7 @@ export function AddDish() {
               }
             )}
           </Box>
-        </Box>
+        </Box> */}
         <Box sx={{m:2}} /> 
         <Button variant="contained" onClick={handleSubmit}>Submit</Button>
       </form>

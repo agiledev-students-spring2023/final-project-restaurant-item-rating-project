@@ -4,13 +4,16 @@ const express = require('express');
 
 // get restaurant model
 const Restaurant = require("./../db");
+const MockHelpers = require("../tests/mock-helpers")
 
 // this router is used for paths matching "/restaurant"
 const restaurantRouter = express.Router();
 
 // test route
 restaurantRouter.get('/test', async (req, res) => {
-  // const deleted = await Restaurant.deleteMany({});
+
+
+
   // console.log("hi");
   // const newRest = await Restaurant.create({
   //   name:"akhil",
