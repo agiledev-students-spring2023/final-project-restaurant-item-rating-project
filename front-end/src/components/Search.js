@@ -9,7 +9,7 @@ import { useNavigate } from 'react-router-dom';
 import IconButton from '@mui/material/IconButton';
 import axios from 'axios';
 // reuse this function
-import { RestaurantMapping } from "./Home"
+import { RestaurantMapping } from "./RestaurantMapping"
 
 const serverAddress = "http://localhost:3002"
 
@@ -85,7 +85,9 @@ export function Search() {
             >
               Please enter a search to see results!
             </Typography>) : 
-              searchResults.map(RestaurantMapping)
+              searchResults.map((searchResult)=>{
+                return RestaurantMapping(searchResult,navigate)
+              })
           )
         }
       </Box>
