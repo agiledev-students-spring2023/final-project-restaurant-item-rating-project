@@ -3,7 +3,7 @@ import Rating from '@mui/material/Rating';
 import { useState, useEffect } from "react";
 import { useNavigate,useParams } from "react-router-dom";
 import axios from 'axios'
-import TimeAgo from "react-timeago"
+/* import TimeAgo from "react-timeago" */
 import { CardMedia } from '@mui/material';
 
 const serverAddress = "http://localhost:3002"
@@ -110,7 +110,7 @@ export function DishDetail() {
           >
             <Box sx={{m:1.5}} /> 
             <Rating name="read-only" value={review.value} readOnly />
-            <TimeAgo date={review.date} />
+            {/* <TimeAgo date={review.date} /> */}
             {/* <Typography> {Math.round((Date.now() - new Date(review.date)) / millisecondsInADay)} days ago </Typography> */}
           </Box>
         );
