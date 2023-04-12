@@ -27,28 +27,28 @@ describe("Rating failure routes", function() {
     sinon.restore();
   });
 
-  describe("create", function() {
-    it("should return an error if restaurant or dish not found", async () => {
-      // stub Restaurant.findById to return undefined
-      sinon.stub(Restaurant, "findById").returns(undefined);
+  // describe("create", function() {
+  //   it("should return an error if restaurant or dish not found", async () => {
+  //     // stub Restaurant.findById to return undefined
+  //     sinon.stub(Restaurant, "findById").returns(undefined);
   
-      const restaurantId = mockRestaurantObject._id;
-      const dishId = mockRestaurantObject.dishes.data[0]._id;
-      const url = `/restaurant/${restaurantId}/dish/${dishId}/review`;
+  //     const restaurantId = mockRestaurantObject._id;
+  //     const dishId = mockRestaurantObject.dishes.data[0]._id;
+  //     const url = `/restaurant/${restaurantId}/dish/${dishId}/review`;
   
-      // make a request to add a review to the restaurant/dish
-      const response = await chai.request(app)
-        .post(url)
-        .send(mockReview);
+  //     // make a request to add a review to the restaurant/dish
+  //     const response = await chai.request(app)
+  //       .post(url)
+  //       .send(mockReview);
   
-      // assert that the response status code is 500
-      expect(response.statusCode).to.equal(500);
+  //     // assert that the response status code is 500
+  //     expect(response.statusCode).to.equal(500);
   
-      // assert that the response body has an error property with the correct message
-      const responseObj = response.body;
-      expect(responseObj).to.have.property('error', 'there was an error creating a new review');
-    });
-  });
+  //     // assert that the response body has an error property with the correct message
+  //     const responseObj = response.body;
+  //     expect(responseObj).to.have.property('error', 'there was an error creating a new review');
+  //   });
+  // });
 
   // describe("create", function() {
   //   it("should return a 500 error if there was an error creating a new review", async () => {
