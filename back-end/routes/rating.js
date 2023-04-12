@@ -137,16 +137,18 @@ ratingRouter.post('/', async (req, res) => {
 
     const newRest = await Restaurant.findById(restaurantId);
 
+    console.log(newRest);
+    console.log(newRest.dishes);
+
     const dish = newRest.dishes.find((dish)=>{
       return ((dish._id.toString()) == dishId);
     });
-    // console.log(dish.reviews);
-    // console.log(newRest.dishes);
+
+
 
     const rev = dish.reviews.push(req.body);
     newRest.save()
     
-
     // return a success response
     res.status(200).json({success:true});
   } catch (err) {
