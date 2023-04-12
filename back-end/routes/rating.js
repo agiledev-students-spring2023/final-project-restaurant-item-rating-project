@@ -1,7 +1,8 @@
 const express = require('express');
 // this router is used for paths matching "/restaurant/:restaurantId/dish/:dishId/review"
 
-const Rating = require("./../db");
+const Restaurant = require("./../db");
+const mongoose = require('mongoose')
 
 const ratingRouter = express.Router({ mergeParams: true });
 
@@ -14,57 +15,57 @@ ratingRouter.use(express.json());
 
 const reviews =[]
 
-function findReviewsByDishId(dishId) {
-  // Filter the reviews array to only include reviews for the specified dish
-  const filteredReviews = reviews.filter(review => review.dishId === dishId);
+// function findReviewsByDishId(dishId) {
+//   // Filter the reviews array to only include reviews for the specified dish
+//   const filteredReviews = reviews.filter(review => review.dishId === dishId);
 
-  // Return an array of objects containing the review and rating values
-  return filteredReviews.map(review => {
-    const ratings = review.ratings;
-    const averageRating = ratings.reduce((acc,cur)=>acc+cur /ratings.length);
+//   // Return an array of objects containing the review and rating values
+//   return filteredReviews.map(review => {
+//     const ratings = review.ratings;
+//     const averageRating = ratings.reduce((acc,cur)=>acc+cur /ratings.length);
     
-    const roundedAverageRating = Number(averageRating.toFixed(2));
-    if (roundedAverageRating > 5) {
-      review.averageRating = 5;
-    } else {
-      review.averageRating = roundedAverageRating;
-    }
-    return {
-      id: review.id,
-      rating: review.ratings[0],
-      review: review.review,
-      dishName: review.dishName,
-      averageRating : review.averageRating
+//     const roundedAverageRating = Number(averageRating.toFixed(2));
+//     if (roundedAverageRating > 5) {
+//       review.averageRating = 5;
+//     } else {
+//       review.averageRating = roundedAverageRating;
+//     }
+//     return {
+//       id: review.id,
+//       rating: review.ratings[0],
+//       review: review.review,
+//       dishName: review.dishName,
+//       averageRating : review.averageRating
   
-    };
-  });
-}
+//     };
+//   });
+// }
 
-function createReview(dishId, review) {
-  review.id = reviews.length + 1;
-  review.dishId = dishId;
-  reviews.push(review);
-  return review;
-}
+// function createReview(dishId, review) {
+//   review.id = reviews.length + 1;
+//   review.dishId = dishId;
+//   reviews.push(review);
+//   return review;
+// }
 
-function updateReview(dishId, reviewId, review) {
-  const index = reviews.findIndex((r) => r.id === reviewId && r.dishId === dishId);
-  if (index !== -1) {
-    reviews[index] = review;
-    review.id = reviewId;
-    review.dishId = dishId;
-    return review;
-  }
-  return null;
-}
+// function updateReview(dishId, reviewId, review) {
+//   const index = reviews.findIndex((r) => r.id === reviewId && r.dishId === dishId);
+//   if (index !== -1) {
+//     reviews[index] = review;
+//     review.id = reviewId;
+//     review.dishId = dishId;
+//     return review;
+//   }
+//   return null;
+// }
 
-function deleteReview(dishId, reviewId) {
-  const index = reviews.findIndex((r) => r.id === reviewId && r.dishId === dishId);
-  if (index !== -1) {
-    return reviews.splice(index, 1)[0];
-  }
-  return null;
-}
+// function deleteReview(dishId, reviewId) {
+//   const index = reviews.findIndex((r) => r.id === reviewId && r.dishId === dishId);
+//   if (index !== -1) {
+//     return reviews.splice(index, 1)[0];
+//   }
+//   return null;
+// }
 
 // ratingRouter.post('/', async (req, res) => {
 //   let newRev;
@@ -129,42 +130,32 @@ function deleteReview(dishId, reviewId) {
 
 
 ratingRouter.post('/', async (req, res) => {
-  let newRev;
   try {
     // create a new rating in the database based on the data in the request body
 
     const { restaurantId, dishId } = req.params;
-    const ratingData = { ...req.body, dishId }; 
-    newRev = await Rating.create(req.body);
 
+    const newRest = await Restaurant.findById(restaurantId);
+
+    const dish = newRest.dishes.find((dish)=>{
+      return ((dish._id.toString()) == dishId);
+    });
+    // console.log(dish.reviews);
+    // console.log(newRest.dishes);
+
+    const rev = dish.reviews.push(req.body);
+    newRest.save()
     
 
-    // calculate the average of the ratings array, or set to 0 if the array is empty
-    const ratingSum = req.body.rating ? req.body.rating.reduce((acc, curr) => acc + curr, 0) : 0;
-    const ratingAvg = req.body.rating && req.body.rating.length ? ratingSum / req.body.rating.length : 0;
-    const ratingAvgRounded = ratingAvg.toFixed(2);
-
-
-    // add the average rating to the response object
-    const responseObj = {
-      review: newRev,
-      averageRating: ratingAvgRounded
-    };
-
-    console.log(responseObj.review);
     // return a success response
-    res.status(200).json(responseObj);
+    res.status(200).json({success:true});
   } catch (err) {
     console.log(err);
     res.status(500).json({
       error: "there was an error creating a new review"
     });
-    return;
   }
 });
-
-
-
 
 
 // ratingRouter.post('/', async (req, res) => {

@@ -2,31 +2,17 @@ import { Box, Button, TextField, Typography } from "@mui/material";
 import React, { useEffect, useState } from 'react';
 import { FaStar, FaStarHalf } from "react-icons/fa";
 import { useLocation, useNavigate, useParams } from "react-router-dom";
-import { Rating } from './Rating';
 import "./stars.css";
 import axios from 'axios'
-
-
-
+import Rating from '@mui/material/Rating';
 
 export function DishReview() {
 
-
  const serverAddress = "http://localhost:3002"
 
-
-
-
  const params = useParams();
- // console.log(params);
-
-
- // restaurantID
-
 
  // to change pages
-
-
  const navigate = useNavigate();
  const location = useLocation();
 
@@ -38,158 +24,60 @@ export function DishReview() {
    display: "inline-block"
  }
 
-
- const [restaurantName, setRestaurantName] = useState('');
- const [dishName, setDish] = useState('');
-
-
- const [averageRating, setAverageRating] = useState(0);
- const [review, setReview] = useState('');
+ const [rating, setRating] = useState(0);
  const [isSubmitted, setIsSubmitted] = useState(false);
- const [rating,setRating] = useState(0);
-  const handleRatingChange = (values) => {
-   setRating(values)
- };
-
-
- const handleReview=(event)=>{
-   setReview(event.target.value)
- };
-
-
- // const handleSubmit = (event) => {
- //   event.preventDefault()
- //   setIsSubmitted(true)
- //   // const sum = ratings.reduce((accumulator, currentValue)=>accumulator + currentValue,0)
- //   // const newAverage = sum / ratings.length
- //   // setAverageRating(parseFloat(newAverage.toFixed(2)))
- //   setReview('')
- //   const data = {
- //     review: review,
- //     ratings: ratings[0],
- //   };
- //   // console.log("data ", data)
-  //   fetch(`http://localhost:3002/restaurant/${params.restaurantID}/dish/${params.dishID}/review`, {
- //   // fetch('http://localhost:3000/restaurant/dish/{dishId}/review', {
- //     method: 'POST',
- //     headers: {
- //       'Content-Type': 'application/json'
- //     },
- //     body: JSON.stringify(data)
- //   })
- //   .then(response => response.json())
- //   .then(data => {
- //     console.log('Success:', data);
- //     const latestRating = data.latestRating;
- //     const dishName = data.dishName;
- //     // setAverageRating(data.review.averageRating);
- //     // setReview(data.review.review);
- //     // console.log(data.dishName)
- //   })
- //   .catch((error) => {
- //     console.error('Error:', error);
- //   });
-  // };
+ 
+ 
+ const [restaurantName, setRestaurantName] = useState('');
+ const [dish, setDish] = useState({});
 
   useEffect( () => {
-    fetch(`${serverAddress}/restaurant/${params.restaurantID}/dish/${params.dishID}`)
-    .then((response) => response.json())
-    .then((data) => {
-
-      setRestaurantName(data.name);
-      console.log(data);
-      // setLocation(data.location);
-      // setDish(data.dishes);
+    // get restaurant name
+    axios.get(`${serverAddress}/restaurant/${params.restaurantID}`)
+    .then(response => {
+      setRestaurantName(response.data.name);
     })
+    .catch((error) => {
+      console.error('Error getting restaurant name: ', error);
+      // alert("An error has occurred when finding that restaurant");
+    });
+    // get dish 
+    axios.get(`${serverAddress}/restaurant/${params.restaurantID}/dish/${params.dishID}`)
+    .then((response) => {setDish(response.data)})
     .catch( (err) => {
       console.error(err);
-      alert("An error has occurred when finding that restaurant");
+      // alert("An error has occurred when finding the dish");
     })
   }, [])
 
-
  const handleSubmit = event => {
-   event.preventDefault();
+  if (
+    (!rating) ||
+    (rating < 1) ||
+    (rating > 5)
+  ) {
+    alert(`Please select a valid rating value. You tried to submit a value of "${rating}", which is not valid.`)
+  }
+  event.preventDefault();
 
-
-   axios.post(`${serverAddress}/restaurant/${params.restaurantID}/dish/${params.dishID}/review`, {
-     review: review,
-     rating: rating
-   }).then(function (response) {
-     console.log(response);
-     const newReview = response.data.review;
-     setAverageRating(response.data.averageRating)
-     alert(`Review submitted`);
-    
-   })
-   .catch(function (error) {
-     console.log(error);
-     alert(error);
-   });
-  
+  axios.post(`${serverAddress}/restaurant/${params.restaurantID}/dish/${params.dishID}/review`, {
+    value: rating
+  }).then(function (response) {
+  console.log(response)
+  })
+  .catch(function (error) {
+    console.log(error);
+    alert(error);
+  });
+  // redirect to dish 
+  navigate(`/restaurant/${params.restaurantID}/dish/${params.dishID}`);
  };
 
-
- // useEffect(() => {
- //   // Make a GET request to fetch the initial data
- //   fetch(`http://localhost:3002/restaurant/${params.restaurantID}/dish/${params.dishID}/review`)
- //   .then(response => response.json())
- //   .then(data => {
- //     const ratings = data.map(review => review.rating); // Extract ratings array
- //     const totalRating = ratings.reduce((acc, curr) => acc + curr, 0); // Calculate total rating
- //     const averageRating = totalRating / ratings.length; // Calculate average rating
- //     const roundedRating = averageRating.toFixed(2); // Round to two decimal points
- //     setAverageRating(roundedRating);
- //     console.log('Average Rating:', roundedRating);
- //   })
- //   .catch((error) => {
- //     console.error('Error:', error);
- //     });
- // }, []);
- 
-
-
-
-
- // const apiUrl = 'http://localhost:3000/restaurant/dish/{dish.id}/review';
-
-
- // TODO: find dish -> get name
- let [dishName2, setDishName]= useState("toDo");
- // useEffect(() => {
- //   fetch(apiUrl)
- //     .then((response) => response.json())
- //     .then((data) => {
- //       // setReviews(data.reviews);
- //       setAverageRating(data.averageRating);
- //       console.log(data.reviews)
- //     });
- // }, []);
-
-
-
-
-
-
-
-
- const renderStars = (rating) => {
-   const starIcons = [];
-   const fullStars = Math.floor(rating);
-   const halfStar = (rating-fullStars)>=0.5
-   // added below to easily control star display because mobile was spilling over display
-   const starWidth = "70";
-   for(let i = 0; i<fullStars; i++){
-     starIcons.push(<FaStar key = {i} className = "star" color = "#ffc107" size = {starWidth}/>)
-   }
-   if(halfStar){
-     starIcons.push(<FaStarHalf key = {starIcons.length} className = "star" color = "#ffc107" size = {starWidth}/>)
-   }
-   for(let i = starIcons.length; i<5; i++){
-     starIcons.push(<FaStar key = {i} className = "star" color = "e4e5e9" size = {starWidth}/>)
-   }
-   return starIcons;
- };
+ function calcAvgReview() {
+  if (!("reviews" in dish)) {return undefined};
+  const average = array => array.reduce((a, b) => a + b) / array.length;
+  return average(dish.reviews.map(review => review.value));
+ }
 
 
  return (
@@ -204,28 +92,33 @@ export function DishReview() {
          <Typography style={{ fontFamily: 'Roboto'}} color={'#31525B'} variant="h4"> Leave a Review</Typography>
          <Box sx={{m:2}} />
          <Typography style={{ fontFamily: 'Roboto'}} variant="h6">Restaurant: {restaurantName}</Typography>
-         <Typography style={{ fontFamily: 'Roboto'}} variant="h6">Dish: {dishName2.name}</Typography>
-         <Typography style={{ fontFamily: 'Roboto'}} variant="h6">Average Rating: {averageRating}</Typography>
+         <Typography style={{ fontFamily: 'Roboto'}} variant="h6">Dish: {dish.name}</Typography>
+         <Typography style={{ fontFamily: 'Roboto'}} variant="h6">Average Rating: {calcAvgReview() ?? 0}</Typography>
          <Box sx={{m:1}} />
          <Box>
-           {renderStars(averageRating)}
+          <Rating readOnly size="large" value={calcAvgReview() ?? 0} />
          </Box>
        </Box>
 
 
        <Box sx={{m:2}} />
        <Box sx={{...centeringStyles, display: "flex"}}>
-         <form onSubmit={handleSubmit} style={{...centeringStyles, }}>
-           <Box sx={centeringStyles}>
+         {/* <form onSubmit={handleSubmit} style={{...centeringStyles, }}> */}
+           <Box sx={{
+            ...centeringStyles,
+            display:"flex",
+            flexDirection: "column"
+          }}>
              <Box sx={{m:2}} />
-             <Typography style={{ fontFamily: 'Roboto'}} color={'#31525B'} variant="h5"> Your Review</Typography>
+             <Typography style={{ fontFamily: 'Roboto'}} color={'#31525B'} variant="h4"> Your Review</Typography>
              <Box sx={{m:1}} />
-             <TextField label = "Review" value = {review} onChange = {handleReview} multiline/>
-             <Box sx={{m:2}} />
-             <Rating onRatingChange = {handleRatingChange} />
+             {/* <TextField label = "Review" value = {review} onChange = {handleReview} multiline/> */}
+             {/* <Box sx={{m:2}} /> */}
+             <Rating size="large" value={rating}  onChange = {(e) => {setRating( parseInt(e.target.value) );}} />
+             <Box sx={{m:1}} />
              <Button variant="contained" onClick={handleSubmit}>Submit</Button>
            </Box>
-         </form>
+         {/* </form> */}
          {isSubmitted && <p>Thank you for your review!</p>}
        </Box>
    </Box>

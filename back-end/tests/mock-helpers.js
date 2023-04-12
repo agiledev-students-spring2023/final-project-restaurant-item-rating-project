@@ -16,16 +16,16 @@ function makeDish() {
   const id = faker.random.alphaNumeric(10);
   return {
       _id: id,
-      name: faker.lorem.word(),
+      name: `${faker.word.adjective()} ${faker.animal.fish()}`,
       reviews: Array.from({length:5}, makeReview),
       validate: sinon.stub().resolves(1),
       save: sinon.stub().resolves(1),
+      image: faker.image.food()
   }
 }
 
 function makeRestaurant() {
   const dishes = Array.from({length:5}, makeDish);
-
   const dishIdMethodStub = sinon.stub();
   const getDish = function (id) {
     return dishes.find( (dish) => {
@@ -34,7 +34,7 @@ function makeRestaurant() {
   }
   return ({
     _id: faker.random.alphaNumeric(10), //Maybe comment this out
-    name: faker.lorem.word(),
+    name: faker.company.name(),
     dishes: {
         data: dishes,
         id: dishIdMethodStub.returns(

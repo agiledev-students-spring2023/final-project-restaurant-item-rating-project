@@ -44,28 +44,26 @@ dishRouter.get('/:id', async (req, res) => {
 });
 
 // Define the POST endpoint to create a a dish for a restaurant
-dishRouter.post('/', async (req, res) => {  //Is :dishId right here?
-  // Here you can create the restaurant in the database based on the data in the request body
-  // For example:
-  //slet newRest;
+dishRouter.post('/', async (req, res) => {  
   try {
-    // console.log("req.body", req.body);
-    //newRest = await Restaurant.create(req.body);
-    const restaurant = await Restaurant.findById(restaurantId);
 
-    await newRest.validate();
-    await newRest.save();
+    const { restaurantId, dishId } = req.params;
+
+    const newRest = await Restaurant.findById(restaurantId);
+
+    const dish = newRest.dishes.push(req.body);
+    newRest.save()
+
   } catch (err) {
     console.log(err);
     res.statusCode = 500;
     res.json({
-      error: "there was an error creating a new restaurant"
+      error: "there was an error creating a new dish"
     })
   }
   // Return a success response
   res.statusCode = 200;
   res.json({
-    restaurant: newRest,
     message: "success"
   });
 });
