@@ -8,13 +8,24 @@ import { DishDetail } from './components/DishDetail';
 import { Search } from './components/Search';
 import { About } from './components/About';
 import { RestaurantDetail } from './components/RestaurantDetail';
+import { Login } from './components/Login';
+import { Register } from './components/Register';
+
 
 function MyRoutes() {
   return (
     <BrowserRouter>
       <Routes>
         <Route path="/" element={<Layout />}>
-          <Route index element={<Home />} /> 
+          <Route index element={<Login />} /> 
+          <Route 
+            path="/login"
+            element={<Login />} 
+          />
+          <Route 
+            path="/register"
+            element={<Register />} 
+          />
           <Route 
             path="restaurant/:restaurantID/dish"
             element={<AddDish />} 
@@ -42,6 +53,10 @@ function MyRoutes() {
           <Route 
             path="/about"
             element={<About />} 
+          />
+          <Route 
+            path="/home"
+            element={<Home />} 
           />
           {/* catch all */}
           <Route 

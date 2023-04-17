@@ -34,7 +34,7 @@ export function Layout() {
 
   const isMobile = width <= 768;
 
-  const home = () => navigate('/');
+  const home = () => navigate('/home');
   const about = () => navigate('/about');
   const search = () => navigate('/search');
 
