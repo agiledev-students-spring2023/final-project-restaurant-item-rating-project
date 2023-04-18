@@ -43,15 +43,34 @@ const ReviewSchema = new Schema({
   },
   date: {
     type: Date,
-    default: Date.now
+    default: Date.now, 
+    required: true
   },
   userID: {
     type: Number,
     //I think we need to change this: once we get the users working on back-end
     required: false
   }
+  
 });
 
+
+
+const Review = mongoose.model('Review', ReviewSchema)
+
+  const goodreview1 = new Review({
+          value:4,
+          date: {type: Date, default: Date.now},
+          userID:123
+        });
+        goodreview1.validateSync(function(error){
+          if(error){
+            console.log(error);
+          }else{
+            counsel.log("Review is valid");
+          }
+  
+    });
 // Define the dish schema
 const DishSchema = new Schema({
   name: {
@@ -67,12 +86,30 @@ const DishSchema = new Schema({
   //   // TODO: change this...just for testing
   //   default: "https://images.ctfassets.net/o19mhvm9a2cm/3TqdEA20hEleGPCZj2JZJl/297b157fdd3ca108c74f17b1bd5fdfce/Website_RB_HP.png"
   // },
-  // averageRating: Number,
+  averageRating: {type: Number, required: true},
   reviews: [ReviewSchema],
 });
-  
+   const Dish = mongoose.model('Dish', DishSchema)
+      const goodDish1 = new Dish({
+        name: 'Tacos1',
+        averageRating : 3.5,
+        reviews: [{ value:4,
+          date: {type: Date, default: Date.now},
+          userID:123}, { value:3,
+            date: {type: Date, default: Date.now},
+            userID:456}],
+      });
+      goodDish1.validateSync(function(error){
+            if(error){
+              console.log(error);
+            }else{
+              counsel.log("Restaurant is valid")
+            }
+    
+      })
 // Define the Restaurant schema
 const RestaurantSchema = new Schema({
+
   name: {
     type: String,
     required: true
@@ -82,7 +119,23 @@ const RestaurantSchema = new Schema({
     required: true
   },
   dishes: [DishSchema],
+
 });
+
+const Restaurant = mongoose.model('Restaurant', RestaurantSchema);
+const goodrestaurant1 = new Restaurant({
+        name: 'Los tacos',
+        location: 'NYC',
+        dishes: [{name: 'tacos1', price: 9.99}, {name: 'tacos2', price: 8.99}],
+      });
+      goodrestaurant1.validateSync(function(error){
+            if(error){
+              console.log(error);
+            }else{
+              counsel.log("Restaurant is valid")
+            };
+    
+      });
 
 RestaurantSchema.index({'$**': 'text'});
 
