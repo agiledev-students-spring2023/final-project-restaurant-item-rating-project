@@ -33,14 +33,31 @@ const { Schema } = mongoose;
 
 // Define the review schema
 const ReviewSchema = new Schema({
-  value: Number,
-  date: {type: Date, default: Date.now},
-  userID: Number,
+  value: {
+    type: Number,
+    required: true,
+    //Need to change min to 1 once we figure out the error. 
+    //Otherwise change DishReview min to 0 -- This seems easier
+    min: 0,
+    max: 5
+  },
+  date: {
+    type: Date,
+    default: Date.now
+  },
+  userID: {
+    type: Number,
+    //I think we need to change this: once we get the users working on back-end
+    required: false
+  }
 });
 
 // Define the dish schema
 const DishSchema = new Schema({
-  name: String,
+  name: {
+    type: String,
+    required: true
+  },
   // TODO: implement this stuff..uploads and method on model to calculate,
   //  then every time the reviews are touched (ex, by "add review"), this method
   //  should be called 
@@ -56,8 +73,14 @@ const DishSchema = new Schema({
   
 // Define the Restaurant schema
 const RestaurantSchema = new Schema({
-  name: String,
-  location: String,
+  name: {
+    type: String,
+    required: true
+  },
+  location: {
+    type: String,
+    required: true
+  },
   dishes: [DishSchema],
 });
 
