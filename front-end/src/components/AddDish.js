@@ -27,6 +27,11 @@ export function AddDish() {
   // };
 
  const handleSubmit = event => {
+
+  if (!dishName) {
+    alert('Please enter a dish name');
+    return;
+  }
   axios.post(`${serverAddress}/restaurant/${params.restaurantID}/dish`, {
     name: dishName
   }).then(function (response) {

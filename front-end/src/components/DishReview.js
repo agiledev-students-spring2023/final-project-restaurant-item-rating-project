@@ -56,7 +56,8 @@ export function DishReview() {
     (rating < 1) ||
     (rating > 5)
   ) {
-    alert(`Please select a valid rating value. You tried to submit a value of "${rating}", which is not valid.`)
+    alert(`Please select a valid rating value. You tried to submit a value of "${rating}", which is not valid.`);
+    return;
   }
   event.preventDefault();
 

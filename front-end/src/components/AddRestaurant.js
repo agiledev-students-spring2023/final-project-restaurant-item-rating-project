@@ -18,6 +18,15 @@ export function AddRestaurant() {
   const handleSubmit = event => {
     event.preventDefault();
 
+    if (!restaurantName) {
+      alert('Please enter a restaurant name');
+      return;
+    }
+    else if (!cityName){
+      alert('Please enter a city');
+      return;
+    }
+
     axios.post(`${serverAddress}/restaurant`, {
       name: restaurantName,
       location: cityName
@@ -28,6 +37,7 @@ export function AddRestaurant() {
     .catch(function (error) {
       console.log(error);
       alert(error);
+      //alert(error.response.data.message);
     });
     
     // navigate('/restaurant');
