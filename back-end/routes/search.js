@@ -1,5 +1,5 @@
 const express = require('express');
-const Restaurant = require("./../db");
+const {Restaurant} = require("./../db");
 // this router is used for paths matching "/search"
 const searchRouter = express.Router();
 

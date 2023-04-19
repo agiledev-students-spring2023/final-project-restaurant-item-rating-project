@@ -3,7 +3,7 @@
 const express = require('express');
 
 // get restaurant model
-const Restaurant = require("./../db");
+const {Restaurant} = require("./../db");
 const MockHelpers = require("../tests/mock-helpers")
 
 // this router is used for paths matching "/restaurant"

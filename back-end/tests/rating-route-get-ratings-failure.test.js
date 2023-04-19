@@ -5,7 +5,7 @@ const sinon = require("sinon");
 const chaiHttp = require('chai-http');
 const { faker } = require("@faker-js/faker");
 const app = require("../app");
-const Restaurant = require("./../db");
+const {Restaurant} = require("./../db");
 const Helpers = require("./mock-helpers");
 
 // middleware

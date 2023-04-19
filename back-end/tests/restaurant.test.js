@@ -7,7 +7,7 @@ const chaiHttp = require('chai-http');
 const { faker } = require("@faker-js/faker");
 // const { server, close } = require('./../server');
 const app = require("../app");
-const Restaurant = require("./../db");
+const {Restaurant} = require("./../db");
 
 // to mock
 const mongoose = require('mongoose');
