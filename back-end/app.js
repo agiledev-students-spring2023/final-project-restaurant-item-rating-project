@@ -19,7 +19,8 @@ const ratingRouter = require('./routes/rating')
 const restaurantRouter = require('./routes/restaurant')
 const suggestionRouter = require('./routes/suggestion')
 const searchRouter = require('./routes/search')
-
+const registerRouter = require('./routes/register');
+const loginRouter = require('./routes/login');
 
 /**
  * Typically, all middlewares would be included before routes
@@ -212,5 +213,6 @@ app.use('/restaurant/:restaurantId/dish', dishRouter); // dish routes
 app.use('/restaurant', restaurantRouter); // restaurant routes
 app.use('/suggestion', suggestionRouter); // suggestion routes
 app.use('/search', searchRouter); // search routes
-
+app.use('/register',registerRouter);
+app.use('/login',loginRouter);
 module.exports = app

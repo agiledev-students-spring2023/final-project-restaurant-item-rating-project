@@ -34,7 +34,7 @@ const { Schema } = mongoose;
 // Define the register schema 
 
 const RegisterSchema = new Schema({
-  username: {
+  email: {
     type: String,
     required: true,
   },
