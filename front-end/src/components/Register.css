@@ -2,6 +2,7 @@
     display: flex;
     justify-content: center;
     font-family: 'Roboto';
+    font-weight: bold;
   }
   
   .register-form__container {
