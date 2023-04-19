@@ -2,9 +2,17 @@
 import { Box, Container, TextField, Typography } from "@mui/material";
 import React, { useState } from 'react';
 import { Redirect, Link } from 'react-router-dom';
+import './Login.css';
 
 
 export function Login() {
+
+  const [inputText, setInputText] = useState('');
+
+  const handleInputChange = (event) => {
+    setInputText(event.target.value);
+  };
+
 
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
@@ -24,48 +32,52 @@ export function Login() {
         }
     };
       
-    const handleForgetPassword = () => {
+/*     const handleForgetPassword = () => {
         // Redirect to register page
         // Replace "/register" with the path of your register page
         window.location.href = '/register';
-    };
+    }; */
       
     if (redirect) {
         return <Link to="/home" />;
     }
 
     return (
-        <div style={{ display: "flex", justifyContent: "center" }}>
-          <form onSubmit={handleLogin}>
-            <div>
-            <h2>Log In</h2>
-              <label htmlFor="email">Email:</label>
-              <input
-                type="email"
-                id="email"
-                value={email}
-                onChange={(event) => setEmail(event.target.value)}
-              />
-            </div>
-            <div>
-              <label htmlFor="password">Password:</label>
-              <input
-                type="password"
-                id="password"
-                value={password}
-                onChange={(event) => setPassword(event.target.value)}
-              />
-            </div>
-            {error && (
-              <div className="error">Invalid authentication, please check your email and password</div>
-            )}
-            <br></br>
-            <Link to="/home">Log In</Link>
-            <br></br>
-            <Link to="/register">Forgot Password</Link>
-          </form>
+      <div className="login-form">
+      <form class="form" onSubmit={handleLogin}>
+        <div className="title">
+          <h3 className="heading">Log In</h3>
         </div>
-      );
-      
+        <div className="input-container">
+          <label className="label" htmlFor="email">Email:</label>
+          <input
+            className="input"
+            type="email"
+            id="email"
+            value={email}
+            onChange={(event) => setEmail(event.target.value)}
+          />
+        </div>
+        <div className="input-container">
+          <label className="label" htmlFor="password">Password:</label>
+          <input
+            className="input"
+            type="password"
+            id="password"
+            value={password}
+            onChange={(event) => setPassword(event.target.value)}
+          />
+        </div>
+        {error && (
+          <div className="error-message">Invalid authentication, please check your email and password</div>
+        )}
+        <br />
+        <a className="button" href="/home">Log In</a>
+        <br />
+        <a className="button" href="/register">Register Page</a>
+      </form>
+    </div>
+    
+  );    
 
 }
