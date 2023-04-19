@@ -32,6 +32,12 @@ export function Register() {
         window.location.href = '/login';
     };
 
+    const handleRegister = () => {
+      // Redirect to register page
+      // Replace "/register" with the path of your register page
+      window.location.href = '/login';
+  };
+
     return (
     <section class="register-form">
       <div class="register-form__container">
@@ -67,7 +73,7 @@ export function Register() {
               onChange={handleConfirmPasswordChange}
             />
           </div>
-          <button class="register-form__button" type="submit">Register</button>
+          <button class="register-form__button" onClick={handleRegister}>Register</button>
         </form>
         <br></br>
         <button class="register-form__login-button" onClick={handleLogIn}>Login Page</button>
