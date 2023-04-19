@@ -38,7 +38,7 @@ export function Register() {
         <h2 class="register-form__title">Register</h2>
         <form class="register-form__form" onSubmit={handleSubmit}>
           <div class="register-form__input-group">
-            <label class="register-form__label" htmlFor="username">Username:</label>
+            <label class="register-form__label" htmlFor="username">Email:</label>
             <input
               class="register-form__input"
               type="text"
