@@ -1,6 +1,7 @@
 
 
 import React, { useState } from "react";
+import './Register.css';
 
 
 export function Register() {
@@ -32,43 +33,47 @@ export function Register() {
     };
 
     return (
-        <div style={{ display: "flex", justifyContent: "center" }}>
-        <div>
-          <h2>Register</h2>
-          <form onSubmit={handleSubmit}>
-            <div>
-              <label htmlFor="username">Username:</label>
-              <input
-                type="text"
-                id="username"
-                value={username}
-                onChange={handleUsernameChange}
-              />
-            </div>
-            <div>
-              <label htmlFor="password">Password:</label>
-              <input
-                type="password"
-                id="password"
-                value={password}
-                onChange={handlePasswordChange}
-              />
-            </div>
-            <div>
-              <label htmlFor="confirmPassword">Confirm Password:</label>
-              <input
-                type="password"
-                id="confirmPassword"
-                value={confirmPassword}
-                onChange={handleConfirmPasswordChange}
-              />
-            </div>
-            <button type="submit">Register</button>
-          </form>
-          <br></br>
-          <button onClick={handleLogIn}>Login</button>
-        </div>
-        </div>
+    <section class="register-form">
+      <div class="register-form__container">
+        <h2 class="register-form__title">Register</h2>
+        <form class="register-form__form" onSubmit={handleSubmit}>
+          <div class="register-form__input-group">
+            <label class="register-form__label" htmlFor="username">Username:</label>
+            <input
+              class="register-form__input"
+              type="text"
+              id="username"
+              value={username}
+              onChange={handleUsernameChange}
+            />
+          </div>
+          <div class="register-form__input-group">
+            <label class="register-form__label" htmlFor="password">Password:</label>
+            <input
+              class="register-form__input"
+              type="password"
+              id="password"
+              value={password}
+              onChange={handlePasswordChange}
+            />
+          </div>
+          <div class="register-form__input-group">
+            <label class="register-form__label" htmlFor="confirmPassword">Confirm Password:</label>
+            <input
+              class="register-form__input"
+              type="password"
+              id="confirmPassword"
+              value={confirmPassword}
+              onChange={handleConfirmPasswordChange}
+            />
+          </div>
+          <button class="register-form__button" type="submit">Register</button>
+        </form>
+        <br></br>
+        <button class="register-form__login-button" onClick={handleLogIn}>Login Page</button>
+      </div>
+    </section>
+    
       );
 
 }

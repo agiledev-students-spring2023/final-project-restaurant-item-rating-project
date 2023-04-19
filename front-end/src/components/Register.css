@@ -1,0 +1,70 @@
+.register-form {
+    display: flex;
+    justify-content: center;
+    font-family: 'Roboto';
+  }
+  
+  .register-form__container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    max-width: 400px;
+  }
+  
+  .register-form__title {
+    font-size: 2em;
+    margin-bottom: 1em;
+    color: #31525B;
+  }
+  
+  .register-form__form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+  }
+  
+  .register-form__input-group {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    margin-bottom: 1em;
+  }
+  
+  .register-form__label {
+    font-size: 1.2em;
+    margin-bottom: 0.5em;
+  }
+  
+  .register-form__input {
+    padding: 0.5em;
+    font-size: 1em;
+    border: 1px solid gray;
+    border-radius: 4px;
+  }
+  
+  .register-form__button {
+    padding: 8px 16px;
+    font-size: 1em;
+    border: none;
+    border-radius: 4px;
+    background-color: #31525B;
+    color: white;
+    cursor: pointer;
+    font-family: 'Roboto';
+    font-weight: bold;
+  }
+  
+  .register-form__login-button {
+    padding: 8px 16px;
+    font-size: 1em;
+    border: none;
+    border-radius: 4px;
+    background-color: #31525B;
+    color: white;
+    cursor: pointer;
+    font-family: 'Roboto';
+    font-weight: bold;
+  }
+  

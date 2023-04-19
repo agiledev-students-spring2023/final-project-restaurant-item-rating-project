@@ -1,0 +1,67 @@
+.login-form {
+    display: flex;
+    justify-content: center;
+    font-family: 'Roboto';
+}
+  
+.form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 20px;
+}
+  
+.title {
+    margin-bottom: 20px;
+    font-family: 'Roboto';
+}
+  
+.heading {
+    font-size: 24px;
+    font-weight: bold;
+    color: #31525B;
+    font-family: 'Roboto';
+}
+  
+.input-container {
+    margin-bottom: 10px;
+}
+  
+.label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: bold;
+}
+  
+.input {
+    width: 100%;
+    padding: 8px;
+    font-size: 16px;
+    border-radius: 3px;
+    border: 1px solid #ccc;
+}
+  
+.error-message {
+    color: red;
+    margin-bottom: 10px;
+}
+  
+.button {
+    display: inline-block;
+    padding: 8px 16px;
+    margin-right: 10px;
+    margin-bottom: 10px;
+    font-size: 16px;
+    font-weight: bold;
+    color: #fff;
+    background-color: #31525B;
+    border: none;
+    border-radius: 3px;
+    text-decoration: none;
+    cursor: pointer;
+}
+  
+.button:hover {
+    background-color: #ffffff;
+}
+  
