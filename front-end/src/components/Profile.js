@@ -40,6 +40,8 @@ export function Profile() {
                 alert("Email successfully changed");
                 setEmail(newEmail);
                 localStorage.setItem('email', newEmail);
+                localStorage.setItem(`avatarUrl-${newEmail}`, avatarUrl);
+
             }
     }
     catch (error) {
@@ -81,6 +83,13 @@ export function Profile() {
       const avatarUrl = reader.result;
       setAvatarUrl(avatarUrl);
   
+      // clear old avatar URLs for the current user
+      Object.keys(localStorage).forEach(key => {
+        if (key.startsWith('avatarUrl-') && key !== `avatarUrl-${email}`) {
+          localStorage.removeItem(key);
+        }
+      });
+  
       // update the avatarUrl for the user logged in
       axios.post(`${serverAddress}/avatar`, {
         email: email,
@@ -88,14 +97,14 @@ export function Profile() {
       })
       .then(response => {
         // store the avatarUrl using the email of the user as the key
-        console.log(email);
         localStorage.setItem(`avatarUrl-${email}`, avatarUrl);
-          })
+      })
       .catch(error => {
         console.log(error);
       });
     };
   };
+  
   
     return (
         <div>

@@ -28,10 +28,13 @@ profileRouter.post('/', async (req, res) => {
       
             const hashedPassword = await bcrypt.hash(password, 10);
             user.password = hashedPassword;
+            delete user.oldPassword;
+
           }
       
           if (email) {
             user.email = email;
+            delete user.oldEmail;
           }
   
       // Save user
