@@ -1,6 +1,6 @@
 const express = require('express');
 //Mongoose required
-const Restaurant = require("./../db");
+const {Restaurant} = require("./../db");
 
 // this router is used for paths matching "/suggestion"
 const suggestionRouter = express.Router();

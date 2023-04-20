@@ -31,7 +31,21 @@ const { Schema } = mongoose;
 // // DB STUFF
 // const mongoose = require('mongoose');
 
+// Define the register schema 
+
+const RegisterSchema = new Schema({
+  email: {
+    type: String,
+    required: true,
+  },
+  password: {
+    type: String,
+    required: true,
+  }
+});
+
 // Define the review schema
+
 const ReviewSchema = new Schema({
   value: {
     type: Number,
@@ -122,23 +136,25 @@ const RestaurantSchema = new Schema({
 
 });
 
-const Restaurant = mongoose.model('Restaurant', RestaurantSchema);
-const goodrestaurant1 = new Restaurant({
-        name: 'Los tacos',
-        location: 'NYC',
-        dishes: [{name: 'tacos1', price: 9.99}, {name: 'tacos2', price: 8.99}],
-      });
-      goodrestaurant1.validateSync(function(error){
-            if(error){
-              console.log(error);
-            }else{
-              counsel.log("Restaurant is valid")
-            };
+// const Restaurant = mongoose.model('Restaurant', RestaurantSchema);
+// const goodrestaurant1 = new Restaurant({
+//         name: 'Los tacos',
+//         location: 'NYC',
+//         dishes: [{name: 'tacos1', price: 9.99}, {name: 'tacos2', price: 8.99}],
+//       });
+//       goodrestaurant1.validateSync(function(error){
+//             if(error){
+//               console.log(error);
+//             }else{
+//               counsel.log("Restaurant is valid")
+//             };
     
-      });
+//       });
 
-RestaurantSchema.index({'$**': 'text'});
+// RestaurantSchema.index({'$**': 'text'});
 
 
-module.exports = RestaurantSchema;
+module.exports = {RestaurantSchema,RegisterSchema};
+// module.exports = RegisterSchema;
+
 // module.exports = DishSchema;

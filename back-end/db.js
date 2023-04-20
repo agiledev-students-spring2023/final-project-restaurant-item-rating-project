@@ -1,6 +1,8 @@
 // DB STUFF
 const mongoose = require('mongoose');
-const RestaurantSchema = require("./schema");
+const {RestaurantSchema, RegisterSchema} = require("./schema");
+
+// const {RegisterSchema} = require("./schema");
 // const DishSchema = require("./schema");
 
 // db implementation
@@ -23,7 +25,10 @@ if (process.env.NODE_ENV != "test") {
 
 const Restaurant = mongoose.model('Restaurant', RestaurantSchema);
 
+const Register = mongoose.model('Register',RegisterSchema);
 
 
-module.exports = Restaurant;
+// module.exports = {Restaurant};
+module.exports = {Restaurant,Register};
+
 // module.exports = Dish;

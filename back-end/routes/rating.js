@@ -1,7 +1,7 @@
 const express = require('express');
 // this router is used for paths matching "/restaurant/:restaurantId/dish/:dishId/review"
 
-const Restaurant = require("./../db");
+const {Restaurant} = require("./../db");
 const mongoose = require('mongoose')
 
 const ratingRouter = express.Router({ mergeParams: true });

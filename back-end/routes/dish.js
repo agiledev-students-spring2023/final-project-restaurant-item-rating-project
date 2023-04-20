@@ -2,7 +2,7 @@ const express = require('express');
 // this router is used for the paths that match "/restaurant/:restaurantId/dish"
 
 // get restaurant model
-const Restaurant = require("../db");
+const {Restaurant} = require("../db");
 
 const dishRouter = express.Router({ mergeParams: true });
 
