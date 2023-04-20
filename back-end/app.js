@@ -21,6 +21,8 @@ const suggestionRouter = require('./routes/suggestion')
 const searchRouter = require('./routes/search')
 const registerRouter = require('./routes/register');
 const loginRouter = require('./routes/login');
+const profileRouter = require('./routes/profile');
+const avatarRouter = require('./routes/avatar');
 
 /**
  * Typically, all middlewares would be included before routes
@@ -215,4 +217,6 @@ app.use('/suggestion', suggestionRouter); // suggestion routes
 app.use('/search', searchRouter); // search routes
 app.use('/register',registerRouter);
 app.use('/login',loginRouter);
+app.use('/profile',profileRouter);
+app.use('/avatar',avatarRouter);
 module.exports = app

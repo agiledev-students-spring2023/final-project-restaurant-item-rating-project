@@ -16,19 +16,26 @@ loginRouter.post('/', async (req, res) => {
         return res.json({ message: "Authentication failed: User not found" });
       }
   
-      if (password !== user.password) { // compare plain text password with hashed password
-        res.statusCode = 401;
-        return res.json({ message: "Authentication failed: Invalid password" });
-      }
+    //   if (password !== user.password) { 
+    //     res.statusCode = 401;
+    //     return res.json({ message: "Authentication failed: Invalid password" });
+    //   }
+    const passwordMatch = await bcrypt.compare(req.body.password, user.password);
+    if (!passwordMatch) {
+        return res.status(401).json({ message: "Invalid email or password" });
+    }
   
       res.statusCode = 200;
-      res.json({ message: "Authentication successful" });
+      const token = jwt.sign({ userId: user._id }, process.env.JWT_SECRET);
+      res.json({ token });
+    //   res.json({ message: "Authentication successful" });
     } catch (err) {
       console.log(err);
       res.statusCode = 500;
       res.json({ error: "there was an error logging in" });
     }
   });
+
     // const { email, password } = req.body;
     // console.log(email);
     // console.log(password);

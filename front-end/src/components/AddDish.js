@@ -1,4 +1,4 @@
-import { Box, Button, Container, TextField, Typography } from "@mui/material";
+import { Avatar, Box, Button, Container, TextField, Typography } from "@mui/material";
 import axios from 'axios';
 import React, { useEffect, useState } from 'react';
 import { useNavigate, useParams } from "react-router-dom";
@@ -7,6 +7,15 @@ import '../App.css';
 
 export function AddDish() {
   const serverAddress = "http://localhost:3002"
+
+  const [avatarUrl, setAvatarUrl] = useState('');
+   useEffect(() => {
+       const storedEmail = localStorage.getItem('email');
+       const storedAvatarUrl = localStorage.getItem(`avatarUrl-${storedEmail}`);
+       if (storedEmail) {
+         setAvatarUrl(storedAvatarUrl);
+       }
+     }, []);
 
   const navigate = useNavigate();
   const params = useParams();
@@ -57,9 +66,15 @@ export function AddDish() {
       // alert("An error has occurred when finding that restaurant");
     });
   }, [])
+  const handleAvatarClick = () => {
+    navigate('/profile');
+  }
   
   return(
     <Container>
+      <Box sx={{ display: "flex", justifyContent: "flex-end", alignItems: "center", p: 2 }}>
+      <Avatar onClick={handleAvatarClick} src={avatarUrl}/>
+       </Box>
       <Typography variant="h3">Add a Dish</Typography>
       <Typography variant="h6">Restaurant: {restaurantName}</Typography>
       <form onSubmit ={handleSubmit}>

@@ -53,14 +53,16 @@ export function Register() {
           console.log(response);
           localStorage.setItem('token', response.data.token);
           alert('User Details submitted')
+          window.location.href = '/login';
         })
         .catch(function (error) {
           console.log(error);
-          alert(error);
-          //alert(error.response.data.message);
+          if (error.response.status === 401) {
+            alert("Email is already taken.");
+          } else {
+            alert(error.response.data.message);
+          }
         });
-        
-        window.location.href = '/login';
         
       } else {
         alert("Passwords do not match.");

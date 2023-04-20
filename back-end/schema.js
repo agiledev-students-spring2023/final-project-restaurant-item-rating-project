@@ -41,7 +41,7 @@ const RegisterSchema = new Schema({
   password: {
     type: String,
     required: true,
-  }
+  },
 });
 
 // Define the review schema
