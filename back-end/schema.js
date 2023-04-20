@@ -101,7 +101,7 @@ const Review = mongoose.model('Review', ReviewSchema)
 // Define the dish schema
 const DishSchema = new Schema({
   name: {
-    type: Number,
+    type: String,
     required: true
   },
   // TODO: implement this stuff..uploads and method on model to calculate,
