@@ -39,9 +39,9 @@ export function DishDetail() {
   
   const [avatarUrl, setAvatarUrl] = useState('');
   useEffect(() => {
-      const storedEmail = localStorage.getItem('email');
-      const storedAvatarUrl = localStorage.getItem(`avatarUrl-${storedEmail}`);
-      if (storedEmail) {
+      const storedId = localStorage.getItem('userId');
+      const storedAvatarUrl = localStorage.getItem(`avatarUrl-${storedId}`);
+      if (storedId) {
         setAvatarUrl(storedAvatarUrl);
       }
     }, []);

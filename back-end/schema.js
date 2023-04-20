@@ -33,7 +33,14 @@ const { Schema } = mongoose;
 
 // Define the register schema 
 
+const { v4: uuidv4 } = require('uuid');
+
 const RegisterSchema = new Schema({
+  userId: {
+    type: String,
+    default: uuidv4,
+    unique: true,
+  },
   email: {
     type: String,
     required: true,

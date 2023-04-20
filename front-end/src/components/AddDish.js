@@ -9,13 +9,17 @@ export function AddDish() {
   const serverAddress = "http://localhost:3002"
 
   const [avatarUrl, setAvatarUrl] = useState('');
-   useEffect(() => {
-       const storedEmail = localStorage.getItem('email');
-       const storedAvatarUrl = localStorage.getItem(`avatarUrl-${storedEmail}`);
-       if (storedEmail) {
-         setAvatarUrl(storedAvatarUrl);
-       }
-     }, []);
+  useEffect(() => {
+      const storedId = localStorage.getItem('userId');
+      const storedAvatarUrl = localStorage.getItem(`avatarUrl-${storedId}`);
+      if (storedId) {
+        setAvatarUrl(storedAvatarUrl);
+      }
+    }, []);
+
+  const handleAvatarClick = () => {
+    navigate('/profile');
+  }
 
   const navigate = useNavigate();
   const params = useParams();
@@ -66,9 +70,7 @@ export function AddDish() {
       // alert("An error has occurred when finding that restaurant");
     });
   }, [])
-  const handleAvatarClick = () => {
-    navigate('/profile');
-  }
+ 
   
   return(
     <Container>

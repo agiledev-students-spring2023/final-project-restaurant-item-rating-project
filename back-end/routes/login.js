@@ -16,10 +16,6 @@ loginRouter.post('/', async (req, res) => {
         return res.json({ message: "Authentication failed: User not found" });
       }
   
-    //   if (password !== user.password) { 
-    //     res.statusCode = 401;
-    //     return res.json({ message: "Authentication failed: Invalid password" });
-    //   }
     const passwordMatch = await bcrypt.compare(req.body.password, user.password);
     if (!passwordMatch) {
         return res.status(401).json({ message: "Invalid email or password" });
@@ -27,7 +23,7 @@ loginRouter.post('/', async (req, res) => {
   
       res.statusCode = 200;
       const token = jwt.sign({ userId: user._id }, process.env.JWT_SECRET);
-      res.json({ token });
+      res.json({ token, userId: user._id  });
     //   res.json({ message: "Authentication successful" });
     } catch (err) {
       console.log(err);

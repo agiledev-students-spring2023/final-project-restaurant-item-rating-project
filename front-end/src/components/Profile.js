@@ -13,62 +13,60 @@ export function Profile() {
     const [newEmail, setNewEmail] = useState('');
     const [newPassword, setNewPassword] = useState('');
     const [avatarUrl, setAvatarUrl] = useState('');
+    
 
-    useEffect(() => {
-        const storedEmail = localStorage.getItem('email');
-        const storedPassword = localStorage.getItem('password');
-        const storedAvatarUrl = localStorage.getItem(`avatarUrl-${storedEmail}`);      
-        if (storedEmail) {
-          setEmail(storedEmail);
-          setPassword(storedPassword);
-          setAvatarUrl(storedAvatarUrl); 
+    const [storedId, setStoredId] = useState('');
 
-      }
-    }, [email,password]);
-
-    const maskedPassword = password.replace(/./g, '*');
-
-    const handleUpdateEmail = async (event) => {
-        event.preventDefault();
-        try {
-            const response = await axios.post(`${serverAddress}/profile`, {
-              oldEmail : email,
-              email: newEmail,
-              password: password
-            });
-            if (response.status === 200) {
-                alert("Email successfully changed");
-                setEmail(newEmail);
-                localStorage.setItem('email', newEmail);
-                localStorage.setItem(`avatarUrl-${newEmail}`, avatarUrl);
-
-            }
+useEffect(() => {
+  const id = localStorage.getItem('userId');
+  if (id) {
+    setStoredId(id);
+    axios.get(`${serverAddress}/profile/${id}`).then(response => {
+      const { email, password } = response.data;
+      setEmail(email);
+      setPassword(password);
+    }).catch(error => {
+      console.log(error);
+      // handle error
+    });
+    const storedAvatarUrl = localStorage.getItem(`avatarUrl-${id}`);
+    if (storedAvatarUrl) {
+      setAvatarUrl(storedAvatarUrl);
     }
-    catch (error) {
-        console.log(error);
-        // setError(true);
-      }
-    };
+  }
+}, [email,password]);
 
-    const handleUpdatePassword = async (event) => {
-        event.preventDefault();
-        try {
-            const response = await axios.post(`${serverAddress}/profile`, {
-              oldPassword : password,
-              email: email,
-              password: newPassword
-            });
-            if (response.status === 200) {
-                alert("Password successfully changed");
-                setPassword(newPassword);
-                localStorage.setItem('password', newPassword);
-            }
+const handleUpdateEmail = async (event) => {
+  event.preventDefault();
+  try {
+    const response = await axios.post(`${serverAddress}/profile/${storedId}`, {
+      email: newEmail,
+    });
+    if (response.status === 200) {
+        alert("Email successfully changed");
+        setEmail(newEmail);
     }
-    catch (error) {
-        console.log(error);
-        // setError(true);
+  } catch (error) {
+    console.log(error);
+    // handle error
+  }
+};
+
+const handleUpdatePassword = async (event) => {
+    event.preventDefault();
+    try {
+      const response = await axios.post(`${serverAddress}/profile/${storedId}`, {
+        password: newPassword,
+      });
+      if (response.status === 200) {
+        alert("Password successfully changed");
+        setPassword(newPassword);
       }
-    };
+    } catch (error) {
+      console.log(error);
+      // setError(true);
+    }
+  };
 
   const handleLogout = () => {
     // logout logic
@@ -85,25 +83,23 @@ export function Profile() {
   
       // clear old avatar URLs for the current user
       Object.keys(localStorage).forEach(key => {
-        if (key.startsWith('avatarUrl-') && key !== `avatarUrl-${email}`) {
+        if (key.startsWith('avatarUrl-') && key !== `avatarUrl-${storedId}`) {
           localStorage.removeItem(key);
         }
       });
   
       // update the avatarUrl for the user logged in
-      axios.post(`${serverAddress}/avatar`, {
-        email: email,
-        // avatarUrl: avatarUrl
+      axios.post(`${serverAddress}/avatar/${storedId}`, {
       })
       .then(response => {
-        // store the avatarUrl using the email of the user as the key
-        localStorage.setItem(`avatarUrl-${email}`, avatarUrl);
+        localStorage.setItem(`avatarUrl-${storedId}`, avatarUrl);
       })
       .catch(error => {
         console.log(error);
       });
     };
   };
+  
   
   
     return (
@@ -122,7 +118,7 @@ export function Profile() {
       </Box>
           <h1>Profile</h1>
           <p style={{border: '1px solid #ccc', padding: '10px',textAlign: 'center'}}>Email: {email}</p>
-          <p style={{border: '1px solid #ccc', padding: '10px',textAlign: 'center'}}>Password: {maskedPassword}</p>
+          {/* <p style={{border: '1px solid #ccc', padding: '10px',textAlign: 'center'}}>Password: {maskedPassword}</p> */}
           <h2>Update Info</h2>
           <form onSubmit={handleUpdateEmail}>
             <label>
@@ -162,3 +158,18 @@ export function Profile() {
       
       
   };
+
+
+   // useEffect(() => {
+    //     const storedId = localStorage.getItem('userId');
+    //     console.log(storedId);
+    //     const storedEmail = localStorage.getItem('email');
+    //     const storedPassword = localStorage.getItem('password');
+    //     const storedAvatarUrl = localStorage.getItem(`avatarUrl-${storedEmail}`);      
+    //     if (storedEmail) {
+    //       setEmail(storedEmail);
+    //       setPassword(storedPassword);
+    //       setAvatarUrl(storedAvatarUrl); 
+
+    //   }
+    // }, [email,password]);

@@ -26,9 +26,13 @@ export function Login() {
       });
   
       if (response.status === 200) {
-        localStorage.setItem('token', response.data.token);
+        const { token, userId } = response.data;
+        localStorage.setItem('token', token);
+        localStorage.setItem('userId', userId);
+        // localStorage.setItem('token', response.data.token);
         localStorage.setItem('email', email);
         localStorage.setItem('password', password);
+        console.log(userId);
         navigate("/home");
       } else {
         setError(true);

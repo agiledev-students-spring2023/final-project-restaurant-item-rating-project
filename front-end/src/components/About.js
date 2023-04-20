@@ -8,18 +8,17 @@ import { useState, useEffect } from 'react';
      const navigate = useNavigate();
      
      const [avatarUrl, setAvatarUrl] = useState('');
-
-     useEffect(() => {
-       const storedEmail = localStorage.getItem('email');
-       const storedAvatarUrl = localStorage.getItem(`avatarUrl-${storedEmail}`);
-       if (storedEmail) {
-         setAvatarUrl(storedAvatarUrl);
-       }
-     }, []);
-
-    const handleAvatarClick = () => {
-        navigate('/profile');
+  useEffect(() => {
+      const storedId = localStorage.getItem('userId');
+      const storedAvatarUrl = localStorage.getItem(`avatarUrl-${storedId}`);
+      if (storedId) {
+        setAvatarUrl(storedAvatarUrl);
       }
+    }, []);
+
+  const handleAvatarClick = () => {
+    navigate('/profile');
+  }
     return (
 
         <Box bgcolor={'#FFFFFF'}> 

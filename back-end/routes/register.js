@@ -25,6 +25,7 @@ registerRouter.post('/', async (req, res) => {
       });
       await newUser.validate();
       await newUser.save();
+      console.log(newUser);
 
       const token = jwt.sign({ id: newUser._id }, process.env.JWT_SECRET);
       res.statusCode = 200;
