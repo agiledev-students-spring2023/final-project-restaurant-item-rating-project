@@ -76,7 +76,8 @@ const ReviewSchema = new Schema({
   },
   userID: {
     type: Number,
-    required: true
+    //pending for the implmentation of userId
+    required: false
   }
   
 });
