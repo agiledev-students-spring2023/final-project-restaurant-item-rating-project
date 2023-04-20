@@ -44,6 +44,20 @@ const RegisterSchema = new Schema({
   }
 });
 
+const Register = mongoose.model('Register',RegisterSchema);
+const goodregister1 = new Register({
+  email:'test@example.com',
+  password:'password123'
+});
+goodregister1.validateSync(function(error){
+  if(error){
+    console.log(error);
+  }else{
+    counsel.log("Review is valid");
+  }
+
+});
+
 // Define the review schema
 
 const ReviewSchema = new Schema({
@@ -62,7 +76,7 @@ const ReviewSchema = new Schema({
   },
   userID: {
     type: Number,
-    //I think we need to change this: once we get the users working on back-end
+    //pending for the implmentation of userId
     required: false
   }
   
@@ -75,7 +89,7 @@ const Review = mongoose.model('Review', ReviewSchema)
   const goodreview1 = new Review({
           value:4,
           date: {type: Date, default: Date.now},
-          userID:123
+          userID: 123
         });
         goodreview1.validateSync(function(error){
           if(error){
@@ -109,9 +123,9 @@ const DishSchema = new Schema({
         averageRating : 3.5,
         reviews: [{ value:4,
           date: {type: Date, default: Date.now},
-          userID:123}, { value:3,
+          userID: 123}, { value:3,
             date: {type: Date, default: Date.now},
-            userID:456}],
+            userID: 456}],
       });
       goodDish1.validateSync(function(error){
             if(error){
@@ -136,25 +150,25 @@ const RestaurantSchema = new Schema({
 
 });
 
-// const Restaurant = mongoose.model('Restaurant', RestaurantSchema);
-// const goodrestaurant1 = new Restaurant({
-//         name: 'Los tacos',
-//         location: 'NYC',
-//         dishes: [{name: 'tacos1', price: 9.99}, {name: 'tacos2', price: 8.99}],
-//       });
-//       goodrestaurant1.validateSync(function(error){
-//             if(error){
-//               console.log(error);
-//             }else{
-//               counsel.log("Restaurant is valid")
-//             };
+ const Restaurant = mongoose.model('Restaurant', RestaurantSchema);
+ const goodrestaurant1 = new Restaurant({
+        name: 'Los tacos',
+        location: 'NYC',
+        dishes: [{name: 'tacos1', price: 9.99}, {name: 'tacos2', price: 8.99}],
+     });
+     goodrestaurant1.validateSync(function(error){
+          if(error){
+               console.log(error);
+            }else{
+              counsel.log("Restaurant is valid")
+            };
     
-//       });
+      });
 
-// RestaurantSchema.index({'$**': 'text'});
+RestaurantSchema.index({'$**': 'text'});
 
 
-module.exports = {RestaurantSchema,RegisterSchema};
+module.exports = {RestaurantSchema,RegisterSchema, ReviewSchema, DishSchema};
 // module.exports = RegisterSchema;
 
 // module.exports = DishSchema;
