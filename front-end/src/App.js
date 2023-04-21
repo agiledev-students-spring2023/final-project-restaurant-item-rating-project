@@ -4,6 +4,7 @@ import { MyRoutes } from './Router';
 
 
 function App() {
+
   return (
     <MyRoutes />
   );
