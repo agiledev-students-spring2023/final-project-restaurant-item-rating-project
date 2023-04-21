@@ -8,14 +8,13 @@ import axios from 'axios'
 
 const serverAddress = "http://localhost:3002"
 
-
 export function Login() {
   const navigate = useNavigate()
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [redirect, setRedirect] = useState(false);
   const [error, setError] = useState(false);
-      
+  
   const handleLogin = async (event) => {
     event.preventDefault();
   
@@ -29,7 +28,6 @@ export function Login() {
         const { token, userId } = response.data;
         localStorage.setItem('token', token);
         localStorage.setItem('userId', userId);
-        // localStorage.setItem('token', response.data.token);
         localStorage.setItem('email', email);
         localStorage.setItem('password', password);
         console.log(userId);
@@ -42,41 +40,46 @@ export function Login() {
       setError(true);
     }
   };
-      
+  
   return (
-    <div className="login-form">
-      <form class="form" onSubmit={handleLogin}>
-        <div className="title">
-          <h3 className="heading">Log In</h3>
-        </div>
-        <div className="input-container">
-          <label className="label" htmlFor="email">Email:</label>
-          <input
-            className="input"
-            type="email"
-            id="email"
-            value={email}
-            onChange={(event) => setEmail(event.target.value)}
-          />
-        </div>
-        <div className="input-container">
-          <label className="label" htmlFor="password">Password:</label>
-          <input
-            className="input"
-            type="password"
-            id="password"
-            value={password}
-            onChange={(event) => setPassword(event.target.value)}
-          />
-        </div>
-        {error && (
-          <div className="error-message">Invalid authentication, please check your email and password</div>
-        )}
-        <br />
-        <button className="button">Log In</button>
-        <br />
-        <a className="button" href="/register">Register Page</a>
-      </form>
-    </div>    
-  );    
+    <div style={{ backgroundColor: '#FAA101' }}>
+      <header>
+        <img src={require('./Dish_Dealer_Logo.png')} width={350} height={200} alt="Dish Dealer Logo" />
+      </header>
+      <div className="login-form">
+        <form class="form" onSubmit={handleLogin}>
+          <div className="title">
+            <h3 className="heading">Log In</h3>
+          </div>
+          <div className="input-container">
+            <label className="label" htmlFor="email">Email:</label>
+            <input
+              className="input"
+              type="email"
+              id="email"
+              value={email}
+              onChange={(event) => setEmail(event.target.value)}
+            />
+          </div>
+          <div className="input-container">
+            <label className="label" htmlFor="password">Password:</label>
+            <input
+              className="input"
+              type="password"
+              id="password"
+              value={password}
+              onChange={(event) => setPassword(event.target.value)}
+            />
+          </div>
+          {error && (
+            <div className="error-message">Invalid authentication, please check your email and password</div>
+          )}
+          <br />
+          <button className="button">Log In</button>
+          <br />
+          <a className="button" href="/register">Register Page</a>
+        </form>
+      </div>
+    </div>
+  );
 }
