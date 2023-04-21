@@ -1,4 +1,4 @@
-import { Box, Button, ImageList, ImageListItem, Typography } from "@mui/material";
+import {Avatar, Box, Button, ImageList, ImageListItem, Typography } from "@mui/material";
 import Rating from '@mui/material/Rating';
 import { useState, useEffect } from "react";
 import { useNavigate,useParams } from "react-router-dom";
@@ -36,6 +36,20 @@ export function DishDetail() {
     });
   }, []);
 
+  
+  const [avatarUrl, setAvatarUrl] = useState('');
+  useEffect(() => {
+      const storedId = localStorage.getItem('userId');
+      const storedAvatarUrl = localStorage.getItem(`avatarUrl-${storedId}`);
+      if (storedId) {
+        setAvatarUrl(storedAvatarUrl);
+      }
+    }, []);
+
+  const handleAvatarClick = () => {
+    navigate('/profile');
+  }
+
   return (
     <Box 
       sx={{
@@ -45,6 +59,9 @@ export function DishDetail() {
         margin: "0 auto"
       }}
     >
+      <Box sx={{ display: "flex", justifyContent: "flex-end", alignItems: "center", p: 2 }}>
+      <Avatar onClick={handleAvatarClick} src={avatarUrl}/>
+       </Box>
       <Typography variant="h3">{dish.name}</Typography>
       <Box sx={{m:2}} /> 
       <Typography style={{ fontFamily: 'Roboto'}} variant="h6">Restaurant: {restaurantName}</Typography>

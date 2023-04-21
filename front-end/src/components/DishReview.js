@@ -1,4 +1,4 @@
-import { Box, Button, TextField, Typography } from "@mui/material";
+import {Avatar, Box, Button, TextField, Typography } from "@mui/material";
 import React, { useEffect, useState } from 'react';
 import { FaStar, FaStarHalf } from "react-icons/fa";
 import { useLocation, useNavigate, useParams } from "react-router-dom";
@@ -79,6 +79,18 @@ export function DishReview() {
   return average(dish.reviews.map(review => review.value));
  }
 
+ const [avatarUrl, setAvatarUrl] = useState('');
+  useEffect(() => {
+      const storedId = localStorage.getItem('userId');
+      const storedAvatarUrl = localStorage.getItem(`avatarUrl-${storedId}`);
+      if (storedId) {
+        setAvatarUrl(storedAvatarUrl);
+      }
+    }, []);
+
+  const handleAvatarClick = () => {
+    navigate('/profile');
+  }
 
  return (
    <Box
@@ -87,6 +99,9 @@ export function DishReview() {
      alignItems="center"
      minHeight="100vh"
    >
+    <Box sx={{ display: "flex", justifyContent: "flex-end", alignItems: "center", p: 2 }}>
+    <Avatar onClick={handleAvatarClick} src={avatarUrl}/>
+       </Box>
        <Box sx={{m:4}} />
        <Box sx={{display: "flex",flexDirection: "column", justifyContent: "center", alignItems: "center"}}>
          <Typography style={{ fontFamily: 'Roboto'}} color={'#31525B'} variant="h4"> Leave a Review</Typography>

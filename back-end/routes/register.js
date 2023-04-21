@@ -9,16 +9,28 @@ const registerRouter = express.Router();
 registerRouter.post('/', async (req, res) => {
     let newUser;
     try {
+
+    const user = await Register.findOne({ email: req.body.email });;
+    if (user) {
+        res.statusCode = 401;
+        return res.json({ message: "Email already taken" });
+        }
+    
       console.log("req.body", req.body);
-      newUser = await Register.create(req.body);
-  
+      const hashedPassword = await bcrypt.hash(req.body.password, 10);
+    //   newUser = await Register.create(req.body);
+      newUser = await Register.create({
+        email: req.body.email,
+        password: hashedPassword
+      });
       await newUser.validate();
       await newUser.save();
+      console.log(newUser);
 
-    //   const token = jwt.sign({ id: newUser._id }, process.env.JWT_SECRET);
+      const token = jwt.sign({ id: newUser._id }, process.env.JWT_SECRET);
       res.statusCode = 200;
       res.json({
-        // token,
+        token,
         user: newUser,
         message: "success"
       });

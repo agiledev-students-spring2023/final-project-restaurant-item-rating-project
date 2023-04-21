@@ -1,10 +1,31 @@
-import { Box, Typography } from "@mui/material";
+import { Avatar, Box, Typography } from "@mui/material";
+import { useLocation, useNavigate, useParams } from "react-router-dom";
+import { useState, useEffect } from 'react';
+
 
 
   export function About() {
+     const navigate = useNavigate();
+     
+     const [avatarUrl, setAvatarUrl] = useState('');
+  useEffect(() => {
+      const storedId = localStorage.getItem('userId');
+      const storedAvatarUrl = localStorage.getItem(`avatarUrl-${storedId}`);
+      if (storedId) {
+        setAvatarUrl(storedAvatarUrl);
+      }
+    }, []);
+
+  const handleAvatarClick = () => {
+    navigate('/profile');
+  }
     return (
 
         <Box bgcolor={'#FFFFFF'}> 
+        <Box sx={{ display: "flex", justifyContent: "flex-end", alignItems: "center", p: 2 }}>
+    <Avatar onClick={handleAvatarClick} src={avatarUrl}/>
+       </Box>
+        
             <Typography style={{ fontFamily: 'Roboto'}} color={'#31525B'} variant="h5" component="div" sx={{ flexGrow: 1, fontWeight: 'bold'}} padding={0} margin={1}>
                 Our Purpose:
             </Typography>

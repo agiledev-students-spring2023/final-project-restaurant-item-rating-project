@@ -1,8 +1,9 @@
-import { Box, Button, Container, TextField, Typography } from "@mui/material";
+import { Avatar, Box, Button, Container, TextField, Typography } from "@mui/material";
 import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios'
 import '../App.css';
+
 
 const serverAddress = "http://localhost:3002"
 
@@ -42,9 +43,24 @@ export function AddRestaurant() {
     
     // navigate('/restaurant');
   };
+  const [avatarUrl, setAvatarUrl] = useState('');
+  useEffect(() => {
+      const storedId = localStorage.getItem('userId');
+      const storedAvatarUrl = localStorage.getItem(`avatarUrl-${storedId}`);
+      if (storedId) {
+        setAvatarUrl(storedAvatarUrl);
+      }
+    }, []);
+
+  const handleAvatarClick = () => {
+    navigate('/profile');
+  }
   
   return(
     <Container bgcolor={'#FFFFFF'}>
+      <Box sx={{ display: "flex", justifyContent: "flex-end", alignItems: "center", p: 2 }}>
+    <Avatar onClick={handleAvatarClick} src={avatarUrl}/>
+       </Box>
       <Typography style={{ fontFamily: 'Roboto'}} color={'#31525B'} variant="h3">Add Restaurant</Typography>
 
       <form>

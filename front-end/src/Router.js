@@ -10,7 +10,7 @@ import { About } from './components/About';
 import { RestaurantDetail } from './components/RestaurantDetail';
 import { Login } from './components/Login';
 import { Register } from './components/Register';
-
+import { Profile } from './components/Profile';
 
 function MyRoutes() {
   return (
@@ -57,6 +57,10 @@ function MyRoutes() {
           <Route 
             path="/home"
             element={<Home />} 
+          />
+          <Route 
+            path="/profile"
+            element={<Profile />} 
           />
           {/* catch all */}
           <Route 

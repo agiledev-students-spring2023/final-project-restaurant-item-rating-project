@@ -1,5 +1,5 @@
 
-import { Box, Button, Typography, capitalize } from "@mui/material";
+import { Avatar,Box, Button, Typography, capitalize } from "@mui/material";
 import Rating from '@mui/material/Rating';
 import { useEffect, useState } from "react";
 import { useNavigate, useParams } from 'react-router-dom';
@@ -31,10 +31,25 @@ export function RestaurantDetail(){
     })
   }, [])
 
+  const [avatarUrl, setAvatarUrl] = useState('');
+  useEffect(() => {
+      const storedId = localStorage.getItem('userId');
+      const storedAvatarUrl = localStorage.getItem(`avatarUrl-${storedId}`);
+      if (storedId) {
+        setAvatarUrl(storedAvatarUrl);
+      }
+    }, []);
+
+  const handleAvatarClick = () => {
+    navigate('/profile');
+  }
+
   // get restaurant
   return (
     <Box sx={{display: 'flex', flexDirection: 'column', alignItems: 'center',paddingBottom: '60px'}}>
-
+<Box sx={{ display: "flex", justifyContent: "flex-end", alignItems: "center", p: 2 }}>
+      <Avatar onClick={handleAvatarClick} src={avatarUrl}/>
+       </Box>
       <Typography style={{ fontFamily: 'Roboto'}} color={'#31525B'} variant="h3" gutterBottom>
         {restaurantName}
       </Typography>

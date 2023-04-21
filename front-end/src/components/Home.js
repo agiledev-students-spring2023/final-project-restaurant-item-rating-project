@@ -1,4 +1,4 @@
-import { Box, Container, Typography } from "@mui/material";
+import { Avatar, Box, Container, Typography } from "@mui/material";
 import Card from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';
 import CardMedia from '@mui/material/CardMedia';
@@ -34,6 +34,19 @@ export function Home() {
     // });
   }, []);
 
+  const [avatarUrl, setAvatarUrl] = useState('');
+  useEffect(() => {
+      const storedId = localStorage.getItem('userId');
+      const storedAvatarUrl = localStorage.getItem(`avatarUrl-${storedId}`);
+      if (storedId) {
+        setAvatarUrl(storedAvatarUrl);
+      }
+    }, []);
+
+  const handleAvatarClick = () => {
+    navigate('/profile');
+  }
+
   // this is what gets rendered in the React DOM. Must be one element at the top level
 
   return (
@@ -43,7 +56,9 @@ export function Home() {
       {/* <Button onClick={() => navigate('/search')}>Search</Button> */}
 
       {/* <Button onClick={() => navigate('/favorites')}>Your Favorites - not built out</Button> */}
-
+      <Box sx={{ display: "flex", justifyContent: "flex-end", alignItems: "center", p: 2 }}>
+      <Avatar onClick={handleAvatarClick} src={avatarUrl}/>
+       </Box>
 
       <Typography 
         variant="h5" 

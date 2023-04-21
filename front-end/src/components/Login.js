@@ -5,6 +5,7 @@ import { Redirect, Link, useNavigate } from 'react-router-dom';
 import './Login.css';
 
 import axios from 'axios'
+
 const serverAddress = "http://localhost:3002"
 
 
@@ -17,15 +18,21 @@ export function Login() {
       
   const handleLogin = async (event) => {
     event.preventDefault();
-
+  
     try {
       const response = await axios.post(`${serverAddress}/login`, {
         email: email,
         password: password
       });
-
+  
       if (response.status === 200) {
-        localStorage.setItem('token', response.data.token);
+        const { token, userId } = response.data;
+        localStorage.setItem('token', token);
+        localStorage.setItem('userId', userId);
+        // localStorage.setItem('token', response.data.token);
+        localStorage.setItem('email', email);
+        localStorage.setItem('password', password);
+        console.log(userId);
         navigate("/home");
       } else {
         setError(true);
@@ -35,6 +42,7 @@ export function Login() {
       setError(true);
     }
   };
+  
       
   return (
     <div className="login-form">
