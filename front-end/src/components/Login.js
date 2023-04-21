@@ -42,7 +42,6 @@ export function Login() {
       setError(true);
     }
   };
-  
       
   return (
     <div className="login-form">

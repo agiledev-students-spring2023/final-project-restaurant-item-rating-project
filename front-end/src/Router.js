@@ -16,7 +16,6 @@ function MyRoutes() {
   return (
     <BrowserRouter>
       <Routes>
-        <Route path="/" element={<Layout />}>
           <Route index element={<Login />} /> 
           <Route 
             path="/login"
@@ -26,6 +25,7 @@ function MyRoutes() {
             path="/register"
             element={<Register />} 
           />
+          <Route path="/" element={<Layout />}>
           <Route 
             path="restaurant/:restaurantID/dish"
             element={<AddDish />} 

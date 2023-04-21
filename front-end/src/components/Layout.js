@@ -94,6 +94,7 @@ export function Layout() {
           }}
           fill={'#B3DEE5'}
         >
+
           <BottomNavigationAction 
             label="Home" 
             icon={<Home />}
