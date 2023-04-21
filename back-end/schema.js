@@ -33,14 +33,7 @@ const { Schema } = mongoose;
 
 // Define the register schema 
 
-const { v4: uuidv4 } = require('uuid');
-
 const RegisterSchema = new Schema({
-  userId: {
-    type: String,
-    default: uuidv4,
-    unique: true,
-  },
   email: {
     type: String,
     required: true,
@@ -48,7 +41,7 @@ const RegisterSchema = new Schema({
   password: {
     type: String,
     required: true,
-  },
+  }
 });
 
 const Register = mongoose.model('Register',RegisterSchema);
@@ -73,8 +66,6 @@ const ReviewSchema = new Schema({
     required: true,
     //Need to change min to 1 once we figure out the error. 
     //Otherwise change DishReview min to 0 -- This seems easier
-    min: 0,
-    max: 5
   },
   date: {
     type: Date,
@@ -84,7 +75,7 @@ const ReviewSchema = new Schema({
   userID: {
     type: Number,
     //pending for the implmentation of userId
-    required: false
+    required: true
   }
   
 });
@@ -96,7 +87,7 @@ const Review = mongoose.model('Review', ReviewSchema)
   const goodreview1 = new Review({
           value:4,
           date: {type: Date, default: Date.now},
-          userID: 123
+          userID: '123abc'
         });
         goodreview1.validateSync(function(error){
           if(error){
@@ -130,9 +121,9 @@ const DishSchema = new Schema({
         averageRating : 3.5,
         reviews: [{ value:4,
           date: {type: Date, default: Date.now},
-          userID: 123}, { value:3,
+          userID: '123abc'}, { value:3,
             date: {type: Date, default: Date.now},
-            userID: 456}],
+            userID: '456def'}],
       });
       goodDish1.validateSync(function(error){
             if(error){
@@ -161,8 +152,14 @@ const RestaurantSchema = new Schema({
  const goodrestaurant1 = new Restaurant({
         name: 'Los tacos',
         location: 'NYC',
-        dishes: [{name: 'tacos1', price: 9.99}, {name: 'tacos2', price: 8.99}],
-     });
+        dishes: {
+          name: 'Tacos1',
+          averageRating : 3.5,
+          reviews: [{ value:4,
+            date: {type: Date, default: Date.now},
+            userID: '123abc'}, { value:3,
+              date: {type: Date, default: Date.now},
+              userID: '456def'}]}});
      goodrestaurant1.validateSync(function(error){
           if(error){
                console.log(error);
