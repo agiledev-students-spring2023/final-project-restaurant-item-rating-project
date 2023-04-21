@@ -2,6 +2,7 @@
     display: flex;
     justify-content: center;
     font-family: 'Roboto';
+    color: #fff;
 }
   
 .form {
@@ -19,7 +20,7 @@
 .heading {
     font-size: 24px;
     font-weight: bold;
-    color: #31525B;
+    color: #fff;
     font-family: 'Roboto';
 }
   
@@ -54,11 +55,12 @@
     font-size: 16px;
     font-weight: bold;
     color: #fff;
-    background-color: #31525B;
+    background-color: #00a4bd;
     border: none;
     border-radius: 3px;
     text-decoration: none;
     cursor: pointer;
+    font-family: 'Roboto';
 }
   
 .button:hover {

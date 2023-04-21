@@ -3,6 +3,7 @@
     justify-content: center;
     font-family: 'Roboto';
     font-weight: bold;
+    color: #fff;
   }
   
   .register-form__container {
@@ -16,7 +17,7 @@
   .register-form__title {
     font-size: 2em;
     margin-bottom: 1em;
-    color: #31525B;
+    color: #fff;
   }
   
   .register-form__form {
@@ -50,7 +51,7 @@
     font-size: 1em;
     border: none;
     border-radius: 4px;
-    background-color: #31525B;
+    background-color: #00a4bd;
     color: white;
     cursor: pointer;
     font-family: 'Roboto';
@@ -62,7 +63,7 @@
     font-size: 1em;
     border: none;
     border-radius: 4px;
-    background-color: #31525B;
+    background-color: #00a4bd;
     color: white;
     cursor: pointer;
     font-family: 'Roboto';
