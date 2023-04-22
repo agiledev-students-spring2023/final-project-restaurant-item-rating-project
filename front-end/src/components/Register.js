@@ -11,9 +11,11 @@ export function Register() {
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
   const [passwordsMatch, setPasswordsMatch] = useState(true);
+  const [validEmail, setValidEmail] = useState(true);
 
   const handleEmailChange = (event) => {
     setEmail(event.target.value);
+    setValidEmail(event.target.value.includes("@"));
   };
 
   const handlePasswordChange = (event) => {
@@ -27,12 +29,15 @@ export function Register() {
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    // if (password === confirmPassword) {
-    //   handleRegister();
-    // } else {
-    //   alert("Passwords do not match.");
-    // }
-    // handle registration logic here, e.g. sending data to server
+    if (!validEmail) {
+      alert("Please enter a valid email address.");
+      return;
+    }
+    if (password === confirmPassword) {
+      handleRegister();
+    } else {
+      alert("Passwords do not match.");
+    }
   };
 
   const handleLogIn = () => {
@@ -75,7 +80,7 @@ export function Register() {
           <h2 className="register-form__title">Register</h2>
           <form className="register-form__form" onSubmit={handleSubmit}>
             <div className="register-form__input-group">
-              <label className="register-form__label" htmlFor="username">Email:</label>
+              <label className="register-form__label" htmlFor="email">Email:</label>
               <input
                 className="register-form__input"
                 type="text"
@@ -83,6 +88,11 @@ export function Register() {
                 value={email}
                 onChange={handleEmailChange}
               />
+              {!validEmail && (
+    <span className="register-form__error">
+      Please enter a valid email address.
+    </span>
+  )}
             </div>
             <div className="register-form__input-group">
               <label className="register-form__label" htmlFor="password">Password:</label>
@@ -105,7 +115,7 @@ export function Register() {
               />
              {!passwordsMatch && <span className="register-form__error">Passwords do not match.</span>}
           </div>
-          <button class="register-form__button" onClick={handleRegister}>Register</button>
+          <button class="register-form__button" onClick={handleRegister}disabled={!validEmail}>Register</button>
         </form>
         <br></br>
         <button class="register-form__login-button" onClick={handleLogIn}>Login Page</button>

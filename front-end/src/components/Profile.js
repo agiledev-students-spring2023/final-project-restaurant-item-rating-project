@@ -12,6 +12,7 @@ export function Profile() {
     const [password, setPassword] = useState('')
     const [newEmail, setNewEmail] = useState('');
     const [newPassword, setNewPassword] = useState('');
+    const [confirmPassword, setConfirmPassword] = useState('');
     const [avatarUrl, setAvatarUrl] = useState('');
     
 
@@ -25,6 +26,8 @@ useEffect(() => {
       const { email, password } = response.data;
       setEmail(email);
       setPassword(password);
+      // setAvatarUrl(avatarUrl);
+      console.log(avatarUrl)
     }).catch(error => {
       console.log(error);
       // handle error
@@ -54,6 +57,10 @@ const handleUpdateEmail = async (event) => {
 
 const handleUpdatePassword = async (event) => {
     event.preventDefault();
+    if (newPassword !== confirmPassword) {
+        alert("Passwords do not match");
+        return;
+    }
     try {
       const response = await axios.post(`${serverAddress}/profile/${storedId}`, {
         password: newPassword,
@@ -70,6 +77,7 @@ const handleUpdatePassword = async (event) => {
 
   const handleLogout = () => {
     // logout logic
+    // localStorage.clear();
     navigate('/login');
   };
 
@@ -79,7 +87,7 @@ const handleUpdatePassword = async (event) => {
     reader.readAsDataURL(file);
     reader.onload = () => {
       const avatarUrl = reader.result;
-      setAvatarUrl(avatarUrl);
+      // setAvatarUrl(avatarUrl);
   
       // clear old avatar URLs for the current user
       Object.keys(localStorage).forEach(key => {
@@ -129,29 +137,42 @@ const handleUpdatePassword = async (event) => {
                 type="email"
                 value={newEmail}
                 onChange={(event) => setNewEmail(event.target.value)}
-                onKeyDown={(event) => {
-                    if (event.keyCode === 13) {
-                      handleUpdateEmail();
-                    }
-                  }}
+                // onKeyDown={(event) => {
+                //     if (event.keyCode === 13) {
+                //       handleUpdateEmail();
+                //     }
+                //   }}
                 />
               </label>
-            </form>
+            <br />
+            <button style={{marginTop: '10px'}} type="submit">Update Email</button>
+          </form>
           <form onSubmit={handleUpdatePassword}>
             <br />
             <label>
-              New Password:
-              <br />
-              <input
-                style={{border: '1px solid #ccc', padding: '10px', width: '100%'}}
-                type="password"
-                value={newPassword}
-                onChange={(event) => setNewPassword(event.target.value)}
-              />
+                New Password:
+                <br />
+                <input
+                    style={{border: '1px solid #ccc', padding: '10px', width: '100%'}}
+                    type="password"
+                    value={newPassword}
+                    onChange={(event) => setNewPassword(event.target.value)}
+                />
+            </label>
+            <br />
+            <label>
+                Confirm Password:
+                <br />
+                <input
+                    style={{border: '1px solid #ccc', padding: '10px', width: '100%'}}
+                    type="password"
+                    value={confirmPassword}
+                    onChange={(event) => setConfirmPassword(event.target.value)}
+                />
             </label>
             <br />
             <button style={{marginTop: '10px'}} type="submit">Update Password</button>
-          </form>
+        </form>
           <button style={{marginTop: '40px'}} onClick={handleLogout}>Logout</button>
         </div>
       );

@@ -28,6 +28,7 @@ registerRouter.post('/', async (req, res) => {
       console.log(newUser);
 
       const token = jwt.sign({ id: newUser._id }, process.env.JWT_SECRET);
+      console.log(newUser._id);
       res.statusCode = 200;
       res.json({
         token,
