@@ -26,8 +26,6 @@ useEffect(() => {
       const { email, password } = response.data;
       setEmail(email);
       setPassword(password);
-      // setAvatarUrl(avatarUrl);
-      console.log(avatarUrl)
     }).catch(error => {
       console.log(error);
       // handle error
@@ -87,7 +85,7 @@ const handleUpdatePassword = async (event) => {
     reader.readAsDataURL(file);
     reader.onload = () => {
       const avatarUrl = reader.result;
-      // setAvatarUrl(avatarUrl);
+      setAvatarUrl(avatarUrl);
   
       // clear old avatar URLs for the current user
       Object.keys(localStorage).forEach(key => {
