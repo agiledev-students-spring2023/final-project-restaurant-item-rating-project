@@ -16,6 +16,7 @@ export function Profile() {
 
   const [storedId, setStoredId] = useState("");
 
+<<<<<<< HEAD
   useEffect(() => {
     const id = localStorage.getItem("userId");
     if (id) {
@@ -39,6 +40,24 @@ export function Profile() {
       }
     }
   }, [avatarUrl, email, password]);
+=======
+useEffect(() => {
+  const id = localStorage.getItem('userId');
+  if (id) {
+    setStoredId(id);
+    axios.get(`${serverAddress}/profile/${id}`).then(response => {
+      const { email, password,avatarUrl } = response.data;
+      setEmail(email);
+      setPassword(password);
+      setAvatarUrl(avatarUrl);
+      localStorage.setItem('avatarUrl', avatarUrl);
+
+    }).catch(error => {
+      console.log(error);
+    });
+  }
+}, [email,password]);
+>>>>>>> origin/master
 
   const handleUpdateEmail = async (event) => {
     event.preventDefault();
@@ -84,8 +103,13 @@ export function Profile() {
 
   const handleLogout = () => {
     // logout logic
+<<<<<<< HEAD
     // localStorage.clear();
     navigate("/login");
+=======
+    localStorage.clear();
+    navigate('/login');
+>>>>>>> origin/master
   };
 
   const handleAvatarUpload = (event) => {
@@ -93,6 +117,7 @@ export function Profile() {
     const reader = new FileReader();
     reader.readAsDataURL(file);
     reader.onload = () => {
+<<<<<<< HEAD
       const avatarUrl = reader.result;
       // setAvatarUrl(avatarUrl);
 
@@ -125,6 +150,29 @@ export function Profile() {
           p: 2,
         }}
       >
+=======
+      const avatarUrl = reader.result; // set the avatarUrl to the value from the FileReader
+      setAvatarUrl(avatarUrl);
+      axios.post(`${serverAddress}/avatar/${storedId}`, {
+        avatarUrl: avatarUrl,
+      })
+      .then(response => {
+        console.log(response.data);
+      })
+      .catch(error => {
+        console.log(error);
+      });
+    };
+  };
+  
+
+  
+  
+  
+    return (
+        <div>
+             <Box sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center', p: 2 }}>
+>>>>>>> origin/master
         <label htmlFor="avatar-upload">
           <Avatar src={avatarUrl} sx={{ width: 200, height: 200 }} />
         </label>

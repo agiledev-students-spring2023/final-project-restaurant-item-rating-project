@@ -28,6 +28,7 @@ export function DishReview() {
 
   const [storedId, setStoredId] = useState("");
 
+<<<<<<< HEAD
   useEffect(() => {
     // get user id
     const id = localStorage.getItem("userId");
@@ -108,6 +109,37 @@ export function DishReview() {
       setAvatarUrl(storedAvatarUrl);
     }
   }, []);
+=======
+  axios.post(`${serverAddress}/restaurant/${params.restaurantID}/dish/${params.dishID}/review`, {
+    value: rating
+  }).then(function (response) {
+  // console.log(response)
+  })
+  .catch(function (error) {
+    console.log(error);
+    alert(error);
+  });
+  // redirect to dish 
+  navigate(`/restaurant/${params.restaurantID}/dish/${params.dishID}`);
+ };
+
+ function calcAvgReview() {
+  if (!("reviews" in dish) || dish.reviews.length === 0) {return undefined};
+  const average = array => array.reduce((a, b) => a + b) / array.length;
+  return average(dish.reviews.map(review => review.value));
+ }
+
+ const [avatarUrl, setAvatarUrl] = useState('');
+ useEffect(() => {
+     const storedId = localStorage.getItem('userId');
+     axios.get(`${serverAddress}/profile/${storedId}`).then(response => {
+       const { email, password,avatarUrl } = response.data;
+       setAvatarUrl(avatarUrl);
+     }).catch(error => {
+       console.log(error);
+     });
+ }, []);
+>>>>>>> origin/master
 
   const handleAvatarClick = () => {
     navigate("/profile");

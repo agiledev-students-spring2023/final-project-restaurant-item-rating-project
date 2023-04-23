@@ -37,6 +37,20 @@ export function Home() {
     }
   }, []);
 
+<<<<<<< HEAD
+=======
+  const [avatarUrl, setAvatarUrl] = useState('');
+  useEffect(() => {
+      const storedId = localStorage.getItem('userId');
+      axios.get(`${serverAddress}/profile/${storedId}`).then(response => {
+        const { email, password,avatarUrl } = response.data;
+        setAvatarUrl(avatarUrl);
+      }).catch(error => {
+        console.log(error);
+      });
+  }, []);
+
+>>>>>>> origin/master
   const handleAvatarClick = () => {
     navigate("/profile");
   };

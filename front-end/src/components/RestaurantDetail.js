@@ -1,7 +1,13 @@
 import { Avatar, Box, Button, Typography } from "@mui/material";
 import Rating from "@mui/material/Rating";
 import { useEffect, useState } from "react";
+<<<<<<< HEAD
 import { useNavigate, useParams } from "react-router-dom";
+=======
+import { useNavigate, useParams } from 'react-router-dom';
+import axios from 'axios';
+
+>>>>>>> origin/master
 
 const serverAddress = "http://localhost:3002";
 
@@ -15,6 +21,7 @@ export function RestaurantDetail() {
   const [dishes, setDishes] = useState([]);
 
   useEffect(() => {
+<<<<<<< HEAD
     fetch(`${serverAddress}/restaurant/${params.restaurantID}`)
       .then((response) => response.json())
       .then((data) => {
@@ -36,6 +43,15 @@ export function RestaurantDetail() {
     if (storedId) {
       setAvatarUrl(storedAvatarUrl);
     }
+=======
+      const storedId = localStorage.getItem('userId');
+      axios.get(`${serverAddress}/profile/${storedId}`).then(response => {
+        const { email, password,avatarUrl } = response.data;
+        setAvatarUrl(avatarUrl);
+      }).catch(error => {
+        console.log(error);
+      });
+>>>>>>> origin/master
   }, []);
 
   const handleAvatarClick = () => {

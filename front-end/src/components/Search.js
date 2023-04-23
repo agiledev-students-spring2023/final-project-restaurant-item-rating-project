@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 import SearchIcon from "@mui/icons-material/Search";
 import { Box, TextField, Typography } from "@mui/material";
 import Button from "@mui/material/Button";
@@ -5,6 +6,18 @@ import IconButton from "@mui/material/IconButton";
 import axios from "axios";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+=======
+import SearchIcon from '@mui/icons-material/Search';
+import {Avatar, Box, Container, TextField, Typography } from "@mui/material";
+import Button from '@mui/material/Button';
+import Card from '@mui/material/Card';
+import CardContent from '@mui/material/CardContent';
+import CardMedia from '@mui/material/CardMedia';
+import { useEffect, useState } from "react";
+import { useNavigate } from 'react-router-dom';
+import IconButton from '@mui/material/IconButton';
+import axios from 'axios';
+>>>>>>> origin/master
 // reuse this function
 import { RestaurantMapping } from "./RestaurantMapping";
 
@@ -29,12 +42,37 @@ export function Search() {
       });
   };
 
+  const [avatarUrl, setAvatarUrl] = useState('');
+  useEffect(() => {
+      const storedId = localStorage.getItem('userId');
+      axios.get(`${serverAddress}/profile/${storedId}`).then(response => {
+        const { email, password,avatarUrl } = response.data;
+        setAvatarUrl(avatarUrl);
+      }).catch(error => {
+        console.log(error);
+      });
+  }, []);
+
+  const handleAvatarClick = () => {
+    navigate('/profile');
+  }
+
   return (
     <Box>
+<<<<<<< HEAD
       <Box
         sx={{
           display: "flex",
           justifyContent: "center",
+=======
+       <Box sx={{ display: "flex", justifyContent: "flex-end", alignItems: "center", p: 2 }}>
+      <Avatar onClick={handleAvatarClick} src={avatarUrl}/>
+       </Box>
+      <Box 
+        sx={{ 
+          display: 'flex', 
+          justifyContent: 'center', 
+>>>>>>> origin/master
         }}
       >
         <TextField

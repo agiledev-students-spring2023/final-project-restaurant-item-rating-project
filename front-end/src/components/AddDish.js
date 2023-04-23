@@ -12,6 +12,26 @@ import { useNavigate, useParams } from "react-router-dom";
 import "../App.css";
 
 export function AddDish() {
+<<<<<<< HEAD
+=======
+  const serverAddress = "http://localhost:3002"
+
+  const [avatarUrl, setAvatarUrl] = useState('');
+  useEffect(() => {
+      const storedId = localStorage.getItem('userId');
+      axios.get(`${serverAddress}/profile/${storedId}`).then(response => {
+        const { email, password,avatarUrl } = response.data;
+        setAvatarUrl(avatarUrl);
+      }).catch(error => {
+        console.log(error);
+      });
+  }, []);
+
+  const handleAvatarClick = () => {
+    navigate('/profile');
+  }
+
+>>>>>>> origin/master
   const navigate = useNavigate();
   const params = useParams();
 
