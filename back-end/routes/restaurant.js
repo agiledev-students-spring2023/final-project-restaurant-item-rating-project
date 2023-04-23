@@ -9,11 +9,15 @@ const MockHelpers = require("../tests/mock-helpers")
 // this router is used for paths matching "/restaurant"
 const restaurantRouter = express.Router();
 
-// // test route
-// restaurantRouter.get('/test', async (req, res) => {
+// test route
+restaurantRouter.get('/test', async (req, res) => {
 
+  const thing = "hi";
+  res.status(200).json({
+    "thing":thing
+  })
 
-
+})
 //   // console.log("hi");
 //   // const newRest = await Restaurant.create({
 //   //   name:"akhil",

@@ -129,6 +129,7 @@ const reviews =[]
 // });
 
 
+
 ratingRouter.post('/', async (req, res) => {
   try {
     // create a new rating in the database based on the data in the request body
@@ -143,8 +144,6 @@ ratingRouter.post('/', async (req, res) => {
     const dish = newRest.dishes.find((dish)=>{
       return ((dish._id.toString()) == dishId);
     });
-
-
 
     const rev = dish.reviews.push(req.body);
     newRest.save()

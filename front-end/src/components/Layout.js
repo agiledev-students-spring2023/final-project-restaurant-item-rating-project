@@ -57,7 +57,7 @@ export function Layout() {
       {/* back button */}
       {/* check if "home" */}
       {
-        (location.pathname === '/') ? 
+        (location.pathname === '/home') ? 
         "" : 
       <IconButton 
         variant="outlined" 

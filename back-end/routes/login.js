@@ -1,60 +1,61 @@
-const express = require('express');
-const jwt = require('jsonwebtoken');
-const bcrypt = require('bcrypt');
+const express = require("express");
+const jwt = require("jsonwebtoken");
+const bcrypt = require("bcrypt");
 const { Register } = require("./../db");
 
 const loginRouter = express.Router();
 
+loginRouter.post("/", async (req, res) => {
+  const { email, password } = req.body;
 
-loginRouter.post('/', async (req, res) => {
-    const { email, password } = req.body;
+  try {
+    const user = await Register.findOne({ email });
+    if (!user) {
+      res.statusCode = 401;
+      return res.json({ message: "Authentication failed: User not found" });
+    }
 
-    try {
-      const user = await Register.findOne({ email });
-      if (!user) {
-        res.statusCode = 401;
-        return res.json({ message: "Authentication failed: User not found" });
-      }
-  
-    const passwordMatch = await bcrypt.compare(req.body.password, user.password);
+    const passwordMatch = await bcrypt.compare(
+      req.body.password,
+      user.password
+    );
     if (!passwordMatch) {
-        return res.status(401).json({ message: "Invalid email or password" });
+      return res.status(401).json({ message: "Invalid email or password" });
     }
-  
-      res.statusCode = 200;
-      const token = jwt.sign({ userId: user._id }, process.env.JWT_SECRET);
-      res.json({ token, userId: user._id  });
+    res.statusCode = 200;
+    const token = jwt.sign({ userId: user._id }, process.env.JWT_SECRET);
+    res.json({ token, userId: user._id });
     //   res.json({ message: "Authentication successful" });
-    } catch (err) {
-      console.log(err);
-      res.statusCode = 500;
-      res.json({ error: "there was an error logging in" });
-    }
-  });
+  } catch (err) {
+    console.log(err);
+    res.statusCode = 500;
+    res.json({ error: "there was an error logging in" });
+  }
+});
 
-    // const { email, password } = req.body;
-    // console.log(email);
-    // console.log(password);
-    // try {
-    //   const user = await Register.findOne({ email });
-    //   if (!user) {
-    //     res.statusCode = 401;
-    //     return res.json({ message: "Authentication failed: User not found" });
-    //   }
-    //   console.log(user);
-    //   const isMatch = await bcrypt.compare(password, user.password);
-    //   if (!isMatch) {
-    //     res.statusCode = 401;
-    //     return res.json({ message: "Authentication failed: Invalid password" });
-    //   }
+// const { email, password } = req.body;
+// console.log(email);
+// console.log(password);
+// try {
+//   const user = await Register.findOne({ email });
+//   if (!user) {
+//     res.statusCode = 401;
+//     return res.json({ message: "Authentication failed: User not found" });
+//   }
+//   console.log(user);
+//   const isMatch = await bcrypt.compare(password, user.password);
+//   if (!isMatch) {
+//     res.statusCode = 401;
+//     return res.json({ message: "Authentication failed: Invalid password" });
+//   }
 
-    //   res.statusCode = 200;
-    //   res.json({ message: "Authentication successful" });
-    // } catch (err) {
-    //   console.log(err);
-    //   res.statusCode = 500;
-    //   res.json({ error: "there was an error logging in" });
-    // }
+//   res.statusCode = 200;
+//   res.json({ message: "Authentication successful" });
+// } catch (err) {
+//   console.log(err);
+//   res.statusCode = 500;
+//   res.json({ error: "there was an error logging in" });
+// }
 //   });
-  
-  module.exports = loginRouter;
+
+module.exports = loginRouter;
