@@ -15,11 +15,13 @@ avatarRouter.post('/:id', async (req, res) => {
     if (!user) {
       return res.status(404).send('User not found');
     }
+    // console.log(user);
 
     const { avatarUrl } = req.body;
     if (avatarUrl) {
       user.avatarUrl = avatarUrl;
     }
+    // console.log(user.avatarUrl);
 
     await user.save();
 

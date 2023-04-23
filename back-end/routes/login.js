@@ -24,6 +24,7 @@ loginRouter.post('/', async (req, res) => {
       res.statusCode = 200;
       const token = jwt.sign({ userId: user._id }, process.env.JWT_SECRET);
       res.json({ token, userId: user._id  });
+      console.log(user);
     //   res.json({ message: "Authentication successful" });
     } catch (err) {
       console.log(err);

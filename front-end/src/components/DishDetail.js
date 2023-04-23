@@ -36,15 +36,16 @@ export function DishDetail() {
     });
   }, []);
 
-  
   const [avatarUrl, setAvatarUrl] = useState('');
   useEffect(() => {
       const storedId = localStorage.getItem('userId');
-      const storedAvatarUrl = localStorage.getItem(`avatarUrl-${storedId}`);
-      if (storedId) {
-        setAvatarUrl(storedAvatarUrl);
-      }
-    }, []);
+      axios.get(`${serverAddress}/profile/${storedId}`).then(response => {
+        const { email, password,avatarUrl } = response.data;
+        setAvatarUrl(avatarUrl);
+      }).catch(error => {
+        console.log(error);
+      });
+  }, []);
 
   const handleAvatarClick = () => {
     navigate('/profile');
