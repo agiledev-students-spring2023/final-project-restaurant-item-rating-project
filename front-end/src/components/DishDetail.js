@@ -4,6 +4,7 @@ import axios from "axios";
 import { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import TimeAgo from "react-timeago";
+import Avatar from "@mui/material/Avatar";
 
 const serverAddress = "http://localhost:3002";
 
@@ -50,31 +51,23 @@ export function DishDetail() {
       });
   }, []);
 
-<<<<<<< HEAD
-  // const [avatarUrl, setAvatarUrl] = useState("");
-  // useEffect(() => {
-  //   const storedId = localStorage.getItem("userId");
-  //   const storedAvatarUrl = localStorage.getItem(`avatarUrl-${storedId}`);
-  //   if (storedId) {
-  //     setAvatarUrl(storedAvatarUrl);
-  //   }
-  // }, []);
-=======
-  const [avatarUrl, setAvatarUrl] = useState('');
+  const [avatarUrl, setAvatarUrl] = useState("");
   useEffect(() => {
-      const storedId = localStorage.getItem('userId');
-      axios.get(`${serverAddress}/profile/${storedId}`).then(response => {
-        const { email, password,avatarUrl } = response.data;
+    const storedId = localStorage.getItem("userId");
+    axios
+      .get(`${serverAddress}/profile/${storedId}`)
+      .then((response) => {
+        const { email, password, avatarUrl } = response.data;
         setAvatarUrl(avatarUrl);
-      }).catch(error => {
+      })
+      .catch((error) => {
         console.log(error);
       });
   }, []);
->>>>>>> origin/master
 
-  // const handleAvatarClick = () => {
-  //   navigate("/profile");
-  // };
+  const handleAvatarClick = () => {
+    navigate("/profile");
+  };
 
   return (
     <Box
@@ -93,7 +86,7 @@ export function DishDetail() {
           p: 2,
         }}
       >
-        {/* <Avatar onClick={handleAvatarClick} src={avatarUrl} /> */}
+        <Avatar onClick={handleAvatarClick} src={avatarUrl} />
       </Box>
       <Typography variant="h3">{dish.name}</Typography>
       <Box sx={{ m: 2 }} />
