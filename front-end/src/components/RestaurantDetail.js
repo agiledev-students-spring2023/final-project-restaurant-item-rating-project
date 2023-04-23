@@ -21,7 +21,7 @@ export function RestaurantDetail() {
         setRestaurantName(data.name);
         setLocation(data.location);
         setDishes(data.dishes);
-        console.log(data.dishes)
+        console.log(data.dishes);
       })
       .catch((err) => {
         console.error(err);
@@ -41,6 +41,16 @@ export function RestaurantDetail() {
   const handleAvatarClick = () => {
     navigate("/profile");
   };
+
+  function calcAvgReview(dish) {
+    if (!("reviews" in dish) || dish.reviews.length === 0) {
+      return 0;
+    }
+    const average = (array) => array.reduce((a, b) => a + b) / array.length;
+    return (
+      Math.round(10 * average(dish.reviews.map((review) => review.value))) / 10
+    );
+  }
 
   // get restaurant
   return (
@@ -108,11 +118,6 @@ export function RestaurantDetail() {
             }}
           >
             <Box height="2rem" />
-            <img
-              src={`${serverAddress}/${dish.image}`}
-              alt="Delicious food"
-              style={{ maxWidth: "100%", height: "auto" }}
-            />
             <Typography
               style={{ fontFamily: "Roboto" }}
               variant="h5"
@@ -121,8 +126,23 @@ export function RestaurantDetail() {
             >
               {dish.name}
             </Typography>
-            {"averageRating" in dish ? (
-              <Rating name="read-only" value={dish.averageRating} readOnly />
+            {"reviews" in dish && dish.reviews.length > 0 ? (
+              <Box>
+                <Rating
+                  readOnly
+                  size="medium"
+                  value={calcAvgReview(dish) ?? 0}
+                />
+              </Box>
+            ) : (
+              ""
+            )}
+            {"image" in dish ? (
+              <img
+                src={`${serverAddress}/${dish.image}`}
+                alt="Delicious food"
+                style={{ maxWidth: "100%", height: "auto" }}
+              />
             ) : (
               ""
             )}

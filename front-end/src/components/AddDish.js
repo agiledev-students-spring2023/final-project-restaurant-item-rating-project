@@ -39,25 +39,19 @@ export function AddDish() {
   // const [uploadedImages, setUploadedImages] = useState([]);
   const [uploadedFile, setUploadedFile] = useState("");
 
-  // const handleSubmit = (event) => {
-  //   if (!dishName) {
-  //     alert("Please enter a dish name");
-  //     return;
-  //   }
-  //   axios
-  //     .post(`${serverAddress}/restaurant/${params.restaurantID}/dish`, {
-  //       name: dishName,
-  //     })
-  //     .then(function (response) {
-  //       console.log(response);
-  //     })
-  //     .catch(function (error) {
-  //       console.log(error);
-  //       alert(error);
-  //     });
-  //   // redirect to dish
-  //   navigate(`/restaurant/${params.restaurantID}`);
-  // };
+  const handleSubmit = (event) => {
+    axios
+      .post(`${serverAddress}/restaurant/${params.restaurantID}/dish`, {})
+      .then(function (response) {
+        console.log(response);
+      })
+      .catch(function (error) {
+        console.log(error);
+        alert(error);
+      });
+    // redirect to dish
+    navigate(`/restaurant/${params.restaurantID}`);
+  };
 
   useEffect(() => {
     // get restaurant name
@@ -71,7 +65,6 @@ export function AddDish() {
         // alert("An error has occurred when finding that restaurant");
       });
   }, []);
-
 
   return (
     <Container>
@@ -91,20 +84,15 @@ export function AddDish() {
       <Box
         component="form"
         action={formAddress}
-        // onSubmit={()=>{navigate(`/restaurant/${params.restaurantID}`)}}
         method="post"
         encType="multipart/form-data"
       >
         <Box sx={{ m: 2 }} />
         <TextField
-          // component="input"
+
           type="text"
           label="Dish Name"
           name="dishName"
-          // value={dishName}
-          // onChange={(e) => {
-          //   setDishName(e.target.value);
-          // }}
         />
         <Box sx={{ m: 2 }} />
         <Typography variant="h6">Add Pictures?</Typography>
@@ -122,27 +110,6 @@ export function AddDish() {
             }}
           />
         </Button>
-
-        {/* <FormGroup>
-          <FormControlLabel 
-            control={
-              <Checkbox 
-                inputProps={{ 'aria-label': 'controlled' }}
-              />
-            } 
-            label="Vegan" 
-          />
-          <FormControlLabel 
-            control={
-              <Checkbox 
-                checked={isGlutenFree}
-                onChange={handleGlutenFree}
-                inputProps={{ 'aria-label': 'controlled' }}
-              />
-            } 
-            label="Gluten Free" 
-          />
-        </FormGroup> */}
 
         <Box sx={{ m: 2 }} />
 

@@ -97,15 +97,28 @@ dishRouter.get("/:id", async (req, res) => {
 
 // Define the POST endpoint to create a a dish for a restaurant
 dishRouter.post("/", upload.single("dishImage"), async (req, res) => {
+  let dishError = true;
+  if ("file" in req) {
+    dishError = false;
+  }
+
   const { restaurantId } = req.params;
   // console.log(req.file.path)
   try {
     const newRest = await Restaurant.findById(restaurantId);
-    const dish = newRest.dishes.push({
-      name: req.body.dishName,
-      image: req.file.path
-    });
+    if (dishError) {
+      const dish = newRest.dishes.push({
+        name: req.body.dishName,
+      });
+    } else {
+      const dish = newRest.dishes.push({
+        name: req.body.dishName,
+        image: req.file.path,
+      });
+    }
     newRest.save();
+    res.redirect(`http://localhost:3000/restaurant/${restaurantId}`)
+    
   } catch (err) {
     console.log(err);
     res.statusCode = 500;

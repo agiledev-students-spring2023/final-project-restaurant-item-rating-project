@@ -94,12 +94,12 @@ export function DishReview() {
 
   function calcAvgReview() {
     if (!("reviews" in dish) || dish.reviews.length === 0) {
-      return undefined;
+      return 0;
     }
     const average = (array) => array.reduce((a, b) => a + b) / array.length;
-    return average(dish.reviews.map((review) => review.value));
+    console.log(average(dish.reviews.map((review) => review.value)))
+    return Math.round(10* average(dish.reviews.map((review) => review.value)))/10;
   }
-
   const [avatarUrl, setAvatarUrl] = useState("");
   useEffect(() => {
     const storedId = localStorage.getItem("userId");

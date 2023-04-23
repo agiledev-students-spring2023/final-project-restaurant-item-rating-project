@@ -12,9 +12,11 @@ const restaurantRouter = express.Router();
 // test route
 restaurantRouter.get('/test', async (req, res) => {
 
-  const thing = "hi";
-  res.status(200).json({
-    "thing":thing
+  // Restaurant.deleteMany({})
+  const r = await Restaurant.find({})
+
+  res.json({
+    "thing":r
   })
 
 })

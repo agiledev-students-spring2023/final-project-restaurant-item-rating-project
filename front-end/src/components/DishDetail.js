@@ -24,6 +24,17 @@ export function DishDetail() {
   const [restaurantName, setRestaurantName] = useState(""); // TODO: mock this with mockeroo
   const [dish, setDish] = useState({});
 
+  function calcAvgReview() {
+    if (!("reviews" in dish) || dish.reviews.length === 0) {
+      return 0;
+    }
+    const average = (array) => array.reduce((a, b) => a + b) / array.length;
+    console.log(average(dish.reviews.map((review) => review.value)));
+    return (
+      Math.round(10 * average(dish.reviews.map((review) => review.value))) / 10
+    );
+  }
+
   useEffect(() => {
     // Make a GET request to fetch the initial data
     axios
@@ -88,28 +99,30 @@ export function DishDetail() {
       <Box sx={{ m: 1.5 }} />
 
       {/* images */}
-      <Typography
-        style={{ fontFamily: "Roboto" }}
-        color={"#31525B"}
-        variant="h4"
-      >
-        How it Looks
-      </Typography>
-      <Box sx={{ m: 0.5 }} />
-
-      { "name" in dish ? 
-      <ImageListItem key={dish.id}>
-        <img
-          src={`${serverAddress}/${dish.image}`}
-          // srcSet={`${serverAddress}/${dish.image}`}
-          alt={dish.name}
-          // width="auto"
-          // height="auto"
-          loading="lazy"
-        />
-      </ImageListItem>
-      : ""
-      }
+      {"image" in dish ? (
+        <Box>
+          <Typography
+            style={{ fontFamily: "Roboto" }}
+            color={"#31525B"}
+            variant="h4"
+          >
+            How it Looks
+          </Typography>
+          <Box sx={{ m: 0.5 }} />
+          <ImageListItem key={dish.id}>
+            <img
+              src={`${serverAddress}/${dish.image}`}
+              // srcSet={`${serverAddress}/${dish.image}`}
+              alt={dish.name}
+              // width="auto"
+              // height="auto"
+              loading="lazy"
+            />
+          </ImageListItem>
+        </Box>
+      ) : (
+        ""
+      )}
       {/* <ImageList 
         sx={{ 
           width: "100%", 
@@ -142,6 +155,13 @@ export function DishDetail() {
       >
         Reviews
       </Typography>
+      {"reviews" in dish && dish.reviews.length > 0 ? (
+        <Box>
+          <Rating readOnly size="medium" value={calcAvgReview(dish) ?? 0} />
+        </Box>
+      ) : (
+        ""
+      )}
       <Button
         variant="contained"
         size="small"
