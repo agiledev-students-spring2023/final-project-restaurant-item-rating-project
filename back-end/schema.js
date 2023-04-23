@@ -41,6 +41,11 @@ const RegisterSchema = new Schema({
   password: {
     type: String,
     required: true,
+  },
+  avatarUrl:{
+    type: String,
+    // required: true,
+    default: '',
   }
 });
 

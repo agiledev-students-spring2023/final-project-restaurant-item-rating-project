@@ -23,17 +23,15 @@ useEffect(() => {
   if (id) {
     setStoredId(id);
     axios.get(`${serverAddress}/profile/${id}`).then(response => {
-      const { email, password } = response.data;
+      const { email, password,avatarUrl } = response.data;
       setEmail(email);
       setPassword(password);
+      setAvatarUrl(avatarUrl);
+      localStorage.setItem('avatarUrl', avatarUrl);
+
     }).catch(error => {
       console.log(error);
-      // handle error
     });
-    const storedAvatarUrl = localStorage.getItem(`avatarUrl-${id}`);
-    if (storedAvatarUrl) {
-      setAvatarUrl(storedAvatarUrl);
-    }
   }
 }, [email,password]);
 
@@ -75,7 +73,7 @@ const handleUpdatePassword = async (event) => {
 
   const handleLogout = () => {
     // logout logic
-    // localStorage.clear();
+    localStorage.clear();
     navigate('/login');
   };
 
@@ -84,27 +82,21 @@ const handleUpdatePassword = async (event) => {
     const reader = new FileReader();
     reader.readAsDataURL(file);
     reader.onload = () => {
-      const avatarUrl = reader.result;
+      const avatarUrl = reader.result; // set the avatarUrl to the value from the FileReader
       setAvatarUrl(avatarUrl);
-  
-      // clear old avatar URLs for the current user
-      Object.keys(localStorage).forEach(key => {
-        if (key.startsWith('avatarUrl-') && key !== `avatarUrl-${storedId}`) {
-          localStorage.removeItem(key);
-        }
-      });
-  
-      // update the avatarUrl for the user logged in
       axios.post(`${serverAddress}/avatar/${storedId}`, {
+        avatarUrl: avatarUrl,
       })
       .then(response => {
-        localStorage.setItem(`avatarUrl-${storedId}`, avatarUrl);
+        console.log(response.data);
       })
       .catch(error => {
         console.log(error);
       });
     };
   };
+  
+
   
   
   

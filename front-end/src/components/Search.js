@@ -1,5 +1,5 @@
 import SearchIcon from '@mui/icons-material/Search';
-import { Box, Container, TextField, Typography } from "@mui/material";
+import {Avatar, Box, Container, TextField, Typography } from "@mui/material";
 import Button from '@mui/material/Button';
 import Card from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';
@@ -35,8 +35,26 @@ export function Search() {
     });
   };  
 
+  const [avatarUrl, setAvatarUrl] = useState('');
+  useEffect(() => {
+      const storedId = localStorage.getItem('userId');
+      axios.get(`${serverAddress}/profile/${storedId}`).then(response => {
+        const { email, password,avatarUrl } = response.data;
+        setAvatarUrl(avatarUrl);
+      }).catch(error => {
+        console.log(error);
+      });
+  }, []);
+
+  const handleAvatarClick = () => {
+    navigate('/profile');
+  }
+
   return (
     <Box>
+       <Box sx={{ display: "flex", justifyContent: "flex-end", alignItems: "center", p: 2 }}>
+      <Avatar onClick={handleAvatarClick} src={avatarUrl}/>
+       </Box>
       <Box 
         sx={{ 
           display: 'flex', 
