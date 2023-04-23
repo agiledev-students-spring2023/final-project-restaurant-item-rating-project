@@ -22,17 +22,10 @@ loginRouter.post("/", async (req, res) => {
     if (!passwordMatch) {
       return res.status(401).json({ message: "Invalid email or password" });
     }
-<<<<<<< HEAD
-    res.statusCode = 200;
-    const token = jwt.sign({ userId: user._id }, process.env.JWT_SECRET);
-    res.json({ token, userId: user._id });
-=======
-  
       res.statusCode = 200;
       const token = jwt.sign({ userId: user._id }, process.env.JWT_SECRET);
       res.json({ token, userId: user._id  });
       console.log(user);
->>>>>>> origin/master
     //   res.json({ message: "Authentication successful" });
   } catch (err) {
     console.log(err);

@@ -12,9 +12,8 @@ import { useNavigate, useParams } from "react-router-dom";
 import "../App.css";
 
 export function AddDish() {
-<<<<<<< HEAD
-=======
   const serverAddress = "http://localhost:3002"
+  const formAddress = `${serverAddress}/restaurant/${params.restaurantID}/dish`;
 
   const [avatarUrl, setAvatarUrl] = useState('');
   useEffect(() => {
@@ -31,25 +30,12 @@ export function AddDish() {
     navigate('/profile');
   }
 
->>>>>>> origin/master
   const navigate = useNavigate();
   const params = useParams();
 
-  const serverAddress = "http://localhost:3002";
-  const formAddress = `${serverAddress}/restaurant/${params.restaurantID}/dish`;
 
-  // avatar stuff
-  const [avatarUrl, setAvatarUrl] = useState("");
-  useEffect(() => {
-    const storedId = localStorage.getItem("userId");
-    const storedAvatarUrl = localStorage.getItem(`avatarUrl-${storedId}`);
-    if (storedId) {
-      setAvatarUrl(storedAvatarUrl);
-    }
-  }, []);
-  const handleAvatarClick = () => {
-    navigate("/profile");
-  };
+
+
 
   // fetched data
   const [restaurantName, setRestaurantName] = useState("");

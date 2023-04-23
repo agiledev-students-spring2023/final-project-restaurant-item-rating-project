@@ -8,37 +8,19 @@ const serverAddress = "http://localhost:3002";
 
 export function Home() {
   // TODO: implement dish suggestions (in back-end too)
-  //  see commented code before
 
   const [suggestionsRestaurant, setSuggestionsRestaurant] = useState([]);
-  // const [suggestionsDish, setSuggestionsDish] = useState([]);
 
   const navigate = useNavigate();
 
   const restaurantSuggestionsUrl = `${serverAddress}/suggestion/restaurant`;
-  // const dishSuggestionsUrl = `${serverAddress}/suggestion/dish`
+
   useEffect(() => {
     axios.get(restaurantSuggestionsUrl).then((response) => {
       setSuggestionsRestaurant(response.data.slice(0, 25));
     });
-    // axios.get(dishSuggestionsUrl)
-    // .then((response) => response.json())
-    // .then((data) => {
-    //   setSuggestionsDish(data);
-    // });
   }, [restaurantSuggestionsUrl]);
 
-  const [avatarUrl, setAvatarUrl] = useState("");
-  useEffect(() => {
-    const storedId = localStorage.getItem("userId");
-    const storedAvatarUrl = localStorage.getItem(`avatarUrl-${storedId}`);
-    if (storedId) {
-      setAvatarUrl(storedAvatarUrl);
-    }
-  }, []);
-
-<<<<<<< HEAD
-=======
   const [avatarUrl, setAvatarUrl] = useState('');
   useEffect(() => {
       const storedId = localStorage.getItem('userId');
@@ -50,7 +32,6 @@ export function Home() {
       });
   }, []);
 
->>>>>>> origin/master
   const handleAvatarClick = () => {
     navigate("/profile");
   };
@@ -59,9 +40,6 @@ export function Home() {
 
   return (
     <Container>
-      {/* <Button onClick={() => navigate('/search')}>Search</Button> */}
-
-      {/* <Button onClick={() => navigate('/favorites')}>Your Favorites - not built out</Button> */}
       <Box
         sx={{
           display: "flex",

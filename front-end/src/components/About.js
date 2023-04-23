@@ -1,33 +1,13 @@
 import { Avatar, Box, Typography } from "@mui/material";
-<<<<<<< HEAD
-import { useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
-=======
 import { useLocation, useNavigate, useParams } from "react-router-dom";
 import { useState, useEffect } from 'react';
 import axios from 'axios';
->>>>>>> origin/master
 
 export function About() {
   const navigate = useNavigate();
+  const serverAddress = "http://localhost:3002"
 
-<<<<<<< HEAD
-  const [avatarUrl, setAvatarUrl] = useState("");
-  useEffect(() => {
-    const storedId = localStorage.getItem("userId");
-    const storedAvatarUrl = localStorage.getItem(`avatarUrl-${storedId}`);
-    if (storedId) {
-      setAvatarUrl(storedAvatarUrl);
-    }
-  }, []);
-=======
-const serverAddress = "http://localhost:3002";
-
-
-  export function About() {
-     const navigate = useNavigate();
-     
-     const [avatarUrl, setAvatarUrl] = useState('');
+  const [avatarUrl, setAvatarUrl] = useState('');
   useEffect(() => {
       const storedId = localStorage.getItem('userId');
       axios.get(`${serverAddress}/profile/${storedId}`).then(response => {
@@ -37,8 +17,6 @@ const serverAddress = "http://localhost:3002";
         console.log(error);
       });
   }, []);
-  
->>>>>>> origin/master
 
   const handleAvatarClick = () => {
     navigate("/profile");

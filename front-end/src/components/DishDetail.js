@@ -22,7 +22,7 @@ export function DishDetail() {
       return 0;
     }
     const average = (array) => array.reduce((a, b) => a + b) / array.length;
-    console.log(average(dish.reviews.map((review) => review.value)));
+    // console.log(average(dish.reviews.map((review) => review.value)));
     return (
       Math.round(10 * average(dish.reviews.map((review) => review.value))) / 10
     );

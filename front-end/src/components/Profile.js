@@ -16,31 +16,6 @@ export function Profile() {
 
   const [storedId, setStoredId] = useState("");
 
-<<<<<<< HEAD
-  useEffect(() => {
-    const id = localStorage.getItem("userId");
-    if (id) {
-      setStoredId(id);
-      axios
-        .get(`${serverAddress}/profile/${id}`)
-        .then((response) => {
-          const { email, password } = response.data;
-          setEmail(email);
-          setPassword(password);
-          // setAvatarUrl(avatarUrl);
-          console.log(avatarUrl);
-        })
-        .catch((error) => {
-          console.log(error);
-          // handle error
-        });
-      const storedAvatarUrl = localStorage.getItem(`avatarUrl-${id}`);
-      if (storedAvatarUrl) {
-        setAvatarUrl(storedAvatarUrl);
-      }
-    }
-  }, [avatarUrl, email, password]);
-=======
 useEffect(() => {
   const id = localStorage.getItem('userId');
   if (id) {
@@ -57,7 +32,6 @@ useEffect(() => {
     });
   }
 }, [email,password]);
->>>>>>> origin/master
 
   const handleUpdateEmail = async (event) => {
     event.preventDefault();
@@ -103,13 +77,8 @@ useEffect(() => {
 
   const handleLogout = () => {
     // logout logic
-<<<<<<< HEAD
-    // localStorage.clear();
-    navigate("/login");
-=======
     localStorage.clear();
     navigate('/login');
->>>>>>> origin/master
   };
 
   const handleAvatarUpload = (event) => {
@@ -117,40 +86,6 @@ useEffect(() => {
     const reader = new FileReader();
     reader.readAsDataURL(file);
     reader.onload = () => {
-<<<<<<< HEAD
-      const avatarUrl = reader.result;
-      // setAvatarUrl(avatarUrl);
-
-      // clear old avatar URLs for the current user
-      Object.keys(localStorage).forEach((key) => {
-        if (key.startsWith("avatarUrl-") && key !== `avatarUrl-${storedId}`) {
-          localStorage.removeItem(key);
-        }
-      });
-
-      // update the avatarUrl for the user logged in
-      axios
-        .post(`${serverAddress}/avatar/${storedId}`, {})
-        .then((response) => {
-          localStorage.setItem(`avatarUrl-${storedId}`, avatarUrl);
-        })
-        .catch((error) => {
-          console.log(error);
-        });
-    };
-  };
-
-  return (
-    <div>
-      <Box
-        sx={{
-          display: "flex",
-          justifyContent: "center",
-          alignItems: "center",
-          p: 2,
-        }}
-      >
-=======
       const avatarUrl = reader.result; // set the avatarUrl to the value from the FileReader
       setAvatarUrl(avatarUrl);
       axios.post(`${serverAddress}/avatar/${storedId}`, {
@@ -172,7 +107,6 @@ useEffect(() => {
     return (
         <div>
              <Box sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center', p: 2 }}>
->>>>>>> origin/master
         <label htmlFor="avatar-upload">
           <Avatar src={avatarUrl} sx={{ width: 200, height: 200 }} />
         </label>
