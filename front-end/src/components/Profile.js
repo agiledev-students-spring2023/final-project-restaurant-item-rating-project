@@ -38,7 +38,7 @@ export function Profile() {
         setAvatarUrl(storedAvatarUrl);
       }
     }
-  }, [email, password]);
+  }, [avatarUrl, email, password]);
 
   const handleUpdateEmail = async (event) => {
     event.preventDefault();

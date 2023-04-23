@@ -2,7 +2,7 @@ import { Avatar, Box, Button, Typography } from "@mui/material";
 import Rating from "@mui/material/Rating";
 import axios from "axios";
 import React, { useEffect, useState } from "react";
-import { useLocation, useNavigate, useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import "./stars.css";
 
 export function DishReview() {
@@ -12,7 +12,6 @@ export function DishReview() {
 
   // to change pages
   const navigate = useNavigate();
-  const location = useLocation();
 
   const centeringStyles = {
     justifyContent: "center",
@@ -27,7 +26,6 @@ export function DishReview() {
   const [restaurantName, setRestaurantName] = useState("");
   const [dish, setDish] = useState({});
 
-  
   const [storedId, setStoredId] = useState("");
 
   useEffect(() => {
@@ -35,9 +33,8 @@ export function DishReview() {
     const id = localStorage.getItem("userId");
     if (id) {
       setStoredId(id);
-    }
-    else {
-      alert("Error: User not logged in. You must be logged in to review")
+    } else {
+      alert("Error: User not logged in. You must be logged in to review");
     }
 
     // get restaurant name
@@ -62,7 +59,7 @@ export function DishReview() {
         console.error(err);
         // alert("An error has occurred when finding the dish");
       });
-  }, []);
+  }, [params.dishID, params.restaurantID]);
 
   const handleSubmit = (event) => {
     if (rating < 0 || rating > 5) {
@@ -78,11 +75,12 @@ export function DishReview() {
         `${serverAddress}/restaurant/${params.restaurantID}/dish/${params.dishID}/review`,
         {
           value: rating,
-          userID: storedId
+          userID: storedId,
         }
       )
       .then(function (response) {
         // console.log(response)
+        setIsSubmitted(true)
       })
       .catch(function (error) {
         console.log(error);
@@ -97,8 +95,10 @@ export function DishReview() {
       return 0;
     }
     const average = (array) => array.reduce((a, b) => a + b) / array.length;
-    console.log(average(dish.reviews.map((review) => review.value)))
-    return Math.round(10* average(dish.reviews.map((review) => review.value)))/10;
+    console.log(average(dish.reviews.map((review) => review.value)));
+    return (
+      Math.round(10 * average(dish.reviews.map((review) => review.value))) / 10
+    );
   }
   const [avatarUrl, setAvatarUrl] = useState("");
   useEffect(() => {

@@ -1,35 +1,32 @@
+import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
+import "./Login.css";
 
-import { Box, Container, TextField, Typography } from "@mui/material";
-import React, { useState } from 'react';
-import { Redirect, Link, useNavigate } from 'react-router-dom';
-import './Login.css';
+import axios from "axios";
 
-import axios from 'axios'
-
-const serverAddress = "http://localhost:3002"
+const serverAddress = "http://localhost:3002";
 
 export function Login() {
-  const navigate = useNavigate()
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
-  const [redirect, setRedirect] = useState(false);
+  const navigate = useNavigate();
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
   const [error, setError] = useState(false);
-  
+
   const handleLogin = async (event) => {
     event.preventDefault();
-  
+
     try {
       const response = await axios.post(`${serverAddress}/login`, {
         email: email,
-        password: password
+        password: password,
       });
-  
+
       if (response.status === 200) {
         const { token, userId } = response.data;
-        localStorage.setItem('token', token);
-        localStorage.setItem('userId', userId);
-        localStorage.setItem('email', email);
-        localStorage.setItem('password', password);
+        localStorage.setItem("token", token);
+        localStorage.setItem("userId", userId);
+        localStorage.setItem("email", email);
+        localStorage.setItem("password", password);
         console.log(userId);
         navigate("/home");
       } else {
@@ -40,11 +37,16 @@ export function Login() {
       setError(true);
     }
   };
-  
+
   return (
-    <div style={{ backgroundColor: '#FAA101' }}>
+    <div style={{ backgroundColor: "#FAA101" }}>
       <header>
-        <img src={require('./Dish_Dealer_Logo.png')} width={350} height={200} alt="Dish Dealer Logo" />
+        <img
+          src={require("./Dish_Dealer_Logo.png")}
+          width={350}
+          height={200}
+          alt="Dish Dealer Logo"
+        />
       </header>
       <div className="login-form">
         <form class="form" onSubmit={handleLogin}>
@@ -52,7 +54,9 @@ export function Login() {
             <h3 className="heading">Log In</h3>
           </div>
           <div className="input-container">
-            <label className="label" htmlFor="email">Email:</label>
+            <label className="label" htmlFor="email">
+              Email:
+            </label>
             <input
               className="input"
               type="email"
@@ -62,7 +66,9 @@ export function Login() {
             />
           </div>
           <div className="input-container">
-            <label className="label" htmlFor="password">Password:</label>
+            <label className="label" htmlFor="password">
+              Password:
+            </label>
             <input
               className="input"
               type="password"
@@ -72,12 +78,16 @@ export function Login() {
             />
           </div>
           {error && (
-            <div className="error-message">Invalid authentication, please check your email and password</div>
+            <div className="error-message">
+              Invalid authentication, please check your email and password
+            </div>
           )}
           <br />
           <button className="button">Log In</button>
           <br />
-          <a className="button" href="/register">Register Page</a>
+          <a className="button" href="/register">
+            Register Page
+          </a>
         </form>
       </div>
     </div>

@@ -117,8 +117,7 @@ dishRouter.post("/", upload.single("dishImage"), async (req, res) => {
       });
     }
     newRest.save();
-    res.redirect(`http://localhost:3000/restaurant/${restaurantId}`)
-    
+    res.redirect(`http://localhost:3000/restaurant/${restaurantId}`);
   } catch (err) {
     console.log(err);
     res.statusCode = 500;

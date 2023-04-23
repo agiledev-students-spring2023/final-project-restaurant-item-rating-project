@@ -19,9 +19,9 @@ const RegisterSchema = new Schema({
 const ReviewSchema = new Schema({
   value: {
     type: Number,
-    min:1,
-    max:5,
-    required:true
+    min: 1,
+    max: 5,
+    required: true,
     //Need to change min to 1 once we figure out the error.
     //Otherwise change DishReview min to 0 -- This seems easier
   },
@@ -54,7 +54,7 @@ const DishSchema = new Schema({
   // },
   image: {
     type: String,
-    required:false
+    required: false,
   },
   averageRating: { type: Number, required: false },
   reviews: [ReviewSchema],

@@ -1,4 +1,4 @@
-import { Avatar, Box, Button, Typography, capitalize } from "@mui/material";
+import { Avatar, Box, Button, Typography } from "@mui/material";
 import Rating from "@mui/material/Rating";
 import { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
@@ -27,7 +27,7 @@ export function RestaurantDetail() {
         console.error(err);
         alert("An error has occurred when finding that restaurant");
       });
-  }, []);
+  }, [params.restaurantID]);
 
   const [avatarUrl, setAvatarUrl] = useState("");
   useEffect(() => {

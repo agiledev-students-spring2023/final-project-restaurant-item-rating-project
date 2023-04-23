@@ -39,20 +39,6 @@ export function AddDish() {
   // const [uploadedImages, setUploadedImages] = useState([]);
   const [uploadedFile, setUploadedFile] = useState("");
 
-  const handleSubmit = (event) => {
-    axios
-      .post(`${serverAddress}/restaurant/${params.restaurantID}/dish`, {})
-      .then(function (response) {
-        console.log(response);
-      })
-      .catch(function (error) {
-        console.log(error);
-        alert(error);
-      });
-    // redirect to dish
-    navigate(`/restaurant/${params.restaurantID}`);
-  };
-
   useEffect(() => {
     // get restaurant name
     axios
@@ -88,12 +74,7 @@ export function AddDish() {
         encType="multipart/form-data"
       >
         <Box sx={{ m: 2 }} />
-        <TextField
-
-          type="text"
-          label="Dish Name"
-          name="dishName"
-        />
+        <TextField type="text" label="Dish Name" name="dishName" />
         <Box sx={{ m: 2 }} />
         <Typography variant="h6">Add Pictures?</Typography>
         <Box sx={{ m: 1 }} />
