@@ -72,14 +72,22 @@ export function RestaurantDetail() {
       >
         <Avatar onClick={handleAvatarClick} src={avatarUrl} />
       </Box>
-      <Typography
-        style={{ fontFamily: "Roboto" }}
-        color={"#31525B"}
-        variant="h3"
-        gutterBottom
+      <Box
+        sx={{
+          display: "flex",
+          justifyContent: "flex-end",
+          textAlign:"center",
+        }}
       >
-        {restaurantName}
-      </Typography>
+        <Typography
+          style={{ fontFamily: "Roboto" }}
+          color={"#31525B"}
+          variant="h3"
+          gutterBottom
+        >
+          {restaurantName}
+        </Typography>
+      </Box>
       <Typography style={{ fontFamily: "Roboto" }} variant="h6" gutterBottom>
         City: {location}
       </Typography>
