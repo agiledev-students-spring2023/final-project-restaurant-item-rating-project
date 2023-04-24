@@ -1,73 +1,24 @@
-
 // Import necessary modules
-const express = require('express');
-
-// get restaurant model
-const {Restaurant} = require("./../db");
-const MockHelpers = require("../tests/mock-helpers")
+const express = require("express");
+const { Restaurant } = require("./../db");
 
 // this router is used for paths matching "/restaurant"
 const restaurantRouter = express.Router();
 
-// // test route
-// restaurantRouter.get('/test', async (req, res) => {
-
-
-
-//   // console.log("hi");
-//   // const newRest = await Restaurant.create({
-//   //   name:"akhil",
-//   //   location: "nyc",
-//   //   dishes: [
-//   //     {"name":"akhil's pasta"}
-//   //   ]
-//   // });
-//   // await newRest.save();
-//   // const allRestaurants = await Restaurant.find({$text: {$search: "akhil"}}).exec();
-//   const allRestaurants = await Restaurant.find({});
-//   res.json({
-//     numberOfResults: allRestaurants.length,
-//     restaurants:allRestaurants
-//   })
-// });
-// // test2 route
-// restaurantRouter.get('/test2', async (req, res) => {
-
-//   // try {
-//   //   const myRest = await Restaurant.findById("64333687508b2bfe3d8b5bbe");
-//   //   createResponse = myRest.dishes.create({
-//   //     name:"pasta"
-//   //   });
-//   //   await myRest.save();
-//   // }
-//   // catch (err) {
-//   //   console.error(err);
-//   // }
-//   // res.json({
-//   //   thing:myRest,
-//   //   saveResp:saveResp,
-//   // })
-//   const searchResults = await Restaurant.find({$text: {$search: "pasta"}}).exec();
-//   res.json({
-//     numberOfResults: searchResults.length,
-//     searchResults: searchResults
-//   })
-// });
-
 // Define the GET endpoint to get restaurant
-restaurantRouter.get('/:id', async (req, res) => {
+restaurantRouter.get("/:id", async (req, res) => {
   // res id, given from URL
   const restaurantId = req.params.id; // extract the restaurant ID from the URL parameter
 
   let restaurant;
   try {
-    restaurant = await Restaurant.findById(restaurantId).exec(); 
+    restaurant = await Restaurant.findById(restaurantId).exec();
   } catch (err) {
     console.log(err);
   }
-  // const restaurant = await Restaurant.findById(restaurantId); 
+  // const restaurant = await Restaurant.findById(restaurantId);
   if (!restaurant) {
-    // error 
+    // error
     res.statusCode = 404;
     res.json({
       error: "Restaurant not found",
@@ -78,24 +29,8 @@ restaurantRouter.get('/:id', async (req, res) => {
   res.json(restaurant);
 });
 
-// // Define the POST endpoint to update a restaurant by ID
-// restaurantRouter.post('/:id', async (req, res) => {
-//   const restaurantId = req.params.id; // extract the restaurant ID from the URL parameter
-
-
-  
-
-//   const updatedRestaurant = {};
-//   // const updatedRestaurant = {updateRestaurant(restaurantId, req.body);}
-
-//   // TODO: check if error
-
-//   // Return a success response
-//   res.json({responseStatus: 200});
-// });
-
 // Define the POST endpoint to create a restaurant
-restaurantRouter.post('/', async (req, res) => {
+restaurantRouter.post("/", async (req, res) => {
   // Here you can create the restaurant in the database based on the data in the request body
   // For example:
   let newRest;
@@ -109,27 +44,15 @@ restaurantRouter.post('/', async (req, res) => {
     console.log(err);
     res.statusCode = 500;
     res.json({
-      error: "there was an error creating a new restaurant"
-    })
+      error: "there was an error creating a new restaurant",
+    });
   }
   // Return a success response
   res.statusCode = 200;
   res.json({
     restaurant: newRest,
-    message: "success"
+    message: "success",
   });
 });
-
-// // Define the DELETE endpoint to delete a restaurant by ID
-// restaurantRouter.delete('/:id', async (req, res) => {
-//   const restaurantId = req.params.id; // extract the restaurant ID from the URL parameter
-
-//   // Here you can delete the restaurant from the database based on the restaurant ID
-//   // For example:
-//   // deleteRestaurant(restaurantId);
-
-//   // Return a success response
-//   res.json({ responseStatus: 200 });
-// });
 
 module.exports = restaurantRouter;

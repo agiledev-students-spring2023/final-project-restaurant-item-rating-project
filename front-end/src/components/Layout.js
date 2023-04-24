@@ -7,7 +7,6 @@ import { BottomNavigation, BottomNavigationAction, Box, Paper, Typography } from
 import IconButton from '@mui/material/IconButton';
 import React, { useEffect, useState } from 'react';
 import { Outlet, useNavigate } from 'react-router-dom';
-import Logo from './Dish_Dealer_Logo.png';
 
 import { useLocation } from 'react-router-dom';
 
@@ -57,7 +56,7 @@ export function Layout() {
       {/* back button */}
       {/* check if "home" */}
       {
-        (location.pathname === '/') ? 
+        (location.pathname === '/home') ? 
         "" : 
       <IconButton 
         variant="outlined" 

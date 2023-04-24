@@ -41,7 +41,7 @@ export function AddRestaurant() {
       //alert(error.response.data.message);
     });
     
-    // navigate('/restaurant');
+    navigate('/home');
   };
   const [avatarUrl, setAvatarUrl] = useState('');
   useEffect(() => {

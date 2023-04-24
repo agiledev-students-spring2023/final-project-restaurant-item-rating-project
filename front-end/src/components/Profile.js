@@ -1,22 +1,20 @@
-import { useEffect, useState } from 'react';
-import { Redirect, useNavigate } from 'react-router-dom';
-import axios from 'axios';
-import { Box, Avatar } from '@mui/material';
-
+import { Avatar, Box } from "@mui/material";
+import axios from "axios";
+import { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 const serverAddress = "http://localhost:3002";
 
 export function Profile() {
-    const navigate = useNavigate()
-    const [email, setEmail] = useState('');
-    const [password, setPassword] = useState('')
-    const [newEmail, setNewEmail] = useState('');
-    const [newPassword, setNewPassword] = useState('');
-    const [confirmPassword, setConfirmPassword] = useState('');
-    const [avatarUrl, setAvatarUrl] = useState('');
-    
+  const navigate = useNavigate();
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [newEmail, setNewEmail] = useState("");
+  const [newPassword, setNewPassword] = useState("");
+  const [confirmPassword, setConfirmPassword] = useState("");
+  const [avatarUrl, setAvatarUrl] = useState("");
 
-    const [storedId, setStoredId] = useState('');
+  const [storedId, setStoredId] = useState("");
 
 useEffect(() => {
   const id = localStorage.getItem('userId');
@@ -35,32 +33,38 @@ useEffect(() => {
   }
 }, [email,password]);
 
-const handleUpdateEmail = async (event) => {
-  event.preventDefault();
-  try {
-    const response = await axios.post(`${serverAddress}/profile/${storedId}`, {
-      email: newEmail,
-    });
-    if (response.status === 200) {
+  const handleUpdateEmail = async (event) => {
+    event.preventDefault();
+    try {
+      const response = await axios.post(
+        `${serverAddress}/profile/${storedId}`,
+        {
+          email: newEmail,
+        }
+      );
+      if (response.status === 200) {
         alert("Email successfully changed");
         setEmail(newEmail);
+      }
+    } catch (error) {
+      console.log(error);
+      // handle error
     }
-  } catch (error) {
-    console.log(error);
-    // handle error
-  }
-};
+  };
 
-const handleUpdatePassword = async (event) => {
+  const handleUpdatePassword = async (event) => {
     event.preventDefault();
     if (newPassword !== confirmPassword) {
-        alert("Passwords do not match");
-        return;
+      alert("Passwords do not match");
+      return;
     }
     try {
-      const response = await axios.post(`${serverAddress}/profile/${storedId}`, {
-        password: newPassword,
-      });
+      const response = await axios.post(
+        `${serverAddress}/profile/${storedId}`,
+        {
+          password: newPassword,
+        }
+      );
       if (response.status === 200) {
         alert("Password successfully changed");
         setPassword(newPassword);
@@ -110,77 +114,88 @@ const handleUpdatePassword = async (event) => {
           type="file"
           id="avatar-upload"
           accept=".jpg,.jpeg,.png"
-          style={{ display: 'none' }}
+          style={{ display: "none" }}
           onChange={handleAvatarUpload}
         />
       </Box>
-          <h1>Profile</h1>
-          <p style={{border: '1px solid #ccc', padding: '10px',textAlign: 'center'}}>Email: {email}</p>
-          {/* <p style={{border: '1px solid #ccc', padding: '10px',textAlign: 'center'}}>Password: {maskedPassword}</p> */}
-          <h2>Update Info</h2>
-          <form onSubmit={handleUpdateEmail}>
-            <label>
-              New Email:
-              <br />
-              <input
-                style={{border: '1px solid #ccc', padding: '10px', width: '100%'}}
-                type="email"
-                value={newEmail}
-                onChange={(event) => setNewEmail(event.target.value)}
-                // onKeyDown={(event) => {
-                //     if (event.keyCode === 13) {
-                //       handleUpdateEmail();
-                //     }
-                //   }}
-                />
-              </label>
-            <br />
-            <button style={{marginTop: '10px'}} type="submit">Update Email</button>
-          </form>
-          <form onSubmit={handleUpdatePassword}>
-            <br />
-            <label>
-                New Password:
-                <br />
-                <input
-                    style={{border: '1px solid #ccc', padding: '10px', width: '100%'}}
-                    type="password"
-                    value={newPassword}
-                    onChange={(event) => setNewPassword(event.target.value)}
-                />
-            </label>
-            <br />
-            <label>
-                Confirm Password:
-                <br />
-                <input
-                    style={{border: '1px solid #ccc', padding: '10px', width: '100%'}}
-                    type="password"
-                    value={confirmPassword}
-                    onChange={(event) => setConfirmPassword(event.target.value)}
-                />
-            </label>
-            <br />
-            <button style={{marginTop: '10px'}} type="submit">Update Password</button>
-        </form>
-          <button style={{marginTop: '40px'}} onClick={handleLogout}>Logout</button>
-        </div>
-      );
-      
-      
-  };
+      <h1>Profile</h1>
+      <p
+        style={{
+          border: "1px solid #ccc",
+          padding: "10px",
+          textAlign: "center",
+        }}
+      >
+        Email: {email}
+      </p>
+      {/* <p style={{border: '1px solid #ccc', padding: '10px',textAlign: 'center'}}>Password: {maskedPassword}</p> */}
+      <h2>Update Info</h2>
+      <form onSubmit={handleUpdateEmail}>
+        <label>
+          New Email:
+          <br />
+          <input
+            style={{ border: "1px solid #ccc", padding: "10px", width: "100%" }}
+            type="email"
+            value={newEmail}
+            onChange={(event) => setNewEmail(event.target.value)}
+            // onKeyDown={(event) => {
+            //     if (event.keyCode === 13) {
+            //       handleUpdateEmail();
+            //     }
+            //   }}
+          />
+        </label>
+        <br />
+        <button style={{ marginTop: "10px" }} type="submit">
+          Update Email
+        </button>
+      </form>
+      <form onSubmit={handleUpdatePassword}>
+        <br />
+        <label>
+          New Password:
+          <br />
+          <input
+            style={{ border: "1px solid #ccc", padding: "10px", width: "100%" }}
+            type="password"
+            value={newPassword}
+            onChange={(event) => setNewPassword(event.target.value)}
+          />
+        </label>
+        <br />
+        <label>
+          Confirm Password:
+          <br />
+          <input
+            style={{ border: "1px solid #ccc", padding: "10px", width: "100%" }}
+            type="password"
+            value={confirmPassword}
+            onChange={(event) => setConfirmPassword(event.target.value)}
+          />
+        </label>
+        <br />
+        <button style={{ marginTop: "10px" }} type="submit">
+          Update Password
+        </button>
+      </form>
+      <button style={{ marginTop: "40px" }} onClick={handleLogout}>
+        Logout
+      </button>
+    </div>
+  );
+}
 
+// useEffect(() => {
+//     const storedId = localStorage.getItem('userId');
+//     console.log(storedId);
+//     const storedEmail = localStorage.getItem('email');
+//     const storedPassword = localStorage.getItem('password');
+//     const storedAvatarUrl = localStorage.getItem(`avatarUrl-${storedEmail}`);
+//     if (storedEmail) {
+//       setEmail(storedEmail);
+//       setPassword(storedPassword);
+//       setAvatarUrl(storedAvatarUrl);
 
-   // useEffect(() => {
-    //     const storedId = localStorage.getItem('userId');
-    //     console.log(storedId);
-    //     const storedEmail = localStorage.getItem('email');
-    //     const storedPassword = localStorage.getItem('password');
-    //     const storedAvatarUrl = localStorage.getItem(`avatarUrl-${storedEmail}`);      
-    //     if (storedEmail) {
-    //       setEmail(storedEmail);
-    //       setPassword(storedPassword);
-    //       setAvatarUrl(storedAvatarUrl); 
-
-    //   }
-    // }, [email,password]);
+//   }
+// }, [email,password]);
