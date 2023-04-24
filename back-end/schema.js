@@ -13,6 +13,11 @@ const RegisterSchema = new Schema({
     type: String,
     required: true,
   },
+  avatarUrl:{
+    type: String,
+    default: '',
+  }
+ 
 });
 
 // Define the review schema
