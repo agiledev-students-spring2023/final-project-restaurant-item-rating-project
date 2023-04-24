@@ -12,30 +12,28 @@ import { useNavigate, useParams } from "react-router-dom";
 import "../App.css";
 
 export function AddDish() {
-  const serverAddress = "http://localhost:3002"
+  const params = useParams();
+  const navigate = useNavigate();
+  const serverAddress = "http://localhost:3002";
   const formAddress = `${serverAddress}/restaurant/${params.restaurantID}/dish`;
 
-  const [avatarUrl, setAvatarUrl] = useState('');
+  const [avatarUrl, setAvatarUrl] = useState("");
   useEffect(() => {
-      const storedId = localStorage.getItem('userId');
-      axios.get(`${serverAddress}/profile/${storedId}`).then(response => {
-        const { email, password,avatarUrl } = response.data;
+    const storedId = localStorage.getItem("userId");
+    axios
+      .get(`${serverAddress}/profile/${storedId}`)
+      .then((response) => {
+        const { avatarUrl } = response.data;
         setAvatarUrl(avatarUrl);
-      }).catch(error => {
+      })
+      .catch((error) => {
         console.log(error);
       });
   }, []);
 
   const handleAvatarClick = () => {
-    navigate('/profile');
-  }
-
-  const navigate = useNavigate();
-  const params = useParams();
-
-
-
-
+    navigate("/profile");
+  };
 
   // fetched data
   const [restaurantName, setRestaurantName] = useState("");
@@ -56,7 +54,7 @@ export function AddDish() {
         console.error("Error getting restaurant name: ", error);
         // alert("An error has occurred when finding that restaurant");
       });
-  }, []);
+  }, [params.restaurantID]);
 
   return (
     <Container>
