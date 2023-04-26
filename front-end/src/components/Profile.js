@@ -1,4 +1,4 @@
-import { Avatar, Box } from "@mui/material";
+import { Avatar, Box, Typography } from "@mui/material";
 import axios from "axios";
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
@@ -106,18 +106,27 @@ useEffect(() => {
   
     return (
         <div>
-             <Box sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center', p: 2 }}>
-        <label htmlFor="avatar-upload">
-          <Avatar src={avatarUrl} sx={{ width: 200, height: 200 }} />
-        </label>
-        <input
-          type="file"
-          id="avatar-upload"
-          accept=".jpg,.jpeg,.png"
-          style={{ display: "none" }}
-          onChange={handleAvatarUpload}
-        />
-      </Box>
+        <Box sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center', p: 2 }}>
+  {avatarUrl ? (
+    <label htmlFor="avatar-upload">
+      <Avatar src={avatarUrl} sx={{ width: 200, height: 200 }} />
+    </label>
+  ) : (
+    <Box sx={{ textAlign: 'center' }}>
+      <Typography>Add Profile Pic</Typography>
+      <label htmlFor="avatar-upload">
+        <Avatar sx={{ width: 200, height: 200 }} />
+      </label>
+    </Box>
+  )}
+  <input
+    type="file"
+    id="avatar-upload"
+    accept=".jpg,.jpeg,.png"
+    style={{ display: "none" }}
+    onChange={handleAvatarUpload}
+  />
+</Box>
       <h1>Profile</h1>
       <p
         style={{
@@ -139,15 +148,10 @@ useEffect(() => {
             type="email"
             value={newEmail}
             onChange={(event) => setNewEmail(event.target.value)}
-            // onKeyDown={(event) => {
-            //     if (event.keyCode === 13) {
-            //       handleUpdateEmail();
-            //     }
-            //   }}
           />
         </label>
         <br />
-        <button style={{ marginTop: "10px" }} type="submit">
+        <button style={{ marginTop: "10px" }} type="submit"  disabled={!newEmail ? true : false}>
           Update Email
         </button>
       </form>
@@ -175,7 +179,7 @@ useEffect(() => {
           />
         </label>
         <br />
-        <button style={{ marginTop: "10px" }} type="submit">
+        <button style={{ marginTop: "10px" }} type="submit"disabled={!newPassword ? true : false}>
           Update Password
         </button>
       </form>
