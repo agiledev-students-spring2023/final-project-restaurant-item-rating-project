@@ -24,7 +24,7 @@ const RegisterSchema = new Schema({
 const ReviewSchema = new Schema({
   value: {
     type: Number,
-    min: 1,
+    min: 0,
     max: 5,
     required: true,
     //Need to change min to 1 once we figure out the error.
