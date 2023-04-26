@@ -69,11 +69,19 @@ export function DishDetail() {
     const response = await axios.delete(`${serverAddress}/restaurant/${params.restaurantID}/dish/${params.dishID}/review/${reviewId}`);
     if (response.status === 200) {
       alert("Review successfully deleted");
-    } 
+      setDish((prevDish) => {
+        const updatedReviews = prevDish.reviews.filter(
+          (review) => review._id !== reviewId
+        );
+        return { ...prevDish, reviews: updatedReviews };
+      });
+    }
+    
   } catch (error) {
     console.log(error.response.data); 
   }
 };
+
 
 
 
