@@ -78,7 +78,7 @@ export function AddDish() {
         encType="multipart/form-data"
       >
         <Box sx={{ m: 2 }} />
-        <TextField type="text" label="Dish Name" name="dishName" />
+        <TextField type="text" label="Dish Name" name="dishName" required/>
         <Box sx={{ m: 2 }} />
         <Typography variant="h6">Add Pictures?</Typography>
         <Box sx={{ m: 1 }} />
