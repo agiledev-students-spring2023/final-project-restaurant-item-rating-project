@@ -107,6 +107,11 @@ dishRouter.post("/", upload.single("dishImage"), async (req, res) => {
   try {
     const newRest = await Restaurant.findById(restaurantId);
     if (dishError) {
+
+      if (!req.body.dishName) {
+        throw new Error("Dish name is required");
+      }
+      
       const dish = newRest.dishes.push({
         name: req.body.dishName,
       });
