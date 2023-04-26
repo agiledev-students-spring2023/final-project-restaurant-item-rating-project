@@ -11,11 +11,19 @@ const serverAddress = "http://localhost:3002";
 
 
 export function DishDetail() {
+
+  const [storedId, setStoredId] = useState("");
  const params = useParams();
  // to change pages
  const navigate = useNavigate();
 
-
+ useEffect(() => {
+  // get user id
+  const id = localStorage.getItem("userId");
+  if (id) {
+    setStoredId(id);
+  } 
+}, []);
  // fetched state
  const [restaurantName, setRestaurantName] = useState(""); // TODO: mock this with mockeroo
  const [dish, setDish] = useState({});
@@ -56,6 +64,16 @@ export function DishDetail() {
      });
  }, []);
 
+ const handleDeleteReview = async (reviewId) => {
+  try {
+    const response = await axios.delete(`${serverAddress}/restaurant/${params.restaurantID}/dish/${params.dishID}/review/${reviewId}`);
+    if (response.status === 200) {
+      alert("Review successfully deleted");
+    } 
+  } catch (error) {
+    console.log(error.response.data); 
+  }
+};
 
 
 
@@ -159,6 +177,7 @@ export function DishDetail() {
      {!("reviews" in dish)
        ? ""
        : dish.reviews.map((review) => {
+        // console.log(review.userID);
            return (
              <Box key={review._id} display="flex" flexDirection={"column"}>
                <Box sx={{ m: 1.5 }} />
@@ -167,6 +186,9 @@ export function DishDetail() {
 
 
                <TimeAgo date={review.date} />
+               {review.userID === storedId && (
+            <Button onClick={() => handleDeleteReview(review._id)}>Delete</Button>
+          )}
                {/* <Typography> {Math.round((Date.now() - new Date(review.date)) / millisecondsInADay)} days ago </Typography> */}
              </Box>
            );
