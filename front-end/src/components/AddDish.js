@@ -17,24 +17,6 @@ export function AddDish() {
   const serverAddress = "http://localhost:3002";
   const formAddress = `${serverAddress}/restaurant/${params.restaurantID}/dish`;
 
-  const [avatarUrl, setAvatarUrl] = useState("");
-  useEffect(() => {
-    const storedId = localStorage.getItem("userId");
-    axios
-      .get(`${serverAddress}/profile/${storedId}`)
-      .then((response) => {
-        const { avatarUrl } = response.data;
-        setAvatarUrl(avatarUrl);
-      })
-      .catch((error) => {
-        console.log(error);
-      });
-  }, []);
-
-  const handleAvatarClick = () => {
-    navigate("/profile");
-  };
-
   // fetched data
   const [restaurantName, setRestaurantName] = useState("");
 
@@ -58,16 +40,6 @@ export function AddDish() {
 
   return (
     <Container>
-      <Box
-        sx={{
-          display: "flex",
-          justifyContent: "flex-end",
-          alignItems: "center",
-          p: 2,
-        }}
-      >
-        <Avatar onClick={handleAvatarClick} src={avatarUrl} />
-      </Box>
       <Typography variant="h3">Add a Dish</Typography>
       <Typography variant="h6">Restaurant: {restaurantName}</Typography>
       {/* form */}

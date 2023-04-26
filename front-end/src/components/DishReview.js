@@ -98,15 +98,13 @@ export function DishReview() {
       Math.round(10 * average(dish.reviews.map((review) => review.value))) / 10
     );
   }
-  const [avatarUrl, setAvatarUrl] = useState('');
+  const [avatarUrl, setAvatarUrl] = useState("");
   useEffect(() => {
-      const storedId = localStorage.getItem('userId');
-      axios.get(`${serverAddress}/profile/${storedId}`).then(response => {
-        const { email, password,avatarUrl } = response.data;
-        setAvatarUrl(avatarUrl);
-      }).catch(error => {
-        console.log(error);
-      });
+    const storedId = localStorage.getItem("userId");
+    const storedAvatarUrl = localStorage.getItem(`avatarUrl-${storedId}`);
+    if (storedId) {
+      setAvatarUrl(storedAvatarUrl);
+    }
   }, []);
 
   const handleAvatarClick = () => {
@@ -120,16 +118,6 @@ export function DishReview() {
       alignItems="center"
       minHeight="100vh"
     >
-      <Box
-        sx={{
-          display: "flex",
-          justifyContent: "flex-end",
-          alignItems: "center",
-          p: 2,
-        }}
-      >
-        <Avatar onClick={handleAvatarClick} src={avatarUrl} />
-      </Box>
       <Box sx={{ m: 4 }} />
       <Box
         sx={{

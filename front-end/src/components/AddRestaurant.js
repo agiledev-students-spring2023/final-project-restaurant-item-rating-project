@@ -43,26 +43,10 @@ export function AddRestaurant() {
     
     navigate('/home');
   };
-  const [avatarUrl, setAvatarUrl] = useState('');
-  useEffect(() => {
-      const storedId = localStorage.getItem('userId');
-      axios.get(`${serverAddress}/profile/${storedId}`).then(response => {
-        const { email, password,avatarUrl } = response.data;
-        setAvatarUrl(avatarUrl);
-      }).catch(error => {
-        console.log(error);
-      });
-  }, []);
-
-  const handleAvatarClick = () => {
-    navigate('/profile');
-  }
   
   return(
     <Container bgcolor={'#FFFFFF'}>
-      <Box sx={{ display: "flex", justifyContent: "flex-end", alignItems: "center", p: 2 }}>
-    <Avatar onClick={handleAvatarClick} src={avatarUrl}/>
-       </Box>
+
       <Typography style={{ fontFamily: 'Roboto'}} color={'#31525B'} variant="h3">Add Restaurant</Typography>
 
       <form>

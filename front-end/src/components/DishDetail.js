@@ -51,23 +51,6 @@ export function DishDetail() {
       });
   }, []);
 
-  const [avatarUrl, setAvatarUrl] = useState("");
-  useEffect(() => {
-    const storedId = localStorage.getItem("userId");
-    axios
-      .get(`${serverAddress}/profile/${storedId}`)
-      .then((response) => {
-        const { email, password, avatarUrl } = response.data;
-        setAvatarUrl(avatarUrl);
-      })
-      .catch((error) => {
-        console.log(error);
-      });
-  }, []);
-
-  const handleAvatarClick = () => {
-    navigate("/profile");
-  };
 
   return (
     <Box
@@ -78,16 +61,6 @@ export function DishDetail() {
         margin: "0 auto",
       }}
     >
-      <Box
-        sx={{
-          display: "flex",
-          justifyContent: "flex-end",
-          alignItems: "center",
-          p: 2,
-        }}
-      >
-        <Avatar onClick={handleAvatarClick} src={avatarUrl} />
-      </Box>
       <Typography variant="h3">{dish.name}</Typography>
       <Box sx={{ m: 2 }} />
       <Typography style={{ fontFamily: "Roboto" }} variant="h6">
