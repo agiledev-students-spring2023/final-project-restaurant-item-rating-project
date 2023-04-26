@@ -29,21 +29,6 @@ export function RestaurantDetail() {
       });
   }, [params.restaurantID]);
 
-  const [avatarUrl, setAvatarUrl] = useState('');
-  useEffect(() => {
-      const storedId = localStorage.getItem('userId');
-      axios.get(`${serverAddress}/profile/${storedId}`).then(response => {
-        const { email, password,avatarUrl } = response.data;
-        setAvatarUrl(avatarUrl);
-      }).catch(error => {
-        console.log(error);
-      });
-  }, []);
-
-  const handleAvatarClick = () => {
-    navigate("/profile");
-  };
-
   function calcAvgReview(dish) {
     if (!("reviews" in dish) || dish.reviews.length === 0) {
       return 0;
@@ -64,16 +49,6 @@ export function RestaurantDetail() {
         paddingBottom: "60px",
       }}
     >
-      <Box
-        sx={{
-          display: "flex",
-          justifyContent: "flex-end",
-          alignItems: "center",
-          p: 2,
-        }}
-      >
-        <Avatar onClick={handleAvatarClick} src={avatarUrl} />
-      </Box>
       <Box
         sx={{
           display: "flex",

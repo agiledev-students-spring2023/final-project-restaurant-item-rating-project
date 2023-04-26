@@ -22,34 +22,11 @@ export function Home() {
   }, [restaurantSuggestionsUrl]);
 
   const [avatarUrl, setAvatarUrl] = useState('');
-  useEffect(() => {
-      const storedId = localStorage.getItem('userId');
-      axios.get(`${serverAddress}/profile/${storedId}`).then(response => {
-        const { email, password,avatarUrl } = response.data;
-        setAvatarUrl(avatarUrl);
-      }).catch(error => {
-        console.log(error);
-      });
-  }, []);
-
-  const handleAvatarClick = () => {
-    navigate("/profile");
-  };
 
   // this is what gets rendered in the React DOM. Must be one element at the top level
 
   return (
     <Container>
-      <Box
-        sx={{
-          display: "flex",
-          justifyContent: "flex-end",
-          alignItems: "center",
-          p: 2,
-        }}
-      >
-        <Avatar onClick={handleAvatarClick} src={avatarUrl} />
-      </Box>
 
       <Typography
         variant="h5"

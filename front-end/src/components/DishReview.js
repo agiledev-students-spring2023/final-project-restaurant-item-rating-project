@@ -1,4 +1,4 @@
-import { Avatar, Box, Button, Typography } from "@mui/material";
+import { Box, Button, Typography } from "@mui/material";
 import Rating from "@mui/material/Rating";
 import axios from "axios";
 import React, { useEffect, useState } from "react";
@@ -62,6 +62,10 @@ export function DishReview() {
   }, [params.dishID, params.restaurantID]);
 
   const handleSubmit = (event) => {
+    if(!rating){
+      event.target.value = 0;
+      setRating(parseInt(0))
+    }
     if (rating < 0 || rating > 5) {
       alert(
         `Please select a valid rating value. You tried to submit a value of "${rating}", which is not valid.`
@@ -98,20 +102,8 @@ export function DishReview() {
       Math.round(10 * average(dish.reviews.map((review) => review.value))) / 10
     );
   }
-  const [avatarUrl, setAvatarUrl] = useState('');
-  useEffect(() => {
-      const storedId = localStorage.getItem('userId');
-      axios.get(`${serverAddress}/profile/${storedId}`).then(response => {
-        const { email, password,avatarUrl } = response.data;
-        setAvatarUrl(avatarUrl);
-      }).catch(error => {
-        console.log(error);
-      });
-  }, []);
+  
 
-  const handleAvatarClick = () => {
-    navigate("/profile");
-  };
 
   return (
     <Box
@@ -120,16 +112,6 @@ export function DishReview() {
       alignItems="center"
       minHeight="100vh"
     >
-      <Box
-        sx={{
-          display: "flex",
-          justifyContent: "flex-end",
-          alignItems: "center",
-          p: 2,
-        }}
-      >
-        <Avatar onClick={handleAvatarClick} src={avatarUrl} />
-      </Box>
       <Box sx={{ m: 4 }} />
       <Box
         sx={{
