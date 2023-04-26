@@ -158,6 +158,38 @@ ratingRouter.post('/', async (req, res) => {
   }
 });
 
+ratingRouter.delete('/:id', async (req, res) => {
+  try {
+    const { restaurantId, dishId, id } = req.params;
+
+    const rest = await Restaurant.findById(restaurantId);
+    const dish = rest.dishes.find((dish) => dish._id.toString() === dishId);
+
+    if (!dish) {
+      return res.status(404).json({ error: "Dish not found" });
+    }
+
+    const review = dish.reviews.find((review) => review._id.toString() === id);
+
+    if (!review) {
+      return res.status(404).json({ error: "Review not found" });
+    }
+
+    const index = dish.reviews.indexOf(review);
+    dish.reviews.splice(index, 1);
+
+    await rest.save();
+
+    res.json({ success: true });
+  } catch (err) {
+    console.log(err);
+    res.status(500).json({
+      error: "there was an error deleting the review"
+    });
+  }
+});
+
+
 
 // ratingRouter.post('/', async (req, res) => {
 //  let newRev;

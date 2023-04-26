@@ -40,6 +40,10 @@ const ReviewSchema = new Schema({
     //pending for the implmentation of userId
     required: true,
   },
+  picUrl:{
+    type: String,
+    default: '',
+  } 
 });
 
 // Define the dish schema
