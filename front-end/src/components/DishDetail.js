@@ -185,7 +185,7 @@ export function DishDetail() {
      {!("reviews" in dish)
        ? ""
        : dish.reviews.map((review) => {
-        // console.log(review.userID);
+        console.log(review);
            return (
              <Box key={review._id} display="flex" flexDirection={"column"}>
                <Box sx={{ m: 1.5 }} />

@@ -42,9 +42,8 @@ const ReviewSchema = new Schema({
   },
   picUrl:{
     type: String,
-    default: ' ',
-  }
- 
+    default: '',
+  } 
 });
 
 // Define the dish schema
