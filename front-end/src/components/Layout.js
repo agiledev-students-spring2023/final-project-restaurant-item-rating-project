@@ -11,6 +11,7 @@ import { Outlet, useNavigate } from 'react-router-dom';
 import { useLocation } from 'react-router-dom';
 
 
+
 /**
  * 
  * @returns parent component for all pages. provides header and footer 
@@ -50,6 +51,7 @@ export function Layout() {
   const serverAddress = "http://localhost:3002";
   const home = () => navigate('/home');
   const search = () => navigate('/search');
+  const favorites = () => navigate('/favorites');
 
   const [value, setValue] = useState(home);
 
@@ -118,6 +120,7 @@ export function Layout() {
             icon={<SearchIcon />}
             onClick={search}
           />
+            <BottomNavigationAction label="Favorites" icon={<FavoriteIcon />} onClick={favorites} />
            <BottomNavigationAction
             label="Profile" 
             icon= { <Avatar src={avatarUrl} />}

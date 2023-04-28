@@ -11,6 +11,7 @@ import { RestaurantDetail } from './components/RestaurantDetail';
 import { Login } from './components/Login';
 import { Register } from './components/Register';
 import { Profile } from './components/Profile';
+import {Favorites} from './components/Favorites';
 
 function MyRoutes() {
   return (
@@ -61,6 +62,10 @@ function MyRoutes() {
           <Route 
             path="/profile"
             element={<Profile />} 
+          />
+           <Route 
+            path="/favorites"
+            element={<Favorites />} 
           />
           {/* catch all */}
           <Route 

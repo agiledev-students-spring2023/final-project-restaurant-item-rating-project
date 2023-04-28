@@ -27,6 +27,7 @@ export function DishDetail() {
  // fetched state
  const [restaurantName, setRestaurantName] = useState(""); // TODO: mock this with mockeroo
  const [dish, setDish] = useState({});
+ const[restaurant,setRestaurant] = useState({});
 
 
  function calcAvgReview() {
@@ -64,6 +65,18 @@ export function DishDetail() {
      });
  }, []);
 
+ useEffect(() => {
+  axios
+    .get(`${serverAddress}/restaurant/${params.restaurantID}`)
+    .then((response) => {
+      setRestaurant(response.data);
+    })
+    .catch((error) => {
+      console.error("Error getting restaurant data: ", error);
+    });
+}, []);
+
+ 
  const handleDeleteReview = async (reviewId) => {
   try {
     const response = await axios.delete(`${serverAddress}/restaurant/${params.restaurantID}/dish/${params.dishID}/review/${reviewId}`);
@@ -81,6 +94,47 @@ export function DishDetail() {
     console.log(error.response.data); 
   }
 };
+
+// const handleFavoriteClick = () => {
+//   if (!storedId) {
+//     alert("Please log in to save dishes to your favorites.");
+//     navigate("/login");
+//     return;
+//   }
+//   axios
+//     .post(`${serverAddress}/favorites/${storedId}`, {
+//       dishId: dish._id,
+//       restaurantID : restaurant._id,
+//     })
+//     .then((response) => {
+//       alert("Dish saved to favorites!");
+//     })
+//     .catch((error) => {
+//       console.error("Error saving dish to favorites: ", error);
+//     });
+// };
+const handleFavoriteClick =  async (event) => {
+    if (!storedId) {
+      alert("Please log in to save dishes to your favorites.");
+      // navigate("/login");
+      return;
+    }
+  try {
+    const response = await axios.post(`${serverAddress}/favorites/${storedId}`, {
+        dishId: dish._id,
+        restaurantID : restaurant._id,
+        dishImg: dish.image,
+      })
+      if (response.status === 200) {
+        alert("Dish saved to favorites!");
+      }
+      else if(response.status === 202){
+        alert("Dish already saved to favorites");
+      }
+    }catch(error){
+        console.error("Error saving dish to favorites: ", error);
+      };
+  };
 
 
 
@@ -125,6 +179,8 @@ export function DishDetail() {
              loading="lazy"
            />
          </ImageListItem>
+         <Box sx={{ m: 2 }} />
+         <Button onClick={() => handleFavoriteClick()}>Add to Favorites</Button>
        </Box>
      ) : (
        ""
