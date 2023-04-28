@@ -10,7 +10,7 @@ favsRouter.post('/:id', async (req, res) => {
     const storedId = req.params.id;
     const { dishId, restaurantID, dishImg } = req.body;
     const favoriteLink = `http://localhost:3000/restaurant/${restaurantID}/dish/${dishId}`;
-    console.log(favoriteLink);
+    // console.log(favoriteLink);
 
     try {
         const user = await Register.findById(storedId);
@@ -47,6 +47,24 @@ favsRouter.post('/:id', async (req, res) => {
           res.status(500).json({ success: false, error: "Unable to fetch user's favorite dishes" });
         }
       });
+      
+      favsRouter.delete('/:id', async (req, res) => {
+        const storedId = req.params.id;
+  const { dishId, restaurantID } = req.body;
+  const favoriteLink = `http://localhost:3000/restaurant/${restaurantID}/dish/${dishId}`;
+  console.log(favoriteLink);
+  try {
+    const user = await Register.findById(storedId);
+    const favLinks = user.favLinks || [];
+    const updatedFavLinks = favLinks.filter((link) => link.link !== favoriteLink);
+    user.favLinks = updatedFavLinks;
+    await user.save();
+    res.status(200).json({ success: true });
+  } catch (error) {
+    console.error("Error removing dish from favorites: ", error);
+    res.status(500).json({ success: false, error: "Unable to remove dish from favorites" });
+  }
+});
       
 
   

@@ -1,10 +1,11 @@
-import { Box, Button, ImageListItem, Typography } from "@mui/material";
+import { Box, Button, ImageListItem, Typography, IconButton  } from "@mui/material";
 import Rating from "@mui/material/Rating";
 import axios from "axios";
 import { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import TimeAgo from "react-timeago";
 import Avatar from "@mui/material/Avatar";
+import { Favorite, FavoriteBorder } from "@mui/icons-material";
 
 
 const serverAddress = "http://localhost:3002";
@@ -28,7 +29,7 @@ export function DishDetail() {
  const [restaurantName, setRestaurantName] = useState(""); // TODO: mock this with mockeroo
  const [dish, setDish] = useState({});
  const[restaurant,setRestaurant] = useState({});
-
+ const [isFavorite, setIsFavorite] = useState(false);
 
  function calcAvgReview() {
    if (!("reviews" in dish) || dish.reviews.length === 0) {
@@ -76,6 +77,23 @@ export function DishDetail() {
     });
 }, []);
 
+useEffect(() => {
+  if (!storedId) {
+    return;
+  }
+
+  axios
+    .get(`${serverAddress}/favorites/${storedId}`)
+    .then((response) => {
+      console.log(response.data);
+      const favorites = response.data.favsLinks.map((fav) => fav.link.split("/").pop());
+      setIsFavorite(favorites.includes(dish._id));
+    })
+    .catch((error) => {
+      console.error("Error checking favorite status: ", error);
+    });
+}, [storedId, dish]);
+
  
  const handleDeleteReview = async (reviewId) => {
   try {
@@ -95,24 +113,7 @@ export function DishDetail() {
   }
 };
 
-// const handleFavoriteClick = () => {
-//   if (!storedId) {
-//     alert("Please log in to save dishes to your favorites.");
-//     navigate("/login");
-//     return;
-//   }
-//   axios
-//     .post(`${serverAddress}/favorites/${storedId}`, {
-//       dishId: dish._id,
-//       restaurantID : restaurant._id,
-//     })
-//     .then((response) => {
-//       alert("Dish saved to favorites!");
-//     })
-//     .catch((error) => {
-//       console.error("Error saving dish to favorites: ", error);
-//     });
-// };
+
 const handleFavoriteClick =  async (event) => {
     if (!storedId) {
       alert("Please log in to save dishes to your favorites.");
@@ -126,10 +127,12 @@ const handleFavoriteClick =  async (event) => {
         dishImg: dish.image,
       })
       if (response.status === 200) {
-        alert("Dish saved to favorites!");
+        setIsFavorite(true);
+        alert(`${dish.name} saved to favorites!`);
       }
       else if(response.status === 202){
-        alert("Dish already saved to favorites");
+        setIsFavorite(true);
+        alert(`${dish.name} already saved to favorites!`);
       }
     }catch(error){
         console.error("Error saving dish to favorites: ", error);
@@ -137,6 +140,39 @@ const handleFavoriteClick =  async (event) => {
   };
 
 
+const handleUnfavoriteClick =  async (event) => {
+  try {
+    const response = await axios.delete(`${serverAddress}/favorites/${storedId}`, {
+      data: {
+        dishId: dish._id,
+        restaurantID: restaurant._id,
+      },
+    });
+    if (response.status === 200) {
+      setIsFavorite(false);
+      alert(`${dish.name} removed from favorites.`);
+    }
+  } catch (error) {
+    console.error("Error removing from favorites: ", error);
+  }
+};
+
+
+  // const handleUnfavoriteClick = async (event) => {
+
+  //   try {
+  //     const response = await axios.delete(`${serverAddress}/favorites/${storedId}`,{
+  //       dishId: dish._id,
+  //       restaurantID : restaurant._id,
+  //     })
+  //     if (response.status === 200) {
+  //       setIsFavorite(false);
+  //       alert(`${dish.name} removed from favorites.`);
+  //     }
+  //   } catch (error) {
+  //     console.error("Error removing from favorites: ", error);
+  //   };
+  // };
 
 
  return (
@@ -180,8 +216,22 @@ const handleFavoriteClick =  async (event) => {
            />
          </ImageListItem>
          <Box sx={{ m: 2 }} />
-         <Button onClick={() => handleFavoriteClick()}>Add to Favorites</Button>
-       </Box>
+         {storedId && (
+          <Box sx={{ display: "flex", alignItems: "center", mt: "10px" }}>
+            {isFavorite ? (
+              <IconButton onClick={handleUnfavoriteClick} sx={{ color: "red" }}>
+                <Favorite />
+              </IconButton>
+            ) : (
+              <IconButton onClick={handleFavoriteClick}>
+                <FavoriteBorder />
+              </IconButton>
+            )}
+            <Typography variant="body1">
+              {isFavorite ? "Remove from favorites" : "Add to favorites"}
+            </Typography>
+          </Box>
+        )}       </Box>
      ) : (
        ""
      )}
