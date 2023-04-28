@@ -16,9 +16,22 @@ const RegisterSchema = new Schema({
   avatarUrl:{
     type: String,
     default: '',
+  },
+  favLinks: {
+    type: [{
+      link: {
+        type: String,
+        required: true
+      },
+      dishImg: {
+        type: String,
+        required: true
+      }
+    }],
+    default: []
   }
- 
 });
+
 
 // Define the review schema
 const ReviewSchema = new Schema({

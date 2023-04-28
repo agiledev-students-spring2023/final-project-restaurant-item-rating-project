@@ -26,6 +26,7 @@ const registerRouter = require("./routes/register");
 const loginRouter = require("./routes/login");
 const profileRouter = require("./routes/profile");
 const avatarRouter = require("./routes/avatar");
+const favsRouter = require("./routes/favs");
 
 /**
  * Typically, all middlewares would be included before routes
@@ -176,5 +177,6 @@ app.use("/register", registerRouter);
 app.use("/login", loginRouter);
 app.use("/profile", profileRouter);
 app.use("/avatar", avatarRouter);
+app.use("/favorites",favsRouter);
 
 module.exports = app;

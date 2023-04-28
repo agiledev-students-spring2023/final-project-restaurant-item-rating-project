@@ -1,10 +1,11 @@
-import { Box, Button, ImageListItem, Typography } from "@mui/material";
+import { Box, Button, ImageListItem, Typography, IconButton  } from "@mui/material";
 import Rating from "@mui/material/Rating";
 import axios from "axios";
 import { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import TimeAgo from "react-timeago";
 import Avatar from "@mui/material/Avatar";
+import { Favorite, FavoriteBorder } from "@mui/icons-material";
 
 
 const serverAddress = "http://localhost:3002";
@@ -27,7 +28,8 @@ export function DishDetail() {
  // fetched state
  const [restaurantName, setRestaurantName] = useState(""); // TODO: mock this with mockeroo
  const [dish, setDish] = useState({});
-
+ const[restaurant,setRestaurant] = useState({});
+ const [isFavorite, setIsFavorite] = useState(false);
 
  function calcAvgReview() {
    if (!("reviews" in dish) || dish.reviews.length === 0) {
@@ -64,6 +66,35 @@ export function DishDetail() {
      });
  }, []);
 
+ useEffect(() => {
+  axios
+    .get(`${serverAddress}/restaurant/${params.restaurantID}`)
+    .then((response) => {
+      setRestaurant(response.data);
+    })
+    .catch((error) => {
+      console.error("Error getting restaurant data: ", error);
+    });
+}, []);
+
+useEffect(() => {
+  if (!storedId) {
+    return;
+  }
+
+  axios
+    .get(`${serverAddress}/favorites/${storedId}`)
+    .then((response) => {
+      console.log(response.data);
+      const favorites = response.data.favsLinks.map((fav) => fav.link.split("/").pop());
+      setIsFavorite(favorites.includes(dish._id));
+    })
+    .catch((error) => {
+      console.error("Error checking favorite status: ", error);
+    });
+}, [storedId, dish]);
+
+ 
  const handleDeleteReview = async (reviewId) => {
   try {
     const response = await axios.delete(`${serverAddress}/restaurant/${params.restaurantID}/dish/${params.dishID}/review/${reviewId}`);
@@ -83,6 +114,65 @@ export function DishDetail() {
 };
 
 
+const handleFavoriteClick =  async (event) => {
+    if (!storedId) {
+      alert("Please log in to save dishes to your favorites.");
+      // navigate("/login");
+      return;
+    }
+  try {
+    const response = await axios.post(`${serverAddress}/favorites/${storedId}`, {
+        dishId: dish._id,
+        restaurantID : restaurant._id,
+        dishImg: dish.image,
+      })
+      if (response.status === 200) {
+        setIsFavorite(true);
+        alert(`${dish.name} saved to favorites!`);
+      }
+      else if(response.status === 202){
+        setIsFavorite(true);
+        alert(`${dish.name} already saved to favorites!`);
+      }
+    }catch(error){
+        console.error("Error saving dish to favorites: ", error);
+      };
+  };
+
+
+const handleUnfavoriteClick =  async (event) => {
+  try {
+    const response = await axios.delete(`${serverAddress}/favorites/${storedId}`, {
+      data: {
+        dishId: dish._id,
+        restaurantID: restaurant._id,
+      },
+    });
+    if (response.status === 200) {
+      setIsFavorite(false);
+      alert(`${dish.name} removed from favorites.`);
+    }
+  } catch (error) {
+    console.error("Error removing from favorites: ", error);
+  }
+};
+
+
+  // const handleUnfavoriteClick = async (event) => {
+
+  //   try {
+  //     const response = await axios.delete(`${serverAddress}/favorites/${storedId}`,{
+  //       dishId: dish._id,
+  //       restaurantID : restaurant._id,
+  //     })
+  //     if (response.status === 200) {
+  //       setIsFavorite(false);
+  //       alert(`${dish.name} removed from favorites.`);
+  //     }
+  //   } catch (error) {
+  //     console.error("Error removing from favorites: ", error);
+  //   };
+  // };
 
 
  return (
@@ -125,7 +215,23 @@ export function DishDetail() {
              loading="lazy"
            />
          </ImageListItem>
-       </Box>
+         <Box sx={{ m: 2 }} />
+         {storedId && (
+          <Box sx={{ display: "flex", alignItems: "center", mt: "10px" }}>
+            {isFavorite ? (
+              <IconButton onClick={handleUnfavoriteClick} sx={{ color: "red" }}>
+                <Favorite />
+              </IconButton>
+            ) : (
+              <IconButton onClick={handleFavoriteClick}>
+                <FavoriteBorder />
+              </IconButton>
+            )}
+            <Typography variant="body1">
+              {isFavorite ? "Remove from favorites" : "Add to favorites"}
+            </Typography>
+          </Box>
+        )}       </Box>
      ) : (
        ""
      )}
