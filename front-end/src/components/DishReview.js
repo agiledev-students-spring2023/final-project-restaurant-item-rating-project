@@ -76,6 +76,10 @@ export function DishReview() {
 
 
  const handleSubmit = (event) => {
+  if(!rating){
+    event.target.value = 0;
+    setRating(parseInt(0))
+  }
    if (rating < 0 || rating > 5) {
      alert(
        `Please select a valid rating value. You tried to submit a value of "${rating}", which is not valid.`
