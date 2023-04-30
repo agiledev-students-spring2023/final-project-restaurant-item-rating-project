@@ -2,11 +2,15 @@
 const express = require("express");
 const bodyParser = require('body-parser');
 
+//needed
 const app = express();
 
+//middleware function
 app.use(bodyParser.json({ limit: '50mb' }));
+//middleware function
 app.use(bodyParser.urlencoded({ limit: '50mb', extended: true }));
 
+//port front end is running on
 const port = 3000;
 
 // import some useful middleware
@@ -16,16 +20,25 @@ require("dotenv").config({ silent: true }); // load environmental variables from
 const morgan = require("morgan"); // middleware for nice logging of incoming HTTP requests
 var cors = require("cors");
 
-// import routers
+// import dish router
 const dishRouter = require("./routes/dish");
+// import rating router
 const ratingRouter = require("./routes/rating");
+// import restaurant router
 const restaurantRouter = require("./routes/restaurant");
+// import suggestion router
 const suggestionRouter = require("./routes/suggestion");
+// import search router
 const searchRouter = require("./routes/search");
+// import register router
 const registerRouter = require("./routes/register");
+// import login router
 const loginRouter = require("./routes/login");
+// import profile router
 const profileRouter = require("./routes/profile");
+// import avatar router
 const avatarRouter = require("./routes/avatar");
+// import fav router
 const favsRouter = require("./routes/favs");
 
 /**
@@ -36,6 +49,8 @@ const favsRouter = require("./routes/favs");
 
 // cors for front-end
 app.use(cors());
+
+//all example code from prof
 
 // use the morgan middleware to log all incoming http requests
 app.use(morgan("dev")); // morgan has a few logging default styles - dev is a nice concise color-coded style
@@ -101,7 +116,7 @@ app.get("/parameter-example/:animalId", async (req, res) => {
   }
 });
 
-////////////////////////////////////////
+//----------------------------------------------
 // THIS PART IS OUR CODE. ABOVE IS FROM PROF
 
 /**

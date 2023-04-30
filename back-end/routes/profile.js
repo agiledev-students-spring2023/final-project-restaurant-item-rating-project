@@ -94,6 +94,4 @@ profileRouter.post('/:id', async (req, res) => {
     }
   });
 
-
-
 module.exports = profileRouter;

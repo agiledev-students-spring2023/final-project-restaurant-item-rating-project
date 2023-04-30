@@ -65,10 +65,5 @@ favsRouter.post('/:id', async (req, res) => {
     res.status(500).json({ success: false, error: "Unable to remove dish from favorites" });
   }
 });
-      
-
-  
-  
-
 
 module.exports = favsRouter;
