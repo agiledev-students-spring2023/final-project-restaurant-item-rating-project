@@ -6,7 +6,6 @@ const { Register } = require("./../db");
 
 const avatarRouter = express.Router();
 
-
 avatarRouter.post('/:id', async (req, res) => {
   try {
     const userId = req.params.id;

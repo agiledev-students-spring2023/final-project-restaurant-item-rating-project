@@ -3,20 +3,23 @@ const mongoose = require("mongoose");
 const { Schema } = mongoose;
 
 // Define the register schema
-
 const RegisterSchema = new Schema({
+  //needs email
   email: {
     type: String,
     required: true,
   },
+  //needs password
   password: {
     type: String,
     required: true,
   },
+  //profile pic
   avatarUrl:{
     type: String,
     default: '',
   },
+  //favorites 
   favLinks: {
     type: [{
       link: {
@@ -35,6 +38,7 @@ const RegisterSchema = new Schema({
 
 // Define the review schema
 const ReviewSchema = new Schema({
+  //rating amount
   value: {
     type: Number,
     min: 0,
@@ -43,16 +47,19 @@ const ReviewSchema = new Schema({
     //Need to change min to 1 once we figure out the error.
     //Otherwise change DishReview min to 0 -- This seems easier
   },
+  //date posted
   date: {
     type: Date,
     default: Date.now,
     required: true,
   },
+  //user id
   userID: {
     type: String,
     //pending for the implmentation of userId
     required: true,
   },
+  //pictures
   picUrl:{
     type: String,
     default: '',
@@ -65,6 +72,7 @@ const DishSchema = new Schema({
     type: String,
     required: true,
   },
+  
   // TODO: implement this stuff..uploads and method on model to calculate,
   //  then every time the reviews are touched (ex, by "add review"), this method
   //  should be called
@@ -74,6 +82,7 @@ const DishSchema = new Schema({
   //   // TODO: change this...just for testing
   //   default: "https://images.ctfassets.net/o19mhvm9a2cm/3TqdEA20hEleGPCZj2JZJl/297b157fdd3ca108c74f17b1bd5fdfce/Website_RB_HP.png"
   // },
+
   image: {
     type: String,
     required: false,
