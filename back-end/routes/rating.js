@@ -128,25 +128,53 @@ const reviews =[]
 //   }
 // });
 
+ratingRouter.get('/', async(req, res) => {
 
+    const { restaurantId, dishId } = req.params;
+    const userId = req.query.userId;
+
+    const newRest = await Restaurant.findById(restaurantId);
+
+  
+    const dish = newRest.dishes.find((dish)=>{
+      return ((dish._id.toString()) == dishId);
+    });
+
+    const revexists = dish.reviews.some((review) =>{
+      return review.userID == userId;
+    });
+    
+    if(!revexists){
+    
+    res.status(200).send('User has not submited review for this dish yet.')
+    }
+      
+    if(revexists){
+    
+      res.status(201).send('User has submited a review for this dish.')
+      }
+  });
 
 ratingRouter.post('/', async (req, res) => {
   try {
     // create a new rating in the database based on the data in the request body
+   
 
-    const { restaurantId, dishId } = req.params;
+    const { restaurantId, userID, dishId } = req.params;
 
     const newRest = await Restaurant.findById(restaurantId);
 
-    console.log(newRest);
-    console.log(newRest.dishes);
-
+    //console.log(newRest);
+    //console.log(newRest.dishes);
+    //console.log(userID);
+   
+  
     const dish = newRest.dishes.find((dish)=>{
       return ((dish._id.toString()) == dishId);
     });
 
     const rev = dish.reviews.push(req.body);
-    newRest.save()
+    newRest.save() 
     
     // return a success response
     res.status(200).json({success:true});
