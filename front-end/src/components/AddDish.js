@@ -12,6 +12,7 @@ import { useNavigate, useParams } from "react-router-dom";
 import "../App.css";
 
 export function AddDish() {
+  const [loggedIn, setLoggedIn] = useState(false);
   const params = useParams();
   const navigate = useNavigate();
   const serverAddress = "http://localhost:3002";
@@ -38,6 +39,22 @@ export function AddDish() {
       });
   }, [params.restaurantID]);
 
+  useEffect(() => {
+    const userId = localStorage.getItem("userId");
+    if (userId) {
+      setLoggedIn(true);
+    }
+  }, []);
+
+  const handleSubmit = (event) => {
+    event.preventDefault();
+    if (loggedIn) {
+      // form submission logic here
+    } else {
+      alert("Please log in to add a dish.");
+    }
+  };
+
   return (
     <Container>
       <Typography variant="h3">Add a Dish</Typography>
@@ -45,7 +62,7 @@ export function AddDish() {
       {/* form */}
       <Box
         component="form"
-        action={formAddress}
+        onSubmit={handleSubmit}
         method="post"
         encType="multipart/form-data"
       >
@@ -77,7 +94,7 @@ export function AddDish() {
           ""
         )}
         <Box sx={{ m: 4 }} />
-        <Button variant="contained" size="large" type="submit">
+        <Button variant="contained" size="large" type="submit"  disabled={!loggedIn}>
           Submit
         </Button>
       </Box>
