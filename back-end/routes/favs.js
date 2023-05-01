@@ -8,7 +8,7 @@ const favsRouter = express.Router();
 
 favsRouter.post('/:id', async (req, res) => {
     const storedId = req.params.id;
-    const { dishId, restaurantID, dishImg } = req.body;
+    const { dishId, restaurantID, dishImg, dishName } = req.body;
     const favoriteLink = `http://localhost:3000/restaurant/${restaurantID}/dish/${dishId}`;
     // console.log(favoriteLink);
 
@@ -24,7 +24,7 @@ favsRouter.post('/:id', async (req, res) => {
         }
     
         // Add the dish to the user's favorites
-        favLinks.push({ link: favoriteLink, dishImg });
+        favLinks.push({ link: favoriteLink, dishImg, dishName });
         user.favLinks = favLinks;
         await user.save();
         console.log(user);

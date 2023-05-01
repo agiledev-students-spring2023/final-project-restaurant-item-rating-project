@@ -131,10 +131,12 @@ const handleFavoriteClick =  async (event) => {
       return;
     }
   try {
+    // console.log(dish.name);
     const response = await axios.post(`${serverAddress}/favorites/${storedId}`, {
         dishId: dish._id,
         restaurantID : restaurant._id,
         dishImg: dish.image,
+        dishName: dish.name 
       })
       if (response.status === 200) {
         setIsFavorite(true);

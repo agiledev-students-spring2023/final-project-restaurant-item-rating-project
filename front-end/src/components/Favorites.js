@@ -15,6 +15,7 @@ export function Favorites() {
           .get(`${serverAddress}/favorites/${userId}`)
           .then((response) => {
             setFavorites(response.data.favsLinks);
+            console.log(response.data.favsLinks);
           })
           .catch((error) => {
             console.error("Error fetching favorites: ", error);
@@ -33,6 +34,11 @@ export function Favorites() {
             <Card>
               <CardActionArea component={Link} to={favorite.link}>
                 <CardMedia component="img" height="200" image={`${serverAddress}/${favorite.dishImg}`}/>
+                <CardContent>
+                <Typography variant="h5" component="h2">
+                  {favorite.dishName}
+                </Typography>
+              </CardContent>
               </CardActionArea>
             </Card>
           </Grid>
