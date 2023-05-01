@@ -2,6 +2,8 @@ import { Avatar, Box, Typography } from "@mui/material";
 import axios from "axios";
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import React, { Component }  from 'react';
+
 
 const serverAddress = "http://localhost:3002";
 

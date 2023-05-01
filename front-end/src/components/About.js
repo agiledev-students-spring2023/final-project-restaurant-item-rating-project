@@ -2,6 +2,7 @@ import { Avatar, Box, Typography } from "@mui/material";
 import { useLocation, useNavigate, useParams } from "react-router-dom";
 import { useState, useEffect } from 'react';
 import axios from 'axios';
+import React, { Component }  from 'react';
 
 export function About() {
   const navigate = useNavigate();

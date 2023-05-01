@@ -3,6 +3,7 @@ import Rating from "@mui/material/Rating";
 import { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import axios from "axios"
+import React, { Component }  from 'react';
 
 const serverAddress = "http://localhost:3002";
 

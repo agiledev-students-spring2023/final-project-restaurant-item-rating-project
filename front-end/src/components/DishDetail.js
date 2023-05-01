@@ -6,6 +6,7 @@ import { useNavigate, useParams } from "react-router-dom";
 import TimeAgo from "react-timeago";
 import Avatar from "@mui/material/Avatar";
 import { Favorite, FavoriteBorder } from "@mui/icons-material";
+import React, { Component }  from 'react';
 
 
 const serverAddress = "http://localhost:3002";
@@ -190,9 +191,7 @@ const handleUnfavoriteClick =  async (event) => {
        Restaurant: {restaurantName}
      </Typography>
 
-
      <Box sx={{ m: 1.5 }} />
-
 
      {/* images */}
      {"image" in dish ? (
@@ -273,7 +272,7 @@ const handleUnfavoriteClick =  async (event) => {
          <Rating readOnly size="medium" value={calcAvgReview(dish) ?? 0} />
        </Box>
      ) : (
-       ""
+       ""  
      )}
      <Button
        variant="contained"

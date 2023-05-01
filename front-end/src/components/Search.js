@@ -5,6 +5,7 @@ import IconButton from "@mui/material/IconButton";
 import axios from "axios";
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import React, { Component }  from 'react';
 // reuse this function
 import { RestaurantMapping } from "./RestaurantMapping";
 

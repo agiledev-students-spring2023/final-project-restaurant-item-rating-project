@@ -12,6 +12,7 @@ import { Login } from './components/Login';
 import { Register } from './components/Register';
 import { Profile } from './components/Profile';
 import {Favorites} from './components/Favorites';
+import React, { Component }  from 'react';
 
 function MyRoutes() {
   return (

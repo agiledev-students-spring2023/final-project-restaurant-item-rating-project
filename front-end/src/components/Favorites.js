@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 import { Link } from "react-router-dom";
 import { Box, Typography, ImageListItem,  Grid, Card, CardMedia, CardActionArea, CardContent} from "@mui/material";
+import React, { Component }  from 'react';
 
 const serverAddress = "http://localhost:3002"; 
 

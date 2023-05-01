@@ -2,6 +2,7 @@ import { Avatar, Box, Container, Typography } from "@mui/material";
 import axios from "axios";
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import React, { Component }  from 'react';
 import { RestaurantMapping } from "./RestaurantMapping";
 
 const serverAddress = "http://localhost:3002";
