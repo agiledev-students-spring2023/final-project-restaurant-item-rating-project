@@ -35,7 +35,7 @@ export function About() {
       </Box>
 
       <Typography
-        style={{ fontFamily: "Roboto" }}
+        style={{ fontFamily: "BlinkMacSystemFont" }}
         color={"#31525B"}
         variant="h5"
         component="div"
@@ -47,7 +47,7 @@ export function About() {
       </Typography>
 
       <Typography
-        style={{ fontFamily: "Roboto" }}
+        style={{ fontFamily: "BlinkMacSystemFont" }}
         variant="body1"
         component="div"
         sx={{ flexGrow: 1 }}
@@ -68,7 +68,7 @@ export function About() {
       </Typography>
 
       <Typography
-        style={{ fontFamily: "Roboto" }}
+        style={{ fontFamily: "BlinkMacSystemFont" }}
         color={"#31525B"}
         variant="h5"
         component="div"
@@ -80,7 +80,7 @@ export function About() {
       </Typography>
 
       <Typography
-        style={{ fontFamily: "Roboto" }}
+        style={{ fontFamily: "BlinkMacSystemFont" }}
         variant="body1"
         component="div"
         sx={{ flexGrow: 1 }}
@@ -92,7 +92,7 @@ export function About() {
       </Typography>
 
       <Typography
-        style={{ fontFamily: "Roboto" }}
+        style={{ fontFamily: "BlinkMacSystemFont" }}
         color={"#31525B"}
         variant="h5"
         component="div"
@@ -104,7 +104,7 @@ export function About() {
       </Typography>
 
       <Typography
-        style={{ fontFamily: "Roboto" }}
+        style={{ fontFamily: "BlinkMacSystemFont" }}
         variant="body1"
         component="div"
         sx={{ flexGrow: 1 }}

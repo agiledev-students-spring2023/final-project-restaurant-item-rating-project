@@ -1,7 +1,7 @@
 .login-form {
     display: flex;
     justify-content: center;
-    font-family: 'Roboto';
+    font-family: 'BlinkMacSystemFont';
     color: #fff;
 }
   
@@ -14,14 +14,14 @@
   
 .title {
     margin-bottom: 20px;
-    font-family: 'Roboto';
+    font-family: 'BlinkMacSystemFont';
 }
   
 .heading {
     font-size: 24px;
     font-weight: bold;
     color: #fff;
-    font-family: 'Roboto';
+    font-family: 'BlinkMacSystemFont';
 }
   
 .input-container {
@@ -60,7 +60,7 @@
     border-radius: 3px;
     text-decoration: none;
     cursor: pointer;
-    font-family: 'Roboto';
+    font-family: 'BlinkMacSystemFont';
 }
   
 .button:hover {

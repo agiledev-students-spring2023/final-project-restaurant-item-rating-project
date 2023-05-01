@@ -159,7 +159,7 @@ export function DishReview() {
        }}
      >
        <Typography
-         style={{ fontFamily: "Roboto" }}
+         style={{ fontFamily: "BlinkMacSystemFont" }}
          color={"#31525B"}
          variant="h4"
        >
@@ -167,13 +167,13 @@ export function DishReview() {
          Leave a Review
        </Typography>
        <Box sx={{ m: 2 }} />
-       <Typography style={{ fontFamily: "Roboto" }} variant="h6">
+       <Typography style={{ fontFamily: "BlinkMacSystemFont" }} variant="h6">
          Restaurant: {restaurantName}
        </Typography>
-       <Typography style={{ fontFamily: "Roboto" }} variant="h6">
+       <Typography style={{ fontFamily: "BlinkMacSystemFont" }} variant="h6">
          Dish: {dish.name}
        </Typography>
-       <Typography style={{ fontFamily: "Roboto" }} variant="h6">
+       <Typography style={{ fontFamily: "BlinkMacSystemFont" }} variant="h6">
          Average Rating: {calcAvgReview() ?? 0}
        </Typography>
        <Box sx={{ m: 1 }} />
@@ -195,7 +195,7 @@ export function DishReview() {
        >
          <Box sx={{ m: 2 }} />
          <Typography
-           style={{ fontFamily: "Roboto" }}
+           style={{ fontFamily: "BlinkMacSystemFont" }}
            color={"#31525B"}
            variant="h4"
          >

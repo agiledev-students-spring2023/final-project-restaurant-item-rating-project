@@ -33,14 +33,14 @@ export function Home() {
         component="div"
         color={"#31525B"}
         align="center"
-        style={{ fontFamily: "Roboto" }}
+        style={{ fontFamily: "BlinkMacSystemFont" }}
         // sx={{ flexGrow: 1}}
       >
         Welcome to Dish Dealer!
       </Typography>
       <Box height={"2em"} />
       <Typography
-        style={{ fontFamily: "Roboto" }}
+        style={{ fontFamily: "BlinkMacSystemFont" }}
         variant="h6"
         component="div"
         // sx={{ flexGrow: 1}}

@@ -55,10 +55,10 @@ export function AddRestaurant() {
   return(
     <Container bgcolor={'#FFFFFF'}>
 
-      <Typography style={{ fontFamily: 'Roboto'}} color={'#31525B'} variant="h3">Add Restaurant</Typography>
+      <Typography style={{ fontFamily: 'BlinkMacSystemFont'}} color={'#31525B'} variant="h3">Add Restaurant</Typography>
 
       <form>
-        <Typography style={{ fontFamily: 'Roboto'}} variant="body1">Add Restaurant</Typography>
+        <Typography style={{ fontFamily: 'BlinkMacSystemFont'}} variant="body1">Add Restaurant</Typography>
         <TextField
           value = {restaurantName} 
           onChange = {(e) => {setRestaurantName(e.target.value);}}
@@ -70,7 +70,7 @@ export function AddRestaurant() {
           variant="outlined"
         />
 
-        <Typography style={{ fontFamily: 'Roboto'}} variant="body1">Add City</Typography>
+        <Typography style={{ fontFamily: 'BlinkMacSystemFont'}} variant="body1">Add City</Typography>
         <TextField
           value = {cityName} 
           onChange = {(e) => {setCityName(e.target.value);}}

@@ -87,7 +87,7 @@ export function Search() {
         }}
       >
         {!hasSearched ? (
-          <Typography variant="body" style={{ fontFamily: "Roboto" }}>
+          <Typography variant="body" style={{ fontFamily: "BlinkMacSystemFont" }}>
             Please enter a search to see results!
           </Typography>
         ) : searchResults.length === 0 ? (
