@@ -9,6 +9,8 @@ const serverAddress = "http://localhost:3002"
 
 export function AddRestaurant() {
 
+  const [loggedIn, setLoggedIn] = useState(false);
+
   const navigate = useNavigate();
 
   // form data
@@ -43,6 +45,12 @@ export function AddRestaurant() {
     
     navigate('/home');
   };
+  useEffect(() => {
+    const userId = localStorage.getItem("userId");
+    if (userId) {
+      setLoggedIn(true);
+    }
+  }, []);
   
   return(
     <Container bgcolor={'#FFFFFF'}>
@@ -100,7 +108,7 @@ export function AddRestaurant() {
         </Box>
          */}
         <Box sx={{m:2}} /> 
-        <Button variant="contained" onClick={handleSubmit}>Submit</Button>
+        <Button variant="contained" onClick={handleSubmit} disabled={!loggedIn}>Submit</Button >
       </form>
     </Container>
   )  
