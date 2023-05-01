@@ -29,6 +29,10 @@ const RegisterSchema = new Schema({
       dishImg: {
         type: String,
         required: true
+      },
+      dishName: {
+        type: String,
+        required: true
       }
     }],
     default: []
