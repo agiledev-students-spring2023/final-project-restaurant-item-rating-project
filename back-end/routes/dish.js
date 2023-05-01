@@ -63,38 +63,6 @@ dishRouter.get("/:id", async (req, res) => {
   res.json(dish);
 });
 
-// // route for HTTP POST requests for /upload-example
-// app.post("/upload", upload.single("dishImage"), (req, res, next) => {
-//   // check whether anything was uploaded
-//   if (!req.files || req.files.length == 0) {
-//     // failure!
-//     const error = new Error("Please upload some files!")
-//     error.httpStatusCode = 400
-//     res.json({
-//       status: "you fail!!!",
-//       message: "rejected your files... try harder",
-//     })
-//     // return next(error)
-//   } else if (req.files.length !== 1) {
-//     res.json({
-//       status: "you fail!!!",
-//       message: "rejected your files... try harder",
-//     })
-//   } else {
-//     // success
-//     // send a message back to the client, for example, a simple JSON object
-//     const data = {
-//       status: "all good",
-//       message: "files were uploaded!!!",
-//       files: req.files,
-//     }
-
-//     // now we can store dish to the place, fam
-
-//     res.json(data)
-//   }
-// })
-
 // Define the POST endpoint to create a a dish for a restaurant
 dishRouter.post("/", upload.single("dishImage"), async (req, res) => {
   let dishError = true;
@@ -130,11 +98,6 @@ dishRouter.post("/", upload.single("dishImage"), async (req, res) => {
       error: "there was an error creating a new dish",
     });
   }
-  // Return a success response
-  // res.json({
-  //   message: "success",
-  // });
-  // res.status(301).redirect(`localhost:3000/restaurant/${restaurantId}`);
 });
 //END OF NEW STUFF
 

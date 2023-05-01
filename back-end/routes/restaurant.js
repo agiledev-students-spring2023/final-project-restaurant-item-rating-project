@@ -6,6 +6,7 @@ const { Restaurant } = require("./../db");
 const restaurantRouter = express.Router();
 
 // Define the GET endpoint to get restaurant
+//get restaurant
 restaurantRouter.get("/:id", async (req, res) => {
   // res id, given from URL
   const restaurantId = req.params.id; // extract the restaurant ID from the URL parameter
@@ -30,6 +31,7 @@ restaurantRouter.get("/:id", async (req, res) => {
 });
 
 // Define the POST endpoint to create a restaurant
+//create restaurnat
 restaurantRouter.post("/", async (req, res) => {
   // Here you can create the restaurant in the database based on the data in the request body
   // For example:

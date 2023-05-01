@@ -10,12 +10,14 @@ avatarRouter.post('/:id', async (req, res) => {
   try {
     const userId = req.params.id;
 
+    //find by user id
     const user = await Register.findById(userId);
     if (!user) {
       return res.status(404).send('User not found');
     }
     // console.log(user);
 
+    //photos!!
     const { avatarUrl } = req.body;
     if (avatarUrl) {
       user.avatarUrl = avatarUrl;

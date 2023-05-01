@@ -6,6 +6,7 @@ require('dotenv').config();
 
 const registerRouter = express.Router();
 
+//create user w register
 registerRouter.post('/', async (req, res) => {
     let newUser;
     try {

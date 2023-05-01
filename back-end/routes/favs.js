@@ -27,6 +27,7 @@ favsRouter.post('/:id', async (req, res) => {
         favLinks.push({ link: favoriteLink, dishImg, dishName });
         user.favLinks = favLinks;
         await user.save();
+        //test
         console.log(user);
     
         res.status(200).json({ success: true });
@@ -36,6 +37,7 @@ favsRouter.post('/:id', async (req, res) => {
       }
     });
 
+    //getting favorites
     favsRouter.get('/:id', async (req, res) => {
         const userId = req.params.id;
       
@@ -48,6 +50,7 @@ favsRouter.post('/:id', async (req, res) => {
         }
       });
       
+      //deleting favorites
       favsRouter.delete('/:id', async (req, res) => {
         const storedId = req.params.id;
   const { dishId, restaurantID } = req.body;
