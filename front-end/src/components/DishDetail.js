@@ -4,7 +4,6 @@ import axios from "axios";
 import { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import TimeAgo from "react-timeago";
-import Avatar from "@mui/material/Avatar";
 import { Favorite, FavoriteBorder } from "@mui/icons-material";
 import React, { Component }  from 'react';
 
@@ -114,7 +113,18 @@ useEffect(() => {
   }
 };
 
-
+const  handleAddReview = async() =>{
+    try{
+      const response = await axios.get(`${serverAddress}/restaurant/${params.restaurantID}/dish/${params.dishID}/review?userId=${storedId}`);
+      if(response.status === 200){
+        navigate(`/restaurant/${params.restaurantID}/dish/${params.dishID}/rating`);
+      }
+      if(response.status === 201){
+       alert("You have already submitted a review for this dish");
+    }}catch(error){
+      console.log(error.response.data)
+    }
+}
 const handleFavoriteClick =  async (event) => {
     if (!storedId) {
       alert("Please log in to save dishes to your favorites.");
@@ -278,9 +288,7 @@ const handleUnfavoriteClick =  async (event) => {
        variant="contained"
        size="small"
        onClick={() => {
-         navigate(
-           `/restaurant/${params.restaurantID}/dish/${params.dishID}/rating`
-         );
+         handleAddReview();
        }}
      >
        Add a review
