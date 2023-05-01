@@ -57,7 +57,7 @@ export function RestaurantDetail() {
         }}
       >
         <Typography
-          style={{ fontFamily: "Roboto" }}
+          style={{ fontFamily: "BlinkMacSystemFont" }}
           color={"#31525B"}
           variant="h3"
           gutterBottom
@@ -65,7 +65,7 @@ export function RestaurantDetail() {
           {restaurantName}
         </Typography>
       </Box>
-      <Typography style={{ fontFamily: "Roboto" }} variant="h6" gutterBottom>
+      <Typography style={{ fontFamily: "BlinkMacSystemFont" }} variant="h6" gutterBottom>
         City: {location}
       </Typography>
 
@@ -73,7 +73,7 @@ export function RestaurantDetail() {
 
       <Box height="2rem" />
       <Typography
-        style={{ fontFamily: "Roboto" }}
+        style={{ fontFamily: "BlinkMacSystemFont" }}
         color={"#31525B"}
         variant="h4"
         gutterBottom
@@ -104,7 +104,7 @@ export function RestaurantDetail() {
           >
             <Box height="2rem" />
             <Typography
-              style={{ fontFamily: "Roboto" }}
+              style={{ fontFamily: "BlinkMacSystemFont" }}
               variant="h5"
               gutterBottom
               textTransform={"capitalize"}

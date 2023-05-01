@@ -198,7 +198,7 @@ const handleUnfavoriteClick =  async (event) => {
    >
      <Typography variant="h3">{dish.name}</Typography>
      <Box sx={{ m: 2 }} />
-     <Typography style={{ fontFamily: "Roboto" }} variant="h6">
+     <Typography style={{ fontFamily: "BlinkMacSystemFont" }} variant="h6">
        Restaurant: {restaurantName}
      </Typography>
 
@@ -210,7 +210,7 @@ const handleUnfavoriteClick =  async (event) => {
      {"image" in dish ? (
        <Box>
          <Typography
-           style={{ fontFamily: "Roboto" }}
+           style={{ fontFamily: "BlinkMacSystemFont" }}
            color={"#31525B"}
            variant="h4"
          >
@@ -274,7 +274,7 @@ const handleUnfavoriteClick =  async (event) => {
 
      <Box sx={{ m: 3 }} />
      <Typography
-       style={{ fontFamily: "Roboto" }}
+       style={{ fontFamily: "BlinkMacSystemFont" }}
        color={"#31525B"}
        variant="h4"
      >
