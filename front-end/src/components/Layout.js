@@ -72,16 +72,16 @@ export function Layout() {
       {/* back button */}
       {/* check if "home" */}
       {
-        (location.pathname === '/home') ? 
-        "" : 
-      <IconButton 
-        variant="outlined" 
-        onClick={() => {
-          navigate(-1);
-        }}
-      >
-        <ArrowBackIosIcon />
-      </IconButton>
+      //   (location.pathname === '/home') ? 
+      //   "" : 
+      // <IconButton 
+      //   variant="outlined" 
+      //   onClick={() => {
+      //     navigate(-1);
+      //   }}
+      // >
+      //   <ArrowBackIosIcon />
+      // </IconButton>
       }
 
       <Box height="1rem" />
