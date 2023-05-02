@@ -306,8 +306,8 @@ const handleUnfavoriteClick =  async (event) => {
              <Box key={review._id} display="flex" flexDirection={"column"}>
                <Box sx={{ m: 1.5 }} />
                <Rating name="read-only" value={review.value} readOnly />
-               {review.picUrl && <img src={review.picUrl} alt="review image" style={{ maxWidth: "150px" }}/>}
-
+               {review.picUrl && <img src={review.picUrl} alt="review image" style={{ maxWidth: "150px" }}/>} 
+               <Typography>{review.review}</Typography>
 
                <TimeAgo date={review.date} />
                {review.userID === storedId && (

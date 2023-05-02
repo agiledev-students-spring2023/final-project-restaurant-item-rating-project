@@ -1,4 +1,4 @@
-import { Avatar, Box, Button, Typography,  IconButton } from "@mui/material";
+import { Avatar, Box, Button, Typography,  IconButton, TextField } from "@mui/material";
 import PhotoCamera from "@mui/icons-material/PhotoCamera";
 import Rating from "@mui/material/Rating";
 import axios from "axios";
@@ -28,16 +28,11 @@ export function DishReview() {
 
  const [rating, setRating] = useState(0);
  const [isSubmitted, setIsSubmitted] = useState(false);
-
-
  const [restaurantName, setRestaurantName] = useState("");
  const [dish, setDish] = useState({});
-
-
  const [storedId, setStoredId] = useState("");
-
-
  const[picUrl, setPicUrl] = useState("");
+ const [review, setReview] = useState("");
 
 
  useEffect(() => {
@@ -96,6 +91,7 @@ export function DishReview() {
          value: rating,
          userID: storedId,
          picUrl: picUrl,
+         review: review,
        }
      )
      .then(function (response) {
@@ -182,7 +178,6 @@ export function DishReview() {
        </Box>
      </Box>
 
-
      <Box sx={{ m: 2 }} />
      <Box sx={{ ...centeringStyles, display: "flex" }}>
        {/* <form onSubmit={handleSubmit} style={{...centeringStyles, }}> */}
@@ -212,6 +207,13 @@ export function DishReview() {
              setRating(parseInt(e.target.value));
            }}
          />
+        <TextField
+          label="Enter your Review Here"
+          value={review}
+          onChange={(e) => setReview(e.target.value)}
+          multiline
+          rows={2}
+        />
          </Box>
      <Box sx={{ display: "flex", alignItems: "center", mb: 2 }}>
        <input
@@ -233,9 +235,8 @@ export function DishReview() {
        <Typography variant="subtitle1">
          {picUrl ? "Image uploaded" : "Upload an image (optional):"}
          {picUrl && <img src={picUrl} alt="uploaded image" style={{ maxWidth: "250px" }} />}
-
-
        </Typography>
+    
      </Box>
          <Button variant="contained" onClick={handleSubmit}>
            Submit

@@ -67,7 +67,12 @@ const ReviewSchema = new Schema({
   picUrl:{
     type: String,
     default: '',
-  } 
+  }, 
+  //comments (text review)
+  review:{
+    type: String,
+    default:'',
+  }
 });
 
 // Define the dish schema
