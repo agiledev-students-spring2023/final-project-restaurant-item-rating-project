@@ -32,7 +32,7 @@ export function DishReview() {
  const [dish, setDish] = useState({});
  const [storedId, setStoredId] = useState("");
  const[picUrl, setPicUrl] = useState("");
- const [review, setReview] = useState("");
+ const [comment, setComment] = useState("");
 
 
  useEffect(() => {
@@ -91,7 +91,7 @@ export function DishReview() {
          value: rating,
          userID: storedId,
          picUrl: picUrl,
-         review: review,
+         comment: comment,
        }
      )
      .then(function (response) {
@@ -209,8 +209,8 @@ export function DishReview() {
          />
         <TextField
           label="Enter your Review Here"
-          value={review}
-          onChange={(e) => setReview(e.target.value)}
+          value={comment}
+          onChange={(e) => setComment(e.target.value)}
           multiline
           rows={2}
         />

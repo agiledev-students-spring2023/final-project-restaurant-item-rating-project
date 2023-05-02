@@ -69,7 +69,7 @@ const ReviewSchema = new Schema({
     default: '',
   }, 
   //comments (text review)
-  review:{
+  comment:{
     type: String,
     default:'',
   }
