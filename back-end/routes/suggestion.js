@@ -17,6 +17,7 @@ suggestionRouter.get('/restaurant', async (req, res)=>{
   }
   res.statusCode = 200;
   res.json(restaurantSuggestions);
+
 });
 
 module.exports = suggestionRouter;

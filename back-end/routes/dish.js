@@ -8,7 +8,6 @@ const { Restaurant } = require("../db");
 const dishRouter = express.Router({ mergeParams: true });
 
 // storage stuff
-//creating picture save
 const storage = multer.diskStorage({
   destination: function (req, file, cb) {
     cb(null, "public/uploads");
@@ -26,7 +25,6 @@ const storage = multer.diskStorage({
     cb(null, newName);
   },
 });
-//upload photo
 const upload = multer({ storage: storage });
 
 const uploadDishImage = multer({ storage: storage }).single("dishImage");
@@ -45,7 +43,6 @@ dishRouter.get("/:id", async (req, res) => {
       // error
       res.statusCode = 404;
       res.json({
-        //alert message
         error: "Restaurant not found",
       });
     }
@@ -54,7 +51,6 @@ dishRouter.get("/:id", async (req, res) => {
     if (!dish) {
       res.statusCode = 404;
       res.json({
-        //alert message
         error: "Dish not found",
       });
       return;
@@ -64,49 +60,141 @@ dishRouter.get("/:id", async (req, res) => {
   }
 
   // Return the restaurant
-  //return JSON 
   res.json(dish);
 });
 
-// Define the POST endpoint to create a a dish for a restaurant
-dishRouter.post("/", upload.single("dishImage"), async (req, res) => {
-  let dishError = true;
-  if ("file" in req) {
-    //errorrrrr
-    dishError = false;
-  }
+// // route for HTTP POST requests for /upload-example
+// app.post("/upload", upload.single("dishImage"), (req, res, next) => {
+//   // check whether anything was uploaded
+//   if (!req.files || req.files.length == 0) {
+//     // failure!
+//     const error = new Error("Please upload some files!")
+//     error.httpStatusCode = 400
+//     res.json({
+//       status: "you fail!!!",
+//       message: "rejected your files... try harder",
+//     })
+//     // return next(error)
+//   } else if (req.files.length !== 1) {
+//     res.json({
+//       status: "you fail!!!",
+//       message: "rejected your files... try harder",
+//     })
+//   } else {
+//     // success
+//     // send a message back to the client, for example, a simple JSON object
+//     const data = {
+//       status: "all good",
+//       message: "files were uploaded!!!",
+//       files: req.files,
+//     }
 
-  const { restaurantId } = req.params;
-  // console.log(req.file.path)
+//     // now we can store dish to the place, fam
+
+//     res.json(data)
+//   }
+// })
+
+
+dishRouter.post("/", async (req, res) => {
+  const restaurantId = req.params.restaurantId;
+  console.log(restaurantId);
   try {
     const newRest = await Restaurant.findById(restaurantId);
-    if (dishError) {
-
-      if (!req.body.dishName) {
-        throw new Error("Dish name is required");
-      }
-      //new dish in ret
-      const dish = newRest.dishes.push({
-        name: req.body.dishName,
-      });
-    } else {
-      const dish = newRest.dishes.push({
-        name: req.body.dishName,
-        image: req.file.path,
-      });
+    if (!req.body.dishName) {
+      throw new Error("Dish name is required");
     }
+    const dish = newRest.dishes.push({
+      name: req.body.dishName,
+      image: req.body.uploadedPicture,
+    });
     newRest.save();
-    //redirect to restaurnat
-    res.redirect(`http://localhost:3000/restaurant/${restaurantId}`);
+    res.status(200).send("Dish created successfully");
   } catch (err) {
     console.log(err);
     res.statusCode = 500;
     res.json({
-      //alert
-      error: "there was an error creating a new dish",
+      error: "There was an error creating a new dish",
     });
   }
 });
+
+
+  // console.log(req.file.path)
+  // try {
+  //   const newRest = await Restaurant.findById(restaurantId);
+  //   if (dishError) {
+
+  //     // if (!req.body.dishName) {
+  //     //   throw new Error("Dish name is required");
+  //     // }
+
+  //     const dish = newRest.dishes.push({
+  //       name: req.body.dishName,
+  //     });
+
+  //   } else {
+  //     const dish = newRest.dishes.push({
+  //       name: req.body.dishName,
+  //       image: req.file.path,
+  //     });
+  //   }
+  //   newRest.save();
+  //   res.redirect(`http://localhost:3000/restaurant/${restaurantId}`);
+  // } catch (err) {
+  //   console.log(err);
+  //   res.statusCode = 500;
+  //   res.json({
+  //     error: "there was an error creating a new dish",
+  //   });
+  // }
+
+
+
+
+
+// Define the POST endpoint to create a a dish for a restaurant
+// dishRouter.post("/", upload.single("dishImage"), async (req, res) => {
+//   let dishError = true;
+//   if ("file" in req) {
+//     dishError = false;
+//   }
+
+//   const { restaurantId } = req.params;
+//   // console.log(req.file.path)
+//   try {
+//     const newRest = await Restaurant.findById(restaurantId);
+//     if (dishError) {
+
+//       // if (!req.body.dishName) {
+//       //   throw new Error("Dish name is required");
+//       // }
+
+//       const dish = newRest.dishes.push({
+//         name: req.body.dishName,
+//       });
+
+//     } else {
+//       const dish = newRest.dishes.push({
+//         name: req.body.dishName,
+//         image: req.file.path,
+//       });
+//     }
+//     newRest.save();
+//     res.redirect(`http://localhost:3000/restaurant/${restaurantId}`);
+//   } catch (err) {
+//     console.log(err);
+//     res.statusCode = 500;
+//     res.json({
+//       error: "there was an error creating a new dish",
+//     });
+//   }
+  // Return a success response
+  // res.json({
+  //   message: "success",
+  // });
+  // res.status(301).redirect(`localhost:3000/restaurant/${restaurantId}`);
+// });
 //END OF NEW STUFF
 
 module.exports = dishRouter;

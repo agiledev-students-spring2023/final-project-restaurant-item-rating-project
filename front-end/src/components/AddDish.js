@@ -1,10 +1,13 @@
 import {
+  Avatar,
   Box,
   Button,
   Container,
   TextField,
   Typography,
+  IconButton
 } from "@mui/material";
+import PhotoCamera from "@mui/icons-material/PhotoCamera";
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
@@ -19,6 +22,7 @@ export function AddDish() {
 
   // fetched data
   const [restaurantName, setRestaurantName] = useState("");
+  const [dishName, setDishName] = useState("");
 
   // form data
   // const [dishName, setDishName] = useState("");
@@ -45,58 +49,72 @@ export function AddDish() {
     }
   }, []);
 
-  // const handleSubmit = (event) => {
-  //   event.preventDefault();
-  //   if (loggedIn) {
-  //     // form submission logic here
-  //   } else {
-  //     alert("Please log in to add a dish.");
-  //   }
-  // };
+  const handleSubmit = async (event) => {
+    event.preventDefault();
+    try {
+      const response = await axios.post(`${serverAddress}/restaurant/${params.restaurantID}/dish`, {
+        dishName: dishName,
+        uploadedPicture: uploadedFile,
+      });
+      if (response.status === 200) {
+        navigate(`/restaurant/${params.restaurantID}`);
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
+  
+
+  const handleImageChange = (event) => {
+    const file = event.target.files[0];
+    const reader = new FileReader();
+    reader.readAsDataURL(file);
+    reader.onloadend = () => {
+      setUploadedFile(reader.result);
+    };
+  };
+ 
 
   return (
     <Container>
       <Typography variant="h3">Add a Dish</Typography>
       <Typography variant="h6">Restaurant: {restaurantName}</Typography>
       {/* form */}
-      <Box
-        component="form"
-        action={formAddress}
-        method="post"
-        encType="multipart/form-data"
-      >
+      <Box>
         <Box sx={{ m: 2 }} />
-        <TextField type="text" label="Dish Name" name="dishName" required/>
+        <TextField type="text" label="Dish Name" name="dishName" value={dishName} onChange={(e) => setDishName(e.target.value)} required/>
         <Box sx={{ m: 2 }} />
         <Typography variant="h6">Add Pictures?</Typography>
         <Box sx={{ m: 1 }} />
 
-        <Button variant="contained" component="label">
-          Upload File
-          <input
-            type="file"
-            hidden
-            name="dishImage"
-            onChange={(e) => {
-              console.log(e.target.files[0].name);
-              setUploadedFile(e.target.files[0].name);
-            }}
-          />
-        </Button>
-
-        <Box sx={{ m: 2 }} />
-
-        {/* image input */}
-        {uploadedFile !== "" ? (
-          <Box sx={{ m: 2 }}>Uploaded image: {uploadedFile}</Box>
-        ) : (
-          ""
-        )}
-        <Box sx={{ m: 4 }} />
-        <Button variant="contained" size="large" type="submit"  disabled={!loggedIn}>
-          Submit
-        </Button>
-      </Box>
+       <Box sx={{ display: "flex", alignItems: "center", mb: 2 }}>
+       <input
+         accept="image/*"
+         id="icon-button-file"
+         type="file"
+         style={{ display: "none" }}
+         onChange={handleImageChange}
+       />
+       <label htmlFor="icon-button-file">
+         <IconButton
+           color="primary"
+           aria-label="upload picture"
+           component="span"
+         >
+           <PhotoCamera />
+         </IconButton>
+       </label>
+       <Typography variant="subtitle1">
+         {uploadedFile ? "Image uploaded" : "Upload an image (optional):"}
+         {uploadedFile && <img src={uploadedFile} alt="uploaded image" style={{ maxWidth: "250px" }} />}
+       </Typography>
+    
+     </Box>
+     <Button variant="contained" type="submit" onClick={handleSubmit} disabled={!loggedIn}>
+           Submit
+         </Button>
+       </Box>
+       {/* </form> */}
     </Container>
   );
 }

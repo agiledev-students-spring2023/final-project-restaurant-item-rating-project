@@ -234,7 +234,7 @@ const handleUnfavoriteClick =  async (event) => {
          <Box sx={{ m: 0.5 }} />
          <ImageListItem key={dish.id}>
            <img
-             src={`${serverAddress}/${dish.image}`}
+             src={dish.image}
              // srcSet={`${serverAddress}/${dish.image}`}
              alt={dish.name}
              // width="auto"

@@ -28,7 +28,7 @@ favsRouter.post('/:id', async (req, res) => {
         user.favLinks = favLinks;
         await user.save();
         //test
-        console.log(user);
+        console.log(user.favLinks);
     
         res.status(200).json({ success: true });
       } catch (error) {
