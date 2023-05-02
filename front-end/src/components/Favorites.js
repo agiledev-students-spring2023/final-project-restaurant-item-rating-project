@@ -33,6 +33,11 @@ export function Favorites() {
             <Card>
               <CardActionArea component={Link} to={favorite.link}>
                 <CardMedia component="img" height="200" image={favorite.dishImg}/>
+                <CardContent>
+                <Typography gutterBottom variant="h5" component="h2">
+                  {favorite.dishName}
+                </Typography>
+              </CardContent>
               </CardActionArea>
             </Card>
           </Grid>
