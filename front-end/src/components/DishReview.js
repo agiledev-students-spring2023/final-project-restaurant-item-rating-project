@@ -81,7 +81,7 @@ let profanity = false;
     setComment(" ")
   }
   badwordsArray.forEach(word=>{
-    if(comment.includes(word)){
+    if(comment.toLowerCase().includes(word)){
       profanity = true; 
     }
   })
