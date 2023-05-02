@@ -8,6 +8,7 @@ const { Restaurant } = require("../db");
 const dishRouter = express.Router({ mergeParams: true });
 
 // storage stuff
+//creating picture save
 const storage = multer.diskStorage({
   destination: function (req, file, cb) {
     cb(null, "public/uploads");
@@ -25,6 +26,7 @@ const storage = multer.diskStorage({
     cb(null, newName);
   },
 });
+//upload photo
 const upload = multer({ storage: storage });
 
 const uploadDishImage = multer({ storage: storage }).single("dishImage");
@@ -43,6 +45,7 @@ dishRouter.get("/:id", async (req, res) => {
       // error
       res.statusCode = 404;
       res.json({
+        //alert message
         error: "Restaurant not found",
       });
     }
@@ -51,6 +54,7 @@ dishRouter.get("/:id", async (req, res) => {
     if (!dish) {
       res.statusCode = 404;
       res.json({
+        //alert message
         error: "Dish not found",
       });
       return;
@@ -60,6 +64,7 @@ dishRouter.get("/:id", async (req, res) => {
   }
 
   // Return the restaurant
+  //return JSON 
   res.json(dish);
 });
 
@@ -67,6 +72,7 @@ dishRouter.get("/:id", async (req, res) => {
 dishRouter.post("/", upload.single("dishImage"), async (req, res) => {
   let dishError = true;
   if ("file" in req) {
+    //errorrrrr
     dishError = false;
   }
 
@@ -79,7 +85,7 @@ dishRouter.post("/", upload.single("dishImage"), async (req, res) => {
       if (!req.body.dishName) {
         throw new Error("Dish name is required");
       }
-      
+      //new dish in ret
       const dish = newRest.dishes.push({
         name: req.body.dishName,
       });
@@ -90,11 +96,13 @@ dishRouter.post("/", upload.single("dishImage"), async (req, res) => {
       });
     }
     newRest.save();
+    //redirect to restaurnat
     res.redirect(`http://localhost:3000/restaurant/${restaurantId}`);
   } catch (err) {
     console.log(err);
     res.statusCode = 500;
     res.json({
+      //alert
       error: "there was an error creating a new dish",
     });
   }

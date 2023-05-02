@@ -11,13 +11,13 @@ function App() {
 './components/AddDish'
 './components/AddRestaurant'
 './components/DishDetail'
-  import { Search } from './components/Search';
-  import { About } from './components/About';
-  import { RestaurantDetail } from './components/RestaurantDetail';
-  import { Login } from './components/Login';
-  import { Register } from './components/Register';
-  import { Profile } from './components/Profile';
-  import {Favorites} from './components/Favorites'; */
+'./components/Search'
+'./components/About'
+'./components/RestaurantDetail'
+'./components/Login'
+'./components/Register'
+'./components/Profile'
+'./components/Favorites' */
 
   return (
     <MyRoutes />

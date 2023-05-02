@@ -4,6 +4,7 @@ const jwt = require('jsonwebtoken');
 const bcrypt = require('bcrypt');
 const { Register } = require("./../db");
 
+//required
 const avatarRouter = express.Router();
 
 avatarRouter.post('/:id', async (req, res) => {
@@ -26,9 +27,11 @@ avatarRouter.post('/:id', async (req, res) => {
 
     await user.save();
 
+    //alert messages
     res.status(200).send('Avatar URL updated');
   } catch (error) {
     console.log(error);
+    //alert messages
     res.status(500).send('Internal server error');
   }
 });
