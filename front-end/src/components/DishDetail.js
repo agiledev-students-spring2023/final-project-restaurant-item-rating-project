@@ -204,7 +204,22 @@ const handleUnfavoriteClick =  async (event) => {
 
 
      <Box sx={{ m: 1.5 }} />
-
+     {storedId && (
+          <Box sx={{ display: "flex", alignItems: "center", mt: "10px" }}>
+            {isFavorite ? (
+              <IconButton onClick={handleUnfavoriteClick} sx={{ color: "red" }}>
+                <Favorite />
+              </IconButton>
+            ) : (
+              <IconButton onClick={handleFavoriteClick}>
+                <FavoriteBorder />
+              </IconButton>
+            )}
+            <Typography variant="body1">
+              {isFavorite ? "Remove from favorites" : "Add to favorites"}
+            </Typography>
+          </Box>
+        )} 
 
      {/* images */}
      {"image" in dish ? (
@@ -228,7 +243,7 @@ const handleUnfavoriteClick =  async (event) => {
            />
          </ImageListItem>
          <Box sx={{ m: 2 }} />
-         {storedId && (
+         {/* {storedId && (
           <Box sx={{ display: "flex", alignItems: "center", mt: "10px" }}>
             {isFavorite ? (
               <IconButton onClick={handleUnfavoriteClick} sx={{ color: "red" }}>
@@ -243,7 +258,8 @@ const handleUnfavoriteClick =  async (event) => {
               {isFavorite ? "Remove from favorites" : "Add to favorites"}
             </Typography>
           </Box>
-        )}       </Box>
+        )}       */}
+         </Box>
      ) : (
        ""
      )}
