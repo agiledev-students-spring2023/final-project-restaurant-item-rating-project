@@ -5,13 +5,15 @@ import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import "./stars.css";
-
+var badwordsArray = require('badwords/array');
 
 export function DishReview() {
  const serverAddress = "http://localhost:3002";
 
 
  const params = useParams();
+ 
+let profanity = false;
 
 
  // to change pages
@@ -75,6 +77,24 @@ export function DishReview() {
     event.target.value = 0;
     setRating(parseInt(0))
   }
+  if(!comment){
+    setComment(" ")
+  }
+  badwordsArray.forEach(word=>{
+    if(comment.includes(word)){
+      profanity = true; 
+    }
+  })
+
+  if(profanity){
+    alert(
+      `Profanity is not allowed in the platform`
+    );
+    return;
+  }
+  
+
+
    if (rating < 0 || rating > 5) {
      alert(
        `Please select a valid rating value. You tried to submit a value of "${rating}", which is not valid.`
