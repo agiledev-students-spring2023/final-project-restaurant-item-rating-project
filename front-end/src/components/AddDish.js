@@ -46,14 +46,14 @@ export function AddDish() {
     }
   }, []);
 
-  const handleSubmit = (event) => {
-    event.preventDefault();
-    if (loggedIn) {
-      // form submission logic here
-    } else {
-      alert("Please log in to add a dish.");
-    }
-  };
+  // const handleSubmit = (event) => {
+  //   event.preventDefault();
+  //   if (loggedIn) {
+  //     // form submission logic here
+  //   } else {
+  //     alert("Please log in to add a dish.");
+  //   }
+  // };
 
   return (
     <Container>
@@ -62,7 +62,7 @@ export function AddDish() {
       {/* form */}
       <Box
         component="form"
-        onSubmit={handleSubmit}
+        action={formAddress}
         method="post"
         encType="multipart/form-data"
       >
