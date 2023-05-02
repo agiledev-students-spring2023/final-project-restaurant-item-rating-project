@@ -310,7 +310,7 @@ const handleUnfavoriteClick =  async (event) => {
                <Typography>{review.comment}</Typography>
 
                <TimeAgo date={review.date} />
-               {review.userID === storedId && (
+               {review.userID === storedId && ( 
             <Button onClick={() => handleDeleteReview(review._id)}>Delete</Button>
           )}
                {/* <Typography> {Math.round((Date.now() - new Date(review.date)) / millisecondsInADay)} days ago </Typography> */}
