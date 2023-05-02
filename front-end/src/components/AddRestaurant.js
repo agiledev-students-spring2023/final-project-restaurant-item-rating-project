@@ -20,11 +20,6 @@ export function AddRestaurant() {
 
   const handleSubmit = event => {
     event.preventDefault();
-    //Error Handling: won't accept a submit until all details are provided
-    if (!restaurantName && !cityName) {
-      alert('Please enter a restaurant name and a city');
-      return;
-    }
 
     //Error Handling: won't accept a submit until all details are provided
     if (!restaurantName && !cityName) {
