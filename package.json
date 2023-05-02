@@ -2,6 +2,8 @@
   "dependencies": {
     "@faker-js/faker": "^7.6.0",
     "axios": "^1.3.4",
+    "bad-words": "^3.0.4",
+    "badwords": "^1.0.0",
     "chai": "^4.3.7",
     "cors": "^2.8.5",
     "dotenv": "^16.0.3",
