@@ -28,7 +28,7 @@ const RegisterSchema = new Schema({
       },
       dishImg: {
         type: String,
-        required: true
+        // required: true
       },
       dishName: {
         type: String,
