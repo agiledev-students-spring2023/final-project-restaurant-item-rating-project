@@ -60,7 +60,7 @@ export function Register() {
         window.location.href = '/login';
       })
       .catch(function (error) {
-        console.log(error);
+        console.log("error: ", error);
         if (error.response.status === 401) {
           alert("Email is already taken.");
         } else {
