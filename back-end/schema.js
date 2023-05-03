@@ -92,6 +92,7 @@ const DishSchema = new Schema({
   //   default: "https://images.ctfassets.net/o19mhvm9a2cm/3TqdEA20hEleGPCZj2JZJl/297b157fdd3ca108c74f17b1bd5fdfce/Website_RB_HP.png"
   // },
 
+  //images in schema
   image: {
     type: String,
     required: false,
@@ -114,5 +115,7 @@ const RestaurantSchema = new Schema({
 });
 
 RestaurantSchema.index({ "$**": "text" });
+
+//export schemas
 
 module.exports = { RestaurantSchema, RegisterSchema, ReviewSchema, DishSchema };
