@@ -93,43 +93,43 @@ export function RestaurantDetail() {
 
       {dishes
         ? dishes.map((dish) => {
-            return (
-              <Box
-                key={dish._id}
-                onClick={() =>
-                  navigate(
-                    `/restaurant/${params.restaurantID}/dish/${dish._id}`
-                  )
-                }
-                sx={{
-                  width: "60%",
-                  margin: "auto",
-                  textAlign: "center",
-                  display: "flex",
-                  flexDirection: "column",
-                }}
+          return (
+            <Box
+              key={dish._id}
+              onClick={() =>
+                navigate(
+                  `/restaurant/${params.restaurantID}/dish/${dish._id}`
+                )
+              }
+              sx={{
+                width: "60%",
+                margin: "auto",
+                textAlign: "center",
+                display: "flex",
+                flexDirection: "column",
+              }}
+            >
+              <Box height="2rem" />
+              <Typography
+                style={{ fontFamily: "BlinkMacSystemFont" }}
+                variant="h5"
+                gutterBottom
+                textTransform={"capitalize"}
               >
-                <Box height="2rem" />
-                <Typography
-                  style={{ fontFamily: "BlinkMacSystemFont" }}
-                  variant="h5"
-                  gutterBottom
-                  textTransform={"capitalize"}
-                >
-                  {dish.name}
-                </Typography>
-                {"reviews" in dish && dish.reviews.length > 0 ? (
-                  <Box>
-                    <Rating
-                      readOnly
-                      size="medium"
-                      value={calcAvgReview(dish) ?? 0}
-                    />
-                  </Box>
-                ) : (
+                {dish.name}
+              </Typography>
+              {"reviews" in dish && dish.reviews.length > 0 ? (
+                <Box>
+                  <Rating
+                    readOnly
+                    size="medium"
+                    value={calcAvgReview(dish) ?? 0}
+                  />
+                </Box>
+              ) : (
                   ""
                 )}
-                {"image" in dish &&
+              {"image" in dish &&
                 dish.image !== "" &&
                 dish.image.length > 5 &&
                 dish.image.slice(0, 6) !== "public" ? (
@@ -141,9 +141,9 @@ export function RestaurantDetail() {
                 ) : (
                   ""
                 )}
-              </Box>
-            );
-          })
+            </Box>
+          );
+        })
         : ""}
     </Box>
   );
