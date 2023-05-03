@@ -31,7 +31,7 @@ export function Login() {
         localStorage.setItem("userId", userId);
         localStorage.setItem("email", email);
         localStorage.setItem("password", password);
-        console.log(userId);
+        // console.log(userId);
         navigate("/home");
       } else {
         setError(true);

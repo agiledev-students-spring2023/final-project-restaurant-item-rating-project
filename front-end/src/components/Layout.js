@@ -36,6 +36,10 @@ export function Layout() {
   function handleWindowSizeChange() {
     setWidth(window.innerWidth);
   }
+  useEffect(() => {
+    // set document title
+    document.title = "Dish Dealer";
+  }, []);
 
   const [avatarUrl, setAvatarUrl] = useState("");
   useEffect(() => {

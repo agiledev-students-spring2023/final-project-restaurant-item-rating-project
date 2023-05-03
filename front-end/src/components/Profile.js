@@ -16,22 +16,24 @@ export function Profile() {
 
   const [storedId, setStoredId] = useState("");
 
-useEffect(() => {
-  const id = localStorage.getItem('userId');
-  if (id) {
-    setStoredId(id);
-    axios.get(`${serverAddress}/profile/${id}`).then(response => {
-      const { email, password,avatarUrl } = response.data;
-      setEmail(email);
-      setPassword(password);
-      setAvatarUrl(avatarUrl);
-      localStorage.setItem('avatarUrl', avatarUrl);
-
-    }).catch(error => {
-      console.log(error);
-    });
-  }
-}, [email,password]);
+  useEffect(() => {
+    const id = localStorage.getItem("userId");
+    if (id) {
+      setStoredId(id);
+      axios
+        .get(`${serverAddress}/profile/${id}`)
+        .then((response) => {
+          const { email, password, avatarUrl } = response.data;
+          setEmail(email);
+          setPassword(password);
+          setAvatarUrl(avatarUrl);
+          localStorage.setItem("avatarUrl", avatarUrl);
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+    }
+  }, [email, password]);
 
   const handleUpdateEmail = async (event) => {
     event.preventDefault();
@@ -78,7 +80,7 @@ useEffect(() => {
   const handleLogout = () => {
     // logout logic
     localStorage.clear();
-    navigate('/login');
+    navigate("/login");
   };
 
   const handleAvatarUpload = (event) => {
@@ -88,45 +90,49 @@ useEffect(() => {
     reader.onload = () => {
       const avatarUrl = reader.result; // set the avatarUrl to the value from the FileReader
       setAvatarUrl(avatarUrl);
-      axios.post(`${serverAddress}/avatar/${storedId}`, {
-        avatarUrl: avatarUrl,
-      })
-      .then(response => {
-        console.log(response.data);
-      })
-      .catch(error => {
-        console.log(error);
-      });
+      axios
+        .post(`${serverAddress}/avatar/${storedId}`, {
+          avatarUrl: avatarUrl,
+        })
+        .then((response) => {
+          // console.log(response.data);
+        })
+        .catch((error) => {
+          console.log(error);
+        });
     };
   };
-  
 
-  
-  
-  
-    return (
-        <div>
-        <Box sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center', p: 2 }}>
-  {avatarUrl ? (
-    <label htmlFor="avatar-upload">
-      <Avatar src={avatarUrl} sx={{ width: 200, height: 200 }} />
-    </label>
-  ) : (
-    <Box sx={{ textAlign: 'center' }}>
-      <Typography>Add Profile Pic</Typography>
-      <label htmlFor="avatar-upload">
-        <Avatar sx={{ width: 200, height: 200 }} />
-      </label>
-    </Box>
-  )}
-  <input
-    type="file"
-    id="avatar-upload"
-    accept=".jpg,.jpeg,.png"
-    style={{ display: "none" }}
-    onChange={handleAvatarUpload}
-  />
-</Box>
+  return (
+    <div>
+      <Box
+        sx={{
+          display: "flex",
+          justifyContent: "center",
+          alignItems: "center",
+          p: 2,
+        }}
+      >
+        {avatarUrl ? (
+          <label htmlFor="avatar-upload">
+            <Avatar src={avatarUrl} sx={{ width: 200, height: 200 }} />
+          </label>
+        ) : (
+          <Box sx={{ textAlign: "center" }}>
+            <Typography>Add Profile Pic</Typography>
+            <label htmlFor="avatar-upload">
+              <Avatar sx={{ width: 200, height: 200 }} />
+            </label>
+          </Box>
+        )}
+        <input
+          type="file"
+          id="avatar-upload"
+          accept=".jpg,.jpeg,.png"
+          style={{ display: "none" }}
+          onChange={handleAvatarUpload}
+        />
+      </Box>
       <h1>Profile</h1>
       <p
         style={{
@@ -151,7 +157,11 @@ useEffect(() => {
           />
         </label>
         <br />
-        <button style={{ marginTop: "10px" }} type="submit"  disabled={!newEmail ? true : false}>
+        <button
+          style={{ marginTop: "10px" }}
+          type="submit"
+          disabled={!newEmail ? true : false}
+        >
           Update Email
         </button>
       </form>
@@ -179,7 +189,11 @@ useEffect(() => {
           />
         </label>
         <br />
-        <button style={{ marginTop: "10px" }} type="submit"disabled={!newPassword ? true : false}>
+        <button
+          style={{ marginTop: "10px" }}
+          type="submit"
+          disabled={!newPassword ? true : false}
+        >
           Update Password
         </button>
       </form>
