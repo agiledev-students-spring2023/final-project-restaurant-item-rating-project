@@ -5,6 +5,28 @@ const { Restaurant } = require("./../db");
 // this router is used for paths matching "/restaurant"
 const restaurantRouter = express.Router();
 
+restaurantRouter.get("/test", async (req, res) => {
+  const restaurants = await Restaurant.find({});
+  const things = restaurants.map( (restaurant) => {
+    var count = Object.keys(myObject).length;
+    return ({
+      id:restaurant.id,
+      size:count,
+    });
+  });
+  res.json({msg:"hey"});
+});
+
+restaurantRouter.get("/delete/:id", async (req, res) => {
+
+  const deleteMsg = await Restaurant.delete({
+    _id: req.params.id,
+  });
+
+  res.json({thing: deleteMsg});
+});
+
+
 // Define the GET endpoint to get restaurant
 //get restaurant
 restaurantRouter.get("/:id", async (req, res) => {
