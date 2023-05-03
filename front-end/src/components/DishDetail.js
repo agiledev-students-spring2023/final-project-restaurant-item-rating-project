@@ -202,6 +202,8 @@ export function DishDetail() {
     navigate(`/restaurant/${params.restaurantID}`);
   };
 
+  console.log(dish)
+
   return (
     <Box
       sx={{
@@ -237,12 +239,12 @@ export function DishDetail() {
       )}
 
       {/* images */}
-      {"image" in dish ? (
+      {/* {"image" in dish ? ( */}
         <Box>
-          {"image" in dish &&
+          {/* {"image" in dish &&
           dish.image !== "" &&
           dish.image.length > 5 &&
-          dish.image.slice(0, 6) !== "public" ? (
+          dish.image.slice(0, 6) !== "public" ? ( */}
             <Box>
               <Typography
                 style={{ fontFamily: "BlinkMacSystemFont" }}
@@ -256,14 +258,14 @@ export function DishDetail() {
                 <img src={dish.image} alt={dish.name} loading="lazy" />
               </ImageListItem>
             </Box>
-          ) : (
+          {/* ) : (
             ""
-          )}
+          )} */}
           <Box sx={{ m: 2 }} />
         </Box>
-      ) : (
+      {/* ) : (
         ""
-      )}
+      )} */}
 
       <Box sx={{ m: 3 }} />
       <Typography
