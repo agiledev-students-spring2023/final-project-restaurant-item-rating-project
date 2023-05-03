@@ -4,12 +4,17 @@ import "./Login.css";
 
 import axios from "axios";
 
+//server
 const serverAddress = "http://localhost:3002";
 
 export function Login() {
+  //navigate
   const navigate = useNavigate();
+  //set email
   const [email, setEmail] = useState("");
+  //set password
   const [password, setPassword] = useState("");
+  //set error
   const [error, setError] = useState(false);
 
   const handleLogin = async (event) => {
