@@ -1,8 +1,9 @@
 # Project Repository
 
-## Dishdealer Front-end code
+## Deployed Code Link:
+http://161.35.75.193:3000/
 
-(http://localhost:3000/)
+## About this Project:
 
 This repository will be used for team projects.
 
