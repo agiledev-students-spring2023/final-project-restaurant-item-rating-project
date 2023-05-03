@@ -99,6 +99,7 @@ dishRouter.get("/:id", async (req, res) => {
 dishRouter.post("/", async (req, res) => {
   const restaurantId = req.params.restaurantId;
   console.log(restaurantId);
+  //try statement
   try {
     const newRest = await Restaurant.findById(restaurantId);
     if (!req.body.dishName) {
@@ -110,7 +111,7 @@ dishRouter.post("/", async (req, res) => {
     });
     newRest.save();
     res.status(200).send("Dish created successfully");
-  } catch (err) {
+  } catch (err) { //catch any errors
     console.log(err);
     res.statusCode = 500;
     res.json({
