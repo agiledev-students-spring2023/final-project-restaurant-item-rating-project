@@ -62,62 +62,6 @@ app.use(express.urlencoded({ extended: true })); // decode url-encoded incoming 
 // make 'public' directory publicly readable with static content
 app.use("/public", express.static("public"));
 
-// enable file uploads saved to disk in a directory named 'public/uploads'
-
-// proxy requests to/from an API
-app.get("/proxy-example", (req, res, next) => {
-  // use axios to make a request to an API for animal data
-  axios
-    .get("https://my.api.mockaroo.com/animals.json?key=d9ddfc40&num=10")
-    .then((apiResponse) => res.json(apiResponse.data)) // pass data along directly to client
-    .catch((err) => next(err)); // pass any errors to express
-});
-
-// same route as above, but using environmental variables for secret credentials
-app.get("/dotenv-example", async (req, res, next) => {
-  try {
-    // insert the environmental variable into the URL we're requesting
-    const response = await axios.get(
-      `${process.env.API_BASE_URL}?key=${process.env.API_SECRET_KEY}&num=10`
-    );
-    res.json(response.data); // pass data along directly to client
-  } catch (err) {
-    res.json({
-      success: false,
-      error: `Oops... In order to use the dotenv module, you must first make a file named .env on your server - see the .env.example file for example.`,
-    });
-  }
-});
-
-// a route with parameter ... animalId is a parameter
-// the code here is similar to the dotenv-example route above... but...
-// using async/await in this route to show another way of dealing with asynchronous requests to an external API or database
-app.get("/parameter-example/:animalId", async (req, res) => {
-  // use axios to make a request to an API to fetch a single animal's data
-  // we use a Mock API here, but imagine we passed the animalId to a real API and received back data about that animal
-  try {
-    const apiResponse = await axios.get(
-      `${process.env.API_BASE_URL}?key=${process.env.API_SECRET_KEY}&num=1&id=${req.params.animalId}`
-    );
-
-    // express places parameters into the req.params object
-    const responseData = {
-      status: "wonderful",
-      message: `Imagine we got the data from the API for animal #${req.params.animalId}`,
-      animalId: req.params.animalId,
-      animal: apiResponse.data,
-    };
-
-    // send the data in the response
-    res.json(responseData);
-  } catch (err) {
-    // send an error JSON object back to the browser
-    res.json(err);
-  }
-});
-
-//----------------------------------------------
-// THIS PART IS OUR CODE. ABOVE IS FROM PROF
 
 /**
  * some common status codes for returning responses
@@ -140,7 +84,7 @@ const genericErrorMessage = "There has been an error :(";
 app.get("/", (req, res) => {
   // get object from API (mockeroo for now)
   const apiResponse = {
-    data: "hello!",
+    data: "hello. welcome to our server!",
   };
   const isError = false;
 
