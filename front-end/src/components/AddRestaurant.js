@@ -5,7 +5,7 @@ import axios from 'axios'
 import '../App.css';
 
 
-const serverAddress = "http://localhost:3002"
+const serverAddress = process.env.SERVER_DEV
 
 export function AddRestaurant() {
 

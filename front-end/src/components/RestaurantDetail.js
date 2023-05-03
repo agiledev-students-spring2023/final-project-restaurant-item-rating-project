@@ -4,7 +4,7 @@ import { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import axios from "axios"
 
-const serverAddress = "http://localhost:3002";
+const serverAddress = process.env.SERVER_DEV;
 
 export function RestaurantDetail() {
   const params = useParams();

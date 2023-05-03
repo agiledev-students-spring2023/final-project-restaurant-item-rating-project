@@ -7,7 +7,7 @@ import TimeAgo from "react-timeago";
 import { Favorite, FavoriteBorder } from "@mui/icons-material";
 
 
-const serverAddress = "http://localhost:3002";
+const serverAddress = process.env.SERVER_DEV;
 
 
 export function DishDetail() {

@@ -8,8 +8,7 @@ import "./stars.css";
 var badwordsArray = require('badwords/array');
 
 export function DishReview() {
- const serverAddress = "http://localhost:3002";
-
+ const serverAddress = process.env.SERVER_DEV;
 
  const params = useParams();
  
@@ -254,7 +253,7 @@ let profanity = false;
        </label>
        <Typography variant="subtitle1">
          {picUrl ? "Image uploaded" : "Upload an image (optional):"}
-         {picUrl && <img src={picUrl} alt="uploaded image" style={{ maxWidth: "250px" }} />}
+         {picUrl && <img src={picUrl} alt="your upload" style={{ maxWidth: "250px" }} />}
        </Typography>
     
      </Box>

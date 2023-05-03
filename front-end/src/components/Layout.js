@@ -48,7 +48,7 @@ export function Layout() {
   }, []);
 
   const isMobile = width <= 768;
-  const serverAddress = "http://localhost:3002";
+  const serverAddress = process.env.SERVER_DEV;
   const home = () => navigate('/home');
   const search = () => navigate('/search');
   const favorites = () => navigate('/favorites');

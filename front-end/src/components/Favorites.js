@@ -3,7 +3,7 @@ import axios from "axios";
 import { Link } from "react-router-dom";
 import { Box, Typography, ImageListItem,  Grid, Card, CardMedia, CardActionArea, CardContent} from "@mui/material";
 
-const serverAddress = "http://localhost:3002"; 
+const serverAddress = process.env.SERVER_DEV; 
 
 export function Favorites() {
     const [favorites, setFavorites] = useState([]);

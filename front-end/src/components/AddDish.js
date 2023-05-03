@@ -17,15 +17,17 @@ export function AddDish() {
   const [loggedIn, setLoggedIn] = useState(false);
   const params = useParams();
   const navigate = useNavigate();
-  const serverAddress = "http://localhost:3002";
+  const serverAddress = process.env.SERVER_DEV;
   const formAddress = `${serverAddress}/restaurant/${params.restaurantID}/dish`;
 
   // fetched data
   const [restaurantName, setRestaurantName] = useState("");
-  const [dishName, setDishName] = useState("");
+
+  // image
+  const [picUrl, setPicUrl] = useState("");
 
   // form data
-  // const [dishName, setDishName] = useState("");
+  const [dishName, setDishName] = useState("");
   // const [uploadedImages, setUploadedImages] = useState([]);
   const [uploadedFile, setUploadedFile] = useState("");
 
@@ -62,17 +64,35 @@ export function AddDish() {
     } catch (error) {
       console.log(error);
     }
+
+    axios
+      .post(
+        `${serverAddress}/restaurant/${params.restaurantID}/dish`,
+        {
+          dishName: dishName,
+          imageUrl: picUrl,
+        }
+      )
+      .then(function (response) {
+        console.log(response);
+      })
+      .catch(function (error) {
+        console.log(error);
+        alert(error);
+      });
+    // redirect to restaurant
+    navigate(`/restaurant/${params.restaurantID}`);
   };
-  
 
   const handleImageChange = (event) => {
     const file = event.target.files[0];
     const reader = new FileReader();
     reader.readAsDataURL(file);
     reader.onloadend = () => {
-      setUploadedFile(reader.result);
+      setPicUrl(reader.result);
     };
   };
+  
  
 
   return (
@@ -82,39 +102,48 @@ export function AddDish() {
       {/* form */}
       <Box>
         <Box sx={{ m: 2 }} />
-        <TextField type="text" label="Dish Name" name="dishName" value={dishName} onChange={(e) => setDishName(e.target.value)} required/>
+        <TextField
+          value={dishName}
+          onChange={(e) => {
+            setDishName(e.target.value);
+          }}
+          type="text"
+          label="Dish Name"
+          name="dishName"
+          required
+        />
         <Box sx={{ m: 2 }} />
         <Typography variant="h6">Add Pictures?</Typography>
         <Box sx={{ m: 1 }} />
 
-       <Box sx={{ display: "flex", alignItems: "center", mb: 2 }}>
-       <input
-         accept="image/*"
-         id="icon-button-file"
-         type="file"
-         style={{ display: "none" }}
-         onChange={handleImageChange}
-       />
-       <label htmlFor="icon-button-file">
-         <IconButton
-           color="primary"
-           aria-label="upload picture"
-           component="span"
-         >
-           <PhotoCamera />
-         </IconButton>
-       </label>
-       <Typography variant="subtitle1">
-         {uploadedFile ? "Image uploaded" : "Upload an image (optional):"}
-         {uploadedFile && <img src={uploadedFile} alt="uploaded image" style={{ maxWidth: "250px" }} />}
-       </Typography>
-    
-     </Box>
-     <Button variant="contained" type="submit" onClick={handleSubmit} disabled={!loggedIn}>
-           Submit
-         </Button>
-       </Box>
-       {/* </form> */}
+        <Button variant="contained" component="label">
+          Upload File
+          <input
+            type="file"
+            accept="image/*"
+            hidden
+            name="dishImage"
+            onChange={handleImageChange}
+          />
+        </Button>
+        <Box sx={{ m: 2 }} />
+        <Typography variant="subtitle1">
+          {picUrl ? "Image uploaded" : "Upload an image (optional):"}
+          {picUrl && (
+            <img src={picUrl} alt="your upload" style={{ maxWidth: "250px" }} />
+          )}
+        </Typography>
+        <Box sx={{ m: 4 }} />
+        <Button
+          onClick={handleSubmit}
+          variant="contained"
+          size="large"
+          type="submit"
+          disabled={!loggedIn}
+        >
+          Submit
+        </Button>
+      </Box>
     </Container>
   );
 }

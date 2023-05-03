@@ -8,7 +8,7 @@ import { useNavigate } from "react-router-dom";
 // reuse this function
 import { RestaurantMapping } from "./RestaurantMapping";
 
-const serverAddress = "http://localhost:3002";
+const serverAddress = process.env.SERVER_DEV;
 
 export function Search() {
   const navigate = useNavigate();
