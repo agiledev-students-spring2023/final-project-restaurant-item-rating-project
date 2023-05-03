@@ -3,7 +3,7 @@ import axios from "axios";
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 
-const serverAddress = "http://localhost:3002";
+const serverAddress = process.env.REACT_APP_SERVER_DEV;
 
 export function Profile() {
   const navigate = useNavigate();

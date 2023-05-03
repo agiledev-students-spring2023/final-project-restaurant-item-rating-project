@@ -95,6 +95,7 @@ const DishSchema = new Schema({
   //images in schema
   image: {
     type: String,
+    default: '',
     required: false,
   },
   averageRating: { type: Number, required: false },

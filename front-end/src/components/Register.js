@@ -4,7 +4,7 @@ import './Register.css';
 import axios from 'axios';
 import logo from './Dish_Dealer_Logo.png';
 
-const serverAddress = "http://localhost:3002";
+const serverAddress = process.env.REACT_APP_SERVER_DEV;
 
 export function Register() {
   const [email, setEmail] = useState("");

@@ -1,10 +1,10 @@
-import { Avatar, Box, Button, Typography } from "@mui/material";
+import { Box, Button, Typography } from "@mui/material";
 import Rating from "@mui/material/Rating";
+import axios from "axios";
 import { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
-import axios from "axios"
 
-const serverAddress = "http://localhost:3002";
+const serverAddress = process.env.REACT_APP_SERVER_DEV;
 
 export function RestaurantDetail() {
   const params = useParams();
@@ -16,7 +16,8 @@ export function RestaurantDetail() {
   const [dishes, setDishes] = useState([]);
 
   useEffect(() => {
-    axios.get(`${serverAddress}/restaurant/${params.restaurantID}`)
+    axios
+      .get(`${serverAddress}/restaurant/${params.restaurantID}`)
       .then((response) => {
         setRestaurantName(response.data.name);
         setLocation(response.data.location);
@@ -53,7 +54,7 @@ export function RestaurantDetail() {
         sx={{
           display: "flex",
           justifyContent: "flex-end",
-          textAlign:"center",
+          textAlign: "center",
         }}
       >
         <Typography
@@ -65,7 +66,11 @@ export function RestaurantDetail() {
           {restaurantName}
         </Typography>
       </Box>
-      <Typography style={{ fontFamily: "BlinkMacSystemFont" }} variant="h6" gutterBottom>
+      <Typography
+        style={{ fontFamily: "BlinkMacSystemFont" }}
+        variant="h6"
+        gutterBottom
+      >
         City: {location}
       </Typography>
 
@@ -87,55 +92,61 @@ export function RestaurantDetail() {
         Add Dish
       </Button>
 
-      {dishes ? dishes.map((dish) => {
-        console.log(dish);
-        return (
-          <Box
-            key={dish._id}
-            onClick={() =>
-              navigate(`/restaurant/${params.restaurantID}/dish/${dish._id}`)
-            }
-            sx={{
-              width: "60%",
-              margin: "auto",
-              textAlign: "center",
-              display: "flex",
-              flexDirection: "column",
-            }}
-          >
-            <Box height="2rem" />
-            <Typography
-              style={{ fontFamily: "BlinkMacSystemFont" }}
-              variant="h5"
-              gutterBottom
-              textTransform={"capitalize"}
-            >
-              {dish.name}
-            </Typography>
-            {"reviews" in dish && dish.reviews.length > 0 ? (
-              <Box>
-                <Rating
-                  readOnly
-                  size="medium"
-                  value={calcAvgReview(dish) ?? 0}
-                />
+      {dishes
+        ? dishes.map((dish) => {
+            console.log(dish);
+            return (
+              <Box
+                key={dish._id}
+                onClick={() =>
+                  navigate(
+                    `/restaurant/${params.restaurantID}/dish/${dish._id}`
+                  )
+                }
+                sx={{
+                  width: "60%",
+                  margin: "auto",
+                  textAlign: "center",
+                  display: "flex",
+                  flexDirection: "column",
+                }}
+              >
+                <Box height="2rem" />
+                <Typography
+                  style={{ fontFamily: "BlinkMacSystemFont" }}
+                  variant="h5"
+                  gutterBottom
+                  textTransform={"capitalize"}
+                >
+                  {dish.name}
+                </Typography>
+                {"reviews" in dish && dish.reviews.length > 0 ? (
+                  <Box>
+                    <Rating
+                      readOnly
+                      size="medium"
+                      value={calcAvgReview(dish) ?? 0}
+                    />
+                  </Box>
+                ) : (
+                  ""
+                )}
+                {"image" in dish &&
+                dish.image !== "" &&
+                dish.image.length > 5 &&
+                dish.image.slice(0, 6) !== "public" ? (
+                  <img
+                    src={dish.image}
+                    alt="Delicious food"
+                    style={{ maxWidth: "100%", height: "auto" }}
+                  />
+                ) : (
+                  ""
+                )}
               </Box>
-            ) : (
-              ""
-            )}
-            {"image" in dish ? (
-              <img
-                src={dish.image}
-                alt="Delicious food"
-                style={{ maxWidth: "100%", height: "auto" }}
-              />
-            ) : (
-              ""
-            )}
-          </Box>
-        );
-      })
-    : ""}
+            );
+          })
+        : ""}
     </Box>
   );
 }
