@@ -1,7 +1,7 @@
 #!/bin/bash
 
 export NODE_ENV=dev
-export SERVER_DEV=http://localhost:8080
+export REACT_APP_SERVER_DEV='http://localhost:8080'
 
 
 

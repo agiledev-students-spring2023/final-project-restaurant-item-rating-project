@@ -5,10 +5,9 @@ import IconButton from "@mui/material/IconButton";
 import axios from "axios";
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-// reuse this function
 import { RestaurantMapping } from "./RestaurantMapping";
 
-const serverAddress = process.env.SERVER_DEV;
+const serverAddress = process.env.REACT_APP_SERVER_DEV;
 
 export function Search() {
   const navigate = useNavigate();

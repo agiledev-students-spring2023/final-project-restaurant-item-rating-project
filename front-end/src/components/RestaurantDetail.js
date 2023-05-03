@@ -4,7 +4,7 @@ import { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import axios from "axios"
 
-const serverAddress = process.env.SERVER_DEV;
+const serverAddress = process.env.REACT_APP_SERVER_DEV;
 
 export function RestaurantDetail() {
   const params = useParams();
@@ -123,7 +123,7 @@ export function RestaurantDetail() {
             ) : (
               ""
             )}
-            {"image" in dish ? (
+            {"image" in dish && dish.image!=="" && dish.image.length>5 && dish.image.slice(0,6)!=="public" ? (
               <img
                 src={dish.image}
                 alt="Delicious food"

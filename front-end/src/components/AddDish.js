@@ -17,7 +17,7 @@ export function AddDish() {
   const [loggedIn, setLoggedIn] = useState(false);
   const params = useParams();
   const navigate = useNavigate();
-  const serverAddress = process.env.SERVER_DEV;
+  const serverAddress = process.env.REACT_APP_SERVER_DEV;
   const formAddress = `${serverAddress}/restaurant/${params.restaurantID}/dish`;
 
   // fetched data

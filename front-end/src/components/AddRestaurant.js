@@ -5,7 +5,7 @@ import axios from 'axios'
 import '../App.css';
 
 
-const serverAddress = process.env.SERVER_DEV
+const serverAddress = process.env.REACT_APP_SERVER_DEV
 
 export function AddRestaurant() {
 

@@ -4,7 +4,7 @@ import "./Login.css";
 
 import axios from "axios";
 
-const serverAddress = process.env.SERVER_DEV;
+const serverAddress = process.env.REACT_APP_SERVER_DEV;
 
 export function Login() {
   //navigate

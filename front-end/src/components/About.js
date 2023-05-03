@@ -5,7 +5,7 @@ import axios from 'axios';
 
 export function About() {
   const navigate = useNavigate();
-  const serverAddress = process.env.SERVER_DEV;
+  const serverAddress = process.env.REACT_APP_SERVER_DEV;
   const [avatarUrl, setAvatarUrl] = useState('');
   useEffect(() => {
       const storedId = localStorage.getItem('userId');
