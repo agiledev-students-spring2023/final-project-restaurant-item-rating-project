@@ -88,6 +88,7 @@ export function RestaurantDetail() {
       </Button>
 
       {dishes ? dishes.map((dish) => {
+        console.log(dish);
         return (
           <Box
             key={dish._id}
@@ -124,7 +125,7 @@ export function RestaurantDetail() {
             )}
             {"image" in dish ? (
               <img
-                src={`${serverAddress}/${dish.image}`}
+                src={dish.image}
                 alt="Delicious food"
                 style={{ maxWidth: "100%", height: "auto" }}
               />
