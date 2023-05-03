@@ -37,7 +37,7 @@ export function AddRestaurant() {
         location: cityName,
       })
       .then(function (response) {
-        console.log(response);
+        // console.log(response);
         alert("Restaurant Details submitted");
       })
       .catch(function (error) {

@@ -22,7 +22,6 @@ export function RestaurantDetail() {
         setRestaurantName(response.data.name);
         setLocation(response.data.location);
         setDishes(response.data.dishes);
-        console.log(response.data.dishes);
       })
       .catch((err) => {
         console.error(err);
@@ -94,7 +93,6 @@ export function RestaurantDetail() {
 
       {dishes
         ? dishes.map((dish) => {
-            console.log(dish);
             return (
               <Box
                 key={dish._id}

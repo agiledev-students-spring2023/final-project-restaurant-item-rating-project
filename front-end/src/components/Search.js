@@ -22,7 +22,7 @@ export function Search() {
         searchText: searchQuery,
       })
       .then((response) => {
-        console.log(response.data);
+        // console.log(response.data);
         setSearchResults(response.data);
         setHasSearched(true);
       });
@@ -32,8 +32,7 @@ export function Search() {
     const storedId = localStorage.getItem("userId");
     axios
       .get(`${serverAddress}/profile/${storedId}`)
-      .then((response) => {
-      })
+      .then((response) => {})
       .catch((error) => {
         console.log(error);
       });

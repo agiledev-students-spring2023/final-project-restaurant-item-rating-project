@@ -87,7 +87,7 @@ export function DishDetail() {
     axios
       .get(`${serverAddress}/favorites/${storedId}`)
       .then((response) => {
-        console.log(response.data);
+        // console.log(response.data);
         const favorites = response.data.favsLinks.map((fav) =>
           fav.link.split("/").pop()
         );
