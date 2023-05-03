@@ -13,6 +13,8 @@ import { Register } from './components/Register';
 import { Profile } from './components/Profile';
 import {Favorites} from './components/Favorites';
 
+//this is router
+//calls the above components
 function MyRoutes() {
   return (
     <BrowserRouter>
