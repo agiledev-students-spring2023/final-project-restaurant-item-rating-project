@@ -202,7 +202,7 @@ export function DishDetail() {
     navigate(`/restaurant/${params.restaurantID}`);
   };
 
-  console.log(dish)
+  // console.log(dish)
 
   return (
     <Box
