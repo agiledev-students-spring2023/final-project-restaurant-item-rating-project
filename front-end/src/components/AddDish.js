@@ -1,13 +1,4 @@
-import {
-  Avatar,
-  Box,
-  Button,
-  Container,
-  TextField,
-  Typography,
-  IconButton
-} from "@mui/material";
-import PhotoCamera from "@mui/icons-material/PhotoCamera";
+import { Box, Button, Container, TextField, Typography } from "@mui/material";
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
@@ -18,18 +9,12 @@ export function AddDish() {
   const params = useParams();
   const navigate = useNavigate();
   const serverAddress = process.env.REACT_APP_SERVER_DEV;
-  const formAddress = `${serverAddress}/restaurant/${params.restaurantID}/dish`;
 
   // fetched data
   const [restaurantName, setRestaurantName] = useState("");
 
-  // image
   const [picUrl, setPicUrl] = useState("");
-
-  // form data
   const [dishName, setDishName] = useState("");
-  // const [uploadedImages, setUploadedImages] = useState([]);
-  const [uploadedFile, setUploadedFile] = useState("");
 
   useEffect(() => {
     // get restaurant name
@@ -42,7 +27,7 @@ export function AddDish() {
         console.error("Error getting restaurant name: ", error);
         // alert("An error has occurred when finding that restaurant");
       });
-  }, [params.restaurantID]);
+  }, [params.restaurantID, serverAddress]);
 
   useEffect(() => {
     const userId = localStorage.getItem("userId");
@@ -53,35 +38,27 @@ export function AddDish() {
 
   const handleSubmit = async (event) => {
     event.preventDefault();
+
     try {
-      const response = await axios.post(`${serverAddress}/restaurant/${params.restaurantID}/dish`, {
-        dishName: dishName,
-        uploadedPicture: uploadedFile,
-      });
+      const response = await axios
+        .post(`${serverAddress}/restaurant/${params.restaurantID}/dish`, {
+          dishName: dishName,
+          imageUrl: picUrl,
+        })
+        .then(function (response) {
+          console.log(response);
+        })
+        .catch(function (error) {
+          console.log(error);
+          alert(error);
+        });
       if (response.status === 200) {
         navigate(`/restaurant/${params.restaurantID}`);
       }
     } catch (error) {
       console.log(error);
     }
-
-    axios
-      .post(
-        `${serverAddress}/restaurant/${params.restaurantID}/dish`,
-        {
-          dishName: dishName,
-          imageUrl: picUrl,
-        }
-      )
-      .then(function (response) {
-        console.log(response);
-      })
-      .catch(function (error) {
-        console.log(error);
-        alert(error);
-      });
     // redirect to restaurant
-    navigate(`/restaurant/${params.restaurantID}`);
   };
 
   const handleImageChange = (event) => {
@@ -92,8 +69,6 @@ export function AddDish() {
       setPicUrl(reader.result);
     };
   };
-  
- 
 
   return (
     <Container>

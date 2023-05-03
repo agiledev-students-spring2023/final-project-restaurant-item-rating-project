@@ -28,24 +28,16 @@ export function Search() {
       });
   };
 
-  const [avatarUrl, setAvatarUrl] = useState("");
-
   useEffect(() => {
     const storedId = localStorage.getItem("userId");
     axios
       .get(`${serverAddress}/profile/${storedId}`)
       .then((response) => {
-        const { email, password, avatarUrl } = response.data;
-        setAvatarUrl(avatarUrl);
       })
       .catch((error) => {
         console.log(error);
       });
   }, []);
-
-  const handleAvatarClick = () => {
-    navigate("/profile");
-  };
 
   return (
     <Box>
@@ -86,7 +78,10 @@ export function Search() {
         }}
       >
         {!hasSearched ? (
-          <Typography variant="body" style={{ fontFamily: "BlinkMacSystemFont" }}>
+          <Typography
+            variant="body"
+            style={{ fontFamily: "BlinkMacSystemFont" }}
+          >
             Please enter a search to see results!
           </Typography>
         ) : searchResults.length === 0 ? (

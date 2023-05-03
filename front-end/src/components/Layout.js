@@ -12,7 +12,7 @@ import {
 } from "@mui/material";
 import axios from "axios";
 import React, { useEffect, useState } from "react";
-import { Outlet, useLocation, useNavigate } from "react-router-dom";
+import { Outlet, useNavigate } from "react-router-dom";
 
 /**
  *
@@ -22,24 +22,34 @@ import { Outlet, useLocation, useNavigate } from "react-router-dom";
 export function Layout() {
   const navigate = useNavigate();
 
+  const serverAddress = process.env.REACT_APP_SERVER_DEV;
+  const home = () => navigate("/home");
+  const search = () => navigate("/search");
+  const favorites = () => navigate("/favorites");
+
+  const [value, setValue] = useState(home);
+
   // for isMobile variable
   const [width, setWidth] = useState(window.innerWidth);
+  const isMobile = width <= 768;
+
   function handleWindowSizeChange() {
     setWidth(window.innerWidth);
   }
+
   const [avatarUrl, setAvatarUrl] = useState("");
   useEffect(() => {
     const storedId = localStorage.getItem("userId");
     axios
       .get(`${serverAddress}/profile/${storedId}`)
       .then((response) => {
-        const { email, password, avatarUrl } = response.data;
+        const { avatarUrl } = response.data;
         setAvatarUrl(avatarUrl);
       })
       .catch((error) => {
         console.log(error);
       });
-  }, []);
+  }, [serverAddress]);
 
   const handleAvatarClick = () => {
     navigate("/profile");
@@ -50,18 +60,6 @@ export function Layout() {
       window.removeEventListener("resize", handleWindowSizeChange);
     };
   }, []);
-
-  const isMobile = width <= 768;
-  const serverAddress = process.env.REACT_APP_SERVER_DEV;
-  const home = () => navigate("/home");
-  const search = () => navigate("/search");
-  const favorites = () => navigate("/favorites");
-
-  const [value, setValue] = useState(home);
-
-  // get path
-  const location = useLocation();
-  // console.log(location.pathname)
 
   return (
     <Box>

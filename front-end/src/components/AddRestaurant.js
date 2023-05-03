@@ -1,54 +1,52 @@
-import { Avatar, Box, Button, Container, TextField, Typography } from "@mui/material";
-import React, { useEffect, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
-import axios from 'axios'
-import '../App.css';
+import { Box, Button, Container, TextField, Typography } from "@mui/material";
+import axios from "axios";
+import React, { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
+import "../App.css";
 
-
-const serverAddress = process.env.REACT_APP_SERVER_DEV
+const serverAddress = process.env.REACT_APP_SERVER_DEV;
 
 export function AddRestaurant() {
-
   const [loggedIn, setLoggedIn] = useState(false);
 
   const navigate = useNavigate();
 
   // form data
-  const [restaurantName, setRestaurantName] = useState('');
-  const [cityName, setCityName] = useState('');
+  const [restaurantName, setRestaurantName] = useState("");
+  const [cityName, setCityName] = useState("");
   // const [uploadedImages, setUploadedImages] = useState([]);
 
-  const handleSubmit = event => {
+  const handleSubmit = (event) => {
     event.preventDefault();
 
     //Error Handling: won't accept a submit until all details are provided
     if (!restaurantName && !cityName) {
-      alert('Please enter a restaurant name and a city');
+      alert("Please enter a restaurant name and a city");
       return;
-    }
-    else if (!restaurantName) {
-      alert('Please enter a restaurant name');
+    } else if (!restaurantName) {
+      alert("Please enter a restaurant name");
       return;
-    }
-    else if (!cityName){
-      alert('Please enter a city');
+    } else if (!cityName) {
+      alert("Please enter a city");
       return;
     }
 
-    axios.post(`${serverAddress}/restaurant`, {
-      name: restaurantName,
-      location: cityName
-    }).then(function (response) {
-      console.log(response);
-      alert('Restaurant Details submitted')
-    })
-    .catch(function (error) {
-      console.log(error);
-      alert(error);
-      //alert(error.response.data.message);
-    });
-    
-    navigate('/home');
+    axios
+      .post(`${serverAddress}/restaurant`, {
+        name: restaurantName,
+        location: cityName,
+      })
+      .then(function (response) {
+        console.log(response);
+        alert("Restaurant Details submitted");
+      })
+      .catch(function (error) {
+        console.log(error);
+        alert(error);
+        //alert(error.response.data.message);
+      });
+
+    navigate("/home");
   };
   useEffect(() => {
     const userId = localStorage.getItem("userId");
@@ -56,33 +54,52 @@ export function AddRestaurant() {
       setLoggedIn(true);
     }
   }, []);
-  
-  return(
-    <Container bgcolor={'#FFFFFF'}>
 
-      <Typography style={{ fontFamily: 'BlinkMacSystemFont'}} color={'#31525B'} variant="h3">Add Restaurant</Typography>
+  return (
+    <Container bgcolor={"#FFFFFF"}>
+      <Typography
+        style={{ fontFamily: "BlinkMacSystemFont" }}
+        color={"#31525B"}
+        variant="h3"
+      >
+        Add Restaurant
+      </Typography>
 
       <form>
-        <Typography style={{ fontFamily: 'BlinkMacSystemFont'}} variant="body1">Add Restaurant</Typography>
+        <Typography
+          style={{ fontFamily: "BlinkMacSystemFont" }}
+          variant="body1"
+        >
+          Add Restaurant
+        </Typography>
         <TextField
-          value = {restaurantName} 
-          onChange = {(e) => {setRestaurantName(e.target.value);}}
-          placeholder='Restaurant Name'
+          value={restaurantName}
+          onChange={(e) => {
+            setRestaurantName(e.target.value);
+          }}
+          placeholder="Restaurant Name"
           sx={{
-            width:"100%",
-            padding:"0.5em",
+            width: "100%",
+            padding: "0.5em",
           }}
           variant="outlined"
         />
 
-        <Typography style={{ fontFamily: 'BlinkMacSystemFont'}} variant="body1">Add City</Typography>
+        <Typography
+          style={{ fontFamily: "BlinkMacSystemFont" }}
+          variant="body1"
+        >
+          Add City
+        </Typography>
         <TextField
-          value = {cityName} 
-          onChange = {(e) => {setCityName(e.target.value);}}
-          placeholder='City'
+          value={cityName}
+          onChange={(e) => {
+            setCityName(e.target.value);
+          }}
+          placeholder="City"
           sx={{
-            width:"100%",
-            padding:"0.5em",
+            width: "100%",
+            padding: "0.5em",
           }}
           variant="outlined"
         />
@@ -112,9 +129,11 @@ export function AddRestaurant() {
           </Box>
         </Box>
          */}
-        <Box sx={{m:2}} /> 
-        <Button variant="contained" onClick={handleSubmit} disabled={!loggedIn}>Submit</Button >
+        <Box sx={{ m: 2 }} />
+        <Button variant="contained" onClick={handleSubmit} disabled={!loggedIn}>
+          Submit
+        </Button>
       </form>
     </Container>
-  )  
+  );
 }

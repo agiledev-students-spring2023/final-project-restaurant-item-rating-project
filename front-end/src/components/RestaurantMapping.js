@@ -1,7 +1,4 @@
 import { Box, Typography } from "@mui/material";
-import Card from "@mui/material/Card";
-import CardContent from "@mui/material/CardContent";
-import CardMedia from "@mui/material/CardMedia";
 /**
  * NOTE: this function is also used in the "Home" component
  * Check changes if you update it!
@@ -13,9 +10,10 @@ import CardMedia from "@mui/material/CardMedia";
 export function RestaurantMapping(restaurant, navigate) {
   // const makeRedir
 
-  const imageUrl = restaurant.dishes.length > 0
-  ? restaurant.dishes[restaurant.dishes.length - 1].image
-  : "https://picsum.photos/200";
+  const imageUrl =
+    restaurant.dishes.length > 0
+      ? restaurant.dishes[restaurant.dishes.length - 1].image
+      : "https://picsum.photos/200";
   return (
     <Box
       key={restaurant._id}
@@ -46,5 +44,4 @@ export function RestaurantMapping(restaurant, navigate) {
       </Typography>
     </Box>
   );
-
 }

@@ -1,21 +1,24 @@
 import { Avatar, Box, Typography } from "@mui/material";
-import { useLocation, useNavigate, useParams } from "react-router-dom";
-import { useState, useEffect } from 'react';
-import axios from 'axios';
+import axios from "axios";
+import { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 export function About() {
   const navigate = useNavigate();
   const serverAddress = process.env.REACT_APP_SERVER_DEV;
-  const [avatarUrl, setAvatarUrl] = useState('');
+  const [avatarUrl, setAvatarUrl] = useState("");
   useEffect(() => {
-      const storedId = localStorage.getItem('userId');
-      axios.get(`${serverAddress}/profile/${storedId}`).then(response => {
-        const { email, password,avatarUrl } = response.data;
+    const storedId = localStorage.getItem("userId");
+    axios
+      .get(`${serverAddress}/profile/${storedId}`)
+      .then((response) => {
+        const { avatarUrl } = response.data;
         setAvatarUrl(avatarUrl);
-      }).catch(error => {
+      })
+      .catch((error) => {
         console.log(error);
       });
-  }, []);
+  }, [serverAddress]);
 
   const handleAvatarClick = () => {
     navigate("/profile");

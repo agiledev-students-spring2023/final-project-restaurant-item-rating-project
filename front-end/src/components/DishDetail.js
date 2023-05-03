@@ -66,7 +66,7 @@ export function DishDetail() {
       .catch((error) => {
         console.error("Error getting restaurant name: ", error);
       });
-  }, []);
+  }, [params.dishID, params.restaurantID]);
 
   useEffect(() => {
     axios
@@ -77,7 +77,7 @@ export function DishDetail() {
       .catch((error) => {
         console.error("Error getting restaurant data: ", error);
       });
-  }, []);
+  }, [params.restaurantID]);
 
   useEffect(() => {
     if (!storedId) {
@@ -200,7 +200,7 @@ export function DishDetail() {
   // };
   const goToRestaurant = () => {
     navigate(`/restaurant/${params.restaurantID}`);
-  }
+  };
 
   return (
     <Box
@@ -215,10 +215,7 @@ export function DishDetail() {
       <Box sx={{ m: 2 }} />
       <Typography style={{ fontFamily: "BlinkMacSystemFont" }} variant="h6">
         {"Restaurant: "}
-        <Link onClick={goToRestaurant}>
-          {restaurantName}
-        </Link>
-        
+        <Link onClick={goToRestaurant}>{restaurantName}</Link>
       </Typography>
 
       <Box sx={{ m: 1.5 }} />
@@ -263,12 +260,10 @@ export function DishDetail() {
             ""
           )}
           <Box sx={{ m: 2 }} />
-
         </Box>
       ) : (
         ""
       )}
-
 
       <Box sx={{ m: 3 }} />
       <Typography
@@ -318,7 +313,6 @@ export function DishDetail() {
                     Delete
                   </Button>
                 )}
-
               </Box>
             );
           })}

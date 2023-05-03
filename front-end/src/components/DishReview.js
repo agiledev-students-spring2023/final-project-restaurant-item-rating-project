@@ -67,7 +67,7 @@ export function DishReview() {
         console.error(err);
         // alert("An error has occurred when finding the dish");
       });
-  }, [params.dishID, params.restaurantID]);
+  }, [params.dishID, params.restaurantID, serverAddress]);
 
   const handleSubmit = async (event) => {
     if (!rating) {
