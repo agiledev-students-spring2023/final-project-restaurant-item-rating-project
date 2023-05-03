@@ -38,7 +38,13 @@ jobs:
           cd front-end
           npm install # install all dependencies listed in package.json
           npm run build # have react build the stand-alone front-end code
-
+  deploy-app:
+      docker:
+      - image: cimg/node:16.13.0 # latest stable node at the time of writing
+      steps:
+      - checkout
+      - run: ssh -oStrictHostKeyChecking=no -v $USER@$IP "./deploy.sh"
+ 
 # Orchestrate our job run sequence
 workflows:
   build-and-test-back-end:
@@ -47,3 +53,10 @@ workflows:
   build-front-end:
     jobs:
       - build-react-js
+  deploy-app-workflow:
+    jobs:
+      - deploy-app:
+          filters:
+            branches:
+              only:
+                - main
