@@ -40,7 +40,7 @@ export function AddDish() {
     event.preventDefault();
 
     try {
-      const response = await axios
+      await axios
         .post(`${serverAddress}/restaurant/${params.restaurantID}/dish`, {
           dishName: dishName,
           imageUrl: picUrl,
