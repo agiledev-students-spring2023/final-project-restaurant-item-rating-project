@@ -48,7 +48,7 @@ dishRouter.get("/:id", async (req, res) => {
 // dishRouter.post("/", upload.single("dishImage"), async (req, res) => {
 dishRouter.post("/", async (req, res) => {
   let imageUploaded = false;
-  if ("uploadedPicture" in req.body && req.body.uploadedPicture!=="") {
+  if ("imageUrl" in req.body && req.body.imageUrl!=="") {
     imageUploaded = true;
   }
 
