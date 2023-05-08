@@ -19,7 +19,7 @@ restaurantRouter.get("/test", async (req, res) => {
 
 restaurantRouter.get("/delete/:id", async (req, res) => {
 
-  const deleteMsg = await Restaurant.delete({
+  const deleteMsg = await Restaurant.deleteOne({
     _id: req.params.id,
   });
 

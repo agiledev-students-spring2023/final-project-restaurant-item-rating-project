@@ -9,8 +9,7 @@ const favsRouter = express.Router();
 favsRouter.post('/:id', async (req, res) => {
     const storedId = req.params.id;
     const { dishId, restaurantID, dishImg, dishName } = req.body;
-    const favoriteLink = `http://localhost:3000/restaurant/${restaurantID}/dish/${dishId}`;
-    // console.log(favoriteLink);
+    const favoriteLink = `http://${process.env.SERVER_IP}:${process.env.FRONTEND_PORT}/restaurant/${restaurantID}/dish/${dishId}`;
 
     try {
         const user = await Register.findById(storedId);
@@ -54,7 +53,7 @@ favsRouter.post('/:id', async (req, res) => {
       favsRouter.delete('/:id', async (req, res) => {
         const storedId = req.params.id;
   const { dishId, restaurantID } = req.body;
-  const favoriteLink = `http://localhost:3000/restaurant/${restaurantID}/dish/${dishId}`;
+  const favoriteLink = `http://${process.env.SERVER_IP}:${process.env.FRONTEND_PORT}/restaurant/${restaurantID}/dish/${dishId}`;
   console.log(favoriteLink);
   try {
     const user = await Register.findById(storedId);
