@@ -1,3 +1,7 @@
+# any uploaded files
+public/uploads/*
+!public/uploads/readme.txt
+
 # Compiled source #
 ###################
 *.com
@@ -38,9 +42,6 @@ Thumbs.db
 
 # Typical Node.js artifacts #
 #############################
-
-#ignore lock file to reduce git log stats bloat 
-package-lock.json
 
 # Logs
 logs
@@ -115,6 +116,7 @@ typings/
 .yarn-integrity
 
 # dotenv environment variables file
+# !.env
 .env
 
 # next.js build output
@@ -123,9 +125,3 @@ typings/
 
 ## Emacs artefacts ##
 *~
-
-## Jekyll artifacts
-**/.jekyll-cache
-**/_site/
-
-bashtest.sh
