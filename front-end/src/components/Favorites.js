@@ -30,7 +30,7 @@ export function Favorites() {
           console.error("Error fetching favorites: ", error);
         });
     }
-  }, []);
+  }, [serverAddress]);
 
   return (
     <Box
