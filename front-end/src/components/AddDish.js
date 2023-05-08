@@ -52,7 +52,7 @@ export function AddDish() {
           console.log(error);
           alert(error);
         });
-        navigate(`/restaurant/${params.restaurantID}`);
+      navigate(`/restaurant/${params.restaurantID}`);
     } catch (error) {
       console.log(error);
     }

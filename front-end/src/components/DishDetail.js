@@ -228,10 +228,10 @@ export function DishDetail() {
               <Favorite />
             </IconButton>
           ) : (
-            <IconButton onClick={handleFavoriteClick}>
-              <FavoriteBorder />
-            </IconButton>
-          )}
+              <IconButton onClick={handleFavoriteClick}>
+                <FavoriteBorder />
+              </IconButton>
+            )}
           <Typography variant="body1">
             {isFavorite ? "Remove from favorites" : "Add to favorites"}
           </Typography>
@@ -240,29 +240,29 @@ export function DishDetail() {
 
       {/* images */}
       {/* {"image" in dish ? ( */}
-        <Box>
-          {/* {"image" in dish &&
+      <Box>
+        {/* {"image" in dish &&
           dish.image !== "" &&
           dish.image.length > 5 &&
           dish.image.slice(0, 6) !== "public" ? ( */}
-            <Box>
-              <Typography
-                style={{ fontFamily: "BlinkMacSystemFont" }}
-                color={"#31525B"}
-                variant="h4"
-              >
-                How it Looks
+        <Box>
+          <Typography
+            style={{ fontFamily: "BlinkMacSystemFont" }}
+            color={"#31525B"}
+            variant="h4"
+          >
+            How it Looks
               </Typography>
-              <Box sx={{ m: 0.5 }} />
-              <ImageListItem key={dish.id}>
-                <img src={dish.image} alt={dish.name} loading="lazy" />
-              </ImageListItem>
-            </Box>
-          {/* ) : (
+          <Box sx={{ m: 0.5 }} />
+          <ImageListItem key={dish.id}>
+            <img src={dish.image} alt={dish.name} loading="lazy" />
+          </ImageListItem>
+        </Box>
+        {/* ) : (
             ""
           )} */}
-          <Box sx={{ m: 2 }} />
-        </Box>
+        <Box sx={{ m: 2 }} />
+      </Box>
       {/* ) : (
         ""
       )} */}
@@ -280,8 +280,8 @@ export function DishDetail() {
           <Rating readOnly size="medium" value={calcAvgReview(dish) ?? 0} />
         </Box>
       ) : (
-        ""
-      )}
+          ""
+        )}
       <Button
         variant="contained"
         size="small"
@@ -295,29 +295,29 @@ export function DishDetail() {
       {!("reviews" in dish)
         ? ""
         : dish.reviews.map((review) => {
-            // console.log(review);
-            return (
-              <Box key={review._id} display="flex" flexDirection={"column"}>
-                <Box sx={{ m: 1.5 }} />
-                <Rating name="read-only" value={review.value} readOnly />
-                {review.picUrl && (
-                  <img
-                    src={review.picUrl}
-                    alt="review"
-                    style={{ maxWidth: "150px" }}
-                  />
-                )}
-                <Typography>{review.comment}</Typography>
+          // console.log(review);
+          return (
+            <Box key={review._id} display="flex" flexDirection={"column"}>
+              <Box sx={{ m: 1.5 }} />
+              <Rating name="read-only" value={review.value} readOnly />
+              {review.picUrl && (
+                <img
+                  src={review.picUrl}
+                  alt="review"
+                  style={{ maxWidth: "150px" }}
+                />
+              )}
+              <Typography>{review.comment}</Typography>
 
-                <TimeAgo date={review.date} />
-                {review.userID === storedId && (
-                  <Button onClick={() => handleDeleteReview(review._id)}>
-                    Delete
-                  </Button>
-                )}
-              </Box>
-            );
-          })}
+              <TimeAgo date={review.date} />
+              {review.userID === storedId && (
+                <Button onClick={() => handleDeleteReview(review._id)}>
+                  Delete
+                </Button>
+              )}
+            </Box>
+          );
+        })}
     </Box>
   );
 }
