@@ -11,13 +11,15 @@ import axios from "axios";
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 
-const serverAddress = process.env.REACT_APP_SERVER_DEV;
 
 export function Favorites() {
+  const serverAddress = process.env.REACT_APP_SERVER_DEV;
   const [favorites, setFavorites] = useState([]);
+  
 
   useEffect(() => {
     const userId = localStorage.getItem("userId");
+    console.log(serverAddress);
     if (userId) {
       axios
         .get(`${serverAddress}/favorites/${userId}`)
