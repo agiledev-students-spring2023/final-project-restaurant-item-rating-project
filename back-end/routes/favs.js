@@ -9,7 +9,7 @@ const favsRouter = express.Router();
 favsRouter.post('/:id', async (req, res) => {
     const storedId = req.params.id;
     const { dishId, restaurantID, dishImg, dishName } = req.body;
-    const favoriteLink = `http://${process.env.SERVER_IP}/restaurant/${restaurantID}/dish/${dishId}`;
+    const favoriteLink = `http://${process.env.SERVER_IP}:${process.env.FRONTEND_PORT}/restaurant/${restaurantID}/dish/${dishId}`;
 
     try {
         const user = await Register.findById(storedId);
